@@ -40,4 +40,16 @@ public abstract class Persona {
     public void setId(String id) {
         this.id = id;
     }
+
+    //Para validación por tipo de usuario
+    public String getTipoUsuario() {
+        if (id.startsWith("ADMIN-")) return "ADMIN";
+        if (id.startsWith("DOC-")) return "MEDICO";
+        if (id.startsWith("FARM-")) return "FARMACEUTICO";
+        if (id.startsWith("PAC-")) return "PACIENTE";
+        return "DESCONOCIDO";
+    }
+
+
+
 }
