@@ -1,4 +1,6 @@
-package Hospital.personas;
+package Hospital.personas.Trabajadores;
+
+import Hospital.personas.Trabajador;
 
 public class Doctor extends Trabajador {
     private String Especialidad; //maybe hacer especialidad como una clase/lista para que solo la seleccionen
