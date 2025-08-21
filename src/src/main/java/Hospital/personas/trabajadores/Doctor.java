@@ -1,4 +1,4 @@
-package Hospital.personas.Trabajadores;
+package Hospital.personas.trabajadores;
 
 import Hospital.personas.Trabajador;
 

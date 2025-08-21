@@ -1,6 +1,5 @@
-package Hospital.personas.Trabajadores;
+package Hospital.personas.trabajadores;
 
-import Hospital.Clave;
 import Hospital.personas.Trabajador;
 
 public class Farmaceutico extends Trabajador {
