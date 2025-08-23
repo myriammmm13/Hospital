@@ -4,6 +4,7 @@ import Hospital.logic.personas.Paciente;
 import Hospital.logic.personas.trabajadores.Doctor;
 import Hospital.logic.Fecha;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecetaBuilder {
@@ -13,6 +14,10 @@ public class RecetaBuilder {
     private Fecha fechaConfeccion;
     private Fecha fechaRetiro;
     private String estado;
+
+    public RecetaBuilder(){
+        this.prescripciones = new ArrayList<>();
+    }
 
     public RecetaBuilder doctor(Doctor doctor) {
         this.doctor = doctor;;
