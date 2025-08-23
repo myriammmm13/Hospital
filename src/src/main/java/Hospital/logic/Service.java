@@ -2,6 +2,7 @@ package Hospital.logic;
 
 import Hospital.data.Data;
 import Hospital.logic.medicamentos.Medicamento;
+import Hospital.logic.recetas.Receta;
 
 import java.util.List;
 
@@ -67,7 +68,21 @@ public class Service {
         if (!eliminado) throw new Exception("Medicamento no encontrado para eliminar");
     }
 
+    //create recetas
+    public void agregarReceta(Receta receta, String userId) throws Exception {
+        validarRol(userId,"MED");
+        for (Receta r : data.getRecetas()) {
+            if (r.equals(receta)) {
+                throw new Exception("Ya se ha registrado esta receta");
+            }
+        }
+        data.getRecetas().add(receta);
+    }
 
+    //read recetas
+    public List<Receta> listarRecetas() {
+        return data.getRecetas();
+    }
 
 
 
