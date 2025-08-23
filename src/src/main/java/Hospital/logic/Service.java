@@ -89,11 +89,11 @@ public class Service {
 
     public Paciente obtenerPaciente(String id) throws Exception {
         for (Paciente m : data.getPacientes()) {
-            if (m.getId().equals(id)) return m;
+            if (m.getId().contains(id) ||  m.getNombre().contains(id) || m.getApellido1().contains(id) || m.getApellido2().contains(id))
+                return m;
         }
         throw new Exception("Paciente no encontrado");
     }
-
     //Update
     public void actualizarPaciente(Paciente act, String userId) throws Exception {
         validarRol(userId,"ADM");
@@ -131,7 +131,8 @@ public class Service {
 
     public Doctor obtenerDoctor(String id) throws Exception {
         for (Doctor m : data.getDoctores()) {
-            if (m.getId().equals(id)) return m;
+            if (m.getId().contains(id) ||  m.getNombre().contains(id) || m.getApellido1().contains(id) || m.getApellido2().contains(id))
+                return m;
         }
         throw new Exception("Doctor no encontrado");
     }
@@ -173,7 +174,8 @@ public class Service {
 
     public Farmaceutico obtenerFarmaceutico(String id) throws Exception {
         for (Farmaceutico m : data.getFamaceuticos()) {
-            if (m.getId().equals(id)) return m;
+            if (m.getId().contains(id) ||  m.getNombre().contains(id) || m.getApellido1().contains(id) || m.getApellido2().contains(id))
+                return m;
         }
         throw new Exception("Farmaceutico no encontrado");
     }
