@@ -48,7 +48,7 @@ public class Service {
 
     public Medicamento obtenerMedicamento(String id) throws Exception {
         for (Medicamento m : data.getMedicamentos()) {
-            if (m.getCodigo().equals(id)) return m;
+            if (m.getCodigo().contains(id) || m.getNombre().contains(id)) return m;
         }
         throw new Exception("Medicamento no encontrado");
     }
