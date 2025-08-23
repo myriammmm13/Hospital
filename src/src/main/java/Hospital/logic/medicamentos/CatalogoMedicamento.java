@@ -1,6 +1,6 @@
-package Hospital.Logic.medicamentos;
+package Hospital.logic.medicamentos;
 
-import Hospital.Logic.personas.Persona;
+import Hospital.logic.personas.Persona;
 
 import java.util.ArrayList;
 import java.util.List;

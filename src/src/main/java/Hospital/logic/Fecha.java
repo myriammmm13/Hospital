@@ -1,4 +1,4 @@
-package Hospital;
+package Hospital.logic;
 
 public class Fecha {
     private int dia;

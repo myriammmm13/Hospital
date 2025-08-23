@@ -1,8 +1,8 @@
-package Hospital.Logic.recetas;
+package Hospital.logic.recetas;
 
-import Hospital.Logic.personas.Paciente;
-import Hospital.Logic.personas.trabajadores.Doctor;
-import Hospital.Fecha;
+import Hospital.logic.personas.Paciente;
+import Hospital.logic.personas.trabajadores.Doctor;
+import Hospital.logic.Fecha;
 
 import java.util.List;
 
