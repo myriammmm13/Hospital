@@ -1,6 +1,9 @@
 package Hospital.logic;
 
 import Hospital.data.Data;
+import Hospital.logic.personas.Persona; //No estoy seguro si ocupan persona o las subs
+import Hospital.logic.medicamentos.Medicamento;
+import Hospital.logic.recetas.Receta;
 
 //recreado del código del profe
 public class Service {
