@@ -1,6 +1,6 @@
-package Hospital.personas;
+package Hospital.logic.personas;
 
-import Hospital.Fecha;
+import Hospital.logic.Fecha;
 
 public class Paciente extends Persona {
     private int TelNum;

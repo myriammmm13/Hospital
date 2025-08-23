@@ -1,6 +1,6 @@
-package Hospital.personas.trabajadores;
+package Hospital.logic.personas.trabajadores;
 
-import Hospital.personas.Trabajador;
+import Hospital.logic.personas.Trabajador;
 
 public class Farmaceutico extends Trabajador {
     public Farmaceutico(String nombre, String apellido1, String apellido2, String id) {
