@@ -39,5 +39,5 @@ public class Data {
 
     public List<Doctor> getDoctores() {return doctores;}
 
-    public List<Farmaceutico> getFamaceuticos() {}
+    public List<Farmaceutico> getFamaceuticos() {return  famaceuticos;}
 }
