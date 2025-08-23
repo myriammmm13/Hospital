@@ -112,6 +112,7 @@ public class Service {
         validarRol(userId,"ADM");
         boolean eliminado = data.getPacientes().removeIf(m -> m.getId().equals(id));
         if (!eliminado) throw new Exception("Paciente no encontrado para eliminar");
+    }
       
     //create recetas
     public void agregarReceta(Receta receta, String userId) throws Exception {
