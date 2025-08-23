@@ -1,4 +1,4 @@
-package Hospital.personas;
+package Hospital.Logic.personas;
 
 public abstract class Persona {
     private String nombre;

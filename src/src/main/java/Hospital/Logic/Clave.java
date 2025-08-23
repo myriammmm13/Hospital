@@ -1,4 +1,4 @@
-package Hospital;
+package Hospital.Logic;
 
 //la clave debe ser inicialmente la cédula del usuario, después se puede cambiar
 //Ella va contenida en solo en trabajador (doc y farma) porque paciente no tiene

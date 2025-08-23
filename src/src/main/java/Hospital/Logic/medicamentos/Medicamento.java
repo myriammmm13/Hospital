@@ -1,4 +1,4 @@
-package Hospital.medicamentos;
+package Hospital.Logic.medicamentos;
 
 public class Medicamento {
     private String codigo;

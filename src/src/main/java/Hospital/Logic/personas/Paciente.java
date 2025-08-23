@@ -1,4 +1,4 @@
-package Hospital.personas;
+package Hospital.Logic.personas;
 
 import Hospital.Fecha;
 

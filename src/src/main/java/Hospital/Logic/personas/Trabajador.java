@@ -1,6 +1,6 @@
-package Hospital.personas;
+package Hospital.Logic.personas;
 
-import Hospital.Clave;
+import Hospital.Logic.Clave;
 
 public abstract class Trabajador extends Persona {
     private Clave clave;

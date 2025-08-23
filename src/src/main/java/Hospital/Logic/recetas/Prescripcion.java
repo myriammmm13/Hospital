@@ -1,6 +1,6 @@
-package Hospital.recetas;
+package Hospital.Logic.recetas;
 
-import Hospital.medicamentos.Medicamento;
+import Hospital.Logic.medicamentos.Medicamento;
 
 public class Prescripcion {
     private Medicamento medicamento;
