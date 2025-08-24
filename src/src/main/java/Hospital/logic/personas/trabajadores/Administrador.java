@@ -9,4 +9,7 @@ public class Administrador extends Trabajador {
      public Administrador(String nombre, String apellido1, String apellido2, String id) {
          super(nombre, apellido1, apellido2, id);
      }
+     public Administrador(){
+         super();
+     }
 }
