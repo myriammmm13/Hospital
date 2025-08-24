@@ -34,10 +34,10 @@ public class DoctorView implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         return;
-        // switch (evt.getPropertyName()) {
-          //  case model.CURRENT:
+         switch (evt.getPropertyName()) {
+            case model.CURRENT:
                 //aquí le voy poniendo las cosas de set...
-            //    break;
-        //}
+                break;
+        }
     }
 }

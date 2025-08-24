@@ -19,7 +19,7 @@ public class DoctorController {
     }
 
     public void create(Doctor n) throws Exception{
-        //model.Service.instance();
+        model.Service.instance();
         model.setCurrent(new Doctor());
     }
 }
