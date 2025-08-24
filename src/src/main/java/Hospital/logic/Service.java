@@ -6,6 +6,8 @@ import Hospital.logic.personas.Paciente;
 import Hospital.logic.personas.trabajadores.Doctor;
 import Hospital.logic.personas.trabajadores.Farmaceutico;
 
+import javax.print.Doc;
+import java.util.ArrayList;
 import java.util.List;
 
 //recreado del código del profe
@@ -46,11 +48,16 @@ public class Service {
         return data.getMedicamentos();
     }
 
-    public Medicamento obtenerMedicamento(String id) throws Exception {
+    public List<Medicamento> obtenerMedicamento(String id) throws Exception {
+        List<Medicamento> medicamentosEncontrados=new ArrayList<>();
         for (Medicamento m : data.getMedicamentos()) {
-            if (m.getCodigo().contains(id) || m.getNombre().contains(id)) return m;
+            if (m.getCodigo().contains(id) || m.getNombre().contains(id))
+                medicamentosEncontrados.add(m);
         }
-        throw new Exception("Medicamento no encontrado");
+        if(medicamentosEncontrados.isEmpty()) {
+            throw new Exception("Medicamento no encontrado");
+        }
+        return medicamentosEncontrados;
     }
     //UPDATE
     public void actualizarMedicamento(Medicamento actualizado, String userId) throws Exception {
@@ -87,12 +94,16 @@ public class Service {
         return data.getPacientes();
     }
 
-    public Paciente obtenerPaciente(String id) throws Exception {
+    public List<Paciente> obtenerPaciente(String id) throws Exception {
+        List<Paciente> pacientesEncontrados=new ArrayList<>();
         for (Paciente m : data.getPacientes()) {
-            if (m.getId().contains(id) ||  m.getNombre().contains(id) || m.getApellido1().contains(id) || m.getApellido2().contains(id))
-                return m;
+            if (m.getId().contains(id) || m.getNombre().contains(id))
+                pacientesEncontrados.add(m);
         }
-        throw new Exception("Paciente no encontrado");
+        if(pacientesEncontrados.isEmpty()) {
+            throw new Exception("Paciente no encontrado");
+        }
+        return pacientesEncontrados;
     }
     //Update
     public void actualizarPaciente(Paciente act, String userId) throws Exception {
@@ -129,12 +140,16 @@ public class Service {
         return data.getDoctores();
     }
 
-    public Doctor obtenerDoctor(String id) throws Exception {
+    public List<Doctor> obtenerDoctor(String id) throws Exception {
+        List<Doctor> doctoresEncontrados=new ArrayList<>();
         for (Doctor m : data.getDoctores()) {
-            if (m.getId().contains(id) ||  m.getNombre().contains(id) || m.getApellido1().contains(id) || m.getApellido2().contains(id))
-                return m;
+            if (m.getId().contains(id) || m.getNombre().contains(id))
+                doctoresEncontrados.add(m);
         }
-        throw new Exception("Doctor no encontrado");
+        if(doctoresEncontrados.isEmpty()) {
+            throw new Exception("Doctor no encontrado");
+        }
+        return doctoresEncontrados;
     }
 
     //Update
@@ -172,12 +187,16 @@ public class Service {
         return data.getFamaceuticos();
     }
 
-    public Farmaceutico obtenerFarmaceutico(String id) throws Exception {
+    public List<Farmaceutico> obtenerFarmaceutico(String id) throws Exception {
+        List<Farmaceutico> farmaceuticosEncontrados=new ArrayList<>();
         for (Farmaceutico m : data.getFamaceuticos()) {
-            if (m.getId().contains(id) ||  m.getNombre().contains(id) || m.getApellido1().contains(id) || m.getApellido2().contains(id))
-                return m;
+            if (m.getId().contains(id) || m.getNombre().contains(id))
+                farmaceuticosEncontrados.add(m);
         }
-        throw new Exception("Farmaceutico no encontrado");
+        if(farmaceuticosEncontrados.isEmpty()) {
+            throw new Exception("Farmacuetico no encontrado");
+        }
+        return farmaceuticosEncontrados;
     }
 
     //Update
