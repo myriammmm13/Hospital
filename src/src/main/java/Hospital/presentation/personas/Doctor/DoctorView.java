@@ -1,26 +1,24 @@
 package Hospital.presentation.personas.Doctor;
-
-import Hospital.logic.personas.trabajadores.Doctor;
-//import Hospital.presentation.Highlighter;
+import Hospital.presentation.personas.Doctor.DoctorController;
+import Hospital.presentation.personas.Doctor.DoctorModel;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class DoctorView implements PropertyChangeListener {
-    public DoctorView(){
-//aquí van todos los botones y demás:p
-    }
+    private JPanel panel;
 
-
-    //---------MVC-----------
     DoctorController controller;
     DoctorModel model;
+
+    public DoctorView() {
+        panel = new JPanel();
+    }
+
+    public JPanel getPanel() {
+        return panel;
+    }
 
     public void setController(DoctorController controller) {
         this.controller = controller;
@@ -33,11 +31,6 @@ public class DoctorView implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        return;
-         switch (evt.getPropertyName()) {
-            case model.CURRENT:
-                //aquí le voy poniendo las cosas de set...
-                break;
-        }
+        // Lo vas a completar cuando el modelo tenga datos que mostrar
     }
 }

@@ -16,15 +16,15 @@ public class DoctorModel extends AbstractModel {
     @Override
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         super.addPropertyChangeListener(listener);
-        firePropertyChange(CURRENT);
+        firePropertyChange(CURRENT, null, current);
     }
 
     public Doctor getCurrent() {
         return current;
     }
 
-    public void setCurrent(Doctor current) {
-        this.current = current;
-        firePropertyChange(CURRENT);
+    public void setCurrent(Doctor m) {
+        this.current = m;
+        firePropertyChange(CURRENT, null, current);
     }
 }

@@ -156,15 +156,6 @@ public class Service {
         return doctoresEncontrados;
     }
 
-    public Doctor obtenerDoctorExp(String id) throws Exception {
-        for (Doctor m : data.getDoctores()) {
-            if (m.getId().contains(id))
-                return m;
-        }
-        throw new Exception("Doctor no encontrado");
-
-    }
-
     //Update
     public void actualizarDoctor(Doctor act, String userId) throws Exception {
         validarRol(userId, "ADM");
