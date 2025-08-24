@@ -10,6 +10,11 @@ public class Doctor extends Trabajador {
         this.Especialidad = Especialidad;
     }
 
+    public Doctor() {
+        super();
+        this.Especialidad = "";
+    }
+
     public String getEspecialidad() {
         return Especialidad;
     }
