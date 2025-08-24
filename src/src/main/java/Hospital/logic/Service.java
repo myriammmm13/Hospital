@@ -2,6 +2,7 @@ package Hospital.logic;
 
 import Hospital.data.Data;
 import Hospital.logic.personas.Paciente;
+import Hospital.logic.personas.trabajadores.Administrador;
 import Hospital.logic.personas.trabajadores.Doctor;
 import Hospital.logic.personas.trabajadores.Farmaceutico;
 import Hospital.logic.recetas.Receta;
@@ -221,6 +222,54 @@ public class Service {
         validarRol(userId, "ADM");
         boolean eliminado = data.getFamaceuticos().removeIf(m -> m.getId().equals(id));
         if (!eliminado) throw new Exception("Farmaceutico no encontrado para eliminar");
+    }
+
+    //Admin
+    //Create
+    public void agregarAdmin(Administrador nuevo, String userId) throws Exception {
+        validarRol(userId, "ADM");
+        for (Administrador m : data.getAdmin()) {
+            if (m.getId().equals(nuevo.getId())) {
+                throw new Exception("Ya existe un administrador con ese ID");
+            }
+        }
+        data.getAdmin().add(nuevo);
+    }
+
+    //Read
+    public List<Administrador> listarAdmins() {
+        return data.getAdmin();
+    }
+
+    public List<Administrador> obtenerAdmin(String id) throws Exception {
+        List<Administrador> adminsEncontrados = new ArrayList<>();
+        for (Administrador m : data.getAdmin()) {
+            if (m.getId().contains(id) || m.getNombre().contains(id))
+                adminsEncontrados.add(m);
+        }
+        if (adminsEncontrados.isEmpty()) {
+            throw new Exception("Administrador no encontrado");
+        }
+        return adminsEncontrados;
+    }
+
+    //Update
+    public void actualizarAdmin(Administrador act, String userId) throws Exception {
+        validarRol(userId, "ADM");
+        for (int i = 0; i < data.getAdmin().size(); i++) {
+            if (data.getAdmin().get(i).getId().equals(act.getId())) {
+                data.getAdmin().set(i, act);
+                return;
+            }
+        }
+        throw new Exception("Administrador no encontrado para actualizar");
+    }
+
+    //Delete
+    public void eliminarAdmin(String id, String userId) throws Exception {
+        validarRol(userId, "ADM");
+        boolean eliminado = data.getAdmin().removeIf(m -> m.getId().equals(id));
+        if (!eliminado) throw new Exception("Administrador no encontrado para eliminar");
     }
 
     //create recetas
