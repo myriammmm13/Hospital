@@ -113,22 +113,6 @@ public class Service {
         boolean eliminado = data.getPacientes().removeIf(m -> m.getId().equals(id));
         if (!eliminado) throw new Exception("Paciente no encontrado para eliminar");
     }
-      
-    //create recetas
-    public void agregarReceta(Receta receta, String userId) throws Exception {
-        validarRol(userId,"MED");
-        for (Receta r : data.getRecetas()) {
-            if (r.equals(receta)) {
-                throw new Exception("Ya se ha registrado esta receta");
-            }
-        }
-        data.getRecetas().add(receta);
-    }
-
-    //read recetas
-    public List<Receta> listarRecetas() {
-        return data.getRecetas();
-    }
 
     //Doctor
     //Create
@@ -216,3 +200,19 @@ public class Service {
         if (!eliminado) throw new Exception("Farmaceutico no encontrado para eliminar");
     }
 }
+
+//create recetas
+    public void agregarReceta(Receta receta, String userId) throws Exception {
+        validarRol(userId,"MED");
+        for (Receta r : data.getRecetas()) {
+            if (r.equals(receta)) {
+                throw new Exception("Ya se ha registrado esta receta");
+            }
+        }
+        data.getRecetas().add(receta);
+    }
+
+    //read recetas
+    public List<Receta> listarRecetas() {
+        return data.getRecetas();
+    }
