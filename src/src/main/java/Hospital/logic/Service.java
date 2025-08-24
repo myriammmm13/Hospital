@@ -218,9 +218,7 @@ public class Service {
         boolean eliminado = data.getFamaceuticos().removeIf(m -> m.getId().equals(id));
         if (!eliminado) throw new Exception("Farmaceutico no encontrado para eliminar");
     }
-}
-
-//create recetas
+    //create recetas
     public void agregarReceta(Receta receta, String userId) throws Exception {
         validarRol(userId,"MED");
         for (Receta r : data.getRecetas()) {
@@ -235,3 +233,4 @@ public class Service {
     public List<Receta> listarRecetas() {
         return data.getRecetas();
     }
+}
