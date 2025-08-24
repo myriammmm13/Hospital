@@ -10,6 +10,11 @@ public class Medicamento {
         this.nombre = nombre;
         this.presentacion = presentacion;
     }
+    public Medicamento() {
+        this.codigo = "";
+        this.nombre = "";
+        this.presentacion = "";
+    }
 
     // Getters y setters
     public String getCodigo() {return codigo;}
