@@ -1,13 +1,11 @@
 package Hospital.logic;
 
 import Hospital.data.Data;
-import Hospital.logic.medicamentos.Medicamento;
 import Hospital.logic.personas.Paciente;
 import Hospital.logic.personas.trabajadores.Doctor;
 import Hospital.logic.personas.trabajadores.Farmaceutico;
 import Hospital.logic.recetas.Receta;
 
-import javax.print.Doc;
 import java.util.ArrayList;
 import java.util.List;
 
