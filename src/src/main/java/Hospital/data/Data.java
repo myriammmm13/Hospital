@@ -26,10 +26,11 @@ public class Data {
         medicamentos.add(new Medicamento("113", "Amoxicilina", "250mg cápsulas"));
         medicamentos.add(new Medicamento("114", "Loratadina", "10mg tabletas"));
     }
-    
+
     public List<Receta> getRecetas() {
         return recetas;
     }
+
 
     public List<Medicamento> getMedicamentos() {
         return medicamentos;
@@ -40,4 +41,5 @@ public class Data {
     public List<Doctor> getDoctores() {return doctores;}
 
     public List<Farmaceutico> getFamaceuticos() {return  famaceuticos;}
+
 }
