@@ -1,6 +1,6 @@
 package Hospital.data;
 
-import Hospital.logic.medicamentos.Medicamento;
+import Hospital.logic.Medicamento;
 import Hospital.logic.personas.Paciente;
 import Hospital.logic.recetas.Receta;
 import Hospital.logic.personas.trabajadores.Doctor;
