@@ -1,4 +1,4 @@
-package Hospital.logic.medicamentos;
+package Hospital.logic;
 
 public class Medicamento {
     private String codigo;
@@ -9,6 +9,11 @@ public class Medicamento {
         this.codigo = codigo;
         this.nombre = nombre;
         this.presentacion = presentacion;
+    }
+    public Medicamento() {
+        this.codigo = "";
+        this.nombre = "";
+        this.presentacion = "";
     }
 
     // Getters y setters

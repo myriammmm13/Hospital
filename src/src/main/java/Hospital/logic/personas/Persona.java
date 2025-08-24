@@ -13,6 +13,13 @@ public abstract class Persona {
         this.id = id;
     }
 
+    protected Persona() {
+        nombre="";
+        apellido1="";
+        apellido2="";
+        id="";
+    }
+
     public String getNombre() {
         return nombre;
     }

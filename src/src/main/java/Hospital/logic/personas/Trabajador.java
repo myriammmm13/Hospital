@@ -9,6 +9,10 @@ public abstract class Trabajador extends Persona {
         super(nombre, apellido1, apellido2, id);
         clave=new Clave(id);
     }
+    protected Trabajador(){
+        super();
+        clave=new Clave("");
+    }
     public String getClave(){
         return clave.getClave();
     }
