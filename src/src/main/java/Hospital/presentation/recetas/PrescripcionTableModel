@@ -33,7 +33,7 @@ public class PrescripcionTableModel extends AbstractTableModel<Prescripcion> imp
             case CANTIDAD:
                 return e.getCantidad();
             case INDICACIONES:
-                return e.getEstadoCivil();
+                return e.getIndicaciones();
             case DURACION:
                 return e.getDuracion();
             default:
