@@ -1,18 +1,16 @@
-package Hospital.presentation.personas.Farmaceutico;
-import Hospital.presentation.personas.Farmaceutico.FarmaController;
-import Hospital.presentation.personas.Farmaceutico.FarmaModel;
+package Hospital.presentation.personas.Doctor;
 
 import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class FarmaView implements PropertyChangeListener {
+public class View implements PropertyChangeListener {
     private JPanel panel;
 
-    FarmaController controller;
-    FarmaModel model;
+    Controller controller;
+    Model model;
 
-    public FarmaView() {
+    public View() {
         panel = new JPanel();
     }
 
@@ -20,11 +18,11 @@ public class FarmaView implements PropertyChangeListener {
         return panel;
     }
 
-    public void setController(FarmaController controller) {
+    public void setController(Controller controller) {
         this.controller = controller;
     }
 
-    public void setModel(FarmaModel model) {
+    public void setModel(Model model) {
         this.model = model;
         model.addPropertyChangeListener(this);
     }

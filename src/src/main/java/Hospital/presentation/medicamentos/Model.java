@@ -1,16 +1,17 @@
-package Hospital.presentation.personas.Administrador;
+package Hospital.presentation.medicamentos;
 
-import Hospital.logic.personas.trabajadores.Administrador;
+import Hospital.logic.Medicamento;
 import Hospital.presentation.AbstractModel;
+
 import java.beans.PropertyChangeListener;
 
-public class AdminModel extends AbstractModel {
-    Administrador current;
+public class Model extends AbstractModel {
+    Medicamento current;
 
     public static final String CURRENT = "current";
 
-    public AdminModel() {
-        current = new Administrador();
+    public Model() {
+        current = new Medicamento();
     }
 
     @Override
@@ -19,11 +20,11 @@ public class AdminModel extends AbstractModel {
         firePropertyChange(CURRENT, null, current);
     }
 
-    public Administrador getCurrent() {
+    public Medicamento getCurrent() {
         return current;
     }
 
-    public void setCurrent(Administrador m) {
+    public void setCurrent(Medicamento m) {
         this.current = m;
         firePropertyChange(CURRENT, null, current);
     }

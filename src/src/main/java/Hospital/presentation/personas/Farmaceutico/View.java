@@ -1,18 +1,16 @@
-package Hospital.presentation.personas.Administrador;
-import Hospital.presentation.personas.Administrador.AdminController;
-import Hospital.presentation.personas.Administrador.AdminModel;
+package Hospital.presentation.personas.Farmaceutico;
 
 import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class AdminView implements PropertyChangeListener {
+public class View implements PropertyChangeListener {
     private JPanel panel;
 
-    AdminController controller;
-    AdminModel model;
+    Controller controller;
+    Model model;
 
-    public AdminView() {
+    public View() {
         panel = new JPanel();
     }
 
@@ -20,11 +18,11 @@ public class AdminView implements PropertyChangeListener {
         return panel;
     }
 
-    public void setController(AdminController controller) {
+    public void setController(Controller controller) {
         this.controller = controller;
     }
 
-    public void setModel(AdminModel model) {
+    public void setModel(Model model) {
         this.model = model;
         model.addPropertyChangeListener(this);
     }

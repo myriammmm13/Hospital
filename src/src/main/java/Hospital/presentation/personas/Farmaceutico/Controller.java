@@ -5,11 +5,11 @@ import Hospital.logic.Service;
 
 import java.util.List;
 
-public class FarmaController {
-    FarmaModel model;
-    FarmaView view;
+public class Controller {
+    Model model;
+    View view;
 
-    public FarmaController(FarmaModel model, FarmaView view) {
+    public Controller(Model model, View view) {
         this.model = model;
         this.view = view;
 

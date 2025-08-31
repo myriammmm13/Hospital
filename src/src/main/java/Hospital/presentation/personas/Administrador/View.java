@@ -1,28 +1,28 @@
-package Hospital.presentation.medicamentos;
+package Hospital.presentation.personas.Administrador;
 
 import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class MedicamentoView implements PropertyChangeListener {
+public class View implements PropertyChangeListener {
     private JPanel panel;
 
-    MedicamentoController controller;
-    MedicamentoModel model;
+    Controller controller;
+    Model model;
 
-    public MedicamentoView() {
-        panel = new JPanel(); // modificar con el GUI Builder
+    public View() {
+        panel = new JPanel();
     }
 
     public JPanel getPanel() {
         return panel;
     }
 
-    public void setController(MedicamentoController controller) {
+    public void setController(Controller controller) {
         this.controller = controller;
     }
 
-    public void setModel(MedicamentoModel model) {
+    public void setModel(Model model) {
         this.model = model;
         model.addPropertyChangeListener(this);
     }

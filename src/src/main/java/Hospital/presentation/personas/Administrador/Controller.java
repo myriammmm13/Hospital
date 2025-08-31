@@ -5,11 +5,11 @@ import Hospital.logic.Service;
 
 import java.util.List;
 
-public class AdminController {
-    AdminModel model;
-    AdminView view;
+public class Controller {
+    Model model;
+    View view;
 
-    public AdminController(AdminModel model, AdminView view) {
+    public Controller(Model model, View view) {
         this.model = model;
         this.view = view;
 
