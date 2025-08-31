@@ -12,6 +12,12 @@ public class Paciente extends Persona {
         this.FechaNacimiento = FechaNacimiento;
     }
 
+    public Paciente(){
+        super();
+        this.TelNum = 0;
+        this.FechaNacimiento = null;
+    }
+
     public int getTelNum() {
         return TelNum;
     }

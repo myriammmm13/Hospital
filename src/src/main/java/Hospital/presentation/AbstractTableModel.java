@@ -1,4 +1,4 @@
-package personas.presentation;
+package Hospital.presentation;
 
 import java.util.List;
 
