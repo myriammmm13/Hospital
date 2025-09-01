@@ -6,7 +6,7 @@ import java.beans.PropertyChangeListener;
 
 public class View implements PropertyChangeListener {
     private JPanel panel;
-    private JTabbedPane Tabs;
+    private JTabbedPane tabs;
     private JPanel Medicos;
     private JPanel Farmaceuticos;
     private JPanel Pacientes;
@@ -14,10 +14,15 @@ public class View implements PropertyChangeListener {
     private JPanel Dashboard;
     private JPanel AcercaDe;
     private JPanel Historico;
+    private JPanel imagePanel;
+    private JLabel imageLabel;
+
     Controller controller;
     Model model;
 
     public View() {
+        ImageIcon icon = new ImageIcon(getClass().getResource("/images/hospital.jpg"));
+        imageLabel.setIcon(icon);
     }
 
     public JPanel getPanel() {
