@@ -297,8 +297,8 @@ public class Service {
 
     public Receta obtenerReceta(Receta r) throws Exception {
         for (Receta re : data.getRecetas()) {
-            if (re.getPaciente().equals(r.getPaciente()) && re.getDoctor().equals(r.getDoctor()) &&
-                    re.getFechaConfeccion().equals(r.getFechaConfeccion())){
+            if (re.getPaciente().equals(r.getPaciente()) && re.getDoctor().equals(r.getDoctor()) /*&&
+                    re.getFechaConfeccion().equals(r.getFechaConfeccion())*/){
                 return re;
             }
         }
@@ -309,7 +309,7 @@ public class Service {
     public void actualizarReceta(Receta r) throws Exception {
         Receta original = obtenerReceta(r);
         original.setPrescripciones(r.getPrescripciones());
-        original.setFechaRetiro(r.getFechaRetiro());
+        //original.setFechaRetiro(r.getFechaRetiro());
         original.setEstado(r.getEstado());
     }
 
