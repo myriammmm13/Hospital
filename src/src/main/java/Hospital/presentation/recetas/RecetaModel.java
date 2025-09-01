@@ -6,6 +6,7 @@ import Hospital.logic.personas.Paciente;
 import Hospital.presentation.AbstractModel;
 
 import java.beans.PropertyChangeListener;
+import java.util.List;
 
 public class RecetaModel extends AbstractModel {
     Receta current;
