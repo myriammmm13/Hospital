@@ -288,7 +288,7 @@ public class Service {
         return data.getRecetas();
     }
 
-    public Receta leerReceta(Receta r) throws Exception {
+    public Receta obtenerReceta(Receta r) throws Exception {
         for (Receta re : data.getRecetas()) {
             if (re.getPaciente().equals(r.getPaciente()) && re.getDoctor().equals(r.getDoctor()) &&
                     re.getFechaConfeccion().equals(r.getFechaConfeccion())){
@@ -299,16 +299,16 @@ public class Service {
     }
 
     //update recetas
-    public void updateReceta(Receta r) throws Exception {
-        Receta original = leerReceta(r);
+    public void actualizarReceta(Receta r) throws Exception {
+        Receta original = obtenerReceta(r);
         original.setPrescripciones(r.getPrescripciones());
         original.setFechaRetiro(r.getFechaRetiro());
         original.setEstado(r.getEstado());
     }
 
     //delete recetas
-    public void borrarReceta(Receta r) throws Exception {
-        Receta borrado = leerReceta(r);
+    public void eliminarReceta(Receta r) throws Exception {
+        Receta borrado = obtenerReceta(r);
         data.getRecetas().remove(borrado);
     }
 }
