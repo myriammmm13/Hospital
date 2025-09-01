@@ -5,11 +5,11 @@ import Hospital.logic.Service;
 
 import java.util.List;
 
-public class DoctorController {
-    DoctorModel model;
-    DoctorView view;
+public class Controller {
+    Model model;
+    View view;
 
-    public DoctorController(DoctorModel model, DoctorView view) {
+    public Controller(Model model, View view) {
         this.model = model;
         this.view = view;
 
