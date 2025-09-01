@@ -2,7 +2,7 @@ package Hospital.logic;
 
 import Hospital.data.Data;
 import Hospital.logic.personas.Paciente;
-import Hospital.logic.personas.trabajadores.Administrador;
+import Hospital.logic.personas.Trabajador;
 import Hospital.logic.personas.trabajadores.Doctor;
 import Hospital.logic.personas.trabajadores.Farmaceutico;
 import Hospital.logic.recetas.Receta;
@@ -224,54 +224,61 @@ public class Service {
         if (!eliminado) throw new Exception("Farmaceutico no encontrado para eliminar");
     }
 
-    //Admin
+    //Trabajador / Admin
     //Create
-    public void agregarAdmin(Administrador nuevo, String userId) throws Exception {
+    public void agregarTrabajador(Trabajador nuevo, String userId) throws Exception {
         validarRol(userId, "ADM");
-        for (Administrador m : data.getAdmin()) {
+        for (Trabajador m : data.getTrabajadores()) {
             if (m.getId().equals(nuevo.getId())) {
-                throw new Exception("Ya existe un administrador con ese ID");
+                throw new Exception("Ya existe un Trabajador con ese ID");
             }
         }
-        data.getAdmin().add(nuevo);
+        data.getTrabajadores().add(nuevo);
+        if (nuevo instanceof Doctor)
+            data.getDoctores().add((Doctor) nuevo);
+        else if(nuevo instanceof Farmaceutico)
+            data.getFamaceuticos().add((Farmaceutico) nuevo);
     }
 
     //Read
-    public List<Administrador> listarAdmins() {
-        return data.getAdmin();
+    public List<Trabajador> listarTrabajadores() {
+        return data.getTrabajadores();
     }
 
-    public List<Administrador> obtenerAdmin(String id) throws Exception {
-        List<Administrador> adminsEncontrados = new ArrayList<>();
-        for (Administrador m : data.getAdmin()) {
+    public List<Trabajador> obtenerTrabajador(String id) throws Exception {
+        List<Trabajador> trabajadoresEncontrados = new ArrayList<>();
+        for (Trabajador m : data.getTrabajadores()) {
             if (m.getId().contains(id) || m.getNombre().contains(id))
-                adminsEncontrados.add(m);
+                trabajadoresEncontrados.add(m);
         }
-        if (adminsEncontrados.isEmpty()) {
-            throw new Exception("Administrador no encontrado");
+        if (trabajadoresEncontrados.isEmpty()) {
+            throw new Exception("Trabajador no encontrado");
         }
-        return adminsEncontrados;
+        return trabajadoresEncontrados;
     }
 
     //Update
-    public void actualizarAdmin(Administrador act, String userId) throws Exception {
+    public void actualizarTrabajador(Trabajador act, String userId) throws Exception {
         validarRol(userId, "ADM");
-        for (int i = 0; i < data.getAdmin().size(); i++) {
-            if (data.getAdmin().get(i).getId().equals(act.getId())) {
-                data.getAdmin().set(i, act);
+        for (int i = 0; i < data.getTrabajadores().size(); i++) {
+            if (data.getTrabajadores().get(i).getId().equals(act.getId())) {
+                data.getTrabajadores().set(i, act);
                 return;
             }
         }
-        throw new Exception("Administrador no encontrado para actualizar");
+        throw new Exception("Trabajador no encontrado para actualizar");
     }
 
     //Delete
-    public void eliminarAdmin(String id, String userId) throws Exception {
+    public void eliminarTrabajador(String id, String userId) throws Exception {
         validarRol(userId, "ADM");
-        boolean eliminado = data.getAdmin().removeIf(m -> m.getId().equals(id));
-        if (!eliminado) throw new Exception("Administrador no encontrado para eliminar");
-    }
-
+        boolean eliminado = data.getTrabajadores().removeIf(m -> m.getId().equals(id));
+        if (!eliminado) throw new Exception("Trabajador no encontrado para eliminar");
+        else {
+            eliminarFarmaceutico(id, userId);
+            eliminarDoctor(id, userId);
+        }//se llama para también eliminarlo a la categoría en la que se creó
+    }//revisar o cambiar, funciona pero no me convence
     //create recetas
     public void agregarReceta(Receta receta, String userId) throws Exception {
         validarRol(userId,"MED");

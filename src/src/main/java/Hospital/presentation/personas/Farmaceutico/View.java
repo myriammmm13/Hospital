@@ -11,7 +11,7 @@ public class View implements PropertyChangeListener {
     Model model;
 
     public View() {
-        panel = new JPanel();
+
     }
 
     public JPanel getPanel() {

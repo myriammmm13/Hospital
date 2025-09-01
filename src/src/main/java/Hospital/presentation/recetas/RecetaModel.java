@@ -5,6 +5,8 @@ import Hospital.logic.Medicamento;
 import Hospital.logic.personas.Paciente;
 import Hospital.presentation.AbstractModel;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.beans.PropertyChangeListener;
 import java.util.List;
 

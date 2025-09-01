@@ -1,16 +1,16 @@
 package Hospital.presentation.personas.Administrador;
 
-import Hospital.logic.personas.trabajadores.Administrador;
+import Hospital.logic.personas.Trabajador;
 import Hospital.presentation.AbstractModel;
 import java.beans.PropertyChangeListener;
 
 public class Model extends AbstractModel {
-    Administrador current;
+    Trabajador current; //puede ser Doc o farma, solo que tenga el cod ADMIN
 
     public static final String CURRENT = "current";
 
     public Model() {
-        current = new Administrador();
+        current = new Trabajador();
     }
 
     @Override
@@ -19,11 +19,11 @@ public class Model extends AbstractModel {
         firePropertyChange(CURRENT, null, current);
     }
 
-    public Administrador getCurrent() {
+    public Trabajador getCurrent() {
         return current;
     }
 
-    public void setCurrent(Administrador m) {
+    public void setCurrent(Trabajador m) {
         this.current = m;
         firePropertyChange(CURRENT, null, current);
     }
