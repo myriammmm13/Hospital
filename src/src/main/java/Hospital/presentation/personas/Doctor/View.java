@@ -6,12 +6,12 @@ import java.beans.PropertyChangeListener;
 
 public class View implements PropertyChangeListener {
     private JPanel panel;
-
     Controller controller;
     Model model;
+    private JButton uy;
 
     public View() {
-        panel = new JPanel();
+
     }
 
     public JPanel getPanel() {
