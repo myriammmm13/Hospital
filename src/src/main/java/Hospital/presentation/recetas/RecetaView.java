@@ -1,8 +1,5 @@
 package Hospital.presentation.recetas;
 
-import Hospital.presentation.recetas.RecetaController;
-import Hospital.presentation.recetas.RecetaModel;
-
 import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;

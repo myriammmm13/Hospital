@@ -24,6 +24,7 @@ public class Receta {
         //this.fechaRetiro = fechaRetiro;
         this.estado = "Confeccionada";
     }
+
     public Receta(){
         this.doctor = new Doctor();
         this.paciente=new Paciente();
@@ -32,4 +33,15 @@ public class Receta {
         //fechaRetiro=new fecha();
         estado = "";
     }
+
+    public Paciente getPaciente() { return paciente; }
+    public Doctor getDoctor() { return doctor; }
+    //public Fecha getFechaConfeccion() { return fechaConfeccion; }
+    //public Fecha getFechaRetiro() { return fechaRetiro; }
+    public List<Prescripcion> getPrescripciones() { return prescripciones; }
+    public String getEstado() { return estado; }
+
+    public void setPrescripciones(List<Prescripcion> prescripciones) {this.prescripciones = prescripciones;}
+    //public void setFechaRetiro(Fecha fechaRetiro) {this.fechaRetiro = fechaRetiro;}
+    public void setEstado(String estado) {this.estado = estado;}
 }
