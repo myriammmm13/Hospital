@@ -24,25 +24,26 @@ public class Data {
         doctores = new ArrayList<>();
         famaceuticos = new ArrayList<>();
         trabajadores = new ArrayList<>();
+
         medicamentos.add(new Medicamento("111", "Acetaminofen", "500mg"));
         medicamentos.add(new Medicamento("112", "Ibuprofeno", "400mg"));
         medicamentos.add(new Medicamento("113", "Amoxicilina", "250mg cápsulas"));
         medicamentos.add(new Medicamento("114", "Loratadina", "10mg tabletas"));
+
+        trabajadores.add(new Trabajador("Ana", "Ramirez", "Soto", "ADM-001", "adm"));
+        trabajadores.add(new Trabajador("Juan", "Hernandez", "Jimenez", "MED-002", "med"));
+        trabajadores.add(new Trabajador("Marco", "Perez", "Garcia", "FAR-003", "far"));
+
     }
 
     public List<Receta> getRecetas() {
         return recetas;
     }
-
     public List<Medicamento> getMedicamentos() {
         return medicamentos;
     }
-
     public List<Paciente> getPacientes() {return  pacientes;}
-
     public List<Doctor> getDoctores() {return doctores;}
-
     public List<Farmaceutico> getFamaceuticos() {return  famaceuticos;}
-
     public List<Trabajador> getTrabajadores() {return trabajadores;}
 }
