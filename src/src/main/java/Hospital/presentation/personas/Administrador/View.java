@@ -23,7 +23,7 @@ public class View implements PropertyChangeListener {
 
     public View() {
         ImageIcon icon = new ImageIcon(getClass().getResource("/images/hospital.jpg"));
-        imageLabel.setIcon(icon);
+        imageLabel.setIcon(icon); //imagen en Acerca de en el hospital
     }
 
     public JPanel getPanel() {
