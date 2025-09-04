@@ -5,18 +5,17 @@ import Hospital.logic.Medicamento;
 import Hospital.logic.personas.Paciente;
 import Hospital.presentation.AbstractModel;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.beans.PropertyChangeListener;
 
-public class RecetaModel extends AbstractModel {
+public class Model extends AbstractModel {
     Receta current;
     List<Medicamento> medicamentos;
     List<Paciente> pacientes;
 
     public static final String CURRENT = "current";
 
-    public RecetaModel() {
+    public Model() {
         current = new Receta();
     }
 

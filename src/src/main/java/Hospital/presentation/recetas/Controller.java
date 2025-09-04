@@ -3,13 +3,11 @@ package Hospital.presentation.recetas;
 import Hospital.logic.recetas.Receta;
 import Hospital.logic.Service;
 
-import java.util.List;
+public class Controller {
+    Model model;
+    View view;
 
-public class RecetaController {
-    RecetaModel model;
-    RecetaView view;
-
-    public RecetaController(RecetaModel model, RecetaView view) {
+    public Controller(Model model, View view) {
         this.model = model;
         this.view = view;
 
