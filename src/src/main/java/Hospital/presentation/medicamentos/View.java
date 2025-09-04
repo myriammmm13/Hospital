@@ -1,6 +1,10 @@
 package Hospital.presentation.medicamentos;
 
+import Hospital.logic.Medicamento;
+
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -9,11 +13,112 @@ public class View implements PropertyChangeListener {
 
     Controller controller;
     Model model;
+    private JLabel codigo;
+    private JTextField codigofield;
+    private JLabel nombre;
+    private JTextField nombreField;
+    private JLabel descripcion;
+    private JTextField descripcionField;
+    private JTextField buscarField;
+    private JButton guardarButton;
+    private JButton modificarButton;
+    private JButton buttonEliminar;
+    private JButton button1;
+    private JButton buttonBuscar;
 
     public View() {
         panel = new JPanel(); // modificar con el GUI Builder
-    }
 
+        guardarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Medicamento m = new Medicamento(
+                        codigofield.getText(),
+                        nombreField.getText(),
+                        descripcionField.getText()
+                );
+                try {
+                    controller.create(m, "");
+                    JOptionPane.showMessageDialog(panel, "Medicamento guardado correctamente.");
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(panel, "Error al guardar: " + ex.getMessage());
+                }
+
+            }
+        });
+        modificarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Medicamento m = new Medicamento(
+                        codigofield.getText(),
+                        nombreField.getText(),
+                        descripcionField.getText()
+                );
+                try {
+                    controller.update(m, "");
+                    JOptionPane.showMessageDialog(panel, "Medicamento modificado correctamente.");
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(panel, "Error al modificar: " + ex.getMessage());
+                }
+
+            }
+        });
+        buttonEliminar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    controller.delete(String.valueOf(codigo), "");
+                    JOptionPane.showMessageDialog(panel, "Medicamento eliminado.");
+                    limpiarCampos();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(panel, "Error al eliminar: " + ex.getMessage());
+                }
+
+            }
+        });
+        button1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    controller.create(new Medicamento("", "", ""), "ADM-111");
+                    limpiarCampos();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(panel, "Error al limpiar: " + ex.getMessage());
+                }
+
+            }
+        });
+        buttonBuscar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String codigoBuscado = buscarField.getText().trim();
+                if (codigoBuscado.isEmpty()) {
+                    JOptionPane.showMessageDialog(panel, "Por favor ingrese un código para buscar.");
+                    return;
+                }
+
+                try {
+                    controller.read(codigoBuscado); // actualiza el modelo con el medicamento encontrado
+                    Medicamento m = model.getCurrent();
+
+                    // Actualiza los campos de texto con los datos del medicamento
+                    codigofield.setText(m.getCodigo());
+                    nombreField.setText(m.getNombre());
+                    descripcionField.setText(m.getPresentacion());
+
+                    JOptionPane.showMessageDialog(panel, "Medicamento encontrado.");
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(panel, "No se encontró el medicamento: " + ex.getMessage());
+                }
+            }
+        });
+    }
+    private void limpiarCampos() {
+        codigofield.setText("");
+        nombreField.setText("");
+        descripcionField.setText("");
+        buscarField.setText("");
+    }
     public JPanel getPanel() {
         return panel;
     }
@@ -29,6 +134,12 @@ public class View implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        // Lo vas a completar cuando el modelo tenga datos que mostrar
+        if (Model.CURRENT.equals(evt.getPropertyName())) {
+            Medicamento m = model.getCurrent();
+            codigofield.setText(m.getCodigo());
+            nombreField.setText(m.getNombre());
+            descripcionField.setText(m.getPresentacion());
+        }
     }
+
 }
