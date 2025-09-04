@@ -1,16 +1,23 @@
-package Hospital.presentation.personas.Doctor;
+package Hospital.presentation.recetas;
 
-import Hospital.logic.personas.trabajadores.Doctor;
+import Hospital.logic.recetas.Receta;
+import Hospital.logic.Medicamento;
+import Hospital.logic.personas.Paciente;
 import Hospital.presentation.AbstractModel;
+
+import java.util.List;
 import java.beans.PropertyChangeListener;
+import java.util.List;
 
 public class Model extends AbstractModel {
-    Doctor current;
+    Receta current;
+    List<Medicamento> medicamentos;
+    List<Paciente> pacientes;
 
     public static final String CURRENT = "current";
 
     public Model() {
-        current = new Doctor();
+        current = new Receta();
     }
 
     @Override
@@ -19,12 +26,12 @@ public class Model extends AbstractModel {
         firePropertyChange(CURRENT, null, current);
     }
 
-    public Doctor getCurrent() {
+    public Receta getCurrent() {
         return current;
     }
 
-    public void setCurrent(Doctor m) {
-        this.current = m;
+    public void setCurrent(Receta r) {
+        this.current = r;
         firePropertyChange(CURRENT, null, current);
     }
 }

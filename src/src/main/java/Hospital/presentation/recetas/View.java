@@ -4,13 +4,13 @@ import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class RecetaView implements PropertyChangeListener {
+public class View implements PropertyChangeListener {
     private JPanel panel;
 
-    RecetaController controller;
-    RecetaModel model;
+    Controller controller;
+    Model model;
 
-    public RecetaView() {
+    public View() {
         panel = new JPanel();
     }
 
@@ -18,11 +18,11 @@ public class RecetaView implements PropertyChangeListener {
         return panel;
     }
 
-    public void setController(RecetaController controller) {
+    public void setController(Controller controller) {
         this.controller = controller;
     }
 
-    public void setModel(RecetaModel model) {
+    public void setModel(Model model) {
         this.model = model;
         model.addPropertyChangeListener(this);
     }

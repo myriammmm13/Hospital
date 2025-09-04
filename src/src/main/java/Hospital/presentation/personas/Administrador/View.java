@@ -7,28 +7,30 @@ import java.beans.PropertyChangeListener;
 
 public class View implements PropertyChangeListener {
     private JPanel panel;
-    private JTabbedPane tabs;
-    private JPanel Medicos;
-    private JPanel Farmaceuticos;
-    private JPanel Pacientes;
-    private JPanel Medicamentos;
-    private JPanel Dashboard;
-    private JPanel AcercaDe;
-    private JPanel Historico;
-    private JPanel imagePanel;
-    private JLabel imageLabel;
+    private JPanel medicoPanel;
+    private JPanel farmaceutaPanel;
+    private JPanel pacientePanel;
+    private JPanel medicamentoPanel;
+    private JPanel dashboardPanel;
+    private JPanel historicoPanel;
+    private JPanel acercaDePanel;
 
     Controller controller;
     Model model;
 
     public View() {
-        ImageIcon icon = new ImageIcon(getClass().getResource("/images/hospital.jpg"));
-        imageLabel.setIcon(icon); //imagen en Acerca de en el hospital
     }
 
     public JPanel getPanel() {
         return panel;
     }
+    public JPanel getMedicoPanel() {return medicoPanel;}
+    public JPanel getFarmaceutaPanel() {return farmaceutaPanel;}
+    public JPanel getPacientePanel() {return pacientePanel;}
+    public JPanel getMedicamentoPanel() {return medicamentoPanel;}
+    public JPanel getDashboardPanel() {return dashboardPanel;}
+    public JPanel getHistoricoPanel() {return historicoPanel;}
+    public JPanel getAcercaDePanel() {return acercaDePanel;}
 
     public void setController(Controller controller) {
         this.controller = controller;

@@ -1,4 +1,4 @@
-package Hospital.presentation.personas.Doctor;
+package Hospital.presentation.personas.Medico;
 
 import javax.swing.*;
 import java.beans.PropertyChangeEvent;
@@ -8,7 +8,6 @@ public class View implements PropertyChangeListener {
     private JPanel panel;
     Controller controller;
     Model model;
-    private JButton uy;
 
     public View() {
 

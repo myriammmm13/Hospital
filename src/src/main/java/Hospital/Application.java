@@ -1,0 +1,113 @@
+package Hospital;
+
+import Hospital.data.Data;
+import Hospital.presentation.login.Controller;
+import Hospital.presentation.login.Model;
+import Hospital.presentation.login.View;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class Application {
+
+    public static final Color BACKGROUND_ERROR = new Color(255, 102, 102);
+
+    public static void main(String[] args) {
+        Data data = new Data();
+
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (Exception ex) {}
+
+        // Mostrar ventana de login
+        View loginView = new View();
+        Model loginModel = new Model(data);
+        Controller loginController = new Controller(loginView, loginModel, (userId, userType) -> {
+            SwingUtilities.invokeLater(() -> {
+                loginView.dispose();
+                launchMainWindow(userId, userType);
+            });
+        });
+
+        loginView.setVisible(true);
+    }
+
+    public static void launchMainWindow(String userId, String userType) {
+        JFrame window = new JFrame("Hospital - Usuario: " + userId);
+        JTabbedPane tabs = new JTabbedPane();
+
+        // Todos los tríos
+        var adminView = new Hospital.presentation.personas.Administrador.View();
+        var adminModel = new Hospital.presentation.personas.Administrador.Model();
+        var adminController = new Hospital.presentation.personas.Administrador.Controller(adminModel, adminView);
+
+        var medicoView = new Hospital.presentation.personas.Medico.View();
+        var medicoModel = new Hospital.presentation.personas.Medico.Model();
+        var medicoController = new Hospital.presentation.personas.Medico.Controller(medicoModel, medicoView);
+
+        var farmaceuticoView = new Hospital.presentation.personas.Farmaceutico.View();
+        var farmaceuticoModel = new Hospital.presentation.personas.Farmaceutico.Model();
+        var farmaceuticoController = new Hospital.presentation.personas.Farmaceutico.Controller(farmaceuticoModel, farmaceuticoView);
+
+        var medicamentoView = new Hospital.presentation.medicamentos.View();
+        var medicamentoModel = new Hospital.presentation.medicamentos.Model();
+        var medicamentoController = new Hospital.presentation.medicamentos.Controller(medicamentoModel, medicamentoView);
+
+        var recetaView = new Hospital.presentation.recetas.View();
+        var recetaModel = new Hospital.presentation.recetas.Model();
+        var recetaController = new  Hospital.presentation.recetas.Controller(recetaModel, recetaView);
+
+        /*
+        var pacienteView = new Hospital.presentation.personas.Paciente.View();
+        var pacienteModel = new Hospital.presentation.personas.Paciente.Model();
+        var pacienteController = new Hospital.presentation.personas.Paciente.Controller(pacienteModel, pacienteView);
+
+        var dashboardView = new Hospital.presentation.dashboard.View();
+        var dashboardModel = new Hospital.presentation.dashboard.Model();
+        var dashboardController = new Hospital.presentation.dashboard.Controller(dashboardModel, dashboardView);
+
+        var historicoView = new Hospital.presentation.historico.View();
+        var historicoModel = new Hospital.presentation.historico.Model();
+        var historicoController = new Hospital.presentation.historico.Controller(historicoModel, historicoView);
+
+        var acercaDeView = new Hospital.presentation.acercaDe.View();
+        var acercaDeModel = new Hospital.presentation.acercaDe.Model();
+        var acercaDeController = new Hospital.presentation.acercaDe.Controller(acercaDeModel, acercaDeView);
+        */
+        switch (userType) {
+            case "ADM":
+                tabs.addTab("Medicos", adminView.getMedicoPanel());
+                tabs.addTab("Farmaceutas", adminView.getFarmaceutaPanel());
+                tabs.addTab("Pacientes", adminView.getPacientePanel());
+                tabs.addTab("Medicamentos", adminView.getMedicamentoPanel());
+                tabs.addTab("Dashboard", adminView.getDashboardPanel());
+                tabs.addTab("Historico", adminView.getHistoricoPanel());
+                tabs.addTab("Acerca de...", adminView.getAcercaDePanel());
+                break;
+
+            case "MED":
+                tabs.addTab("Preescribir", recetaView.getPanel());
+                //tabs.addTab("Dashboard", dashboardView.getPanel());
+                //tabs.addTab("Historico", historicoView.getPanel());
+                //tabs.addTab("Acerca de...", acercaDeView.getPanel());
+
+                break;
+
+            case "FAR":
+                tabs.addTab("Preescribir", recetaView.getPanel());
+                //tabs.addTab("Dashboard", dashboardView.getPanel());
+
+                break;
+
+            default:
+                JOptionPane.showMessageDialog(null, "Tipo de usuario no reconocido");
+                System.exit(0);
+        }
+
+        window.setContentPane(tabs);
+        window.setSize(800, 600);
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setLocationRelativeTo(null);
+        window.setVisible(true);
+    }
+}
