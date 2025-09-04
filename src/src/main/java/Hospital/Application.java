@@ -4,6 +4,7 @@ import Hospital.data.Data;
 import Hospital.presentation.login.Controller;
 import Hospital.presentation.login.Model;
 import Hospital.presentation.login.View;
+//import Hospital.presentation.medicamentos.MedicamentosView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -49,7 +50,7 @@ public class Application {
         var farmaceuticoModel = new Hospital.presentation.personas.Farmaceutico.Model();
         var farmaceuticoController = new Hospital.presentation.personas.Farmaceutico.Controller(farmaceuticoModel, farmaceuticoView);
 
-        var medicamentoView = new Hospital.presentation.medicamentos.View();
+        var medicamentoView = new Hospital.presentation.medicamentos.MedicamentosView();
         var medicamentoModel = new Hospital.presentation.medicamentos.Model();
         var medicamentoController = new Hospital.presentation.medicamentos.Controller(medicamentoModel, medicamentoView);
 
@@ -79,7 +80,7 @@ public class Application {
                 tabs.addTab("Medicos", adminView.getMedicoPanel());
                 tabs.addTab("Farmaceutas", adminView.getFarmaceutaPanel());
                 tabs.addTab("Pacientes", adminView.getPacientePanel());
-                tabs.addTab("Medicamentos", adminView.getMedicamentoPanel());
+                tabs.addTab("Medicamentos", medicamentoView.getPanel());
                 tabs.addTab("Dashboard", adminView.getDashboardPanel());
                 tabs.addTab("Historico", adminView.getHistoricoPanel());
                 tabs.addTab("Acerca de...", adminView.getAcercaDePanel());
