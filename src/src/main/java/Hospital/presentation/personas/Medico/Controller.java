@@ -1,4 +1,4 @@
-package Hospital.presentation.personas.Doctor;
+package Hospital.presentation.personas.Medico;
 
 import Hospital.logic.personas.trabajadores.Doctor;
 import Hospital.logic.Service;
