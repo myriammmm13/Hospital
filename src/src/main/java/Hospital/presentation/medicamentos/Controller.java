@@ -7,9 +7,9 @@ import java.util.List;
 
 public class Controller {
     Model model;
-    MedicamentosView view;
+    View view;
 
-    public Controller(Model model, MedicamentosView view) {
+    public Controller(Model model, View view) {
         this.model = model;
         this.view = view;
 
