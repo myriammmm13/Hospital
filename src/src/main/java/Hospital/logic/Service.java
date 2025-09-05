@@ -3,7 +3,7 @@ package Hospital.logic;
 import Hospital.data.Data;
 import Hospital.logic.personas.Paciente;
 import Hospital.logic.personas.Trabajador;
-import Hospital.logic.personas.trabajadores.Doctor;
+import Hospital.logic.personas.trabajadores.Medico;
 import Hospital.logic.personas.trabajadores.Farmaceutico;
 import Hospital.logic.recetas.Receta;
 
@@ -130,9 +130,9 @@ public class Service {
 
     //Doctor
     //Create
-    public void agregarDoctor(Doctor nuevo, String userId) throws Exception {
+    public void agregarDoctor(Medico nuevo, String userId) throws Exception {
         validarRol(userId, "ADM");
-        for (Doctor m : data.getDoctores()) {
+        for (Medico m : data.getDoctores()) {
             if (m.getId().equals(nuevo.getId())) {
                 throw new Exception("Ya existe un doctor con ese ID");
             }
@@ -141,13 +141,13 @@ public class Service {
     }
 
     //Read
-    public List<Doctor> listarDoctores() {
+    public List<Medico> listarDoctores() {
         return data.getDoctores();
     }
 
-    public List<Doctor> obtenerDoctor(String id) throws Exception {
-        List<Doctor> doctoresEncontrados = new ArrayList<>();
-        for (Doctor m : data.getDoctores()) {
+    public List<Medico> obtenerDoctor(String id) throws Exception {
+        List<Medico> doctoresEncontrados = new ArrayList<>();
+        for (Medico m : data.getDoctores()) {
             if (m.getId().contains(id) || m.getNombre().contains(id))
                 doctoresEncontrados.add(m);
         }
@@ -158,7 +158,7 @@ public class Service {
     }
 
     //Update
-    public void actualizarDoctor(Doctor act, String userId) throws Exception {
+    public void actualizarDoctor(Medico act, String userId) throws Exception {
         validarRol(userId, "ADM");
         for (int i = 0; i < data.getPacientes().size(); i++) {
             if (data.getDoctores().get(i).getId().equals(act.getId())) {
@@ -234,8 +234,8 @@ public class Service {
             }
         }
         data.getTrabajadores().add(nuevo);
-        if (nuevo instanceof Doctor)
-            data.getDoctores().add((Doctor) nuevo);
+        if (nuevo instanceof Medico)
+            data.getDoctores().add((Medico) nuevo);
         else if(nuevo instanceof Farmaceutico)
             data.getFamaceuticos().add((Farmaceutico) nuevo);
     }

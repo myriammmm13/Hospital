@@ -8,10 +8,9 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class MedicamentosView implements PropertyChangeListener {
+public class View implements PropertyChangeListener {
     private JPanel medicamentosPanel;
     public JPanel getPanel() {
-        System.out.println("Panel de medicamentos: " + medicamentosPanel); //Para debug
         return medicamentosPanel;
     }
 
@@ -31,7 +30,7 @@ public class MedicamentosView implements PropertyChangeListener {
     private JButton button1;
     private JButton buttonBuscar;
 
-    public MedicamentosView() {
+    public View() {
 
         guardarButton.addActionListener(new ActionListener() {
             @Override

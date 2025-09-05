@@ -4,32 +4,22 @@ import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import Hospital.presentation.medicamentos.MedicamentosView;
-
 public class View implements PropertyChangeListener {
-    private JPanel panel;
-//    private JPanel medicoPanel;
-//    private JPanel farmaceutaPanel;
-//    private JPanel pacientePanel;
-//    private JPanel medicamentoPanel;
-//    private JPanel dashboardPanel;
-//    private JPanel historicoPanel;
-//    private JPanel acercaDePanel;
+    private JPanel administradorPanel;
+    public JPanel getPanel() {
+        return administradorPanel;
+    }
 
     Controller controller;
     Model model;
 
     public View() {
-        medicamentosView = new MedicamentosView(); //para ligar el tap
+        //medicamentosView = new Hospital.presentation.medicamentos.View(); //para ligar el tap
     }
 
     //Para ligar con el tap de medicamentos
-    private MedicamentosView medicamentosView;
+    //private Hospital.presentation.medicamentos.View medicamentosView;
 
-
-//    public JPanel getPanel() {
-//        return panel;
-//    }
 //    public JPanel getMedicoPanel() {return medicoPanel;}
 //    public JPanel getFarmaceutaPanel() {return farmaceutaPanel;}
 //    public JPanel getPacientePanel() {return pacientePanel;}

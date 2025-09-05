@@ -3,8 +3,7 @@ package Hospital;
 import Hospital.data.Data;
 import Hospital.presentation.login.Controller;
 import Hospital.presentation.login.Model;
-import Hospital.presentation.login.View;
-//import Hospital.presentation.medicamentos.MedicamentosView;
+import Hospital.presentation.personas.Medico.View;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,7 +20,7 @@ public class Application {
         } catch (Exception ex) {}
 
         // Mostrar ventana de login
-        View loginView = new View();
+        Hospital.presentation.login.View loginView = new Hospital.presentation.login.View();
         Model loginModel = new Model(data);
         Controller loginController = new Controller(loginView, loginModel, (userId, userType) -> {
             SwingUtilities.invokeLater(() -> {
@@ -50,7 +49,7 @@ public class Application {
         var farmaceuticoModel = new Hospital.presentation.personas.Farmaceutico.Model();
         var farmaceuticoController = new Hospital.presentation.personas.Farmaceutico.Controller(farmaceuticoModel, farmaceuticoView);
 
-        var medicamentoView = new Hospital.presentation.medicamentos.MedicamentosView();
+        var medicamentoView = new Hospital.presentation.medicamentos.View();
         var medicamentoModel = new Hospital.presentation.medicamentos.Model();
         var medicamentoController = new Hospital.presentation.medicamentos.Controller(medicamentoModel, medicamentoView);
 
@@ -77,13 +76,13 @@ public class Application {
         */
         switch (userType) {
             case "ADM":
-                tabs.addTab("Medicos", adminView.getMedicoPanel());
-                tabs.addTab("Farmaceutas", adminView.getFarmaceutaPanel());
-                tabs.addTab("Pacientes", adminView.getPacientePanel());
-                tabs.addTab("Medicamentos", medicamentoView.getPanel());
-                tabs.addTab("Dashboard", adminView.getDashboardPanel());
-                tabs.addTab("Historico", adminView.getHistoricoPanel());
-                tabs.addTab("Acerca de...", adminView.getAcercaDePanel());
+                  tabs.addTab("Medicos", medicoView.getPanel());
+                  tabs.addTab("Farmaceutas", farmaceuticoView.getPanel());
+//                tabs.addTab("Pacientes", adminView.getPacientePanel());
+                  tabs.addTab("Medicamentos", medicamentoView.getPanel());
+//                tabs.addTab("Dashboard", adminView.getDashboardPanel());
+//                tabs.addTab("Historico", adminView.getHistoricoPanel());
+//                tabs.addTab("Acerca de...", adminView.getAcercaDePanel());
                 break;
 
             case "MED":
