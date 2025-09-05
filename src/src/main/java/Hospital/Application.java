@@ -70,27 +70,27 @@ public class Application {
         var historicoView = new Hospital.presentation.historico.View();
         var historicoModel = new Hospital.presentation.historico.Model();
         var historicoController = new Hospital.presentation.historico.Controller(historicoModel, historicoView);
+*/
+        var acercaDeView = new Hospital.presentation.AcercaDe.View();
+        var acercaDeModel = new Hospital.presentation.AcercaDe.Model();
+        var acercaDeController = new Hospital.presentation.AcercaDe.Controller(acercaDeModel, acercaDeView);
 
-        var acercaDeView = new Hospital.presentation.acercaDe.View();
-        var acercaDeModel = new Hospital.presentation.acercaDe.Model();
-        var acercaDeController = new Hospital.presentation.acercaDe.Controller(acercaDeModel, acercaDeView);
-        */
         switch (userType) {
             case "ADM":
-                tabs.addTab("Medicos", adminView.getMedicoPanel());
-                tabs.addTab("Farmaceutas", adminView.getFarmaceutaPanel());
-                tabs.addTab("Pacientes", adminView.getPacientePanel());
+                //tabs.addTab("Medicos", adminView.getMedicoPanel());
+                //tabs.addTab("Farmaceutas", adminView.getFarmaceutaPanel());
+                //tabs.addTab("Pacientes", adminView.getPacientePanel());
                 tabs.addTab("Medicamentos", medicamentoView.getPanel());
-                tabs.addTab("Dashboard", adminView.getDashboardPanel());
-                tabs.addTab("Historico", adminView.getHistoricoPanel());
-                tabs.addTab("Acerca de...", adminView.getAcercaDePanel());
+                //tabs.addTab("Dashboard", adminView.getDashboardPanel());
+                //tabs.addTab("Historico", adminView.getHistoricoPanel());
+                tabs.addTab("Acerca de...", acercaDeView.getPanel());
                 break;
 
             case "MED":
                 tabs.addTab("Preescribir", recetaView.getPanel());
                 //tabs.addTab("Dashboard", dashboardView.getPanel());
                 //tabs.addTab("Historico", historicoView.getPanel());
-                //tabs.addTab("Acerca de...", acercaDeView.getPanel());
+                tabs.addTab("Acerca de...", acercaDeView.getPanel());
 
                 break;
 
