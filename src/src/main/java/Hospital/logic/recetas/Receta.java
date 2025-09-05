@@ -35,7 +35,7 @@ public class Receta {
     }
 
     public Paciente getPaciente() { return paciente; }
-    public Doctor getDoctor() { return doctor; }
+    public Medico getDoctor() { return doctor; }
     //public Fecha getFechaConfeccion() { return fechaConfeccion; }
     //public Fecha getFechaRetiro() { return fechaRetiro; }
     public List<Prescripcion> getPrescripciones() { return prescripciones; }

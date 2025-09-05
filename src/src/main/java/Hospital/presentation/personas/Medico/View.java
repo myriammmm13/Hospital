@@ -6,6 +6,7 @@ import java.beans.PropertyChangeListener;
 
 public class View implements PropertyChangeListener {
     private JPanel medicoPanel;
+
     public JPanel getPanel() {
         return medicoPanel;
     }
