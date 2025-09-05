@@ -15,17 +15,11 @@ public class View implements PropertyChangeListener {
 //    private JPanel dashboardPanel;
 //    private JPanel historicoPanel;
 //    private JPanel acercaDePanel;
-
     Controller controller;
     Model model;
 
     public View() {
-        medicamentosView = new MedicamentosView(); //para ligar el tap
     }
-
-    //Para ligar con el tap de medicamentos
-    private MedicamentosView medicamentosView;
-
 
 //    public JPanel getPanel() {
 //        return panel;

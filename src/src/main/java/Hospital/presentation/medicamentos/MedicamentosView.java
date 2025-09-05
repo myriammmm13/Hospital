@@ -10,6 +10,7 @@ import java.beans.PropertyChangeListener;
 
 public class MedicamentosView implements PropertyChangeListener {
     private JPanel medicamentosPanel;
+
     public JPanel getPanel() {
         System.out.println("Panel de medicamentos: " + medicamentosPanel); //Para debug
         return medicamentosPanel;
