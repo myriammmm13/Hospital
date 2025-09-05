@@ -23,7 +23,7 @@ public class Data {
         pacientes = new ArrayList<>();
         medicos = new ArrayList<>();
         famaceuticos = new ArrayList<>();
-        trabajadores = new ArrayList<>();
+        trabajadores = new ArrayList<>();//se guardan todos los farma y doc aquí
 
         medicamentos.add(new Medicamento("111", "Acetaminofen", "500mg"));
         medicamentos.add(new Medicamento("112", "Ibuprofeno", "400mg"));

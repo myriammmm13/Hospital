@@ -1,4 +1,4 @@
-package Hospital.presentation.recetas;
+package Hospital.presentation.prescribir;
 
 import Hospital.logic.recetas.Receta;
 import Hospital.logic.Medicamento;

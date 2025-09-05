@@ -1,4 +1,4 @@
-package Hospital.presentation.recetas;
+package Hospital.presentation.prescribir;
 
 import Hospital.logic.Medicamento;
 import Hospital.logic.recetas.Receta;
@@ -26,7 +26,7 @@ public class Controller {
         model.setCurrent(encontrado);
     }
 
-    public void uodate(Receta r) throws Exception {
+    public void update(Receta r) throws Exception {
         model.setCurrent(r);
         Service.instance().actualizarReceta(r);
     }
