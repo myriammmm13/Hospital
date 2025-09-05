@@ -5,17 +5,18 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class View implements PropertyChangeListener {
-    private JPanel panel;
+    private JPanel FarmaceuticoPanel;
+    private JPanel farmaceuticoPanel;
+
+    public JPanel getPanel() {
+        return FarmaceuticoPanel;
+    }
 
     Controller controller;
     Model model;
 
     public View() {
 
-    }
-
-    public JPanel getPanel() {
-        return panel;
     }
 
     public void setController(Controller controller) {

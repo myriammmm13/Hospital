@@ -5,16 +5,16 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class View implements PropertyChangeListener {
-    private JPanel panel;
+    private JPanel medicoPanel;
+    public JPanel getPanel() {
+        return medicoPanel;
+    }
+
     Controller controller;
     Model model;
 
     public View() {
 
-    }
-
-    public JPanel getPanel() {
-        return panel;
     }
 
     public void setController(Controller controller) {
