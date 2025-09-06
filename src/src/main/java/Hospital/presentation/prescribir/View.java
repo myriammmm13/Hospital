@@ -8,33 +8,26 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class View implements PropertyChangeListener{
-    private JLabel controlLabel;
-    private JButton buscarPacienteButton;
-    private JButton agregarMedicamentoButton;
-    private JLabel recetaLabel;
-    private JPanel controlPanel;
-    private JPanel ajustarPanel;
-    private JPanel RecetaPanel;
-    private JPanel recetasConteo;
-    private JLabel nombreLabel;
-    private JButton fechaButton;
+public class View implements PropertyChangeListener {
+    private JPanel panel;
     private JButton guardarButton;
     private JButton limpiarButton;
     private JButton descartarMedicamentoButton;
     private JButton detallesButton;
-    private JLabel ajustarLabel;
-    private JPanel panel;
+    private JButton buscarPacienteButton;
+    private JButton buscarMedicamentoButton;
+    private JTable PrescripcionTable;
+    private JButton fechaBiblioButton;
+
     Model model;
     Controller controller;
 
-    public View() {}
-
-    public JPanel getPanel() {return panel;}
-
-    public void setController(Controller controller) {
-        this.controller = controller;
+    public View() {
     }
+
+    public JPanel getPanel() { return panel; }
+
+    public void setController(Controller controller) { this.controller = controller; }
 
     public void setModel(Model model) {
         this.model = model;

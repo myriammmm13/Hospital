@@ -3,8 +3,7 @@ package Hospital;
 import Hospital.data.Data;
 import Hospital.presentation.login.Controller;
 import Hospital.presentation.login.Model;
-import Hospital.presentation.login.View;
-//import Hospital.presentation.medicamentos.MedicamentosView;
+import Hospital.presentation.personas.Medico.View;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,7 +20,7 @@ public class Application {
         } catch (Exception ex) {}
 
         // Mostrar ventana de login
-        View loginView = new View();
+        Hospital.presentation.login.View loginView = new Hospital.presentation.login.View();
         Model loginModel = new Model(data);
         Controller loginController = new Controller(loginView, loginModel, (userId, userType) -> {
             SwingUtilities.invokeLater(() -> {
@@ -50,23 +49,23 @@ public class Application {
         var farmaceuticoModel = new Hospital.presentation.personas.Farmaceutico.Model();
         var farmaceuticoController = new Hospital.presentation.personas.Farmaceutico.Controller(farmaceuticoModel, farmaceuticoView);
 
-        var medicamentoView = new Hospital.presentation.medicamentos.MedicamentosView();
+        var medicamentoView = new Hospital.presentation.medicamentos.View();
         var medicamentoModel = new Hospital.presentation.medicamentos.Model();
         var medicamentoController = new Hospital.presentation.medicamentos.Controller(medicamentoModel, medicamentoView);
 
-        var recetaView = new Hospital.presentation.recetas.View();
-        var recetaModel = new Hospital.presentation.recetas.Model();
-        var recetaController = new  Hospital.presentation.recetas.Controller(recetaModel, recetaView);
+        var prescribirView = new Hospital.presentation.prescribir.View();
+        var prescribirModel = new Hospital.presentation.prescribir.Model();
+        var prescribirController = new  Hospital.presentation.prescribir.Controller(prescribirModel, prescribirView);
 
         /*
         var pacienteView = new Hospital.presentation.personas.Paciente.View();
         var pacienteModel = new Hospital.presentation.personas.Paciente.Model();
         var pacienteController = new Hospital.presentation.personas.Paciente.Controller(pacienteModel, pacienteView);
-
+*/
         var dashboardView = new Hospital.presentation.dashboard.View();
         var dashboardModel = new Hospital.presentation.dashboard.Model();
         var dashboardController = new Hospital.presentation.dashboard.Controller(dashboardModel, dashboardView);
-
+/*
         var historicoView = new Hospital.presentation.historico.View();
         var historicoModel = new Hospital.presentation.historico.Model();
         var historicoController = new Hospital.presentation.historico.Controller(historicoModel, historicoView);
@@ -77,25 +76,25 @@ public class Application {
 
         switch (userType) {
             case "ADM":
-                //tabs.addTab("Medicos", adminView.getMedicoPanel());
-                //tabs.addTab("Farmaceutas", adminView.getFarmaceutaPanel());
-                //tabs.addTab("Pacientes", adminView.getPacientePanel());
-                tabs.addTab("Medicamentos", medicamentoView.getPanel());
-                //tabs.addTab("Dashboard", adminView.getDashboardPanel());
-                //tabs.addTab("Historico", adminView.getHistoricoPanel());
-                tabs.addTab("Acerca de...", acercaDeView.getPanel());
+                  tabs.addTab("Medicos", medicoView.getPanel());
+                  tabs.addTab("Farmaceutas", farmaceuticoView.getPanel());
+//                tabs.addTab("Pacientes", pacienteView.getPanel());
+                  tabs.addTab("Medicamentos", medicamentoView.getPanel());
+                  tabs.addTab("Dashboard", dashboardView.getPanel());
+//                tabs.addTab("Historico", historicoView.getPanel());
+                  tabs.addTab("Acerca de...", acercaDeView.getPanel());
                 break;
 
             case "MED":
-                tabs.addTab("Preescribir", recetaView.getPanel());
-                //tabs.addTab("Dashboard", dashboardView.getPanel());
+                tabs.addTab("Preescribir", prescribirView.getPanel());
+                tabs.addTab("Dashboard", dashboardView.getPanel());
                 //tabs.addTab("Historico", historicoView.getPanel());
                 tabs.addTab("Acerca de...", acercaDeView.getPanel());
 
                 break;
 
             case "FAR":
-                tabs.addTab("Preescribir", recetaView.getPanel());
+                tabs.addTab("Preescribir", prescribirView.getPanel());
                 //tabs.addTab("Dashboard", dashboardView.getPanel());
 
                 break;
