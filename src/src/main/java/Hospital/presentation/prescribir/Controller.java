@@ -1,8 +1,8 @@
 package Hospital.presentation.prescribir;
 
-import Hospital.logic.Medicamento;
 import Hospital.logic.recetas.Receta;
 import Hospital.logic.Service;
+import Hospital.presentation.prescribir.View.View;
 
 public class Controller {
     Model model;
