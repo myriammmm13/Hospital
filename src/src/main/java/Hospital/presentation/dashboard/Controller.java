@@ -1,8 +1,8 @@
 package Hospital.presentation.dashboard;
 
 import Hospital.logic.Medicamento;
-import Hospital.presentation.medicamentos.Model;
-import Hospital.presentation.medicamentos.View;
+import Hospital.presentation.dashboard.Model;
+import Hospital.presentation.dashboard.View;
 
 import java.util.List;
 
@@ -14,8 +14,7 @@ public class Controller {
         this.model = model;
         this.view = view;
 
-        //view.setController(this);
-        //no se pq chorchas no sirve
+        view.setController(this);
         view.setModel(model);
     }
 }

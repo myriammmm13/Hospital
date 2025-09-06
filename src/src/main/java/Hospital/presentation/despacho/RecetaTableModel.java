@@ -6,7 +6,7 @@ import Hospital.presentation.AbstractTableModel;
 import java.util.List;
 
 public class RecetaTableModel extends AbstractTableModel<Receta> implements javax.swing.table.TableModel{
-    public TableModel(int[] cols, List<Receta> rows) {
+    public RecetaTableModel(int[] cols, List<Receta> rows) {
         super(cols, rows);
     }
 

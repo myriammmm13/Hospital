@@ -9,7 +9,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class View implements PropertyChangeListener{
-    private JPanel panel;
+    private JPanel panel1;
     private JTable table1;
     private JComboBox button1;
     private JButton button2;
@@ -24,10 +24,11 @@ public class View implements PropertyChangeListener{
     Controller controller;
     Model model;
 
+    public View(){}
+    public JPanel getPanel() {return panel1;}
     public void setController(Controller controller) {
         this.controller = controller;
     }
-
     public void setModel(Model model) {
         this.model = model;
         model.addPropertyChangeListener(this);
