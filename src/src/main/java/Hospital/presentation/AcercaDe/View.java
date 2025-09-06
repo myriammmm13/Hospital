@@ -1,22 +1,26 @@
-package Hospital.presentation.personas.Farmaceutico;
+package Hospital.presentation.AcercaDe;
 
 import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class View implements PropertyChangeListener {
-    private JPanel FarmaceuticoPanel;
-    private JPanel farmaceuticoPanel;
-
-    public JPanel getPanel() {
-        return FarmaceuticoPanel;
-    }
-
+    private JPanel panelPrincipal;
+    private JPanel imagePanel;
+    private JLabel imageHospital;
+    private JLabel nomHospital;
+    private JLabel ContacNumber;
+    private JLabel direc;
     Controller controller;
     Model model;
 
     public View() {
 
+    }
+
+    public JPanel getPanel() {
+        System.out.println("Panel de Acerca de: " + panelPrincipal);
+        return panelPrincipal;
     }
 
     public void setController(Controller controller) {

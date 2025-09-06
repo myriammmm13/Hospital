@@ -1,11 +1,15 @@
-package Hospital.presentation.recetas.PrescripcionTableModel;
+package Hospital.presentation.prescribir;
 import Hospital.logic.recetas.Prescripcion;
-import hospital.presentation.AbstractTableModel;
-import java.util.List;
+import Hospital.presentation.AbstractTableModel;
 
-public class PrescripcionTableModel extends AbstractTableModel<Prescripcion> implements javax.swing.table.TableModel {
-    public TableModel(int[] cols, List<Prescripcion> rows) {
+import java.util.List;
+/*
+public class PrescribirTableModel extends AbstractTableModel<Prescripcion> implements javax.swing.table.TableModel {
+    public PrescribirTableModel(int[] cols, List<Prescripcion> rows) {
         super(cols, rows);
+    }
+    public PrescribirTableModel(){
+        super();
     }
 
     public static final int MEDICAMENTO = 0;
@@ -41,4 +45,4 @@ public class PrescripcionTableModel extends AbstractTableModel<Prescripcion> imp
         }
     }
 
-}
+}*/

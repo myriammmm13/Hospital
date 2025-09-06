@@ -1,28 +1,17 @@
 package Hospital.presentation.personas.Administrador;
 
 import javax.swing.*;
-import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class View implements PropertyChangeListener {
     private JPanel panel;
-    private JTabbedPane Tabs;
-    private JPanel Medicos;
-    private JPanel Farmaceuticos;
-    private JPanel Pacientes;
-    private JPanel Medicamentos;
-    private JPanel Dashboard;
-    private JPanel AcercaDe;
-    private JPanel Historico;
+
     Controller controller;
     Model model;
 
+    public JPanel getPanel(){return panel;}
     public View() {
-    }
-
-    public JPanel getPanel() {
-        return panel;
     }
 
     public void setController(Controller controller) {

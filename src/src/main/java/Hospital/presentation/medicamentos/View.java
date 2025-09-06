@@ -9,10 +9,15 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class View implements PropertyChangeListener {
-    private JPanel panel;
+    private JPanel medicamentosPanel;
+
+    public JPanel getPanel() {
+        return medicamentosPanel;
+    }
 
     Controller controller;
     Model model;
+
     private JLabel codigo;
     private JTextField codigofield;
     private JLabel nombre;
@@ -27,7 +32,6 @@ public class View implements PropertyChangeListener {
     private JButton buttonBuscar;
 
     public View() {
-        panel = new JPanel(); // modificar con el GUI Builder
 
         guardarButton.addActionListener(new ActionListener() {
             @Override
@@ -39,9 +43,9 @@ public class View implements PropertyChangeListener {
                 );
                 try {
                     controller.create(m, "");
-                    JOptionPane.showMessageDialog(panel, "Medicamento guardado correctamente.");
+                    JOptionPane.showMessageDialog(medicamentosPanel, "Medicamento guardado correctamente.");
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(panel, "Error al guardar: " + ex.getMessage());
+                    JOptionPane.showMessageDialog(medicamentosPanel, "Error al guardar: " + ex.getMessage());
                 }
 
             }
@@ -56,9 +60,9 @@ public class View implements PropertyChangeListener {
                 );
                 try {
                     controller.update(m, "");
-                    JOptionPane.showMessageDialog(panel, "Medicamento modificado correctamente.");
+                    JOptionPane.showMessageDialog(medicamentosPanel, "Medicamento modificado correctamente.");
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(panel, "Error al modificar: " + ex.getMessage());
+                    JOptionPane.showMessageDialog(medicamentosPanel, "Error al modificar: " + ex.getMessage());
                 }
 
             }
@@ -67,11 +71,11 @@ public class View implements PropertyChangeListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    controller.delete(String.valueOf(codigo), "");
-                    JOptionPane.showMessageDialog(panel, "Medicamento eliminado.");
+                    controller.delete(codigofield.getText(), "");
+                    JOptionPane.showMessageDialog(medicamentosPanel, "Medicamento eliminado.");
                     limpiarCampos();
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(panel, "Error al eliminar: " + ex.getMessage());
+                    JOptionPane.showMessageDialog(medicamentosPanel, "Error al eliminar: " + ex.getMessage());
                 }
 
             }
@@ -83,7 +87,7 @@ public class View implements PropertyChangeListener {
                     controller.create(new Medicamento("", "", ""), "ADM-111");
                     limpiarCampos();
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(panel, "Error al limpiar: " + ex.getMessage());
+                    JOptionPane.showMessageDialog(medicamentosPanel, "Error al limpiar: " + ex.getMessage());
                 }
 
             }
@@ -93,7 +97,7 @@ public class View implements PropertyChangeListener {
             public void actionPerformed(ActionEvent e) {
                 String codigoBuscado = buscarField.getText().trim();
                 if (codigoBuscado.isEmpty()) {
-                    JOptionPane.showMessageDialog(panel, "Por favor ingrese un código para buscar.");
+                    JOptionPane.showMessageDialog(medicamentosPanel, "Por favor ingrese un código para buscar.");
                     return;
                 }
 
@@ -106,9 +110,9 @@ public class View implements PropertyChangeListener {
                     nombreField.setText(m.getNombre());
                     descripcionField.setText(m.getPresentacion());
 
-                    JOptionPane.showMessageDialog(panel, "Medicamento encontrado.");
+                    JOptionPane.showMessageDialog(medicamentosPanel, "Medicamento encontrado.");
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(panel, "No se encontró el medicamento: " + ex.getMessage());
+                    JOptionPane.showMessageDialog(medicamentosPanel, "No se encontró el medicamento: " + ex.getMessage());
                 }
             }
         });
@@ -118,9 +122,6 @@ public class View implements PropertyChangeListener {
         nombreField.setText("");
         descripcionField.setText("");
         buscarField.setText("");
-    }
-    public JPanel getPanel() {
-        return panel;
     }
 
     public void setController(Controller controller) {

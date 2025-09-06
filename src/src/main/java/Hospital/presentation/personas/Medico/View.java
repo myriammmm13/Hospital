@@ -1,21 +1,21 @@
-package Hospital.presentation.personas.Doctor;
+package Hospital.presentation.personas.Medico;
 
 import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class View implements PropertyChangeListener {
-    private JPanel panel;
+    private JPanel medicoPanel;
+
+    public JPanel getPanel() {
+        return medicoPanel;
+    }
+
     Controller controller;
     Model model;
-    private JButton uy;
 
     public View() {
 
-    }
-
-    public JPanel getPanel() {
-        return panel;
     }
 
     public void setController(Controller controller) {
