@@ -142,5 +142,4 @@ public class View implements PropertyChangeListener {
             descripcionField.setText(m.getPresentacion());
         }
     }
-
 }
