@@ -16,9 +16,7 @@ public class View implements PropertyChangeListener {
     private JPanel ListPanel;
     private JTextField IDText;
     private JTextField nomText;
-    private JLabel EspLabel;
     private JLabel NomLabel;
-    private JTextField EspText;
     private JButton GuardarButton;
     private JButton LimpiarButton;
     private JButton BorrarButton;

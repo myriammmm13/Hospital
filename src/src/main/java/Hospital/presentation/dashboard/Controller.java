@@ -1,9 +1,5 @@
 package Hospital.presentation.dashboard;
 
-import Hospital.logic.Medicamento;
-import Hospital.presentation.dashboard.Model;
-import Hospital.presentation.dashboard.View;
-
 import java.util.List;
 
 public class Controller {
@@ -17,4 +13,5 @@ public class Controller {
         view.setController(this);
         view.setModel(model);
     }
+
 }
