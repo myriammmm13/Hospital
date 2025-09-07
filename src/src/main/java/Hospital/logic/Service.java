@@ -97,7 +97,7 @@ public class Service {
         return data.getPacientes();
     }
 
-    public List<Paciente> obtenerPaciente(String id) throws Exception {
+    public List<Paciente> obtenerPacientes(String id) throws Exception {
         List<Paciente> pacientesEncontrados = new ArrayList<>();
         for (Paciente m : data.getPacientes()) {
             if (m.getId().contains(id) || m.getNombre().contains(id))
@@ -107,6 +107,14 @@ public class Service {
             throw new Exception("Paciente no encontrado");
         }
         return pacientesEncontrados;
+    }
+    public Paciente obtenerPaciente(String id) throws Exception {
+        Paciente paciente = new Paciente();
+        for (Paciente m : data.getPacientes()) {
+            if (m.getId().equals(id))
+                paciente = m;
+        }
+        return paciente;
     }
 
     //Update
