@@ -64,4 +64,9 @@ public class Model extends AbstractModel {
     }
 
     public Paciente getPaciente() { return  current.getPaciente(); }
+
+    public void agregarPrescripcion(Prescripcion prescripcion){
+        this.current.agregarPrescripcion(prescripcion);
+        setPrescripciones(current.getPrescripciones());
+    }
 }

@@ -31,6 +31,19 @@ public class View extends JDialog implements PropertyChangeListener {
         setTitle("Pacientes");
         setSize(400, 250);
 
+        okButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                Hospital.presentation.prescribir.buscarMedicamento.crearPrescripcion.View crearPrescripcionView = null;
+                if (medicamentoBusquedaTable.getSelectedRow() >=0) {
+                    crearPrescripcionView = new Hospital.presentation.prescribir.buscarMedicamento.
+                            crearPrescripcion.View(controller.getMedicamento(medicamentoBusquedaTable.getSelectedRow()));
+                }
+                crearPrescripcionView.setVisible(true);
+            }
+        });
+
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -79,12 +92,12 @@ public class View extends JDialog implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
-            case Model.PACIENTES:
+            case Model.MEDICAMENTOS:
                 int[] cols = {TableModel.CODIGO, TableModel.NOMBRE, TableModel.PRESENTACION};
                 TableModel tableModel = new TableModel(cols, model.getMedicamentosList());
                 medicamentoBusquedaTable.setModel(tableModel);
 
-                // Inicializa el sorter
+
                 ordenamientoBusqueda = new TableRowSorter<>(tableModel);
                 medicamentoBusquedaTable.setRowSorter(ordenamientoBusqueda);
                 break;
