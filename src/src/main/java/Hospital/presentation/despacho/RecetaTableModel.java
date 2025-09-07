@@ -39,7 +39,7 @@ public class RecetaTableModel extends AbstractTableModel<Receta> implements java
                 //return e.getFecha_Confeccion();
                 return 0;
             case ESTADO:
-                return "Confeccionado";
+                return e.getEstado();
             default:
                 return "";
         }

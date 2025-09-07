@@ -2,6 +2,7 @@ package Hospital.presentation.prescribir;
 
 import Hospital.logic.recetas.Prescripcion;
 import Hospital.logic.recetas.Receta;
+import Hospital.logic.personas.trabajadores.Medico;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -28,6 +29,7 @@ public class View implements PropertyChangeListener {
 
     Model model;
     Controller controller;
+    Medico doctorAuxiliar; //solo para que no se pegue
 
     public View() {
         buscarPacienteView =  new Hospital.presentation.prescribir.buscarPaciente.View();
@@ -36,7 +38,7 @@ public class View implements PropertyChangeListener {
         guardarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Receta r = new Receta(model.getCurrent().getPaciente(), Medico doctor, PrescripcionTable.getModel());
+                Receta r = new Receta(doctorAuxiliar = new Medico(), model.getCurrent().getPaciente(), model.getCurrent().getPrescripciones());
                 try {
                     controller.create(r, "");
                     JOptionPane.showMessageDialog(panel, "Receta guardada correctamente.");
@@ -112,6 +114,8 @@ public class View implements PropertyChangeListener {
 
         buscarMedicamentoView.setModel(model);
         model.addPropertyChangeListener((buscarMedicamentoView));
+
+
     }
 
     @Override

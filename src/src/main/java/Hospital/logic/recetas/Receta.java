@@ -54,4 +54,5 @@ public class Receta {
     public void actualizarPrescripcion(Prescripcion prescripcion, int row) {
         this.prescripciones.set(row, prescripcion);
     }
+
 }
