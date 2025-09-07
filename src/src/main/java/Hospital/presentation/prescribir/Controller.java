@@ -1,6 +1,5 @@
 package Hospital.presentation.prescribir;
 
-import Hospital.logic.Medicamento;
 import Hospital.logic.recetas.Receta;
 import Hospital.logic.Service;
 
@@ -41,6 +40,6 @@ public class Controller {
     }
 
     public void setPaciente(int row) {
-        model.setPaciente(model.getPacientes().get(row));
+        model.setPaciente(model.getPacientesList().get(row));
     }
 }
