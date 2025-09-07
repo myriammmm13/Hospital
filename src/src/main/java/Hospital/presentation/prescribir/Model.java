@@ -74,4 +74,9 @@ public class Model extends AbstractModel {
         this.current.borrarPrescripcion(prescripcion);
         setPrescripciones(current.getPrescripciones());
     }
+
+    public void actualizarPrescripcion(Prescripcion prescripcion, int row) {
+        this.current.actualizarPrescripcion(prescripcion, row);
+        setPrescripciones(current.getPrescripciones());
+    }
 }
