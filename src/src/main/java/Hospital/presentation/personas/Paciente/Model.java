@@ -1,21 +1,19 @@
-package Hospital.presentation.historico;
+package Hospital.presentation.personas.Paciente;
 
-import Hospital.logic.Medicamento;
 import Hospital.logic.personas.Paciente;
-import Hospital.logic.recetas.Receta;
 import Hospital.presentation.AbstractModel;
 
 import java.beans.PropertyChangeListener;
 import java.util.List;
 
 public class Model extends AbstractModel {
-    Receta current;
-    List<Receta> recetas;
+    Paciente current;
+    //debe estar llamando a lista de pacientes en data para buscar y demás
 
     public static final String CURRENT = "current";
 
     public Model() {
-        current = new Receta();
+        current = new Paciente();
     }
 
     @Override
@@ -24,15 +22,11 @@ public class Model extends AbstractModel {
         firePropertyChange(CURRENT, null, current);
     }
 
-    public Receta getCurrent() {
+    public Paciente getCurrent() {
         return current;
     }
 
-    public List<Receta> getRecetas() {
-        return recetas;
-    }
-
-    public void setCurrent(Receta r) {
+    public void setCurrent(Paciente r) {
         this.current = r;
         firePropertyChange(CURRENT, null, current);
     }

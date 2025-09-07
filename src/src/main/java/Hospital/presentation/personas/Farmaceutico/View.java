@@ -6,10 +6,25 @@ import java.beans.PropertyChangeListener;
 
 public class View implements PropertyChangeListener {
     private JPanel FarmaceuticoPanel;
+    private JPanel panel;
+    private JPanel listadoPanel;
+    private JPanel busquedaPanel;
     private JPanel farmaceuticoPanel;
+    private JLabel idLabel;
+    private JTextField idText;
+    private JLabel nombreLabel;
+    private JTextField nombreText;
+    private JButton guardarButton;
+    private JButton limpiarButton;
+    private JButton borrarButton;
+    private JLabel nomLabel;
+    private JTextField nomText;
+    private JButton buscarButton;
+    private JButton reporteButton;
+    private JTable listadoTable;
 
     public JPanel getPanel() {
-        return FarmaceuticoPanel;
+        return panel;
     }
 
     Controller controller;

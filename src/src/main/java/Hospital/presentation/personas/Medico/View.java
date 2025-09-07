@@ -5,10 +5,27 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class View implements PropertyChangeListener {
-    private JPanel medicoPanel;
+    private JPanel panel;
+    private JPanel MedicoPanel;
+    private JPanel ListadoPanel;
+    private JPanel BusquedaPanel;
+    private JLabel IDLabel;
+    private JTextField IDText;
+    private JLabel NomLabel;
+    private JTextField NomText;
+    private JButton guardarButton;
+    private JButton limpiarButton;
+    private JLabel EspLabel;
+    private JTextField EspText;
+    private JButton borrarButton;
+    private JLabel NombreLabelBusq;
+    private JTextField NomTextBusq;
+    private JButton buscarButton;
+    private JButton reporteButton;
+    private JTable ListaTable;
 
     public JPanel getPanel() {
-        return medicoPanel;
+        return panel;
     }
 
     Controller controller;
