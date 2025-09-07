@@ -52,4 +52,8 @@ public class Controller {
     public void agregarPrescripcion(Prescripcion p) {
         model.agregarPrescripcion(p);
     }
+
+    public void borrarPrescripcion(int row){
+        model.borrarPrescripcion(model.getPrescripcionesList().get(row));
+    }
 }
