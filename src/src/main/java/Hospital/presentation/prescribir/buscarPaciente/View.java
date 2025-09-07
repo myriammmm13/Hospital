@@ -1,6 +1,9 @@
 package Hospital.presentation.prescribir.buscarPaciente;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.TableRowSorter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -17,6 +20,8 @@ public class View extends JDialog implements PropertyChangeListener {
     private JButton okButton;
     private JTable personasBusquedaTable;
 
+    private TableRowSorter<TableModel> ordenamientoBusqueda;
+
     public View() {
         setContentPane(panel);
         setModal(true);
@@ -24,13 +29,6 @@ public class View extends JDialog implements PropertyChangeListener {
         setLocationRelativeTo(null);
         setTitle("Pacientes");
         setSize(400, 250);
-
-        buscar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controller.searchDepartamentos(nombre.getText());
-            }
-        });
 
         okButton.addActionListener(new ActionListener() {
             @Override
@@ -44,6 +42,31 @@ public class View extends JDialog implements PropertyChangeListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 View.this.setVisible(false);
+            }
+        });
+
+        busquedaField.getDocument().addDocumentListener(new DocumentListener() {
+            public void insertUpdate(DocumentEvent e) {
+                filtrar();
+            }
+
+            public void removeUpdate(DocumentEvent e) {
+                filtrar();
+            }
+
+            public void changedUpdate(DocumentEvent e) {
+                filtrar();
+            }
+
+            private void filtrar() {
+                if (ordenamientoBusqueda == null) return; // Aún no se ha inicializado
+
+                String texto = busquedaField.getText().trim();
+                if (texto.length() == 0) {
+                    ordenamientoBusqueda.setRowFilter(null);
+                } else {
+                    ordenamientoBusqueda.setRowFilter(RowFilter.regexFilter("(?i)" + texto, TableModel.NOMBRE));
+                }
             }
         });
     }
@@ -65,7 +88,12 @@ public class View extends JDialog implements PropertyChangeListener {
         switch (evt.getPropertyName()) {
             case Model.PACIENTES:
                 int[] cols = {TableModel.ID, TableModel.NOMBRE, TableModel.TELEFONO, TableModel.FEC_NAC};
-                personasBusquedaTable.setModel(new TableModel(cols,model.getPacientes()));
+                TableModel tableModel = new TableModel(cols, model.getPacientes());
+                personasBusquedaTable.setModel(tableModel);
+
+                // Inicializa el sorter
+                ordenamientoBusqueda = new TableRowSorter<>(tableModel);
+                personasBusquedaTable.setRowSorter(ordenamientoBusqueda);
                 break;
         }
         this.panel.revalidate();

@@ -32,7 +32,7 @@
               <model>
                 <item value="ID"/>
                 <item value="Nombre"/>
-                <item value="D.O.B"/>
+                <item value="Telefono"/>
               </model>
             </properties>
           </component>
