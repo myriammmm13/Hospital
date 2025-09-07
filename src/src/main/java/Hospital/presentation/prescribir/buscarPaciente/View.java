@@ -91,7 +91,6 @@ public class View extends JDialog implements PropertyChangeListener {
                 TableModel tableModel = new TableModel(cols, model.getPacientesList());
                 personasBusquedaTable.setModel(tableModel);
 
-                // Inicializa el sorter
                 ordenamientoBusqueda = new TableRowSorter<>(tableModel);
                 personasBusquedaTable.setRowSorter(ordenamientoBusqueda);
                 break;

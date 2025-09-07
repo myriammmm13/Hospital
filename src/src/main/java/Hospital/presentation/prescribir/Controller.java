@@ -1,5 +1,7 @@
 package Hospital.presentation.prescribir;
 
+import Hospital.logic.Medicamento;
+import Hospital.logic.recetas.Prescripcion;
 import Hospital.logic.recetas.Receta;
 import Hospital.logic.Service;
 
@@ -41,5 +43,13 @@ public class Controller {
 
     public void setPaciente(int row) {
         model.setPaciente(model.getPacientesList().get(row));
+    }
+
+    public Medicamento getMedicamento(int row) {
+        return model.getMedicamentosList().get(row);
+    }
+
+    public void agregarPrescripcion(Prescripcion p) {
+        model.agregarPrescripcion(p);
     }
 }

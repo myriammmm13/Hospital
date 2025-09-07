@@ -45,4 +45,7 @@ public class Receta {
     public void setPrescripciones(List<Prescripcion> prescripciones) {this.prescripciones = prescripciones;}
     //public void setFechaRetiro(Fecha fechaRetiro) {this.fechaRetiro = fechaRetiro;}
     public void setEstado(String estado) {this.estado = estado;}
+    public void agregarPrescripcion(Prescripcion prescripcion){
+        this.prescripciones.add(prescripcion);
+    }
 }
