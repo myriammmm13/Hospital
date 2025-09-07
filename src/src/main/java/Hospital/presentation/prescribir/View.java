@@ -38,7 +38,8 @@ public class View implements PropertyChangeListener {
         guardarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Receta r = new Receta(doctorAuxiliar = new Medico(), model.getCurrent().getPaciente(), model.getCurrent().getPrescripciones());
+                Receta r = new Receta(doctorAuxiliar = new Medico(), model.getCurrent().getPaciente(),
+                        model.getCurrent().getPrescripciones());
                 try {
                     controller.create(r, "aqui falta el id");
                     JOptionPane.showMessageDialog(panel, "Receta guardada correctamente.");
