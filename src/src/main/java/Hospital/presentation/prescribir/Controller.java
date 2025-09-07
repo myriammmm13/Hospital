@@ -56,4 +56,8 @@ public class Controller {
     public void borrarPrescripcion(int row){
         model.borrarPrescripcion(model.getPrescripcionesList().get(row));
     }
+
+    public void actualizarPrescripcion(Prescripcion prescripcion, int row) {
+        model.actualizarPrescripcion(prescripcion, row);
+    }
 }

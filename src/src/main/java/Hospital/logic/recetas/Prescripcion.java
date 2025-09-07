@@ -15,6 +15,12 @@ public class Prescripcion {
         this.cantidad = cantidad;
     }
 
+    public void setCantidad(int cantidad) { this.cantidad = cantidad; }
+
+    public void setDuracion(int duracion) { this.duracion = duracion; }
+
+    public void setIndicaciones(String indicaciones) { this.indicaciones = indicaciones; }
+
     public String getNombre(){
         return medicamento.getNombre();
     }
@@ -34,5 +40,8 @@ public class Prescripcion {
     public int getDuracion(){
         return duracion;
     }
-    
+
+    public Medicamento getMedicamento() {
+        return medicamento;
+    }
 }

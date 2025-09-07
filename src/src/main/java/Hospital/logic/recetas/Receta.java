@@ -51,4 +51,7 @@ public class Receta {
     public void borrarPrescripcion(Prescripcion prescripcion){
         this.prescripciones.remove(prescripcion);
     }
+    public void actualizarPrescripcion(Prescripcion prescripcion, int row) {
+        this.prescripciones.set(row, prescripcion);
+    }
 }

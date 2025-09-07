@@ -20,6 +20,9 @@ public class View extends JDialog implements PropertyChangeListener {
     private JButton guardarButton;
     private JButton cancelarButton;
 
+    private Prescripcion prescripcion = null;
+    private int row;
+
     Controller controller;
     Model model;
 
@@ -34,9 +37,17 @@ public class View extends JDialog implements PropertyChangeListener {
         guardarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Prescripcion p = new Prescripcion(medicamento, indicacionesField.getText(),
-                        (int)duracionSpinner.getValue(), (int)cantidadSpinner.getValue());
-                controller.agregarPrescripcion(p);
+                if(prescripcion != null){
+                    prescripcion.setCantidad((int) cantidadSpinner.getValue());
+                    prescripcion.setDuracion((int) duracionSpinner.getValue());
+                    prescripcion.setIndicaciones(indicacionesField.getText());
+                    controller.actualizarPrescripcion(prescripcion, row);
+                }
+                else {
+                    Prescripcion p = new Prescripcion(medicamento, indicacionesField.getText(),
+                            (int) duracionSpinner.getValue(), (int) cantidadSpinner.getValue());
+                    controller.agregarPrescripcion(p);
+                }
             }
         });
 
@@ -56,6 +67,16 @@ public class View extends JDialog implements PropertyChangeListener {
         this.model = model;
         model.addPropertyChangeListener(this);
     }
+
+    public void setPrescripcion(Prescripcion p) {
+        this.prescripcion = p;
+        cantidadSpinner.setValue(p.getCantidad());
+        duracionSpinner.setValue(p.getDuracion());
+        indicacionesField.setText(p.getIndicaciones());
+        setTitle("Editar línea - " + p.getNombre());
+    }
+
+    public void setRow(int row) { this.row = row; }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {

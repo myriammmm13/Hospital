@@ -1,8 +1,7 @@
 package Hospital.presentation.prescribir;
 
-import Hospital.logic.Medicamento;
+import Hospital.logic.recetas.Prescripcion;
 import Hospital.logic.recetas.Receta;
-import Hospital.data.Data;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -25,6 +24,7 @@ public class View implements PropertyChangeListener {
 
     private Hospital.presentation.prescribir.buscarPaciente.View buscarPacienteView;
     private Hospital.presentation.prescribir.buscarMedicamento.View buscarMedicamentoView;
+    private Hospital.presentation.prescribir.buscarMedicamento.crearPrescripcion.View CrearPrescripcionView;
 
     Model model;
     Controller controller;
@@ -78,6 +78,22 @@ public class View implements PropertyChangeListener {
             public void actionPerformed(ActionEvent e) {
                 if(PrescripcionTable.getSelectedRow()>=0){
                     controller.borrarPrescripcion(PrescripcionTable.getSelectedRow());
+                }
+            }
+        });
+
+        detallesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(PrescripcionTable.getSelectedRow()>=0){
+                    Prescripcion pres = model.getPrescripcionesList().get(PrescripcionTable.getSelectedRow());
+                    CrearPrescripcionView = new Hospital.presentation.
+                            prescribir.buscarMedicamento.crearPrescripcion.View(pres.getMedicamento());
+                    CrearPrescripcionView.setPrescripcion(pres);
+                    CrearPrescripcionView.setRow(PrescripcionTable.getSelectedRow());
+                    CrearPrescripcionView.setController(controller);
+                    CrearPrescripcionView.setModel(model);
+                    CrearPrescripcionView.setVisible(true);
                 }
             }
         });
