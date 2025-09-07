@@ -23,10 +23,16 @@ public class View implements PropertyChangeListener {
     private JLabel fechaField;
     private JLabel nombreField;
 
+    private Hospital.presentation.prescribir.buscarPaciente.View buscarPacienteView;
+    private Hospital.presentation.prescribir.buscarMedicamento.View buscarMedicamentoView;
+
     Model model;
     Controller controller;
 
     public View() {
+        buscarPacienteView =  new Hospital.presentation.prescribir.buscarPaciente.View();
+        buscarMedicamentoView = new  Hospital.presentation.prescribir.buscarMedicamento.View();
+
         guardarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -52,6 +58,20 @@ public class View implements PropertyChangeListener {
 
             }
         });
+
+        buscarPacienteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                buscarPacienteView.setVisible(true);
+            }
+        });
+
+        buscarMedicamentoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                buscarMedicamentoView.setVisible(true);
+            }
+        });
     }
 
     public JPanel getPanel() { return panel; }
@@ -61,6 +81,12 @@ public class View implements PropertyChangeListener {
     public void setModel(Model model) {
         this.model = model;
         model.addPropertyChangeListener(this);
+
+        buscarPacienteView.setModel(model);
+        model.addPropertyChangeListener(buscarPacienteView);
+
+        buscarMedicamentoView.setModel(model);
+        model.addPropertyChangeListener((buscarMedicamentoView));
     }
 
     @Override
