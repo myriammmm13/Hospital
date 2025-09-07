@@ -15,8 +15,7 @@ public class Receta {
     //private Fecha fechaRetiro;
     private String estado;
 
-    public Receta(Medico doctor, Paciente paciente, List<Prescripcion> prescripciones,
-                  Fecha fechaConfeccion, Fecha fechaRetiro) {
+    public Receta(Medico doctor, Paciente paciente, List<Prescripcion> prescripciones) {
         this.doctor = doctor;
         this.paciente = paciente;
         this.prescripciones = prescripciones;
@@ -41,6 +40,8 @@ public class Receta {
     public List<Prescripcion> getPrescripciones() { return prescripciones; }
     public String getEstado() { return estado; }
 
+    public void setPaciente(Paciente paciente) { this.paciente = paciente; }
+    public void setDoctor(Medico doctor){this.doctor = doctor;}
     public void setPrescripciones(List<Prescripcion> prescripciones) {this.prescripciones = prescripciones;}
     //public void setFechaRetiro(Fecha fechaRetiro) {this.fechaRetiro = fechaRetiro;}
     public void setEstado(String estado) {this.estado = estado;}
