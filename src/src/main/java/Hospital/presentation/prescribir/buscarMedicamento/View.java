@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.TableRowSorter;
 
@@ -31,11 +33,19 @@ public class View extends JDialog implements PropertyChangeListener {
         setTitle("Pacientes");
         setSize(400, 250);
 
+        categoriaBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                filtrar();
+            }
+        });
+
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                Hospital.presentation.prescribir.buscarMedicamento.crearPrescripcion.View crearPrescripcionView = null;
+                Hospital.presentation.prescribir.buscarMedicamento.crearPrescripcion.
+                        View crearPrescripcionView = null;
                 if (medicamentoBusquedaTable.getSelectedRow() >=0) {
                     crearPrescripcionView = new Hospital.presentation.prescribir.buscarMedicamento.
                             crearPrescripcion.View(controller.getMedicamento(medicamentoBusquedaTable.getSelectedRow()));
@@ -63,17 +73,6 @@ public class View extends JDialog implements PropertyChangeListener {
             public void changedUpdate(DocumentEvent e) {
                 filtrar();
             }
-
-            private void filtrar() {
-                if (ordenamientoBusqueda == null) return; // Aún no se ha inicializado
-
-                String texto = busquedaField.getText().trim();
-                if (texto.length() == 0) {
-                    ordenamientoBusqueda.setRowFilter(null);
-                } else {
-                    ordenamientoBusqueda.setRowFilter(RowFilter.regexFilter("(?i)" + texto, TableModel.NOMBRE));
-                }
-            }
         });
     }
 
@@ -87,6 +86,30 @@ public class View extends JDialog implements PropertyChangeListener {
     public void setModel(Model model) {
         this.model = model;
         model.addPropertyChangeListener(this);
+    }
+
+    private Map<String, Integer> columnaFiltroMap = new HashMap<>();
+
+    private void inicializarComboBox() {
+        categoriaBox.addItem("Nombre");
+        categoriaBox.addItem("Código");
+
+        columnaFiltroMap.put("Nombre", TableModel.NOMBRE);
+        columnaFiltroMap.put("Código", TableModel.CODIGO);
+    }
+
+    private void filtrar() {
+        if (ordenamientoBusqueda == null) return;
+
+        String texto = busquedaField.getText().trim();
+        String categoriaSeleccionada = (String) categoriaBox.getSelectedItem();
+        int columna = columnaFiltroMap.getOrDefault(categoriaSeleccionada, TableModel.NOMBRE);
+
+        if (texto.length() == 0) {
+            ordenamientoBusqueda.setRowFilter(null);
+        } else {
+            ordenamientoBusqueda.setRowFilter(RowFilter.regexFilter("(?i)" + texto, columna));
+        }
     }
 
     @Override

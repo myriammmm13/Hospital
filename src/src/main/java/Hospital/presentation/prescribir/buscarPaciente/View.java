@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.HashMap;
+import java.util.Map;
 
 import Hospital.presentation.prescribir.Controller;
 import Hospital.presentation.prescribir.Model;
@@ -57,18 +59,33 @@ public class View extends JDialog implements PropertyChangeListener {
             public void changedUpdate(DocumentEvent e) {
                 filtrar();
             }
-
-            private void filtrar() {
-                if (ordenamientoBusqueda == null) return; // Aún no se ha inicializado
-
-                String texto = busquedaField.getText().trim();
-                if (texto.length() == 0) {
-                    ordenamientoBusqueda.setRowFilter(null);
-                } else {
-                    ordenamientoBusqueda.setRowFilter(RowFilter.regexFilter("(?i)" + texto, TableModel.NOMBRE));
-                }
-            }
         });
+    }
+
+    private Map<String, Integer> columnaFiltroMap = new HashMap<>();
+
+    private void inicializarComboBox() {
+        categoriaBox.addItem("Id");
+        categoriaBox.addItem("Código");
+        categoriaBox.addItem("Telefono");
+
+        columnaFiltroMap.put("Id", TableModel.ID);
+        columnaFiltroMap.put("Código", TableModel.NOMBRE);
+        columnaFiltroMap.put("Telefono", TableModel.TELEFONO);
+    }
+
+    private void filtrar() {
+        if (ordenamientoBusqueda == null) return;
+
+        String texto = busquedaField.getText().trim();
+        String categoriaSeleccionada = (String) categoriaBox.getSelectedItem();
+        int columna = columnaFiltroMap.getOrDefault(categoriaSeleccionada, Hospital.presentation.prescribir.buscarMedicamento.TableModel.NOMBRE);
+
+        if (texto.length() == 0) {
+            ordenamientoBusqueda.setRowFilter(null);
+        } else {
+            ordenamientoBusqueda.setRowFilter(RowFilter.regexFilter("(?i)" + texto, columna));
+        }
     }
 
     Controller controller;
