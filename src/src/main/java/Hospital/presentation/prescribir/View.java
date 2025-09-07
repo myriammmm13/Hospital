@@ -72,6 +72,15 @@ public class View implements PropertyChangeListener {
                 buscarMedicamentoView.setVisible(true);
             }
         });
+
+        descartarMedicamentoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(PrescripcionTable.getSelectedRow()>=0){
+                    controller.borrarPrescripcion(PrescripcionTable.getSelectedRow());
+                }
+            }
+        });
     }
 
     public JPanel getPanel() { return panel; }
