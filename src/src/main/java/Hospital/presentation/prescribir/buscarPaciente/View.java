@@ -88,7 +88,7 @@ public class View extends JDialog implements PropertyChangeListener {
         switch (evt.getPropertyName()) {
             case Model.PACIENTES:
                 int[] cols = {TableModel.ID, TableModel.NOMBRE, TableModel.TELEFONO, TableModel.FEC_NAC};
-                TableModel tableModel = new TableModel(cols, model.getPacientes());
+                TableModel tableModel = new TableModel(cols, model.getPacientesList());
                 personasBusquedaTable.setModel(tableModel);
 
                 // Inicializa el sorter

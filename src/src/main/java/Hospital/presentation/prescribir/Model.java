@@ -45,7 +45,15 @@ public class Model extends AbstractModel {
         return prescripciones;
     }
 
-    public void setPrescripcionesList(List<Prescripcion> list) {
+    public List<Paciente> getPacientesList() {
+        return pacientes;
+    }
+
+    public List<Medicamento> getMedicamentosList() {
+        return medicamentos;
+    }
+
+    public void setPrescripciones(List<Prescripcion> list) {
         this.prescripciones = list;
         firePropertyChange(PRESCRIPCIONES, null, list);
     }
@@ -56,8 +64,4 @@ public class Model extends AbstractModel {
     }
 
     public Paciente getPaciente() { return  current.getPaciente(); }
-
-    public List<Paciente> getPacientes() {
-        return pacientes;
-    }
 }
