@@ -48,4 +48,7 @@ public class Receta {
     public void agregarPrescripcion(Prescripcion prescripcion){
         this.prescripciones.add(prescripcion);
     }
+    public void borrarPrescripcion(Prescripcion prescripcion){
+        this.prescripciones.remove(prescripcion);
+    }
 }
