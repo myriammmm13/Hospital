@@ -57,11 +57,11 @@ public class Application {
         var prescribirModel = new Hospital.presentation.prescribir.Model();
         var prescribirController = new  Hospital.presentation.prescribir.Controller(prescribirModel, prescribirView);
 
-        /*
+
         var pacienteView = new Hospital.presentation.personas.Paciente.View();
         var pacienteModel = new Hospital.presentation.personas.Paciente.Model();
         var pacienteController = new Hospital.presentation.personas.Paciente.Controller(pacienteModel, pacienteView);
-*/
+
         var dashboardView = new Hospital.presentation.dashboard.View();
         var dashboardModel = new Hospital.presentation.dashboard.Model();
         var dashboardController = new Hospital.presentation.dashboard.Controller(dashboardModel, dashboardView);
@@ -78,7 +78,7 @@ public class Application {
             case "ADM":
                   tabs.addTab("Medicos", medicoView.getPanel());
                   tabs.addTab("Farmaceutas", farmaceuticoView.getPanel());
-//                tabs.addTab("Pacientes", pacienteView.getPanel());
+                  tabs.addTab("Pacientes", pacienteView.getPanel());
                   tabs.addTab("Medicamentos", medicamentoView.getPanel());
                   tabs.addTab("Dashboard", dashboardView.getPanel());
 //                tabs.addTab("Historico", historicoView.getPanel());
