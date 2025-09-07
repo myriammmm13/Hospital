@@ -1,9 +1,11 @@
 package Hospital.presentation.prescribir;
 
-import Hospital.presentation.prescribir.Controller;
-import Hospital.presentation.prescribir.Model;
+import Hospital.logic.Medicamento;
+import Hospital.logic.recetas.Receta;
+import Hospital.data.Data;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -18,11 +20,38 @@ public class View implements PropertyChangeListener {
     private JButton buscarMedicamentoButton;
     private JTable PrescripcionTable;
     private JButton fechaBiblioButton;
+    private JLabel fechaField;
+    private JLabel nombreField;
 
     Model model;
     Controller controller;
 
     public View() {
+        guardarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Receta r = new Receta(model.getCurrent().getPaciente(), Medico doctor, PrescripcionTable.getModel());
+                try {
+                    controller.create(r, "");
+                    JOptionPane.showMessageDialog(panel, "Receta guardada correctamente.");
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(panel, "Error al guardar: " + ex.getMessage());
+                }
+
+            }
+        });
+        limpiarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    controller.create(new Receta(), "ADM-111");
+                    limpiarCampos();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(panel, "Error al limpiar: " + ex.getMessage());
+                }
+
+            }
+        });
     }
 
     public JPanel getPanel() { return panel; }
@@ -36,6 +65,25 @@ public class View implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        // Lo vas a completar cuando el modelo tenga datos que mostrar
+        switch (evt.getPropertyName()) {
+            case Model.PRESCRIPCIONES:
+                int[] cols = {TableModel.MEDICAMENTO,TableModel.PRESENTACION, TableModel.CANTIDAD,
+                        TableModel.INDICACIONES, TableModel.DURACION};
+                PrescripcionTable.setModel(new TableModel(cols,model.getPrescripcionesList()));
+                break;
+            case Model.CURRENT:
+                Receta r = model.getCurrent();
+                break;
+            case Model.PACIENTE:
+                if (model.getCurrent().getPaciente() != null)
+                    nombreField.setText(model.getCurrent().getPaciente().getNombre());
+                else
+                    nombreField.setText("No seleccionado");
+        }
+    }
+
+    private void limpiarCampos() {
+        nombreField.setText("");
+        PrescripcionTable.setModel(new TableModel());
     }
 }

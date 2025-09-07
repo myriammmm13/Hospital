@@ -35,4 +35,12 @@ public class Controller {
         Service.instance().eliminarReceta(r);
         model.setCurrent(new Receta()); // limpiar la vista
     }
+
+    public void clear() {
+        model.setCurrent(new Receta());
+    }
+
+    public void setPaciente(int row) {
+        model.setPaciente(model.getPacientes().get(row));
+    }
 }
