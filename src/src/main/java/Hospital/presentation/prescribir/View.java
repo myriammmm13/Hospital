@@ -40,7 +40,7 @@ public class View implements PropertyChangeListener {
             public void actionPerformed(ActionEvent e) {
                 Receta r = new Receta(doctorAuxiliar = new Medico(), model.getCurrent().getPaciente(), model.getCurrent().getPrescripciones());
                 try {
-                    controller.create(r, "");
+                    controller.create(r, "aqui falta el id");
                     JOptionPane.showMessageDialog(panel, "Receta guardada correctamente.");
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(panel, "Error al guardar: " + ex.getMessage());
@@ -52,7 +52,7 @@ public class View implements PropertyChangeListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    controller.create(new Receta(), "ADM-111");
+                    controller.create(new Receta(), "id del doctor");
                     limpiarCampos();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(panel, "Error al limpiar: " + ex.getMessage());
