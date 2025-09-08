@@ -18,6 +18,8 @@ public class Controller {
     public void create(Paciente r) throws Exception {
         model.setCurrent(r);
         Service.instance().agregarPaciente(r);
+        model.setCurrent(new Paciente());
+        model.setList(Service.instance().findAllPacientes());
     }
 
     public void read(String id, String nom) throws Exception {

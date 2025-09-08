@@ -1,7 +1,6 @@
 package Hospital.presentation.personas.Medico;
 
 import Hospital.Application;
-import Hospital.logic.personas.Paciente;
 import Hospital.logic.personas.trabajadores.Medico;
 
 import javax.swing.*;
@@ -28,9 +27,10 @@ public class View implements PropertyChangeListener {
     private JTextField NomTextBusq;
     private JButton buscarButton;
     private JButton reporteButton;
-    private JTable ListaTable;
     private JLabel idBusqLabel;
     private JTextField idBusqText;
+    private JScrollPane scrollMedico;
+    private JTable medicoTable;
 
     public JPanel getPanel() {
         return panel;
@@ -103,7 +103,18 @@ public class View implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        // Lo vas a completar cuando el modelo tenga datos que mostrar
+        switch (evt.getPropertyName()) {
+            case Model.LIST:
+                int[] cols = {TableModel.ID, TableModel.NOMBRE, TableModel.ESPECIALIDAD};
+                medicoTable.setModel(new TableModel(cols,model.getList()));
+                break;
+            case Hospital.presentation.personas.Paciente.Model.CURRENT:
+                IDText.setText(model.getCurrent().getId());
+                NomText.setText(model.getCurrent().getNombre());
+                EspText.setText(model.getCurrent().getEspecialidad());
+                break;
+        }
+        this.panel.revalidate();
     }
 
     public Medico take() {

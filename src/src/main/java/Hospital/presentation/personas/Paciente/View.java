@@ -25,13 +25,14 @@ public class View implements PropertyChangeListener {
     private JTextField NombreText;
     private JButton BuscarButton;
     private JButton ReporteButton;
-    private JTable ListadoTable;
     private JLabel numLabel;
     private JTextField numTelText;
     private JLabel idBusqLabel;
     private JTextField idBusqText;
     private JTextField cambiarPorBiblio;
     private JLabel fechaLabel;
+    private JScrollPane scrollTable;
+    private JTable pacientesTable;
 
     Model model;
     Controller controller;
@@ -44,6 +45,7 @@ public class View implements PropertyChangeListener {
                     Paciente n = take();
                     try {
                         controller.create(n);
+
                         JOptionPane.showMessageDialog(panel, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -100,14 +102,26 @@ public class View implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        // Lo vas a completar cuando el modelo tenga datos que mostrar
+        switch (evt.getPropertyName()) {
+            case Model.LIST:
+                int[] cols = {TableModel.ID,TableModel.NOMBRE, TableModel.NUMERO, TableModel.FECHA};
+                pacientesTable.setModel(new TableModel(cols,model.getList()));
+                break;
+            case Model.CURRENT:
+                IDText.setText(model.getCurrent().getId());
+                nomText.setText(model.getCurrent().getNombre());
+                numTelText.setText(model.getCurrent().getTelNum());
+                cambiarPorBiblio.setText(model.getCurrent().getNombre());//se debe hacer el cambio por la biblioteca de fecha
+                break;
+        }
+        this.panel.revalidate();
     }
 
     public Paciente take() {
         Paciente e = new Paciente();
         e.setId(IDText.getText());
         e.setNombre(nomText.getText());
-        //hacer fecha
+        e.setFechaNacimiento(cambiarPorBiblio.getText());//cambiar por la biblioteca
         e.setTelNum(numTelText.getText());
         return e;
     }
@@ -156,15 +170,7 @@ public class View implements PropertyChangeListener {
             numTelText.setBackground(null);
             numTelText.setToolTipText(null);
         }
-
-      /*  if (model.getCurrent().getDepartamento()==null) {
-            valid = false;
-            departamento.setBackground(Application.BACKGROUND_ERROR);
-            departamento.setToolTipText("Departamento requerido");
-        } else {
-            departamento.setBackground(null);
-            departamento.setToolTipText(null);
-        }*///hacer el de fecha después :))))
+      //hacer el de fecha después :))))
         return valid;
     }
 

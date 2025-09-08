@@ -3,7 +3,7 @@ package Hospital;
 import Hospital.data.Data;
 import Hospital.presentation.login.Controller;
 import Hospital.presentation.login.Model;
-import Hospital.presentation.personas.Medico.View;
+import Hospital.presentation.login.View;
 
 import javax.swing.*;
 import java.awt.*;
@@ -81,14 +81,14 @@ public class Application {
                   tabs.addTab("Pacientes", pacienteView.getPanel());
                   tabs.addTab("Medicamentos", medicamentoView.getPanel());
                   tabs.addTab("Dashboard", dashboardView.getPanel());
-                  tabs.addTab("Historico", historicoView.getPanel());
+                  tabs.addTab("Histórico", historicoView.getPanel());
                   tabs.addTab("Acerca de...", acercaDeView.getPanel());
                 break;
 
             case "MED":
                 tabs.addTab("Prescribir", prescribirView.getPanel());
                 tabs.addTab("Dashboard", dashboardView.getPanel());
-                tabs.addTab("Historico", historicoView.getPanel());
+                tabs.addTab("Histórico", historicoView.getPanel());
                 tabs.addTab("Acerca de...", acercaDeView.getPanel());
 
                 break;
@@ -96,7 +96,7 @@ public class Application {
             case "FAR":
                 tabs.addTab("Prescribir", prescribirView.getPanel());
                 tabs.addTab("Dashboard", dashboardView.getPanel());
-
+                tabs.addTab("Acerca de...", acercaDeView.getPanel());
                 break;
 
             default:
