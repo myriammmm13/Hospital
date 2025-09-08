@@ -15,23 +15,34 @@ public class Controller {
         view.setModel(model);
     }
 
-    public void create(Paciente r, String userId) throws Exception {
+    public void create(Paciente r) throws Exception {
         model.setCurrent(r);
-        Service.instance().agregarPaciente(r, userId);
+        Service.instance().agregarPaciente(r);
     }
 
-    public void read(Paciente r) throws Exception {
-        Paciente encontrado = Service.instance().obtenerPaciente(r.getId());
-        model.setCurrent(encontrado);
+    public void read(String id, String nom) throws Exception {
+        Paciente e = new Paciente();
+        e.setId(id);
+        try {
+            model.setCurrent(Service.instance().obtenerPaciente(id, nom));
+        } catch (Exception ex) {
+            Paciente b = new Paciente();
+            b.setId(id);
+            model.setCurrent(b);
+            throw ex;
+        }
     }
 
-    public void update(Paciente r, String id) throws Exception {
+    public void update(Paciente r) throws Exception {
         model.setCurrent(r);
-        Service.instance().actualizarPaciente(r,id);//el ID es el del que hizo login
+        Service.instance().actualizarPaciente(r);//el ID es el del que hizo login
     }
 
-    public void delete(Paciente r, String id) throws Exception {
-        Service.instance().eliminarPaciente(r.getId(), id);//segundo id de login
+    public void delete(Paciente r) throws Exception {
+        Service.instance().eliminarPaciente(r);//segundo id de login
         model.setCurrent(new Paciente()); // limpiar la vista
+    }
+    public void clear() {
+        view.clearFields();
     }
 }

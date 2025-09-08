@@ -35,10 +35,10 @@ public class Controller {
         Service.instance().actualizarMedicamento(m, userId);
     }
 
-    public void delete(String codigo, String userId) throws Exception {
+    public void delete(String codigo) throws Exception {
         Medicamento m = new Medicamento();
         m.setCodigo(codigo);
-        Service.instance().eliminarMedicamento(codigo, userId);
+        Service.instance().eliminarMedicamento(codigo);
         model.setCurrent(new Medicamento()); // limpiar la vista
     }
 

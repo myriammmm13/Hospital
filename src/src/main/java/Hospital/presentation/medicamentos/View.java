@@ -71,7 +71,7 @@ public class View implements PropertyChangeListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    controller.delete(codigofield.getText(), "");
+                    controller.delete(codigofield.getText());
                     JOptionPane.showMessageDialog(medicamentosPanel, "Medicamento eliminado.");
                     limpiarCampos();
                 } catch (Exception ex) {
