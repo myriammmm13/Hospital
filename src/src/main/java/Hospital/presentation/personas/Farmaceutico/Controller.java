@@ -17,13 +17,13 @@ public class Controller {
         view.setModel(model);
     }
 
-    public void create(Farmaceutico m, String userId) throws Exception {
+    public void create(Farmaceutico m) throws Exception {
         model.setCurrent(m);
-        Service.instance().agregarFarmaceutico(m, userId);
+        Service.instance().agregarFarmaceutico(m);
     }
 
-    public void read(String id) throws Exception {
-        List<Farmaceutico> encontrados = Service.instance().obtenerFarmaceutico(id);
+    public void read(String id, String nom) throws Exception {
+        List<Farmaceutico> encontrados = Service.instance().obtenerFarmaceutico(id, nom);
         if (encontrados.isEmpty()) {
             throw new Exception("No se encontró ningún Farmaceutico");
         }
@@ -35,10 +35,13 @@ public class Controller {
         Service.instance().actualizarFarmaceutico(m, userId);
     }
 
-    public void delete(String id, String userId) throws Exception {
+    public void delete(Farmaceutico r) throws Exception {
         Farmaceutico m = new Farmaceutico();
-        m.setId(id);
-        Service.instance().eliminarFarmaceutico(id, userId);
+        m.setId(r.getId());
+        Service.instance().eliminarFarmaceutico(r.getId(), r.getNombre());
         model.setCurrent(new Farmaceutico());
+    }
+    public void clear() {
+        view.clearFields();
     }
 }

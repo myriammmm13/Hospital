@@ -1,9 +1,10 @@
 package Hospital.presentation.personas.Paciente;
 
-import Hospital.presentation.personas.Paciente.Controller;
-import Hospital.presentation.personas.Paciente.Model;
+import Hospital.Application;
+import Hospital.logic.personas.Paciente;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -25,11 +26,67 @@ public class View implements PropertyChangeListener {
     private JButton BuscarButton;
     private JButton ReporteButton;
     private JTable ListadoTable;
+    private JLabel numLabel;
+    private JTextField numTelText;
+    private JLabel idBusqLabel;
+    private JTextField idBusqText;
+    private JTextField cambiarPorBiblio;
+    private JLabel fechaLabel;
 
     Model model;
     Controller controller;
 
     public View() {
+        GuardarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (validate()) {
+                    Paciente n = take();
+                    try {
+                        controller.create(n);
+                        JOptionPane.showMessageDialog(panel, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+
+                }
+            }
+        });
+
+        LimpiarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.clear();
+            }
+        });
+        BorrarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (validateDelete()) {
+                    Paciente n = take();
+                    try {
+                        controller.delete(n);
+                        JOptionPane.showMessageDialog(panel, "ELIMINACIÓN REALIZADA", "", JOptionPane.INFORMATION_MESSAGE);
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        });
+
+        BuscarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (validateSearch()) {
+                    try {
+                        controller.read(idBusqText.getText(), NombreText.getText());
+                    } catch (Exception ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    fillFields(model.getCurrent());
+                }
+            }
+        });
     }
 
     public JPanel getPanel() { return panel; }
@@ -45,4 +102,104 @@ public class View implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         // Lo vas a completar cuando el modelo tenga datos que mostrar
     }
+
+    public Paciente take() {
+        Paciente e = new Paciente();
+        e.setId(IDText.getText());
+        e.setNombre(nomText.getText());
+        //hacer fecha
+        e.setTelNum(numTelText.getText());
+        return e;
+    }
+    public void clearFields() {
+        IDText.setText("");
+        nomText.setText("");
+        numTelText.setText("");
+        numTelText.setBackground(null);
+        numTelText.setToolTipText(null);
+        IDText.setBackground(null);
+        nomText.setBackground(null);
+        IDText.setToolTipText(null);
+        nomText.setToolTipText(null);
+    }
+    public void fillFields(Paciente e) {
+        IDText.setText(e.getId());
+        nomText.setText(e.getNombre());
+        numTelText.setText(e.getTelNum());
+        //falta numero
+    }
+
+    private boolean validate() {
+        boolean valid = true;
+        if (IDText.getText().isEmpty()) {
+            valid = false;
+            IDText.setBackground(Application.BACKGROUND_ERROR);
+            IDText.setToolTipText("id requerido");
+        } else {
+            IDText.setBackground(null);
+            IDText.setToolTipText(null);
+        }
+
+        if (nomText.getText().isEmpty()) {
+            valid = false;
+            nomText.setBackground(Application.BACKGROUND_ERROR);
+            nomText.setToolTipText("Nombre requerido");
+        } else {
+            nomText.setBackground(null);
+            nomText.setToolTipText(null);
+        }
+        if (numTelText.getText().isEmpty()) {
+            valid = false;
+            numTelText.setBackground(Application.BACKGROUND_ERROR);
+            numTelText.setToolTipText("Nombre requerido");
+        } else {
+            numTelText.setBackground(null);
+            numTelText.setToolTipText(null);
+        }
+
+      /*  if (model.getCurrent().getDepartamento()==null) {
+            valid = false;
+            departamento.setBackground(Application.BACKGROUND_ERROR);
+            departamento.setToolTipText("Departamento requerido");
+        } else {
+            departamento.setBackground(null);
+            departamento.setToolTipText(null);
+        }*///hacer el de fecha después :))))
+        return valid;
+    }
+
+    private boolean validateSearch() {
+        return !idBusqText.getText().isEmpty() || !NombreText.getText().isEmpty();
+    }
+    private boolean validateDelete() {
+        boolean valid = false;
+
+        boolean idVacio = IDText.getText().isEmpty();
+        boolean nombreVacio = nomText.getText().isEmpty();
+
+        // Si ambos están vacíos, no es válido
+        if (idVacio && nombreVacio) {
+            IDText.setBackground(Application.BACKGROUND_ERROR);
+            IDText.setToolTipText("ID requerido o Nombre requerido");
+
+            nomText.setBackground(Application.BACKGROUND_ERROR);
+            nomText.setToolTipText("ID requerido o Nombre requerido");
+        } else {
+            valid = true;
+
+            // Limpiar errores si tienen datos
+            if (!idVacio) {
+                IDText.setBackground(null);
+                IDText.setToolTipText(null);
+            }
+
+            if (!nombreVacio) {
+                nomText.setBackground(null);
+                nomText.setToolTipText(null);
+            }
+        }
+
+        return valid;
+    }
+
 }
