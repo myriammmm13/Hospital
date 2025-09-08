@@ -24,17 +24,9 @@ public class Service {
         data = new Data();
     }
 
-    //Validaciones
-    private void validarRol(String userId, String rolEsperado) throws Exception {
-        if (!userId.startsWith(rolEsperado)) {
-            throw new Exception("Acceso denegado: se requiere rol " + rolEsperado);
-        }
-    }
-
     //CRUD Medicamentos
     //CREATE
     public void agregarMedicamento(Medicamento nuevo, String userId) throws Exception {
-        validarRol(userId, "ADM");
         for (Medicamento m : data.getMedicamentos()) {
             if (m.getCodigo().equals(nuevo.getCodigo())) {
                 throw new Exception("Ya existe un medicamento con ese ID");
@@ -62,7 +54,6 @@ public class Service {
 
     //UPDATE
     public void actualizarMedicamento(Medicamento actualizado, String userId) throws Exception {
-        validarRol(userId, "ADM");
         for (int i = 0; i < data.getMedicamentos().size(); i++) {
             if (data.getMedicamentos().get(i).getCodigo().equals(actualizado.getCodigo())) {
                 data.getMedicamentos().set(i, actualizado);
@@ -166,7 +157,6 @@ public class Service {
 
     //Update
     public void actualizarDoctor(Medico act, String userId) throws Exception {
-        validarRol(userId, "ADM");
         for (int i = 0; i < data.getPacientes().size(); i++) {
             if (data.getDoctores().get(i).getId().equals(act.getId())) {
                 data.getDoctores().set(i, act);
@@ -215,7 +205,6 @@ public class Service {
 
     //Update
     public void actualizarFarmaceutico(Farmaceutico act, String userId) throws Exception {
-        validarRol(userId, "ADM");
         for (int i = 0; i < data.getFamaceuticos().size(); i++) {
             if (data.getFamaceuticos().get(i).getId().equals(act.getId())) {
                 data.getFamaceuticos().set(i, act);
@@ -237,7 +226,6 @@ public class Service {
     //Trabajador / Admin
     //Create
     public void agregarTrabajador(Trabajador nuevo, String userId) throws Exception {
-        validarRol(userId, "ADM");
         for (Trabajador m : data.getTrabajadores()) {
             if (m.getId().equals(nuevo.getId())) {
                 throw new Exception("Ya existe un Trabajador con ese ID");
@@ -269,7 +257,6 @@ public class Service {
 
     //Update
     public void actualizarTrabajador(Trabajador act, String userId) throws Exception {
-        validarRol(userId, "ADM");
         for (int i = 0; i < data.getTrabajadores().size(); i++) {
             if (data.getTrabajadores().get(i).getId().equals(act.getId())) {
                 data.getTrabajadores().set(i, act);
@@ -281,7 +268,6 @@ public class Service {
 
     //Delete
     public void eliminarTrabajador(String id, String userId) throws Exception {
-        validarRol(userId, "ADM");
         boolean eliminado = data.getTrabajadores().removeIf(m -> m.getId().equals(id));
         if (!eliminado) throw new Exception("Trabajador no encontrado para eliminar");
         else {
@@ -291,7 +277,6 @@ public class Service {
     }//revisar o cambiar, funciona pero no me convence
     //create recetas
     public void agregarReceta(Receta receta, String userId) throws Exception {
-        validarRol(userId,"MED");
         for (Receta r : data.getRecetas()) {
             if (r.equals(receta)) {
                 throw new Exception("Ya se ha registrado esta receta");
