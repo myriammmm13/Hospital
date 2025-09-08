@@ -2,6 +2,7 @@ package Hospital.presentation.personas.Farmaceutico;
 
 import Hospital.logic.personas.trabajadores.Farmaceutico;
 import Hospital.logic.Service;
+import Hospital.logic.personas.trabajadores.Medico;
 
 import java.util.List;
 
@@ -20,6 +21,8 @@ public class Controller {
     public void create(Farmaceutico m) throws Exception {
         model.setCurrent(m);
         Service.instance().agregarFarmaceutico(m);
+        model.setCurrent(new Farmaceutico());
+        model.setList(Service.instance().findAllFarmacuetico());
     }
 
     public void read(String id, String nom) throws Exception {

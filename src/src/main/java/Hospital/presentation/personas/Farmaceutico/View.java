@@ -1,8 +1,8 @@
 package Hospital.presentation.personas.Farmaceutico;
 
 import Hospital.Application;
-import Hospital.logic.personas.Paciente;
 import Hospital.logic.personas.trabajadores.Farmaceutico;
+import Hospital.presentation.personas.Farmaceutico.TableModel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -27,9 +27,10 @@ public class View implements PropertyChangeListener {
     private JTextField nomText;
     private JButton buscarButton;
     private JButton reporteButton;
-    private JTable listadoTable;
     private JLabel idBusqLabel;
     private JTextField idBusqText;
+    private JScrollPane farmaScroll;
+    private JTable farmaceuticoTable;
 
     public JPanel getPanel() {
         return panel;
@@ -109,8 +110,19 @@ public class View implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        // Lo vas a completar cuando el modelo tenga datos que mostrar
+        switch (evt.getPropertyName()) {
+            case Model.LIST:
+                int[] cols = {TableModel.ID, TableModel.NOMBRE};
+                farmaceuticoTable.setModel(new TableModel(cols,model.getList()));
+                break;
+            case Model.CURRENT:
+                idText.setText(model.getCurrent().getId());
+                nombreText.setText(model.getCurrent().getNombre());
+                break;
+        }
+        this.panel.revalidate();
     }
+
     public Farmaceutico take() {
         Farmaceutico e = new Farmaceutico();
         e.setId(idText.getText());

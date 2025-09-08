@@ -1,16 +1,23 @@
 package Hospital.presentation.personas.Medico;
 
+import Hospital.logic.personas.Paciente;
 import Hospital.logic.personas.trabajadores.Medico;
 import Hospital.presentation.AbstractModel;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Model extends AbstractModel {
     Medico current;
+    List<Medico> list;
 
+    public static final String LIST = "list";
     public static final String CURRENT = "current";
 
     public Model() {
         current = new Medico();
+        list = new ArrayList<Medico>();
+
     }
 
     @Override
@@ -26,5 +33,12 @@ public class Model extends AbstractModel {
     public void setCurrent(Medico m) {
         this.current = m;
         firePropertyChange(CURRENT, null, current);
+    }
+    public List<Medico> getList() {
+        return list;
+    }
+    public void setList(List<Medico> list) {
+        this.list = list;
+        firePropertyChange(LIST);
     }
 }

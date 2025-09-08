@@ -1,5 +1,6 @@
 package Hospital.presentation.personas.Medico;
 
+import Hospital.logic.personas.Paciente;
 import Hospital.logic.personas.trabajadores.Medico;
 import Hospital.logic.Service;
 
@@ -20,6 +21,8 @@ public class Controller {
     public void create(Medico m ) throws Exception {
         model.setCurrent(m);
         Service.instance().agregarDoctor(m);
+        model.setCurrent(new Medico());
+        model.setList(Service.instance().findAllMedico());
     }
 
     public void read(String id, String nom) throws Exception {

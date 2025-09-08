@@ -10,6 +10,9 @@ public class AbstractModel {
         propertyChangeSupport = new PropertyChangeSupport(this);
     }
 
+    protected void firePropertyChange(String propertyName) {
+        propertyChangeSupport.firePropertyChange(propertyName, null, null);
+    }
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         propertyChangeSupport.addPropertyChangeListener(listener);
     }

@@ -155,7 +155,7 @@ public class Service {
     public List<Medico> obtenerDoctor(String id, String nom) throws Exception {
         List<Medico> doctoresEncontrados = new ArrayList<>();
         for (Medico m : data.getDoctores()) {
-            if (m.getId().contains(id) || m.getNombre().contains(id))
+            if (m.getId().equals(id) || m.getNombre().equals(id))
                 doctoresEncontrados.add(m);
         }
         if (doctoresEncontrados.isEmpty()) {
@@ -204,7 +204,7 @@ public class Service {
     public List<Farmaceutico> obtenerFarmaceutico(String id, String nom) throws Exception {
         List<Farmaceutico> farmaceuticosEncontrados = new ArrayList<>();
         for (Farmaceutico m : data.getFamaceuticos()) {
-            if (m.getId().contains(id) || m.getNombre().contains(nom))
+            if (m.getId().equals(id) || m.getNombre().equals(nom))
                 farmaceuticosEncontrados.add(m);
         }
         if (farmaceuticosEncontrados.isEmpty()) {
@@ -330,4 +330,16 @@ public class Service {
     }
 
 
+    public List<Paciente> findAllPacientes() {
+        return data.getPacientes();
+    }
+    public List<Medicamento> findAllMedicamentos() {
+        return data.getMedicamentos();
+    }
+    public List<Medico> findAllMedico() {
+        return data.getDoctores();
+    }
+    public List<Farmaceutico> findAllFarmacuetico() {
+        return data.getFamaceuticos();
+    }
 }
