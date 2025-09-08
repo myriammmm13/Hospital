@@ -1,5 +1,6 @@
 package Hospital.presentation.personas.Medico;
 
+import Hospital.logic.personas.Paciente;
 import Hospital.logic.personas.trabajadores.Medico;
 import Hospital.logic.Service;
 
@@ -17,13 +18,15 @@ public class Controller {
         view.setModel(model);
     }
 
-    public void create(Medico m, String userId) throws Exception {
+    public void create(Medico m ) throws Exception {
         model.setCurrent(m);
-        Service.instance().agregarDoctor(m, userId);
+        Service.instance().agregarDoctor(m);
+        model.setCurrent(new Medico());
+        model.setList(Service.instance().findAllMedico());
     }
 
-    public void read(String id) throws Exception {
-        List<Medico> encontrados = Service.instance().obtenerDoctor(id);
+    public void read(String id, String nom) throws Exception {
+        List<Medico> encontrados = Service.instance().obtenerDoctor(id, nom);
         if (encontrados.isEmpty()) {
             throw new Exception("No se encontró ningún Doctor");
         }
@@ -35,11 +38,13 @@ public class Controller {
         Service.instance().actualizarDoctor(m, userId);
     }
 
-    public void delete(String id, String userId) throws Exception {
+    public void delete(Medico r ) throws Exception {
         Medico m = new Medico();
-        m.setId(id);
-        Service.instance().eliminarDoctor(id, userId);
+        m.setId(r.getId());
+        Service.instance().eliminarDoctor(r.getId(), r.getNombre());
         model.setCurrent(new Medico());
     }
-
+    public void clear() {
+        view.clearFields();
+    }
 }

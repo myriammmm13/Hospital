@@ -24,17 +24,9 @@ public class Service {
         data = new Data();
     }
 
-    //Validaciones
-    private void validarRol(String userId, String rolEsperado) throws Exception {
-        if (!userId.startsWith(rolEsperado)) {
-            throw new Exception("Acceso denegado: se requiere rol " + rolEsperado);
-        }
-    }
-
     //CRUD Medicamentos
     //CREATE
     public void agregarMedicamento(Medicamento nuevo, String userId) throws Exception {
-        validarRol(userId, "ADM");
         for (Medicamento m : data.getMedicamentos()) {
             if (m.getCodigo().equals(nuevo.getCodigo())) {
                 throw new Exception("Ya existe un medicamento con ese ID");
@@ -62,7 +54,6 @@ public class Service {
 
     //UPDATE
     public void actualizarMedicamento(Medicamento actualizado, String userId) throws Exception {
-        validarRol(userId, "ADM");
         for (int i = 0; i < data.getMedicamentos().size(); i++) {
             if (data.getMedicamentos().get(i).getCodigo().equals(actualizado.getCodigo())) {
                 data.getMedicamentos().set(i, actualizado);
@@ -73,8 +64,7 @@ public class Service {
     }
 
     //DELETE
-    public void eliminarMedicamento(String cod, String userId) throws Exception {
-        validarRol(userId, "ADM");
+    public void eliminarMedicamento(String cod) throws Exception {
         boolean eliminado = data.getMedicamentos().removeIf(m -> m.getCodigo().equals(cod));
         if (!eliminado) throw new Exception("Medicamento no encontrado para eliminar");
     }
@@ -82,8 +72,7 @@ public class Service {
 
     //Paciente
     //Create
-    public void agregarPaciente(Paciente nuevo, String userId) throws Exception {
-        validarRol(userId, "ADM");
+    public void agregarPaciente(Paciente nuevo) throws Exception {
         for (Paciente m : data.getPacientes()) {
             if (m.getId().equals(nuevo.getId())) {
                 throw new Exception("Ya existe un paciente con ese ID");
@@ -108,18 +97,17 @@ public class Service {
         }
         return pacientesEncontrados;
     }
-    public Paciente obtenerPaciente(String id) throws Exception {
+    public Paciente obtenerPaciente(String id, String nom) throws Exception {
         Paciente paciente = new Paciente();
         for (Paciente m : data.getPacientes()) {
-            if (m.getId().equals(id))
+            if (m.getId().equals(id) || m.getNombre().equals(nom))
                 paciente = m;
         }
         return paciente;
     }
 
     //Update
-    public void actualizarPaciente(Paciente act, String userId) throws Exception {
-        validarRol(userId, "ADM");
+    public void actualizarPaciente(Paciente act) throws Exception {
         for (int i = 0; i < data.getPacientes().size(); i++) {
             if (data.getPacientes().get(i).getId().equals(act.getId())) {
                 data.getPacientes().set(i, act);
@@ -130,16 +118,18 @@ public class Service {
     }
 
     //Delete
-    public void eliminarPaciente(String id, String userId) throws Exception {
-        validarRol(userId, "ADM");
-        boolean eliminado = data.getPacientes().removeIf(m -> m.getId().equals(id));
-        if (!eliminado) throw new Exception("Paciente no encontrado para eliminar");
+    public void eliminarPaciente(Paciente r) throws Exception {
+        boolean eliminado = data.getPacientes().removeIf(m -> m.getId().equals(r.getId()));
+        if (!eliminado){
+            eliminado = data.getPacientes().removeIf(m -> m.getNombre().equals(r.getNombre()));
+            if(!eliminado)
+                throw new Exception("Paciente no encontrado para eliminar");
+        }
     }
 
     //Doctor
     //Create
-    public void agregarDoctor(Medico nuevo, String userId) throws Exception {
-        validarRol(userId, "ADM");
+    public void agregarDoctor(Medico nuevo) throws Exception {
         for (Medico m : data.getDoctores()) {
             if (m.getId().equals(nuevo.getId())) {
                 throw new Exception("Ya existe un doctor con ese ID");
@@ -153,10 +143,10 @@ public class Service {
         return data.getDoctores();
     }
 
-    public List<Medico> obtenerDoctor(String id) throws Exception {
+    public List<Medico> obtenerDoctor(String id, String nom) throws Exception {
         List<Medico> doctoresEncontrados = new ArrayList<>();
         for (Medico m : data.getDoctores()) {
-            if (m.getId().contains(id) || m.getNombre().contains(id))
+            if (m.getId().equals(id) || m.getNombre().equals(id))
                 doctoresEncontrados.add(m);
         }
         if (doctoresEncontrados.isEmpty()) {
@@ -167,7 +157,6 @@ public class Service {
 
     //Update
     public void actualizarDoctor(Medico act, String userId) throws Exception {
-        validarRol(userId, "ADM");
         for (int i = 0; i < data.getPacientes().size(); i++) {
             if (data.getDoctores().get(i).getId().equals(act.getId())) {
                 data.getDoctores().set(i, act);
@@ -178,19 +167,20 @@ public class Service {
     }
 
     //Delete
-    public void eliminarDoctor(String id, String userId) throws Exception {
-        validarRol(userId, "ADM");
+    public void eliminarDoctor(String id, String nom) throws Exception {
         boolean eliminado = data.getDoctores().removeIf(m -> m.getId().equals(id));
+        if(!eliminado){
+            eliminado = data.getDoctores().removeIf(m -> m.getNombre().equals(nom));
+        }
         if (!eliminado) throw new Exception("Doctor no encontrado para eliminar");
     }
 
     //Farma
     //Create
-    public void agregarFarmaceutico(Farmaceutico nuevo, String userId) throws Exception {
-        validarRol(userId, "ADM");
+    public void agregarFarmaceutico(Farmaceutico nuevo) throws Exception {
         for (Farmaceutico m : data.getFamaceuticos()) {
             if (m.getId().equals(nuevo.getId())) {
-                throw new Exception("Ya existe un farmaceutico con ese ID");
+                throw new Exception("Ya existe un farmacéutico con ese ID");
             }
         }
         data.getFamaceuticos().add(nuevo);
@@ -201,10 +191,10 @@ public class Service {
         return data.getFamaceuticos();
     }
 
-    public List<Farmaceutico> obtenerFarmaceutico(String id) throws Exception {
+    public List<Farmaceutico> obtenerFarmaceutico(String id, String nom) throws Exception {
         List<Farmaceutico> farmaceuticosEncontrados = new ArrayList<>();
         for (Farmaceutico m : data.getFamaceuticos()) {
-            if (m.getId().contains(id) || m.getNombre().contains(id))
+            if (m.getId().equals(id) || m.getNombre().equals(nom))
                 farmaceuticosEncontrados.add(m);
         }
         if (farmaceuticosEncontrados.isEmpty()) {
@@ -215,7 +205,6 @@ public class Service {
 
     //Update
     public void actualizarFarmaceutico(Farmaceutico act, String userId) throws Exception {
-        validarRol(userId, "ADM");
         for (int i = 0; i < data.getFamaceuticos().size(); i++) {
             if (data.getFamaceuticos().get(i).getId().equals(act.getId())) {
                 data.getFamaceuticos().set(i, act);
@@ -226,16 +215,17 @@ public class Service {
     }
 
     //Delete
-    public void eliminarFarmaceutico(String id, String userId) throws Exception {
-        validarRol(userId, "ADM");
+    public void eliminarFarmaceutico(String id, String nom) throws Exception {
         boolean eliminado = data.getFamaceuticos().removeIf(m -> m.getId().equals(id));
-        if (!eliminado) throw new Exception("Farmaceutico no encontrado para eliminar");
+        if(!eliminado){
+            eliminado=data.getFamaceuticos().removeIf(m -> m.getNombre().equals(nom));
+            if (!eliminado) throw new Exception("Farmaceutico no encontrado para eliminar");
+        }
     }
 
     //Trabajador / Admin
     //Create
     public void agregarTrabajador(Trabajador nuevo, String userId) throws Exception {
-        validarRol(userId, "ADM");
         for (Trabajador m : data.getTrabajadores()) {
             if (m.getId().equals(nuevo.getId())) {
                 throw new Exception("Ya existe un Trabajador con ese ID");
@@ -267,7 +257,6 @@ public class Service {
 
     //Update
     public void actualizarTrabajador(Trabajador act, String userId) throws Exception {
-        validarRol(userId, "ADM");
         for (int i = 0; i < data.getTrabajadores().size(); i++) {
             if (data.getTrabajadores().get(i).getId().equals(act.getId())) {
                 data.getTrabajadores().set(i, act);
@@ -279,7 +268,6 @@ public class Service {
 
     //Delete
     public void eliminarTrabajador(String id, String userId) throws Exception {
-        validarRol(userId, "ADM");
         boolean eliminado = data.getTrabajadores().removeIf(m -> m.getId().equals(id));
         if (!eliminado) throw new Exception("Trabajador no encontrado para eliminar");
         else {
@@ -289,7 +277,6 @@ public class Service {
     }//revisar o cambiar, funciona pero no me convence
     //create recetas
     public void agregarReceta(Receta receta, String userId) throws Exception {
-        validarRol(userId,"MED");
         for (Receta r : data.getRecetas()) {
             if (r.equals(receta)) {
                 throw new Exception("Ya se ha registrado esta receta");
@@ -328,4 +315,16 @@ public class Service {
     }
 
 
+    public List<Paciente> findAllPacientes() {
+        return data.getPacientes();
+    }
+    public List<Medicamento> findAllMedicamentos() {
+        return data.getMedicamentos();
+    }
+    public List<Medico> findAllMedico() {
+        return data.getDoctores();
+    }
+    public List<Farmaceutico> findAllFarmacuetico() {
+        return data.getFamaceuticos();
+    }
 }
