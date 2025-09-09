@@ -3,12 +3,16 @@ package Hospital.presentation.prescribir;
 import Hospital.logic.recetas.Prescripcion;
 import Hospital.logic.recetas.Receta;
 import Hospital.logic.personas.trabajadores.Medico;
+import com.github.lgooddatepicker.components.DatePicker;
+import com.github.lgooddatepicker.components.DatePickerSettings;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.time.LocalDate;
 
 public class View implements PropertyChangeListener {
     private JPanel panel;
@@ -19,10 +23,10 @@ public class View implements PropertyChangeListener {
     private JButton buscarPacienteButton;
     private JButton buscarMedicamentoButton;
     private JTable PrescripcionTable;
-    private JButton fechaBiblioButton;
     private JLabel fechaField;
     private JLabel nombreField;
-
+    private JPanel fechaPanel;
+    private DatePicker fecha;
     private Hospital.presentation.prescribir.buscarPaciente.View buscarPacienteView;
     private Hospital.presentation.prescribir.buscarMedicamento.View buscarMedicamentoView;
     private Hospital.presentation.prescribir.buscarMedicamento.crearPrescripcion.View CrearPrescripcionView;
@@ -32,6 +36,13 @@ public class View implements PropertyChangeListener {
     Medico doctorAuxiliar; //solo para que no se pegue
 
     public View() {
+        DatePickerSettings settings = new DatePickerSettings();
+        settings.setFormatForDatesCommonEra("yyyy-MM-dd");
+        fecha = new DatePicker(settings);
+
+        fechaPanel.setLayout(new BorderLayout());
+        fechaPanel.add(fecha, BorderLayout.CENTER);
+
         buscarPacienteView =  new Hospital.presentation.prescribir.buscarPaciente.View();
         buscarMedicamentoView = new  Hospital.presentation.prescribir.buscarMedicamento.View();
 
@@ -100,6 +111,7 @@ public class View implements PropertyChangeListener {
                 }
             }
         });
+
     }
 
     public JPanel getPanel() { return panel; }

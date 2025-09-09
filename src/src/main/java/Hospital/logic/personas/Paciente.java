@@ -1,7 +1,5 @@
 package Hospital.logic.personas;
 
-import Hospital.logic.Fecha;
-
 public class Paciente extends Persona {
     private String TelNum;
     private String FechaNacimiento;

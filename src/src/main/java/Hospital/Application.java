@@ -37,10 +37,6 @@ public class Application {
         JTabbedPane tabs = new JTabbedPane();
 
         // Todos los tríos
-        var adminView = new Hospital.presentation.personas.Administrador.View();
-        var adminModel = new Hospital.presentation.personas.Administrador.Model();
-        var adminController = new Hospital.presentation.personas.Administrador.Controller(adminModel, adminView);
-
         var medicoView = new Hospital.presentation.personas.Medico.View();
         var medicoModel = new Hospital.presentation.personas.Medico.Model();
         var medicoController = new Hospital.presentation.personas.Medico.Controller(medicoModel, medicoView);

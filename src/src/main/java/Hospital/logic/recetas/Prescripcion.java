@@ -8,7 +8,7 @@ public class Prescripcion {
     private int duracion;
     private int cantidad;
 
-    public Prescripcion(Medicamento medicamento, String indicaciones, int duracion, int cantidad) {
+    public Prescripcion(Medicamento medicamento, String indicaciones, int duracion, int cantidad ) {
         this.medicamento = medicamento;
         this.indicaciones = indicaciones;
         this.duracion = duracion;
