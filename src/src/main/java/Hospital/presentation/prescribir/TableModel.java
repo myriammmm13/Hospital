@@ -3,12 +3,13 @@ import Hospital.logic.recetas.Prescripcion;
 import Hospital.presentation.AbstractTableModel;
 
 import java.util.List;
-/*
-public class PrescribirTableModel extends AbstractTableModel<Prescripcion> implements javax.swing.table.TableModel {
-    public PrescribirTableModel(int[] cols, List<Prescripcion> rows) {
+
+public class TableModel extends AbstractTableModel<Prescripcion> implements javax.swing.table.TableModel {
+
+    public TableModel(int[] cols, List<Prescripcion> rows) {
         super(cols, rows);
     }
-    public PrescribirTableModel(){
+    public TableModel(){
         super();
     }
 
@@ -25,7 +26,7 @@ public class PrescribirTableModel extends AbstractTableModel<Prescripcion> imple
         colNames[PRESENTACION] = "Presentación";
         colNames[CANTIDAD] = "Cantidad";
         colNames[INDICACIONES] = "Indicaciones";
-        colNames[DURACION] = "Duración":
+        colNames[DURACION] = "Duración";
     }
     @Override
     protected Object getPropetyAt(Prescripcion e, int col) {
@@ -45,4 +46,4 @@ public class PrescribirTableModel extends AbstractTableModel<Prescripcion> imple
         }
     }
 
-}*/
+}

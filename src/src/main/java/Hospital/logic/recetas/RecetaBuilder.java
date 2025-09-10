@@ -2,7 +2,6 @@ package Hospital.logic.recetas;
 
 import Hospital.logic.personas.Paciente;
 import Hospital.logic.personas.trabajadores.Medico;
-import Hospital.logic.Fecha;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +10,6 @@ public class RecetaBuilder {
     private Medico doctor;
     private Paciente paciente;
     private List<Prescripcion> prescripciones;
-    private Fecha fechaConfeccion;
-    private Fecha fechaRetiro;
     private String estado;
 
     public RecetaBuilder(){
@@ -48,19 +45,9 @@ public class RecetaBuilder {
         return this;
     }
 
-    public RecetaBuilder fechaConfeccion(Fecha fechaConfeccion) {
-        this.fechaConfeccion =  fechaConfeccion;
-        return this;
-    }
-
-    public RecetaBuilder fechaRetiro(Fecha fechaRetiro) {
-        this.fechaRetiro = fechaRetiro;
-        return this;
-    }
-
     public Receta build() {
         //faltan validaciones y excepciones :(
-        return new Receta(doctor, paciente, prescripciones, fechaConfeccion, fechaRetiro);
+        return new Receta(doctor, paciente, prescripciones);
     }
 }
 

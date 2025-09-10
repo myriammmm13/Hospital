@@ -2,7 +2,6 @@ package Hospital.logic.recetas;
 
 import Hospital.logic.personas.Paciente;
 import Hospital.logic.personas.trabajadores.Medico;
-import Hospital.logic.Fecha;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +14,7 @@ public class Receta {
     //private Fecha fechaRetiro;
     private String estado;
 
-    public Receta(Medico doctor, Paciente paciente, List<Prescripcion> prescripciones,
-                  Fecha fechaConfeccion, Fecha fechaRetiro) {
+    public Receta(Medico doctor, Paciente paciente, List<Prescripcion> prescripciones) {
         this.doctor = doctor;
         this.paciente = paciente;
         this.prescripciones = prescripciones;
@@ -41,7 +39,19 @@ public class Receta {
     public List<Prescripcion> getPrescripciones() { return prescripciones; }
     public String getEstado() { return estado; }
 
+    public void setPaciente(Paciente paciente) { this.paciente = paciente; }
+    public void setDoctor(Medico doctor){this.doctor = doctor;}
     public void setPrescripciones(List<Prescripcion> prescripciones) {this.prescripciones = prescripciones;}
     //public void setFechaRetiro(Fecha fechaRetiro) {this.fechaRetiro = fechaRetiro;}
     public void setEstado(String estado) {this.estado = estado;}
+    public void agregarPrescripcion(Prescripcion prescripcion){
+        this.prescripciones.add(prescripcion);
+    }
+    public void borrarPrescripcion(Prescripcion prescripcion){
+        this.prescripciones.remove(prescripcion);
+    }
+    public void actualizarPrescripcion(Prescripcion prescripcion, int row) {
+        this.prescripciones.set(row, prescripcion);
+    }
+
 }

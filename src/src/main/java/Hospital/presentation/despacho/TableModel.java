@@ -5,8 +5,8 @@ import Hospital.presentation.AbstractTableModel;
 
 import java.util.List;
 
-public class RecetaTableModel extends AbstractTableModel<Receta> implements javax.swing.table.TableModel{
-    public RecetaTableModel(int[] cols, List<Receta> rows) {
+public class TableModel extends AbstractTableModel<Receta> implements javax.swing.table.TableModel{
+    public TableModel(int[] cols, List<Receta> rows) {
         super(cols, rows);
     }
 
@@ -39,7 +39,7 @@ public class RecetaTableModel extends AbstractTableModel<Receta> implements java
                 //return e.getFecha_Confeccion();
                 return 0;
             case ESTADO:
-                return "Confeccionado";
+                return e.getEstado();
             default:
                 return "";
         }

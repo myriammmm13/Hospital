@@ -1,12 +1,10 @@
 package Hospital.logic.personas;
 
-import Hospital.logic.Fecha;
-
 public class Paciente extends Persona {
-    private int TelNum;
-    private Fecha FechaNacimiento;
+    private String TelNum;
+    private String FechaNacimiento;
 
-    public Paciente(String nombre, String apellido1, String apellido2, String id, int TelNum, Fecha FechaNacimiento) {
+    public Paciente(String nombre, String apellido1, String apellido2, String id, String TelNum, String FechaNacimiento) {
         super(nombre, apellido1, apellido2, id);
         this.TelNum = TelNum;
         this.FechaNacimiento = FechaNacimiento;
@@ -14,22 +12,22 @@ public class Paciente extends Persona {
 
     public Paciente(){
         super();
-        this.TelNum = 0;
-        this.FechaNacimiento = null;
+        this.TelNum = "";
+        this.FechaNacimiento = "";
     }
 
-    public int getTelNum() {
+    public String getTelNum() {
         return TelNum;
     }
 
-    public void setTelNum(int telNum) {
+    public void setTelNum(String telNum) {
         TelNum = telNum;
     }
-    public Fecha getFechaNacimiento(){
+    public String getFechaNacimiento(){
         return FechaNacimiento;
     }
 
-    public void setFechaNacimiento(Fecha FechaNacimiento){
+    public void setFechaNacimiento(String FechaNacimiento){
         this.FechaNacimiento=FechaNacimiento;
     }
 }

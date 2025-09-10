@@ -3,7 +3,7 @@ package Hospital;
 import Hospital.data.Data;
 import Hospital.presentation.login.Controller;
 import Hospital.presentation.login.Model;
-import Hospital.presentation.personas.Medico.View;
+import Hospital.presentation.login.View;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,10 +37,6 @@ public class Application {
         JTabbedPane tabs = new JTabbedPane();
 
         // Todos los tríos
-        var adminView = new Hospital.presentation.personas.Administrador.View();
-        var adminModel = new Hospital.presentation.personas.Administrador.Model();
-        var adminController = new Hospital.presentation.personas.Administrador.Controller(adminModel, adminView);
-
         var medicoView = new Hospital.presentation.personas.Medico.View();
         var medicoModel = new Hospital.presentation.personas.Medico.Model();
         var medicoController = new Hospital.presentation.personas.Medico.Controller(medicoModel, medicoView);
@@ -57,19 +53,19 @@ public class Application {
         var prescribirModel = new Hospital.presentation.prescribir.Model();
         var prescribirController = new  Hospital.presentation.prescribir.Controller(prescribirModel, prescribirView);
 
-        /*
+
         var pacienteView = new Hospital.presentation.personas.Paciente.View();
         var pacienteModel = new Hospital.presentation.personas.Paciente.Model();
         var pacienteController = new Hospital.presentation.personas.Paciente.Controller(pacienteModel, pacienteView);
-*/
+
         var dashboardView = new Hospital.presentation.dashboard.View();
         var dashboardModel = new Hospital.presentation.dashboard.Model();
         var dashboardController = new Hospital.presentation.dashboard.Controller(dashboardModel, dashboardView);
-/*
+
         var historicoView = new Hospital.presentation.historico.View();
         var historicoModel = new Hospital.presentation.historico.Model();
         var historicoController = new Hospital.presentation.historico.Controller(historicoModel, historicoView);
-*/
+
         var acercaDeView = new Hospital.presentation.AcercaDe.View();
         var acercaDeModel = new Hospital.presentation.AcercaDe.Model();
         var acercaDeController = new Hospital.presentation.AcercaDe.Controller(acercaDeModel, acercaDeView);
@@ -78,25 +74,25 @@ public class Application {
             case "ADM":
                   tabs.addTab("Medicos", medicoView.getPanel());
                   tabs.addTab("Farmaceutas", farmaceuticoView.getPanel());
-//                tabs.addTab("Pacientes", pacienteView.getPanel());
+                  tabs.addTab("Pacientes", pacienteView.getPanel());
                   tabs.addTab("Medicamentos", medicamentoView.getPanel());
                   tabs.addTab("Dashboard", dashboardView.getPanel());
-//                tabs.addTab("Historico", historicoView.getPanel());
+                  tabs.addTab("Histórico", historicoView.getPanel());
                   tabs.addTab("Acerca de...", acercaDeView.getPanel());
                 break;
 
             case "MED":
-                tabs.addTab("Preescribir", prescribirView.getPanel());
+                tabs.addTab("Prescribir", prescribirView.getPanel());
                 tabs.addTab("Dashboard", dashboardView.getPanel());
-                //tabs.addTab("Historico", historicoView.getPanel());
+                tabs.addTab("Histórico", historicoView.getPanel());
                 tabs.addTab("Acerca de...", acercaDeView.getPanel());
 
                 break;
 
             case "FAR":
-                tabs.addTab("Preescribir", prescribirView.getPanel());
-                //tabs.addTab("Dashboard", dashboardView.getPanel());
-
+                tabs.addTab("Prescribir", prescribirView.getPanel());
+                tabs.addTab("Dashboard", dashboardView.getPanel());
+                tabs.addTab("Acerca de...", acercaDeView.getPanel());
                 break;
 
             default:
