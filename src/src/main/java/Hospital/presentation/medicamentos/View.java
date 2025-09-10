@@ -42,7 +42,7 @@ public class View implements PropertyChangeListener {
                         descripcionField.getText()
                 );
                 try {
-                    controller.create(m, "");
+                    controller.create(m);
                     JOptionPane.showMessageDialog(medicamentosPanel, "Medicamento guardado correctamente.");
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(medicamentosPanel, "Error al guardar: " + ex.getMessage());
@@ -59,7 +59,7 @@ public class View implements PropertyChangeListener {
                         descripcionField.getText()
                 );
                 try {
-                    controller.update(m, "");
+                    controller.update(m);
                     JOptionPane.showMessageDialog(medicamentosPanel, "Medicamento modificado correctamente.");
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(medicamentosPanel, "Error al modificar: " + ex.getMessage());
@@ -84,10 +84,10 @@ public class View implements PropertyChangeListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    controller.create(new Medicamento("", "", ""), "ADM-111");
+                    controller.create(new Medicamento("", "", ""));
                     limpiarCampos();
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(medicamentosPanel, "Error al limpiar: " + ex.getMessage());
+                    JOptionPane.showMessageDialog(medicamentosPanel, "Error al limpiar: " /*+ ex.getMessage()*/);
                 }
 
             }
@@ -95,7 +95,7 @@ public class View implements PropertyChangeListener {
         buttonBuscar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String codigoBuscado = buscarField.getText().trim();
+                String codigoBuscado = codigofield.getText().trim();
                 if (codigoBuscado.isEmpty()) {
                     JOptionPane.showMessageDialog(medicamentosPanel, "Por favor ingrese un código para buscar.");
                     return;
@@ -121,7 +121,7 @@ public class View implements PropertyChangeListener {
         codigofield.setText("");
         nombreField.setText("");
         descripcionField.setText("");
-        buscarField.setText("");
+        //buscarField.setText("");
     }
 
     public void setController(Controller controller) {
