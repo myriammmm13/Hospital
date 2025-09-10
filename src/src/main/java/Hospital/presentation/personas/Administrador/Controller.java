@@ -17,9 +17,9 @@ public class Controller {
         view.setModel(model);
     }
 
-    public void create(Trabajador m, String userId) throws Exception {
+    public void create(Trabajador m) throws Exception {
         model.setCurrent(m);
-        Service.instance().agregarTrabajador(m, userId);
+        Service.instance().agregarTrabajador(m);
     }
 
     public void read(String id) throws Exception {
@@ -30,15 +30,15 @@ public class Controller {
         model.setCurrent(encontrados.getFirst());
     }
 
-    public void update(Trabajador m, String userId) throws Exception {
+    public void update(Trabajador m) throws Exception {
         model.setCurrent(m);
-        Service.instance().actualizarTrabajador(m, userId);
+        Service.instance().actualizarTrabajador(m);
     }
 
-    public void delete(String id, String userId) throws Exception {
+    public void delete(String id) throws Exception {
         Trabajador m = new Trabajador();
         m.setId(id);
-        Service.instance().eliminarTrabajador(id, userId);
+        Service.instance().eliminarTrabajador(id);
         model.setCurrent(new Trabajador());
     }
 

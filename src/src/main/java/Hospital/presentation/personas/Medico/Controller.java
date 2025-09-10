@@ -17,9 +17,9 @@ public class Controller {
         view.setModel(model);
     }
 
-    public void create(Medico m, String userId) throws Exception {
+    public void create(Medico m) throws Exception {
         model.setCurrent(m);
-        Service.instance().agregarDoctor(m, userId);
+        Service.instance().agregarDoctor(m);
     }
 
     public void read(String id) throws Exception {
@@ -30,15 +30,15 @@ public class Controller {
         model.setCurrent(encontrados.getFirst());
     }
 
-    public void update(Medico m, String userId) throws Exception {
+    public void update(Medico m) throws Exception {
         model.setCurrent(m);
-        Service.instance().actualizarDoctor(m, userId);
+        Service.instance().actualizarDoctor(m);
     }
 
-    public void delete(String id, String userId) throws Exception {
+    public void delete(String id) throws Exception {
         Medico m = new Medico();
         m.setId(id);
-        Service.instance().eliminarDoctor(id, userId);
+        Service.instance().eliminarDoctor(id);
         model.setCurrent(new Medico());
     }
 

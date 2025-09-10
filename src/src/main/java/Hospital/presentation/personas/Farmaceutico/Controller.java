@@ -17,9 +17,9 @@ public class Controller {
         view.setModel(model);
     }
 
-    public void create(Farmaceutico m, String userId) throws Exception {
+    public void create(Farmaceutico m) throws Exception {
         model.setCurrent(m);
-        Service.instance().agregarFarmaceutico(m, userId);
+        Service.instance().agregarFarmaceutico(m);
     }
 
     public void read(String id) throws Exception {
@@ -30,15 +30,15 @@ public class Controller {
         model.setCurrent(encontrados.getFirst());
     }
 
-    public void update(Farmaceutico m, String userId) throws Exception {
+    public void update(Farmaceutico m) throws Exception {
         model.setCurrent(m);
-        Service.instance().actualizarFarmaceutico(m, userId);
+        Service.instance().actualizarFarmaceutico(m);
     }
 
-    public void delete(String id, String userId) throws Exception {
+    public void delete(String id) throws Exception {
         Farmaceutico m = new Farmaceutico();
         m.setId(id);
-        Service.instance().eliminarFarmaceutico(id, userId);
+        Service.instance().eliminarFarmaceutico(id);
         model.setCurrent(new Farmaceutico());
     }
 }
