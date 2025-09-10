@@ -8,7 +8,7 @@ public class View extends JFrame {
     JTextField userField = new JTextField(15);
     JPasswordField passField = new JPasswordField(15);
     JButton loginButton = new JButton("Ingresar");
-    JButton changePasswordButton = new JButton("Cambiar contraseña");
+    //JButton changePasswordButton = new JButton("Cambiar contraseña");
 
     public View() {
         setTitle("Login Hospital");
@@ -23,7 +23,7 @@ public class View extends JFrame {
         panel.add(passField);
         panel.add(new JLabel(""));
         panel.add(loginButton);
-        panel.add(changePasswordButton);
+        //panel.add(changePasswordButton);
 
         add(panel);
     }
@@ -41,8 +41,8 @@ public class View extends JFrame {
         JOptionPane.showMessageDialog(this, msg);
     }
 
-    public void addChangePasswordListener(ActionListener listener) {
-        changePasswordButton.addActionListener(listener);
-    }
+//    public void addChangePasswordListener(ActionListener listener) {
+//        changePasswordButton.addActionListener(listener);
+//    }
 
 }
