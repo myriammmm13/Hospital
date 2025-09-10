@@ -41,4 +41,7 @@ public class Controller {
         Service.instance().eliminarFarmaceutico(id);
         model.setCurrent(new Farmaceutico());
     }
+
+    public void clear() {
+    }
 }
