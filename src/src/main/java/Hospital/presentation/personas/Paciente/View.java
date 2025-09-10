@@ -119,7 +119,8 @@ public class View implements PropertyChangeListener {
                     );
 
                     if (nuevoValor != null) {
-                        pacientesTable.setValueAt(nuevoValor, row, column);
+                        Paciente a= pacientesTable.get
+                        //hacer switch para llamar al set del tipo de dato y el paciente esp
                     }
                 }
             }
