@@ -1,7 +1,7 @@
-package Hospital.presentation.personas.Medico;
+package Hospital.presentation.personas.Administrador;
 
-import Hospital.logic.personas.trabajadores.Medico;
 import Hospital.logic.Service;
+import Hospital.logic.personas.Trabajador;
 
 import java.util.List;
 
@@ -17,29 +17,29 @@ public class Controller {
         view.setModel(model);
     }
 
-    public void create(Medico m) throws Exception {
+    public void create(Trabajador m) throws Exception {
         model.setCurrent(m);
-        Service.instance().agregarDoctor(m);
+        Service.instance().agregarTrabajador(m);
     }
 
     public void read(String id) throws Exception {
-        List<Medico> encontrados = Service.instance().obtenerDoctor(id);
+        List<Trabajador> encontrados = Service.instance().obtenerTrabajador(id);
         if (encontrados.isEmpty()) {
-            throw new Exception("No se encontró ningún Doctor");
+            throw new Exception("No se encontró ningún Trabajador");
         }
         model.setCurrent(encontrados.getFirst());
     }
 
-    public void update(Medico m) throws Exception {
+    public void update(Trabajador m) throws Exception {
         model.setCurrent(m);
-        Service.instance().actualizarDoctor(m);
+        Service.instance().actualizarTrabajador(m);
     }
 
     public void delete(String id) throws Exception {
-        Medico m = new Medico();
+        Trabajador m = new Trabajador();
         m.setId(id);
-        Service.instance().eliminarDoctor(id);
-        model.setCurrent(new Medico());
+        Service.instance().eliminarTrabajador(id);
+        model.setCurrent(new Trabajador());
     }
 
 }

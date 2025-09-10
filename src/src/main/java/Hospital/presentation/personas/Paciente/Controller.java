@@ -40,8 +40,8 @@ public class Controller {
         Service.instance().actualizarPaciente(r);//el ID es el del que hizo login
     }
 
-    public void delete(Paciente r) throws Exception {
-        Service.instance().eliminarPaciente(r);//segundo id de login
+    public void delete(String id) throws Exception {
+        Service.instance().eliminarPaciente(id);//segundo id de login
         model.setCurrent(new Paciente()); // limpiar la vista
     }
     public void clear() {

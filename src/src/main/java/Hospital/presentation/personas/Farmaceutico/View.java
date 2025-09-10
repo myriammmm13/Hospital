@@ -68,7 +68,7 @@ public class View implements PropertyChangeListener {
                 if (validateDelete()) {
                     Farmaceutico n = take();
                     try {
-                        controller.delete(n);
+                        controller.delete(String.valueOf(n));
                         JOptionPane.showMessageDialog(panel, "ELIMINACIÓN REALIZADA", "", JOptionPane.INFORMATION_MESSAGE);
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -82,7 +82,7 @@ public class View implements PropertyChangeListener {
             public void actionPerformed(ActionEvent e) {
                 if (validateSearch()) {
                     try {
-                        controller.read(idBusqText.getText(), nombreText.getText());
+                        controller.read(idBusqText.getText());
                     } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }

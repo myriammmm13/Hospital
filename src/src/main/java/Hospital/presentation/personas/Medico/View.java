@@ -68,7 +68,7 @@ public class View implements PropertyChangeListener {
                 if (validateDelete()) {
                     Medico n = take();
                     try {
-                        controller.delete(n);
+                        controller.delete(String.valueOf(n));
                         JOptionPane.showMessageDialog(panel, "ELIMINACIÓN REALIZADA", "", JOptionPane.INFORMATION_MESSAGE);
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);

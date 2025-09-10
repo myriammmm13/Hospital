@@ -2,7 +2,6 @@ package Hospital.presentation.personas.Farmaceutico;
 
 import Hospital.logic.personas.trabajadores.Farmaceutico;
 import Hospital.logic.Service;
-import Hospital.logic.personas.trabajadores.Medico;
 
 import java.util.List;
 
@@ -21,30 +20,28 @@ public class Controller {
     public void create(Farmaceutico m) throws Exception {
         model.setCurrent(m);
         Service.instance().agregarFarmaceutico(m);
-        model.setCurrent(new Farmaceutico());
-        model.setList(Service.instance().findAllFarmacuetico());
     }
 
-    public void read(String id, String nom) throws Exception {
-        List<Farmaceutico> encontrados = Service.instance().obtenerFarmaceutico(id, nom);
+    public void read(String id) throws Exception {
+        List<Farmaceutico> encontrados = Service.instance().obtenerFarmaceutico(id);
         if (encontrados.isEmpty()) {
             throw new Exception("No se encontró ningún Farmaceutico");
         }
         model.setCurrent(encontrados.getFirst());
     }
 
-    public void update(Farmaceutico m, String userId) throws Exception {
+    public void update(Farmaceutico m) throws Exception {
         model.setCurrent(m);
-        Service.instance().actualizarFarmaceutico(m, userId);
+        Service.instance().actualizarFarmaceutico(m);
     }
 
-    public void delete(Farmaceutico r) throws Exception {
+    public void delete(String id) throws Exception {
         Farmaceutico m = new Farmaceutico();
-        m.setId(r.getId());
-        Service.instance().eliminarFarmaceutico(r.getId(), r.getNombre());
+        m.setId(id);
+        Service.instance().eliminarFarmaceutico(id);
         model.setCurrent(new Farmaceutico());
     }
+
     public void clear() {
-        view.clearFields();
     }
 }
