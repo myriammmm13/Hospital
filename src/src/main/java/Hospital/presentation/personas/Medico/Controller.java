@@ -42,4 +42,7 @@ public class Controller {
         model.setCurrent(new Medico());
     }
 
+    public void clear() {
+
+    }
 }

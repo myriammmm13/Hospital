@@ -1,6 +1,7 @@
 package Hospital.presentation.personas.Medico;
 
 import Hospital.Application;
+import Hospital.logic.Medicamento;
 import Hospital.logic.personas.trabajadores.Medico;
 
 import javax.swing.*;
@@ -59,7 +60,7 @@ public class View implements PropertyChangeListener {
         limpiarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controller.clear();
+                clearFields();
             }
         });
         borrarButton.addActionListener(new ActionListener() {
@@ -82,7 +83,7 @@ public class View implements PropertyChangeListener {
             public void actionPerformed(ActionEvent e) {
                 if (validateSearch()) {
                     try {
-                        controller.read(idBusqText.getText(), NomText.getText());
+                        controller.read(idBusqText.getText());
                     } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }

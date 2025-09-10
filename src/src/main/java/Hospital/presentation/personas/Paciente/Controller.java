@@ -19,14 +19,14 @@ public class Controller {
         model.setCurrent(r);
         Service.instance().agregarPaciente(r);
         model.setCurrent(new Paciente());
-        model.setList(Service.instance().findAllPacientes());
+        //model.setList(Service.instance().findAllPacientes());
     }
 
     public void read(String id, String nom) throws Exception {
         Paciente e = new Paciente();
         e.setId(id);
         try {
-            model.setCurrent(Service.instance().obtenerPaciente(id, nom));
+            model.setCurrent((Paciente) Service.instance().obtenerPaciente(id));
         } catch (Exception ex) {
             Paciente b = new Paciente();
             b.setId(id);
