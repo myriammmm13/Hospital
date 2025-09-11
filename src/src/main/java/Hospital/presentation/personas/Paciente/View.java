@@ -253,5 +253,4 @@ public class View implements PropertyChangeListener {
         }
         return valid;
     }
-
 }
