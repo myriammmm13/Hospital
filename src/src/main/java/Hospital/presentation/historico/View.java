@@ -49,10 +49,10 @@ public class View implements PropertyChangeListener {
                         int filaModelo = respuestaBusquedaPanel.convertRowIndexToModel(filaVista);
                         TableModel tableModel = (TableModel) respuestaBusquedaPanel.getModel();
                         Receta recetaSeleccionada = tableModel.getRecetaAt(filaModelo);
-                        controller.addRecetaReciente(recetaSeleccionada);
                         detalleMedView = new Hospital.presentation.despacho.detalleMed.View(recetaSeleccionada);
                         //detalleMedView.setController(controller);
                         //detalleMedView.setModel(model);
+                        //controller.addRecetaReciente(recetaSeleccionada);
                         detalleMedView.setVisible(true);
                     }
 

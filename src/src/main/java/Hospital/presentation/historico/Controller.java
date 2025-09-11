@@ -15,7 +15,8 @@ public class Controller {
         view.setModel(model);
     }
 
-    public void addRecetaReciente(Receta recetaSeleccionada) {
+    public void addRecetaReciente(Receta recetaSeleccionada){
         model.addReceta(recetaSeleccionada);
     }
+
 }

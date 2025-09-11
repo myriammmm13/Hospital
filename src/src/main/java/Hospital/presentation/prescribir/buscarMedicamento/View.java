@@ -88,6 +88,8 @@ public class View extends JDialog implements PropertyChangeListener {
     public void setModel(Model model) {
         this.model = model;
         model.addPropertyChangeListener(this);
+
+        propertyChange(new PropertyChangeEvent(model, Model.MEDICAMENTOS, null, null));
     }
 
     private Map<String, Integer> columnaFiltroMap = new HashMap<>();
