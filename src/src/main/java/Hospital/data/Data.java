@@ -30,11 +30,9 @@ public class Data {
         medicamentos.add(new Medicamento("113", "Amoxicilina", "250mg cápsulas"));
         medicamentos.add(new Medicamento("114", "Loratadina", "10mg tabletas"));
 
-        //medicos.add(new Medico("Juan", "Hernandez", "Jimenez", "MED-002", "med"));
-
-        trabajadores.add(new Trabajador("Ana", "Ramirez", "Soto", "ADM-001", "adm"));
-        trabajadores.add(new Trabajador("Juan", "Hernandez", "Jimenez", "MED-002", "med"));
-        trabajadores.add(new Trabajador("Marco", "Perez", "Garcia", "FAR-003", "far"));
+        trabajadores.add(new Trabajador("Ana Ramirez Soto", "ADM-001", "adm"));
+        trabajadores.add(new Trabajador("Juan Hernandez Jimenez", "MED-002", "med"));
+        trabajadores.add(new Trabajador("Marco Perez Garcia", "FAR-003", "far"));
 
     }
 

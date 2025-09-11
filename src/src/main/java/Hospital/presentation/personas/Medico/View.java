@@ -1,12 +1,14 @@
 package Hospital.presentation.personas.Medico;
 
 import Hospital.Application;
-import Hospital.logic.Medicamento;
+import Hospital.logic.personas.Paciente;
 import Hospital.logic.personas.trabajadores.Medico;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -60,7 +62,7 @@ public class View implements PropertyChangeListener {
         limpiarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                clearFields();
+                controller.clear();
             }
         });
         borrarButton.addActionListener(new ActionListener() {
@@ -69,7 +71,7 @@ public class View implements PropertyChangeListener {
                 if (validateDelete()) {
                     Medico n = take();
                     try {
-                        controller.delete(String.valueOf(n));
+                        controller.delete(n);
                         JOptionPane.showMessageDialog(panel, "ELIMINACIÓN REALIZADA", "", JOptionPane.INFORMATION_MESSAGE);
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -83,11 +85,39 @@ public class View implements PropertyChangeListener {
             public void actionPerformed(ActionEvent e) {
                 if (validateSearch()) {
                     try {
-                        controller.read(idBusqText.getText());
+                        controller.read(idBusqText.getText(), NomTextBusq.getText());
                     } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
                     fillFields(model.getCurrent());
+                }
+            }
+        });
+
+        medicoTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2 && medicoTable.getSelectedRow() != -1) {
+                    int row = medicoTable.getSelectedRow();
+                    int column = medicoTable.getSelectedColumn();
+
+                    Object value = medicoTable.getValueAt(row, column);
+                    String nuevoValor = JOptionPane.showInputDialog(
+                            null,
+                            "Modificar valor:",
+                            value
+                    );
+                    Medico cambiado = model.getList().get(row);
+                    switch (column) {
+                        case 0://id
+                            cambiado.setId(nuevoValor);
+                            break;
+                        case 1://nombre
+                            cambiado.setNombre(nuevoValor);
+                            break;
+                        case 2://esp
+                            cambiado.setEspecialidad(nuevoValor);
+                    }
                 }
             }
         });
@@ -148,7 +178,7 @@ public class View implements PropertyChangeListener {
         if (IDText.getText().isEmpty()) {
             valid = false;
             IDText.setBackground(Application.BACKGROUND_ERROR);
-            IDText.setToolTipText("id requerido");
+            IDText.setToolTipText("ID requerido");
         } else {
             IDText.setBackground(null);
             IDText.setToolTipText(null);
@@ -165,7 +195,7 @@ public class View implements PropertyChangeListener {
         if (EspText.getText().isEmpty()) {
             valid = false;
             EspText.setBackground(Application.BACKGROUND_ERROR);
-            EspText.setToolTipText("Nombre requerido");
+            EspText.setToolTipText("Especialidad requerida");
         } else {
             EspText.setBackground(null);
             EspText.setToolTipText(null);
@@ -181,18 +211,20 @@ public class View implements PropertyChangeListener {
 
         boolean idVacio = IDText.getText().isEmpty();
         boolean nombreVacio = NomText.getText().isEmpty();
+        boolean especialidadVacio = EspText.getText().isEmpty();
 
-        // Si ambos están vacíos, no es válido
         if (idVacio && nombreVacio) {
             IDText.setBackground(Application.BACKGROUND_ERROR);
-            IDText.setToolTipText("ID requerido o Nombre requerido");
+            IDText.setToolTipText("ID requerido");
 
             NomText.setBackground(Application.BACKGROUND_ERROR);
-            NomText.setToolTipText("ID requerido o Nombre requerido");
+            NomText.setToolTipText("Nombre requerido");
+
+            EspText.setBackground(Application.BACKGROUND_ERROR);
+            EspText.setToolTipText("Especialidad requerida");
         } else {
             valid = true;
 
-            // Limpiar errores si tienen datos
             if (!idVacio) {
                 IDText.setBackground(null);
                 IDText.setToolTipText(null);
@@ -202,8 +234,12 @@ public class View implements PropertyChangeListener {
                 NomText.setBackground(null);
                 NomText.setToolTipText(null);
             }
-        }
 
+            if (!especialidadVacio) {
+                EspText.setBackground(null);
+                EspText.setToolTipText(null);
+            }
+        }
         return valid;
     }
 }
