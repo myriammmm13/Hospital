@@ -33,6 +33,8 @@ public class View extends JDialog implements PropertyChangeListener {
         setTitle("Pacientes");
         setSize(400, 250);
 
+        inicializarComboBox();
+
         categoriaBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -110,6 +112,8 @@ public class View extends JDialog implements PropertyChangeListener {
         } else {
             ordenamientoBusqueda.setRowFilter(RowFilter.regexFilter("(?i)" + texto, columna));
         }
+
+        medicamentoBusquedaTable.repaint();
     }
 
     @Override

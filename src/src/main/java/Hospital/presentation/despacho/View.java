@@ -34,6 +34,7 @@ public class View implements PropertyChangeListener {
     Controller controller;
 
     View(){
+        inicializarComboBox();
 
         detallesPrescripcionButton.addActionListener(new ActionListener() {
             @Override
@@ -174,6 +175,8 @@ public class View implements PropertyChangeListener {
         } else {
             ordenamientoBusqueda.setRowFilter(RowFilter.regexFilter("(?i)" + texto, columna));
         }
+
+        recetaTable.repaint();
     }
 
     @Override

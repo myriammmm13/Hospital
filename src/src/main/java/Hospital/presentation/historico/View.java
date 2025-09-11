@@ -29,7 +29,18 @@ public class View implements PropertyChangeListener {
     private Map<String, Integer> columnaFiltroMap = new HashMap<>();
     private Hospital.presentation.despacho.detalleMed.View detalleMedView;
 
+    public JPanel getPanel() { return panel; }
+
+    public void setController(Controller controller) { this.controller = controller; }
+
+    public void setModel(Model model) {
+        this.model = model;
+        model.addPropertyChangeListener(this);
+    }
+
     public View(){
+        inicializarComboBox();
+
         respuestaBusquedaPanel.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
@@ -63,14 +74,6 @@ public class View implements PropertyChangeListener {
                 filtrar();
             }
         });
-    }
-    public JPanel getPanel() { return panel; }
-
-    public void setController(Controller controller) { this.controller = controller; }
-
-    public void setModel(Model model) {
-        this.model = model;
-        model.addPropertyChangeListener(this);
     }
 
     private void inicializarComboBox() {
