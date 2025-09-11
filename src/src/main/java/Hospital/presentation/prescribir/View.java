@@ -14,7 +14,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class View implements PropertyChangeListener {
-    private JPanel panel;
+    private JPanel panelPrincipal;
     private JButton guardarButton;
     private JButton limpiarButton;
     private JButton descartarMedicamentoButton;
@@ -25,6 +25,10 @@ public class View implements PropertyChangeListener {
     private JLabel fechaField;
     private JLabel nombreField;
     private JPanel fechaPanel;
+    private JPanel controlPanel;
+    private JPanel recetaPanel;
+    private JPanel medioPanel;
+    private JPanel ajustarPanel;
     private DatePicker fecha;
     private Hospital.presentation.prescribir.buscarPaciente.View buscarPacienteView;
     private Hospital.presentation.prescribir.buscarMedicamento.View buscarMedicamentoView;
@@ -52,9 +56,9 @@ public class View implements PropertyChangeListener {
                         model.getCurrent().getPrescripciones());
                 try {
                     controller.create(r);
-                    JOptionPane.showMessageDialog(panel, "Receta guardada correctamente.");
+                    JOptionPane.showMessageDialog(panelPrincipal, "Receta guardada correctamente.");
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(panel, "Error al guardar: " + ex.getMessage());
+                    JOptionPane.showMessageDialog(panelPrincipal, "Error al guardar: " + ex.getMessage());
                 }
 
             }
@@ -66,7 +70,7 @@ public class View implements PropertyChangeListener {
                     controller.create(new Receta(doctorAuxiliar = new Medico(), model.getCurrent().getPaciente(), model.getCurrent().getPrescripciones()) /*id del doctor*/);
                     limpiarCampos();
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(panel, "Error al limpiar: " + ex.getMessage());
+                    JOptionPane.showMessageDialog(panelPrincipal, "Error al limpiar: " + ex.getMessage());
                 }
 
             }
@@ -113,7 +117,7 @@ public class View implements PropertyChangeListener {
 
     }
 
-    public JPanel getPanel() { return panel; }
+    public JPanel getPanel() { return panelPrincipal; }
 
     public void setController(Controller controller) { this.controller = controller; }
 
