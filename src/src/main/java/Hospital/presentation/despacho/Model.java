@@ -9,7 +9,6 @@ import java.util.List;
 public class Model extends AbstractModel {
     List<Receta> recetas;
     public static final String RECETAS = "recetas";
-    public static final String PRESCRIPCIONES = "prescripciones";
 
     public List<Receta> getRecetasList() {
         return recetas;

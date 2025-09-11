@@ -1,6 +1,7 @@
 package Hospital.presentation.historico;
 
 import Hospital.logic.Medicamento;
+import Hospital.logic.Service;
 import Hospital.logic.personas.Paciente;
 import Hospital.logic.recetas.Receta;
 import Hospital.presentation.AbstractModel;
@@ -20,8 +21,9 @@ public class Model extends AbstractModel {
 
     public List<Receta> getRecetasRecientes(){ return recetasRecientes; }
 
-    public Model(List<Receta> recetas) {
-        this.recetas = recetas;
+    public Model() {
+        Service service = Service.instance();
+        this.recetas = service.listarRecetas();
     }
 
     public void addReceta(Receta receta) {

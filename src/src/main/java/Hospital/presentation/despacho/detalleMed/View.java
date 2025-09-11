@@ -8,10 +8,8 @@ import Hospital.presentation.prescribir.TableModel;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
-public class View extends JDialog implements PropertyChangeListener {
+public class View extends JDialog {
     private JPanel panel;
     private JTable prescripcionTable;
     private JButton okButton;
@@ -27,6 +25,11 @@ public class View extends JDialog implements PropertyChangeListener {
         setTitle("Detalles Receta");
         setSize(400, 250);
         this.receta = receta;
+
+        int[] cols = {TableModel.MEDICAMENTO, TableModel.PRESENTACION, TableModel.CANTIDAD,
+                TableModel.INDICACIONES, TableModel.DURACION};
+        TableModel tableModel = new TableModel(cols, receta.getPrescripciones());
+        prescripcionTable.setModel(tableModel);
 
         okButton.addActionListener(new ActionListener() {
             @Override
@@ -44,16 +47,4 @@ public class View extends JDialog implements PropertyChangeListener {
         this.model = model;
     }
 
-    @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-        switch (evt.getPropertyName()) {
-            case Model.PRESCRIPCIONES :
-                int[] cols = {TableModel.MEDICAMENTO,TableModel.PRESENTACION, TableModel.CANTIDAD,
-                        TableModel.INDICACIONES, TableModel.DURACION};
-                TableModel tableModel = new TableModel(cols, receta.getPrescripciones());
-                prescripcionTable.setModel(tableModel);
-                break;
-        }
-        this.panel.revalidate();
-    }
 }
