@@ -22,7 +22,7 @@ public class TableModel extends AbstractTableModel<Prescripcion> implements java
 
     @Override
     protected void initColNames() {
-        colNames = new String[5];
+        colNames = new String[7];
         colNames[MEDICAMENTO] = "Medicamento";
         colNames[PRESENTACION] = "Presentación";
         colNames[CANTIDAD] = "Cantidad";

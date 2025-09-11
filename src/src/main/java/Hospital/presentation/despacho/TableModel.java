@@ -18,7 +18,7 @@ public class TableModel extends AbstractTableModel<Receta> implements javax.swin
 
     @Override
     protected void initColNames() {
-        colNames = new String[5];
+        colNames = new String[7];
         colNames[PACIENTE] = "Paciente";
         colNames[DOCTOR] = "Doctor";
         colNames[PRESCRIPCIONES] = "Prescripciones";

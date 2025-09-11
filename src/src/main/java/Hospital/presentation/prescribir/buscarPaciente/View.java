@@ -88,6 +88,7 @@ public class View extends JDialog implements PropertyChangeListener{
         } else {
             ordenamientoBusqueda.setRowFilter(RowFilter.regexFilter("(?i)" + texto, columna));
         }
+        personasBusquedaTable.repaint();
     }
 
     Controller controller;
@@ -100,6 +101,8 @@ public class View extends JDialog implements PropertyChangeListener{
     public void setModel(Model model) {
         this.model = model;
         model.addPropertyChangeListener(this);
+
+        propertyChange(new PropertyChangeEvent(model, Model.PACIENTES, null, null));
     }
 
     @Override

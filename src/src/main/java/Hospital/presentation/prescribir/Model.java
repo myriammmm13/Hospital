@@ -27,6 +27,7 @@ public class Model extends AbstractModel {
         pacientes = service.listarPacientes();
         medicamentos = service.listarMedicamentos();
         current = new Receta();
+        firePropertyChange(PACIENTES, null, pacientes);
     }
 
     @Override
