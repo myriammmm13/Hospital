@@ -6,7 +6,6 @@ import Hospital.presentation.despacho.Model;
 import Hospital.presentation.prescribir.TableModel;
 
 import javax.swing.*;
-import javax.swing.table.TableRowSorter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;

@@ -5,8 +5,6 @@ import Hospital.logic.personas.Paciente;
 import Hospital.logic.recetas.Receta;
 import Hospital.presentation.AbstractModel;
 
-import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Model extends AbstractModel {
@@ -26,5 +24,6 @@ public class Model extends AbstractModel {
 
     public void addReceta(Receta receta) {
         this.recetasRecientes.add(receta);
+        firePropertyChange(RECETASRECIENTES, null, recetasRecientes);
     }
 }

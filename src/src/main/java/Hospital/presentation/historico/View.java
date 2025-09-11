@@ -20,13 +20,11 @@ import java.util.stream.Collectors;
 
 public class View implements PropertyChangeListener {
     private JPanel listaPanel;
-    private JPanel busquedaPanel;
-    private JLabel codigoLabel;
-    private JTextField textField1;
-    private JButton buscarButton;
     private JTable respuestaBusquedaPanel;
     private JTable table1;
     private JPanel panel;
+    private JComboBox categoriaBox;
+    private JTextField busquedaField;
 
     Controller controller;
     Model model;
@@ -44,9 +42,11 @@ public class View implements PropertyChangeListener {
                         int filaModelo = respuestaBusquedaPanel.convertRowIndexToModel(filaVista);
                         TableModel tableModel = (TableModel) respuestaBusquedaPanel.getModel();
                         Receta recetaSeleccionada = tableModel.getRecetaAt(filaModelo);
+                        controller.addRecetaReciente(recetaSeleccionada);
                         detalleMedView = new Hospital.presentation.despacho.detalleMed.View(recetaSeleccionada);
                         detalleMedView.setVisible(true);
                     }
+
                 }
             }
         });
@@ -78,11 +78,9 @@ public class View implements PropertyChangeListener {
     private void inicializarComboBox() {
         categoriaBox.addItem("Paciente");
         categoriaBox.addItem("Doctor");
-        categoriaBox.addItem("Estado");
 
         columnaFiltroMap.put("Paciente", TableModel.PACIENTE);
         columnaFiltroMap.put("Doctor", TableModel.DOCTOR);
-        columnaFiltroMap.put("Estado", TableModel.ESTADO);
     }
 
     private void filtrar() {
