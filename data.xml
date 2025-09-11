@@ -77,7 +77,40 @@
             <clave></clave>
         </trabajador>
     </trabajadores>
-    <recetas/>
+    <recetas>
+        <receta>
+            <doctor>
+                <id></id>
+                <nombre></nombre>
+                <clave></clave>
+                <especialidad></especialidad>
+            </doctor>
+            <estado>Confeccionada</estado>
+            <fechaRetiro/>
+            <paciente>
+                <id></id>
+                <nombre></nombre>
+                <fechaNacimiento></fechaNacimiento>
+                <telNum></telNum>
+            </paciente>
+        </receta>
+        <receta>
+            <doctor>
+                <id></id>
+                <nombre></nombre>
+                <clave></clave>
+                <especialidad></especialidad>
+            </doctor>
+            <estado>Confeccionada</estado>
+            <fechaRetiro/>
+            <paciente>
+                <id></id>
+                <nombre></nombre>
+                <fechaNacimiento></fechaNacimiento>
+                <telNum></telNum>
+            </paciente>
+        </receta>
+    </recetas>
     <pacientes>
         <paciente>
             <id>333</id>

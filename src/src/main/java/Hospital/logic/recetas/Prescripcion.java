@@ -54,7 +54,12 @@ public class Prescripcion {
         if (indicaciones == null || indicaciones.isBlank()) return;
         this.indicaciones = indicaciones.trim();
     }
-
+    public void setPrescripcion(Prescripcion p){
+        this.medicamento= p.medicamento;
+        this.indicaciones=p.indicaciones;
+        this.duracion=p.duracion;
+        this.cantidad=p.cantidad;
+    }
     public void setDuracion(int duracion) {
         if (duracion > 0) this.duracion = duracion;
     }

@@ -1,5 +1,6 @@
 package Hospital.logic.recetas;
 
+import Hospital.data.LocalDateAdapter;
 import Hospital.logic.personas.Paciente;
 import Hospital.logic.personas.trabajadores.Medico;
 
@@ -7,7 +8,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+@XmlRootElement
 public class Receta {
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private Medico doctor;
     private Paciente paciente;
     private List<Prescripcion> prescripciones;

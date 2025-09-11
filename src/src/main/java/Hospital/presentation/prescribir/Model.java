@@ -21,15 +21,14 @@ public class Model extends AbstractModel {
     public static final String MEDICAMENTOS = "medicamentos";
     public static final String PACIENTES = "pacientes";
     public static final String PACIENTE = "paciente";
+    public static final String PRESCRIPCION = "prescripcion";
 
     public Model() {
         pacientes = new ArrayList<>();
         medicamentos = new ArrayList<>();
         prescripciones = new ArrayList<>();
-
         current = new Receta();
-
-        //current = new Receta(doctorAuxiliar = new Medico(), model.getCurrent().getPaciente(), model.getCurrent().getPrescripciones());
+        
     }
 
     @Override
@@ -57,9 +56,11 @@ public class Model extends AbstractModel {
         return medicamentos;
     }
 
+    public List<Paciente> getPacientes(){return pacientes;}
+
     public void setPrescripciones(List<Prescripcion> list) {
-        this.prescripciones = list;
-        firePropertyChange(PRESCRIPCIONES, null, list);
+        this.prescripciones = list != null ? list : new ArrayList<>();
+        firePropertyChange(PRESCRIPCIONES, null, this.prescripciones);
     }
 
     public void setPacientes(List<Paciente> list) {
@@ -70,6 +71,11 @@ public class Model extends AbstractModel {
     public void setPaciente(Paciente paciente) {
         this.current.setPaciente(paciente);
         firePropertyChange(PACIENTE, null, paciente);
+    }
+
+    public void setPrescripcion(Prescripcion prescripcion) {
+        this.current.agregarPrescripcion(prescripcion);
+        firePropertyChange(PRESCRIPCION, null, prescripcion);
     }
 
     public Paciente getPaciente() { return  current.getPaciente(); }
@@ -93,4 +99,8 @@ public class Model extends AbstractModel {
         return pacientes;
     }
 
+    public void setMedicamentos(List<Medicamento> list) {
+        this.medicamentos = list != null ? list : new ArrayList<>();
+        firePropertyChange(MEDICAMENTOS, null, this.medicamentos);
+    }
 }

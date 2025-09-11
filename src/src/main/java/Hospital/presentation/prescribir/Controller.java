@@ -16,6 +16,7 @@ public class Controller {
         view.setController(this);
         view.setModel(model);
         model.setPacientes(Service.instance().search(new Paciente()));
+        model.setMedicamentos(Service.instance().findAllMedicamentos());
     }
 
     public void create(Receta r ) throws Exception {
@@ -25,7 +26,7 @@ public class Controller {
 
 
     public void clear() {
-        //model.setCurrent(new Receta(doctorAuxiliar = new Medico(), model.getCurrent().getPaciente(), model.getCurrent().getPrescripciones()));
+
     }
 
     public void setPaciente(int row) {

@@ -102,7 +102,7 @@ public class View extends JDialog implements PropertyChangeListener{
         this.model = model;
         model.addPropertyChangeListener(this);
 
-        int[] cols = {TableModel.ID, TableModel.NOMBRE, TableModel.TELEFONO, TableModel.FEC_NAC}; // ajusta según tus columnas
+        int[] cols = {TableModel.ID, TableModel.NOMBRE, TableModel.TELEFONO, TableModel.FEC_NAC};
         personasBusquedaTable.setModel(new TableModel(cols, model.getPacientesList()) {
         });
     }
