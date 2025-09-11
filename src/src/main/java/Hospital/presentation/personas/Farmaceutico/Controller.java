@@ -33,9 +33,9 @@ public class Controller {
         model.setCurrent(encontrados.getFirst());
     }
 
-    public void update(Farmaceutico m, String userId) throws Exception {
+    public void update(Farmaceutico m) throws Exception {
         model.setCurrent(m);
-        Service.instance().actualizarFarmaceutico(m, userId);
+        Service.instance().actualizarFarmaceutico(m);
     }
 
     public void delete(Farmaceutico r) throws Exception {

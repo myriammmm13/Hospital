@@ -15,11 +15,10 @@ public class Controller {
         view.setModel(model);
     }
 
-    public void create(Paciente r) throws Exception {
-        model.setCurrent(r);
-        Service.instance().agregarPaciente(r);
-        model.setCurrent(new Paciente());
-        model.setList(Service.instance().findAllPacientes());
+    public void create(Paciente p) throws Exception {
+        Service.instance().agregarPaciente(p);
+        model.setCurrent(p);
+        model.setList(Service.instance().listarPacientes());
     }
 
     public void read(String id, String nom) throws Exception {
