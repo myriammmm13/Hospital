@@ -9,10 +9,7 @@ import Hospital.logic.recetas.Prescripcion;
 import Hospital.logic.recetas.Receta;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Service {
@@ -371,5 +368,13 @@ public class Service {
     }
     public List<Farmaceutico> findAllFarmacuetico() {
         return data.getFamaceuticos();
+    }
+
+
+    public List<Paciente> search( Paciente e) {
+        return data.getPacientes().stream()
+                .filter(i -> i.getNombre().toLowerCase().contains(e.getNombre().toLowerCase()))
+                .sorted(Comparator.comparing(Paciente::getNombre))
+                .collect(Collectors.toList());
     }
 }

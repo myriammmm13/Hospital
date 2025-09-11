@@ -14,7 +14,7 @@ import java.util.Map;
 import Hospital.presentation.prescribir.Controller;
 import Hospital.presentation.prescribir.Model;
 
-public class View extends JDialog implements PropertyChangeListener {
+public class View extends JDialog implements PropertyChangeListener{
     private JPanel panel;
     private JComboBox categoriaBox;
     private JTextField busquedaField;
@@ -31,6 +31,8 @@ public class View extends JDialog implements PropertyChangeListener {
         setLocationRelativeTo(null);
         setTitle("Pacientes");
         setSize(400, 250);
+
+        inicializarComboBox();
 
         okButton.addActionListener(new ActionListener() {
             @Override
@@ -65,13 +67,13 @@ public class View extends JDialog implements PropertyChangeListener {
     private Map<String, Integer> columnaFiltroMap = new HashMap<>();
 
     private void inicializarComboBox() {
-        categoriaBox.addItem("Id");
-        categoriaBox.addItem("Código");
-        categoriaBox.addItem("Telefono");
+        categoriaBox.addItem("ID");
+        categoriaBox.addItem("Nombre");
+        categoriaBox.addItem("Teléfono");
 
-        columnaFiltroMap.put("Id", TableModel.ID);
-        columnaFiltroMap.put("Código", TableModel.NOMBRE);
-        columnaFiltroMap.put("Telefono", TableModel.TELEFONO);
+        columnaFiltroMap.put("ID", TableModel.ID);
+        columnaFiltroMap.put("Nombre", TableModel.NOMBRE);
+        columnaFiltroMap.put("Teléfono", TableModel.TELEFONO);
     }
 
     private void filtrar() {
@@ -79,13 +81,14 @@ public class View extends JDialog implements PropertyChangeListener {
 
         String texto = busquedaField.getText().trim();
         String categoriaSeleccionada = (String) categoriaBox.getSelectedItem();
-        int columna = columnaFiltroMap.getOrDefault(categoriaSeleccionada, Hospital.presentation.prescribir.buscarMedicamento.TableModel.NOMBRE);
+        int columna = columnaFiltroMap.getOrDefault(categoriaSeleccionada, TableModel.NOMBRE);
 
         if (texto.length() == 0) {
             ordenamientoBusqueda.setRowFilter(null);
         } else {
             ordenamientoBusqueda.setRowFilter(RowFilter.regexFilter("(?i)" + texto, columna));
         }
+        personasBusquedaTable.repaint();
     }
 
     Controller controller;
@@ -98,6 +101,10 @@ public class View extends JDialog implements PropertyChangeListener {
     public void setModel(Model model) {
         this.model = model;
         model.addPropertyChangeListener(this);
+
+        int[] cols = {TableModel.ID, TableModel.NOMBRE, TableModel.TELEFONO, TableModel.FEC_NAC}; // ajusta según tus columnas
+        personasBusquedaTable.setModel(new TableModel(cols, model.getPacientesList()) {
+        });
     }
 
     @Override
@@ -111,6 +118,7 @@ public class View extends JDialog implements PropertyChangeListener {
                 ordenamientoBusqueda = new TableRowSorter<>(tableModel);
                 personasBusquedaTable.setRowSorter(ordenamientoBusqueda);
                 break;
+
         }
         this.panel.revalidate();
     }

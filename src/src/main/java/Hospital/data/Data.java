@@ -34,6 +34,7 @@ public class Data {
         trabajadores.add(new Trabajador("Juan Hernandez Jimenez", "MED-002"));
         trabajadores.add(new Trabajador("Marco Perez Garcia", "FAR-003"));
 
+        pacientes.add(new Paciente("Myriam Jara W","504650944","72785169","2025 - 07- 12"));
     }
 
     public List<Receta> getRecetas() {
