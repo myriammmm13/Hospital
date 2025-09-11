@@ -1,38 +1,34 @@
 package Hospital.presentation.historico;
 
-import Hospital.logic.personas.trabajadores.Medico;
+import Hospital.logic.Service;
 import Hospital.logic.recetas.Receta;
 import Hospital.presentation.AbstractModel;
 
-import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Model extends AbstractModel {
-    Receta current;
     List<Receta> recetas;
+    List<Receta> recetasRecientes;
+    public static final String RECETAS = "recetas";
+    public static final String RECETASRECIENTES = "recetasRecientes";
 
-    public static final String CURRENT = "current";
+    public List<Receta> getRecetasList() {
+            return recetas;
+    }
+
+    public List<Receta> getRecetasRecientes(){ return recetasRecientes; }
 
     public Model() {
-        //current = new Receta(doctorAuxiliar = new Medico(), model.getCurrent().getPaciente(), model.getCurrent().getPrescripciones());
+            Service service = Service.instance();
+            this.recetas = service.listarRecetas();
+            this.recetasRecientes = new ArrayList<>();
+            firePropertyChange(RECETAS, null, recetas);
+        }
+
+        public void addReceta(Receta receta) {
+            this.recetasRecientes.add(receta);
+            firePropertyChange(RECETASRECIENTES, null, recetasRecientes);
+        }
     }
 
-    @Override
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        super.addPropertyChangeListener(listener);
-        firePropertyChange(CURRENT, null, current);
-    }
-
-    public Receta getCurrent() {
-        return current;
-    }
-
-    public List<Receta> getRecetas() {
-        return recetas;
-    }
-
-    public void setCurrent(Receta r) {
-        this.current = r;
-        firePropertyChange(CURRENT, null, current);
-    }
-}

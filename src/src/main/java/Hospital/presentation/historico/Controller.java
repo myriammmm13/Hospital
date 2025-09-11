@@ -15,23 +15,11 @@ public class Controller {
         view.setModel(model);
     }
 
-    public void create(Receta r ) throws Exception {
-        model.setCurrent(r);
-        Service.instance().agregarReceta(r);
+    public void addRecetaReciente(Receta recetaSeleccionada){
+        model.addReceta(recetaSeleccionada);
     }
 
-    public void read(Receta r) throws Exception {
-        Receta encontrado = Service.instance().obtenerReceta(r);
-        model.setCurrent(encontrado);
-    }
-
-    public void update(Receta r) throws Exception {
-        model.setCurrent(r);
-        Service.instance().actualizarReceta(r);
-    }
-
-//    public void delete(Receta r) throws Exception {
-//        Service.instance().eliminarReceta(r);
-//        model.setCurrent(new Receta(doctorAuxiliar = new Medico(), model.getCurrent().getPaciente(), model.getCurrent().getPrescripciones())); // limpiar la vista
-//    }
 }
+
+
+
