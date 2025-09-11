@@ -23,6 +23,7 @@ public class Model extends AbstractModel {
     public Model() {
         Service service = Service.instance();
         this.recetas = service.listarRecetas();
+        firePropertyChange(RECETAS, null, recetas);
     }
 
     public void addReceta(Receta receta) {
