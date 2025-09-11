@@ -153,6 +153,6 @@ public class View implements PropertyChangeListener {
 
     private void limpiarCampos() {
         nombreField.setText("");
-        PrescripcionTable.setModel(new TableModel());
+        PrescripcionTable.repaint();
     }
 }

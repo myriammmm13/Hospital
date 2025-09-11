@@ -147,6 +147,7 @@ public class View implements PropertyChangeListener {
     public void setModel(Model model) {
         this.model = model;
         model.addPropertyChangeListener(this);
+        propertyChange(new PropertyChangeEvent(model, model.RECETAS, null, null));
     }
 
     private void inicializarComboBox() {

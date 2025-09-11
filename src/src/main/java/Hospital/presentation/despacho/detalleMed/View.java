@@ -8,6 +8,7 @@ import Hospital.presentation.prescribir.TableModel;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
 
 public class View extends JDialog {
     private JPanel panel;

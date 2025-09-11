@@ -10,9 +10,6 @@ public class TableModel extends AbstractTableModel<Prescripcion> implements java
     public TableModel(int[] cols, List<Prescripcion> rows) {
         super(cols, rows);
     }
-    public TableModel(){
-        super();
-    }
 
     public static final int MEDICAMENTO = 0;
     public static final int PRESENTACION = 1;
