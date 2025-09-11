@@ -12,7 +12,6 @@ public class Model extends AbstractModel {
     List<Receta> recetas;
     List<Receta> recetasRecientes;
     public static final String RECETAS = "recetas";
-    public static final String PRESCRIPCIONES = "prescripciones";
     public static final String RECETASRECIENTES = "recetasRecientes";
 
     public List<Receta> getRecetasList() {
