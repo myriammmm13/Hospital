@@ -15,6 +15,11 @@ public class Receta {
     private LocalDate fechaRetiro;
     private String estado;
 
+    public Receta() {
+        prescripciones = new ArrayList<>();
+        estado = "Iniciado";
+        fechaConfeccion = LocalDate.now();
+    }
     public Receta(Medico doctor, Paciente paciente, List<Prescripcion> prescripciones, LocalDate fechaRetiro) {
         this.doctor = doctor;
         this.paciente = paciente;

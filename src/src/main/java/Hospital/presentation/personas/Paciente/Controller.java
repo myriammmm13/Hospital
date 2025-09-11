@@ -22,14 +22,7 @@ public class Controller {
     }
 
     public void read(String id, String nom) throws Exception {
-        try {
-            model.setCurrent(Service.instance().obtenerPaciente(id, nom));
-        } catch (Exception ex) {
-            Paciente b = new Paciente();
-            b.setId(id);
-            model.setCurrent(b);
-            throw ex;
-        }
+        model.setCurrent(Service.instance().obtenerPaciente(id, nom));
     }
 
     public void update(Paciente r) throws Exception {

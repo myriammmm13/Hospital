@@ -137,7 +137,6 @@ public class View implements PropertyChangeListener {
 
             }
         });
-
     }
 
     public JPanel getPanel() { return panel; }
