@@ -17,8 +17,8 @@ public class View extends JDialog implements PropertyChangeListener {
     private JSpinner cantidadSpinner;
     private JSpinner duracionSpinner;
     private JTextField indicacionesField;
-    private JButton guardarButton;
-    private JButton cancelarButton;
+    private JButton BotonGuardarCrearPrescrripcion;
+    private JButton BotonCancelarDeCrearPrescripcion;
 
     private Prescripcion prescripcion = null;
     private int row;
@@ -29,12 +29,12 @@ public class View extends JDialog implements PropertyChangeListener {
     public View(Medicamento medicamento){
         setContentPane(panel);
         setModal(true);
-        getRootPane().setDefaultButton(guardarButton);
+        getRootPane().setDefaultButton(BotonGuardarCrearPrescrripcion);
         setLocationRelativeTo(null);
         setTitle(medicamento.getNombre());
         setSize(400, 250);
 
-        guardarButton.addActionListener(new ActionListener() {
+        BotonGuardarCrearPrescrripcion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(prescripcion != null){
@@ -51,7 +51,7 @@ public class View extends JDialog implements PropertyChangeListener {
             }
         });
 
-        cancelarButton.addActionListener(new ActionListener() {
+        BotonCancelarDeCrearPrescripcion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 View.this.setVisible(false);
