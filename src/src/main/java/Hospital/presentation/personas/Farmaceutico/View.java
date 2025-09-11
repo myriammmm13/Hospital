@@ -7,6 +7,8 @@ import Hospital.presentation.personas.Farmaceutico.TableModel;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -68,7 +70,7 @@ public class View implements PropertyChangeListener {
                 if (validateDelete()) {
                     Farmaceutico n = take();
                     try {
-                        controller.delete(String.valueOf(n));
+                        controller.delete(n);
                         JOptionPane.showMessageDialog(panel, "ELIMINACIÓN REALIZADA", "", JOptionPane.INFORMATION_MESSAGE);
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -82,7 +84,7 @@ public class View implements PropertyChangeListener {
             public void actionPerformed(ActionEvent e) {
                 if (validateSearch()) {
                     try {
-                        controller.read(idBusqText.getText());
+                        controller.read(idBusqText.getText(), nomText.getText());
                     } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
@@ -95,6 +97,32 @@ public class View implements PropertyChangeListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                //hay que hacerle la acción xd
+            }
+        });
+
+        farmaceuticoTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2 && farmaceuticoTable.getSelectedRow() != -1) {
+                    int row = farmaceuticoTable.getSelectedRow();
+                    int column = farmaceuticoTable.getSelectedColumn();
+
+                    Object value = farmaceuticoTable.getValueAt(row, column);
+                    String nuevoValor = JOptionPane.showInputDialog(
+                            null,
+                            "Modificar valor:",
+                            value
+                    );
+                    Farmaceutico cambiado = model.getList().get(row);
+                    switch (column) {
+                        case 0://id
+                            cambiado.setId(nuevoValor);
+                            break;
+                        case 1://nombre
+                            cambiado.setNombre(nuevoValor);
+                            break;
+                    }
+                }
             }
         });
     }

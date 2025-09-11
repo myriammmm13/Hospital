@@ -15,9 +15,9 @@ public class Controller {
         view.setModel(model);
     }
 
-    public void create(Receta r) throws Exception {
+    public void create(Receta r, String userId) throws Exception {
         model.setCurrent(r);
-        Service.instance().agregarReceta(r);
+        Service.instance().agregarReceta(r, userId);
     }
 
     public void read(Receta r) throws Exception {
