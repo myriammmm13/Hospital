@@ -1,4 +1,5 @@
 package Hospital.presentation.login;
+import Hospital.data.XmlPersister;
 import Hospital.logic.personas.Trabajador;
 
 import javax.swing.*;
@@ -43,6 +44,15 @@ public class Controller {
                     for (Trabajador t : model.getData().getTrabajadores()) {
                         if (t.getId().equals(user)) {
                             t.setClave(nueva1);
+
+                            try {
+                                XmlPersister.instance().store(model.getData());
+                                System.out.println("Contraseña actualizada y guardada en XML");
+                            } catch (Exception exx) {
+                                JOptionPane.showMessageDialog(dialog, "Error al guardar la nueva contraseña");
+                                exx.printStackTrace();
+                            }
+
                             JOptionPane.showMessageDialog(dialog, "Contraseña actualizada");
                             dialog.dispose();
                             return;

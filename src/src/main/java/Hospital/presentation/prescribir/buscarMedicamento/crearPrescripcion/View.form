@@ -58,9 +58,11 @@
                 <preferred-size width="150" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <text value=""/>
+            </properties>
           </component>
-          <component id="6559" class="javax.swing.JButton" binding="guardarButton" default-binding="true">
+          <component id="6559" class="javax.swing.JButton" binding="BotonGuardarCrearPrescrripcion">
             <constraints>
               <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -68,7 +70,7 @@
               <text value="Guardar"/>
             </properties>
           </component>
-          <component id="ed4c7" class="javax.swing.JButton" binding="cancelarButton" default-binding="true">
+          <component id="ed4c7" class="javax.swing.JButton" binding="BotonCancelarDeCrearPrescripcion">
             <constraints>
               <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
