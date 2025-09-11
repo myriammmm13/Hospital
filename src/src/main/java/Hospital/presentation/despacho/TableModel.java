@@ -25,6 +25,11 @@ public class TableModel extends AbstractTableModel<Receta> implements javax.swin
         colNames[FECHA_CONFECCION] = "Fecha de Confección";
         colNames[ESTADO] = "Estado";
     }
+
+    public Receta getRecetaAt(int rowIndex) {
+        return getRowAt(rowIndex);
+    }
+
     @Override
     protected Object getPropetyAt(Receta e, int col) {
         switch (cols[col]) {

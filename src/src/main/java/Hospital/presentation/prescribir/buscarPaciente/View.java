@@ -14,7 +14,7 @@ import java.util.Map;
 import Hospital.presentation.prescribir.Controller;
 import Hospital.presentation.prescribir.Model;
 
-public class View extends JDialog implements PropertyChangeListener {
+public class View extends JDialog implements PropertyChangeListener{
     private JPanel panel;
     private JComboBox categoriaBox;
     private JTextField busquedaField;
