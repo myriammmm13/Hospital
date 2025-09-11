@@ -18,8 +18,8 @@ public class Model extends AbstractModel {
     public static final String CURRENT = "current";
 
     public Model() {
-        recetas = new ArrayList<Receta>();
-        medicamentos = new  ArrayList<Medicamento>();
+        List<Receta> recetas = new ArrayList<>();
+        List<Medicamento> medicamentos = new ArrayList<>();
     }
 
     @Override
@@ -47,14 +47,14 @@ public class Model extends AbstractModel {
     }
 
     public List<Medicamento> getMedicamentos() {
-        return medicamentos;
+        if (this.medicamentos == null) {
+            return new ArrayList<>();
+        }
+        return this.medicamentos;
     }
 
     public void setMedicamentos(List<Medicamento> medicamentos) {
         this.medicamentos = medicamentos;
         firePropertyChange(LIST, null, medicamentos);
     }
-
-
-
 }

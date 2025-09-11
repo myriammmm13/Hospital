@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.time.LocalDate;
 
 public class View implements PropertyChangeListener {
     private JPanel medicamentosPanel;
@@ -24,14 +25,17 @@ public class View implements PropertyChangeListener {
     private JTextField nombreField;
     private JLabel descripcion;
     private JTextField descripcionField;
-    private JTextField buscarField;
     private JButton guardarButton;
     private JButton modificarButton;
     private JButton buttonEliminar;
     private JButton button1;
     private JButton buttonBuscar;
+    private JPanel medicamentosPanelTable;
+    private JTable medicamentosTable;
 
     public View() {
+
+        //medicamentosPanelTable.add(medicamentosTable);
 
         guardarButton.addActionListener(new ActionListener() {
             @Override
@@ -42,7 +46,7 @@ public class View implements PropertyChangeListener {
                         descripcionField.getText()
                 );
                 try {
-                    controller.create(m);
+                    controller.create(m, "");
                     JOptionPane.showMessageDialog(medicamentosPanel, "Medicamento guardado correctamente.");
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(medicamentosPanel, "Error al guardar: " + ex.getMessage());
@@ -84,10 +88,10 @@ public class View implements PropertyChangeListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    controller.create(new Medicamento("", "", ""));
+                    controller.create(new Medicamento("", "", ""), "ADM-111");
                     limpiarCampos();
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(medicamentosPanel, "Error al limpiar: " /*+ ex.getMessage()*/);
+                    JOptionPane.showMessageDialog(medicamentosPanel, "Error al limpiar: " + ex.getMessage());
                 }
 
             }
@@ -117,6 +121,7 @@ public class View implements PropertyChangeListener {
             }
         });
     }
+
     private void limpiarCampos() {
         codigofield.setText("");
         nombreField.setText("");
@@ -134,11 +139,19 @@ public class View implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        if (Model.CURRENT.equals(evt.getPropertyName())) {
-            Medicamento m = model.getCurrent();
-            codigofield.setText(m.getCodigo());
-            nombreField.setText(m.getNombre());
-            descripcionField.setText(m.getPresentacion());
+        switch (evt.getPropertyName()) {
+            case Model.CURRENT: {
+                codigofield.setText(model.getCurrent().getCodigo());
+                nombreField.setText(model.getCurrent().getNombre());
+                descripcionField.setText(model.getCurrent().getPresentacion());
+                break;
+            }
+            case Model.LIST: {
+                int[] cols = {TableModel.CODIGO, TableModel.NOMBRE, TableModel.PRESENTACION};
+                medicamentosTable.setModel(new TableModel(cols, model.getList()));
+                break;
+            }
         }
+        this.medicamentosPanel.revalidate();
     }
 }

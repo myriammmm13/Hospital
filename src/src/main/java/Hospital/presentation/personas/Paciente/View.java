@@ -60,12 +60,10 @@ public class View implements PropertyChangeListener {
                     Paciente n = take();
                     try {
                         controller.create(n);
-
                         JOptionPane.showMessageDialog(panel, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                     }
-
                 }
             }
         });
@@ -82,7 +80,7 @@ public class View implements PropertyChangeListener {
                 if (validateDelete()) {
                     Paciente n = take();
                     try {
-                        controller.delete(String.valueOf(n));
+                        controller.delete(n);
                         JOptionPane.showMessageDialog(panel, "ELIMINACIÓN REALIZADA", "", JOptionPane.INFORMATION_MESSAGE);
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -117,9 +115,18 @@ public class View implements PropertyChangeListener {
                             "Modificar valor:",
                             value
                     );
-
-                    if (nuevoValor != null) {
-                        pacientesTable.setValueAt(nuevoValor, row, column);
+                    Paciente cambiado = model.getList().get(row);
+                    switch (column) {
+                        case 0://id
+                            cambiado.setId(nuevoValor);
+                            break;
+                        case 1://nombre
+                            cambiado.setNombre(nuevoValor);
+                            break;
+                        case 2://numero
+                            cambiado.setTelNum(nuevoValor);
+                        case 3://fecha
+                            cambiado.setFechaNacimiento(nuevoValor);
                     }
                 }
             }
@@ -168,28 +175,12 @@ public class View implements PropertyChangeListener {
         }
         return e;
     }
-    public void clearFields() {
-        IDText.setText("");
-        nomText.setText("");
-        numTelText.setText("");
-        numTelText.setBackground(null);
-        numTelText.setToolTipText(null);
-        IDText.setBackground(null);
-        nomText.setBackground(null);
-        IDText.setToolTipText(null);
-        nomText.setToolTipText(null);
-        String fechaTexto = model.getCurrent().getFechaNacimiento();
-        if (fechaTexto != null && !fechaTexto.isEmpty()) {
-            fechaPicker.setDate(LocalDate.parse(fechaTexto));
-        } else {
-            fechaPicker.clear();
-        }
-    }
+
     public void fillFields(Paciente e) {
         IDText.setText(e.getId());
         nomText.setText(e.getNombre());
         numTelText.setText(e.getTelNum());
-        //falta numero
+        fechaPicker.setDate(LocalDate.parse(e.getFechaNacimiento()));
     }
 
     private boolean validate() {
@@ -197,12 +188,11 @@ public class View implements PropertyChangeListener {
         if (IDText.getText().isEmpty()) {
             valid = false;
             IDText.setBackground(Application.BACKGROUND_ERROR);
-            IDText.setToolTipText("id requerido");
+            IDText.setToolTipText("ID requerido");
         } else {
             IDText.setBackground(null);
             IDText.setToolTipText(null);
         }
-
         if (nomText.getText().isEmpty()) {
             valid = false;
             nomText.setBackground(Application.BACKGROUND_ERROR);
@@ -239,7 +229,6 @@ public class View implements PropertyChangeListener {
         boolean idVacio = IDText.getText().isEmpty();
         boolean nombreVacio = nomText.getText().isEmpty();
 
-        // Si ambos están vacíos, no es válido
         if (idVacio && nombreVacio) {
             IDText.setBackground(Application.BACKGROUND_ERROR);
             IDText.setToolTipText("ID requerido o Nombre requerido");
@@ -249,7 +238,6 @@ public class View implements PropertyChangeListener {
         } else {
             valid = true;
 
-            // Limpiar errores si tienen datos
             if (!idVacio) {
                 IDText.setBackground(null);
                 IDText.setToolTipText(null);
@@ -260,8 +248,6 @@ public class View implements PropertyChangeListener {
                 nomText.setToolTipText(null);
             }
         }
-
         return valid;
     }
-
 }
