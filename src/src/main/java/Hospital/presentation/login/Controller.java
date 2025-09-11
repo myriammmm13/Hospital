@@ -1,4 +1,7 @@
 package Hospital.presentation.login;
+import Hospital.logic.personas.Trabajador;
+
+import javax.swing.*;
 import java.util.function.BiConsumer;
 
 public class Controller {
@@ -21,5 +24,37 @@ public class Controller {
                 view.showMessage("Credenciales inválidas");
             }
         });
+
+        view.addChangePasswordListener(e -> {
+            String user = view.getUser();
+            String pass = view.getPassword();
+
+            if (model.validate(user, pass)) {
+                ChangePasswordDialog dialog = new ChangePasswordDialog(view);
+                dialog.getConfirmButton().addActionListener(ev -> {
+                    String nueva1 = dialog.getNewPassword1();
+                    String nueva2 = dialog.getNewPassword2();
+
+                    if (!nueva1.equals(nueva2)) {
+                        JOptionPane.showMessageDialog(dialog, "Las contraseñas no coinciden");
+                        return;
+                    }
+
+                    for (Trabajador t : model.getData().getTrabajadores()) {
+                        if (t.getId().equals(user)) {
+                            t.setClave(nueva1);
+                            JOptionPane.showMessageDialog(dialog, "Contraseña actualizada");
+                            dialog.dispose();
+                            return;
+                        }
+                    }
+                });
+
+                dialog.setVisible(true);
+            } else {
+                view.showMessage("Usuario o contraseña incorrectos");
+            }
+        });
+
     }
 }

@@ -7,6 +7,7 @@ import Hospital.presentation.login.View;
 
 import javax.swing.*;
 import java.awt.*;
+import java.net.URL;
 
 public class Application {
 
@@ -72,27 +73,27 @@ public class Application {
 
         switch (userType) {
             case "ADM":
-                  tabs.addTab("Medicos", medicoView.getPanel());
-                  tabs.addTab("Farmaceutas", farmaceuticoView.getPanel());
-                  tabs.addTab("Pacientes", pacienteView.getPanel());
-                  tabs.addTab("Medicamentos", medicamentoView.getPanel());
-                  tabs.addTab("Dashboard", dashboardView.getPanel());
-                  tabs.addTab("Histórico", historicoView.getPanel());
-                  tabs.addTab("Acerca de...", acercaDeView.getPanel());
+                tabs.addTab("Medicos", cargarIcono("/images/medico1.png"), medicoView.getPanel());
+                  tabs.addTab("Farmaceutas", cargarIcono("/images/farmaceuta.png"), farmaceuticoView.getPanel());
+                  tabs.addTab("Pacientes", cargarIcono("/images/paciente.png"), pacienteView.getPanel());
+                  tabs.addTab("Medicamentos", cargarIcono("/images/medicamento1.png"), medicamentoView.getPanel());
+                  tabs.addTab("Dashboard", cargarIcono("/images/dashboard1.png"), dashboardView.getPanel());
+                  tabs.addTab("Histórico", cargarIcono("/images/historico1.png"), historicoView.getPanel());
+                  tabs.addTab("Acerca de...", cargarIcono("/images/acercade1.png"), acercaDeView.getPanel());
                 break;
 
             case "MED":
-                tabs.addTab("Prescribir", prescribirView.getPanel());
-                tabs.addTab("Dashboard", dashboardView.getPanel());
-                tabs.addTab("Histórico", historicoView.getPanel());
-                tabs.addTab("Acerca de...", acercaDeView.getPanel());
+                tabs.addTab("Prescribir", cargarIcono("/images/prescipcion1.png"), prescribirView.getPanel());
+                tabs.addTab("Dashboard", cargarIcono("/images/dashboard1.png"), dashboardView.getPanel());
+                tabs.addTab("Histórico", cargarIcono("/images/historico1.png"), historicoView.getPanel());
+                tabs.addTab("Acerca de...", cargarIcono("/images/acercade1.png"), acercaDeView.getPanel());
 
                 break;
 
             case "FAR":
-                tabs.addTab("Prescribir", prescribirView.getPanel());
-                tabs.addTab("Dashboard", dashboardView.getPanel());
-                tabs.addTab("Acerca de...", acercaDeView.getPanel());
+                tabs.addTab("Prescribir", cargarIcono("/images/prescipcion1.png"), prescribirView.getPanel());
+                tabs.addTab("Dashboard", cargarIcono("/images/dashboard1.png"), dashboardView.getPanel());
+                tabs.addTab("Acerca de...", cargarIcono("/images/acercade1.png"), acercaDeView.getPanel());
                 break;
 
             default:
@@ -105,5 +106,15 @@ public class Application {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setLocationRelativeTo(null);
         window.setVisible(true);
+    }
+
+    private static ImageIcon cargarIcono(String ruta) {
+        URL url = Application.class.getResource(ruta);
+        if (url != null) {
+            ImageIcon icon = new ImageIcon(url);
+            Image scaled = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            return new ImageIcon(scaled);
+        }
+        return null;
     }
 }
