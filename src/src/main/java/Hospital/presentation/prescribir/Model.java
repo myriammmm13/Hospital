@@ -28,7 +28,7 @@ public class Model extends AbstractModel {
         medicamentos = new ArrayList<>();
         prescripciones = new ArrayList<>();
         current = new Receta();
-
+        
     }
 
     @Override
