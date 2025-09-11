@@ -30,8 +30,8 @@ public class Controller {
         Service.instance().actualizarReceta(r);
     }
 
-    public void delete(Receta r) throws Exception {
-        Service.instance().eliminarReceta(r);
-        model.setCurrent(new Receta()); // limpiar la vista
-    }
+//    public void delete(Receta r) throws Exception {
+//        Service.instance().eliminarReceta(r);
+//        model.setCurrent(new Receta(doctorAuxiliar = new Medico(), model.getCurrent().getPaciente(), model.getCurrent().getPrescripciones())); // limpiar la vista
+//    }
 }

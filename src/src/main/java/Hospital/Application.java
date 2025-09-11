@@ -1,6 +1,7 @@
 package Hospital;
 
 import Hospital.data.Data;
+import Hospital.logic.Service;
 import Hospital.presentation.login.Controller;
 import Hospital.presentation.login.Model;
 import Hospital.presentation.login.View;
@@ -21,7 +22,7 @@ public class Application {
         } catch (Exception ex) {}
 
         // Mostrar ventana de login
-        Hospital.presentation.login.View loginView = new Hospital.presentation.login.View();
+        View loginView = new View();
         Model loginModel = new Model(data);
         Controller loginController = new Controller(loginView, loginModel, (userId, userType) -> {
             SwingUtilities.invokeLater(() -> {
@@ -59,8 +60,8 @@ public class Application {
         var pacienteModel = new Hospital.presentation.personas.Paciente.Model();
         var pacienteController = new Hospital.presentation.personas.Paciente.Controller(pacienteModel, pacienteView);
 
-        var dashboardView = new Hospital.presentation.dashboard.View();
         var dashboardModel = new Hospital.presentation.dashboard.Model();
+        var dashboardView = new Hospital.presentation.dashboard.View();
         var dashboardController = new Hospital.presentation.dashboard.Controller(dashboardModel, dashboardView);
 
         var historicoView = new Hospital.presentation.historico.View();

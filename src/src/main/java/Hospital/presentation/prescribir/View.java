@@ -12,7 +12,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.time.LocalDate;
 
 public class View implements PropertyChangeListener {
     private JPanel panel;
@@ -52,7 +51,7 @@ public class View implements PropertyChangeListener {
                 Receta r = new Receta(doctorAuxiliar = new Medico(), model.getCurrent().getPaciente(),
                         model.getCurrent().getPrescripciones());
                 try {
-                    controller.create(r, "aqui falta el id");
+                    controller.create(r /*aqui falta el id*/);
                     JOptionPane.showMessageDialog(panel, "Receta guardada correctamente.");
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(panel, "Error al guardar: " + ex.getMessage());
@@ -64,7 +63,7 @@ public class View implements PropertyChangeListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    controller.create(new Receta(), "id del doctor");
+                    controller.create(new Receta(doctorAuxiliar = new Medico(), model.getCurrent().getPaciente(), model.getCurrent().getPrescripciones()) /*id del doctor*/);
                     limpiarCampos();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(panel, "Error al limpiar: " + ex.getMessage());

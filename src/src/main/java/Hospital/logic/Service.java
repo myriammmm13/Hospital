@@ -5,10 +5,15 @@ import Hospital.logic.personas.Paciente;
 import Hospital.logic.personas.Trabajador;
 import Hospital.logic.personas.trabajadores.Medico;
 import Hospital.logic.personas.trabajadores.Farmaceutico;
+import Hospital.logic.recetas.Prescripcion;
 import Hospital.logic.recetas.Receta;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Service {
     private static Service Instance;
@@ -294,6 +299,7 @@ public class Service {
             eliminarDoctor(id, userId);
         }//se llama para también eliminarlo a la categoría en la que se creó
     }//revisar o cambiar, funciona pero no me convence
+
     //create recetas
     public void agregarReceta(Receta receta, String userId) throws Exception {
         for (Receta r : data.getRecetas()) {
@@ -333,6 +339,24 @@ public class Service {
         data.getRecetas().remove(borrado);
     }
 
+    //más de recetas por dashboard
+    public Map<String, Integer> cantidadPorMedicamentoYMes(String nombreMedicamento, LocalDate desde, LocalDate hasta) {
+        Map<String, Integer> resultado = new LinkedHashMap<>();
+
+        for (Receta r : data.getRecetas()) {
+            LocalDate fecha = r.getFechaConfeccion();
+            if (fecha != null && (fecha.isEqual(desde) || fecha.isAfter(desde)) && (fecha.isEqual(hasta) || fecha.isBefore(hasta))) {
+                String claveMes = fecha.getYear() + "-" + fecha.getMonthValue(); // Ej: "2025-8"
+                for (Prescripcion p : r.getPrescripciones()) {
+                    if (p.getNombre().equalsIgnoreCase(nombreMedicamento)) {
+                        resultado.put(claveMes, resultado.getOrDefault(claveMes, 0) + p.getCantidad());
+                    }
+                }
+            }
+        }
+
+        return resultado;
+    }
 
     public List<Paciente> findAllPacientes() {
         return data.getPacientes();

@@ -1,7 +1,6 @@
 package Hospital.presentation.historico;
 
-import Hospital.logic.Medicamento;
-import Hospital.logic.personas.Paciente;
+import Hospital.logic.personas.trabajadores.Medico;
 import Hospital.logic.recetas.Receta;
 import Hospital.presentation.AbstractModel;
 
@@ -15,7 +14,7 @@ public class Model extends AbstractModel {
     public static final String CURRENT = "current";
 
     public Model() {
-        current = new Receta();
+        //current = new Receta(doctorAuxiliar = new Medico(), model.getCurrent().getPaciente(), model.getCurrent().getPrescripciones());
     }
 
     @Override
