@@ -121,7 +121,6 @@ public class View implements PropertyChangeListener {
         codigofield.setText("");
         nombreField.setText("");
         descripcionField.setText("");
-        //buscarField.setText("");
     }
 
     public void setController(Controller controller) {

@@ -6,6 +6,7 @@ import Hospital.logic.recetas.Receta;
 import Hospital.presentation.AbstractModel;
 
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Model extends AbstractModel {
@@ -17,7 +18,8 @@ public class Model extends AbstractModel {
     public static final String CURRENT = "current";
 
     public Model() {
-        // Inicialización vacía, se puede poblar luego
+        recetas = new ArrayList<Receta>();
+        medicamentos = new  ArrayList<Medicamento>();
     }
 
     @Override
