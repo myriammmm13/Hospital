@@ -67,13 +67,13 @@ public class View extends JDialog implements PropertyChangeListener{
     private Map<String, Integer> columnaFiltroMap = new HashMap<>();
 
     private void inicializarComboBox() {
-        categoriaBox.addItem("Id");
+        categoriaBox.addItem("ID");
         categoriaBox.addItem("Nombre");
-        categoriaBox.addItem("Telefono");
+        categoriaBox.addItem("Teléfono");
 
-        columnaFiltroMap.put("Id", TableModel.ID);
+        columnaFiltroMap.put("ID", TableModel.ID);
         columnaFiltroMap.put("Nombre", TableModel.NOMBRE);
-        columnaFiltroMap.put("Telefono", TableModel.TELEFONO);
+        columnaFiltroMap.put("Teléfono", TableModel.TELEFONO);
     }
 
     private void filtrar() {
@@ -102,7 +102,9 @@ public class View extends JDialog implements PropertyChangeListener{
         this.model = model;
         model.addPropertyChangeListener(this);
 
-        propertyChange(new PropertyChangeEvent(model, Model.PACIENTES, null, null));
+        int[] cols = {TableModel.ID, TableModel.NOMBRE, TableModel.TELEFONO, TableModel.FEC_NAC};
+        personasBusquedaTable.setModel(new TableModel(cols, model.getPacientesList()) {
+        });
     }
 
     @Override
@@ -116,6 +118,7 @@ public class View extends JDialog implements PropertyChangeListener{
                 ordenamientoBusqueda = new TableRowSorter<>(tableModel);
                 personasBusquedaTable.setRowSorter(ordenamientoBusqueda);
                 break;
+
         }
         this.panel.revalidate();
     }

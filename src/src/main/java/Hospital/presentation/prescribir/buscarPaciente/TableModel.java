@@ -17,8 +17,8 @@ public class TableModel extends AbstractTableModel<Paciente> implements javax.sw
 
     @Override
     protected void initColNames() {
-        colNames = new String[5];
-        colNames[ID] = "Id";
+        colNames = new String[4];
+        colNames[ID] = "ID";
         colNames[NOMBRE] = "Nombre";
         colNames[TELEFONO] = "Telefono";
         colNames[FEC_NAC] = "Fec Nacimiento";

@@ -34,7 +34,6 @@ public class View extends JDialog implements PropertyChangeListener {
         setSize(400, 250);
 
         inicializarComboBox();
-
         categoriaBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -55,6 +54,7 @@ public class View extends JDialog implements PropertyChangeListener {
                 crearPrescripcionView.setVisible(true);
             }
         });
+
 
         cancelButton.addActionListener(new ActionListener() {
             @Override
@@ -89,7 +89,9 @@ public class View extends JDialog implements PropertyChangeListener {
         this.model = model;
         model.addPropertyChangeListener(this);
 
-        propertyChange(new PropertyChangeEvent(model, Model.MEDICAMENTOS, null, null));
+        int[] cols = {TableModel.CODIGO,TableModel.NOMBRE, TableModel.PRESENTACION};
+        medicamentoBusquedaTable.setModel(new TableModel(cols, model.getMedicamentosList()) {
+        });
     }
 
     private Map<String, Integer> columnaFiltroMap = new HashMap<>();
@@ -114,7 +116,6 @@ public class View extends JDialog implements PropertyChangeListener {
         } else {
             ordenamientoBusqueda.setRowFilter(RowFilter.regexFilter("(?i)" + texto, columna));
         }
-
         medicamentoBusquedaTable.repaint();
     }
 
@@ -126,10 +127,11 @@ public class View extends JDialog implements PropertyChangeListener {
                 TableModel tableModel = new TableModel(cols, model.getMedicamentosList());
                 medicamentoBusquedaTable.setModel(tableModel);
 
+
                 ordenamientoBusqueda = new TableRowSorter<>(tableModel);
                 medicamentoBusquedaTable.setRowSorter(ordenamientoBusqueda);
                 break;
         }
-        this.panel.repaint();
+        this.panel.revalidate();
     }
 }

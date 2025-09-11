@@ -1,17 +1,17 @@
 package Hospital.presentation.prescribir;
 
 import Hospital.logic.Medicamento;
-import Hospital.logic.Service;
 import Hospital.logic.recetas.Prescripcion;
 import Hospital.logic.recetas.Receta;
 import Hospital.logic.personas.Paciente;
 import Hospital.presentation.AbstractModel;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.beans.PropertyChangeListener;
 
 public class Model extends AbstractModel {
-    Receta current = new  Receta();
+    Receta current;
     List<Prescripcion> prescripciones;
     List<Medicamento> medicamentos;
     List<Paciente> pacientes;
@@ -21,14 +21,14 @@ public class Model extends AbstractModel {
     public static final String MEDICAMENTOS = "medicamentos";
     public static final String PACIENTES = "pacientes";
     public static final String PACIENTE = "paciente";
+    public static final String PRESCRIPCION = "prescripcion";
 
     public Model() {
-        Service service = Service.instance();
-        pacientes = service.listarPacientes();
-        medicamentos = service.listarMedicamentos();
+        pacientes = new ArrayList<>();
+        medicamentos = new ArrayList<>();
+        prescripciones = new ArrayList<>();
         current = new Receta();
-        firePropertyChange(PACIENTES, null, pacientes);
-        firePropertyChange(MEDICAMENTOS, null, medicamentos);
+
     }
 
     @Override
@@ -51,22 +51,31 @@ public class Model extends AbstractModel {
         return prescripciones;
     }
 
-    public List<Paciente> getPacientesList() {
-        return pacientes;
-    }
 
     public List<Medicamento> getMedicamentosList() {
         return medicamentos;
     }
 
+    public List<Paciente> getPacientes(){return pacientes;}
+
     public void setPrescripciones(List<Prescripcion> list) {
-        this.prescripciones = list;
-        firePropertyChange(PRESCRIPCIONES, null, list);
+        this.prescripciones = list != null ? list : new ArrayList<>();
+        firePropertyChange(PRESCRIPCIONES, null, this.prescripciones);
+    }
+
+    public void setPacientes(List<Paciente> list) {
+        this.pacientes = list != null ? list : new ArrayList<>();
+        firePropertyChange(PACIENTES, null, this.pacientes);
     }
 
     public void setPaciente(Paciente paciente) {
         this.current.setPaciente(paciente);
         firePropertyChange(PACIENTE, null, paciente);
+    }
+
+    public void setPrescripcion(Prescripcion prescripcion) {
+        this.current.agregarPrescripcion(prescripcion);
+        firePropertyChange(PRESCRIPCION, null, prescripcion);
     }
 
     public Paciente getPaciente() { return  current.getPaciente(); }
@@ -84,5 +93,14 @@ public class Model extends AbstractModel {
     public void actualizarPrescripcion(Prescripcion prescripcion, int row) {
         this.current.actualizarPrescripcion(prescripcion, row);
         setPrescripciones(current.getPrescripciones());
+    }
+
+    public List<Paciente> getPacientesList() {
+        return pacientes;
+    }
+
+    public void setMedicamentos(List<Medicamento> list) {
+        this.medicamentos = list != null ? list : new ArrayList<>();
+        firePropertyChange(MEDICAMENTOS, null, this.medicamentos);
     }
 }
