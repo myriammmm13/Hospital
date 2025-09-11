@@ -11,7 +11,7 @@ import java.util.List;
 import java.beans.PropertyChangeListener;
 
 public class Model extends AbstractModel {
-    Receta current;
+    Receta current = new  Receta();
     List<Prescripcion> prescripciones;
     List<Medicamento> medicamentos;
     List<Paciente> pacientes;

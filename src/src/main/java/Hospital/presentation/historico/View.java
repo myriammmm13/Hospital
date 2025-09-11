@@ -125,7 +125,7 @@ public class View implements PropertyChangeListener {
 
     private void limpiarCampos() {
         respuestaBusquedaPanel.clearSelection();
-        respuestaBusquedaPanel.revalidate();
-        table1.revalidate();
+        respuestaBusquedaPanel.repaint();
+        table1.repaint();
     }
 }

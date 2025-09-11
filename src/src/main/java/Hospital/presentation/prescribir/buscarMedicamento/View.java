@@ -126,11 +126,10 @@ public class View extends JDialog implements PropertyChangeListener {
                 TableModel tableModel = new TableModel(cols, model.getMedicamentosList());
                 medicamentoBusquedaTable.setModel(tableModel);
 
-
                 ordenamientoBusqueda = new TableRowSorter<>(tableModel);
                 medicamentoBusquedaTable.setRowSorter(ordenamientoBusqueda);
                 break;
         }
-        this.panel.revalidate();
+        this.panel.repaint();
     }
 }

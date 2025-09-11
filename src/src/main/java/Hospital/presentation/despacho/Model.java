@@ -15,9 +15,9 @@ public class Model extends AbstractModel {
         return recetas;
     }
 
-    public Model(List<Receta> recetas) {
+    public Model(List<Receta> receta) {
         recetas = new ArrayList<>();
-        this.recetas = recetas;
+        this.recetas = receta;
         firePropertyChange(RECETAS, null, recetas);
     }
 

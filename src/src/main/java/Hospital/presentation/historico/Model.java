@@ -6,6 +6,7 @@ import Hospital.logic.personas.Paciente;
 import Hospital.logic.recetas.Receta;
 import Hospital.presentation.AbstractModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Model extends AbstractModel {
@@ -23,6 +24,7 @@ public class Model extends AbstractModel {
     public Model() {
         Service service = Service.instance();
         this.recetas = service.listarRecetas();
+        this.recetasRecientes = new ArrayList<>();
         firePropertyChange(RECETAS, null, recetas);
     }
 

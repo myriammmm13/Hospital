@@ -205,6 +205,6 @@ public class View implements PropertyChangeListener {
     private void limpiarCampos() {
         busquedaField.setText("");
         recetaTable.clearSelection();
-        recetaTable.revalidate();
+        recetaTable.repaint();
     }
 }
