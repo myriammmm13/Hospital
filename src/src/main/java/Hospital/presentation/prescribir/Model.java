@@ -22,7 +22,7 @@ public class Model extends AbstractModel {
     public static final String PACIENTE = "paciente";
 
     public Model() {
-        current = new Receta();
+        //current = new Receta(doctorAuxiliar = new Medico(), model.getCurrent().getPaciente(), model.getCurrent().getPrescripciones());
     }
 
     @Override

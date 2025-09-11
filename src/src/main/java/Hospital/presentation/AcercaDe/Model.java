@@ -1,13 +1,9 @@
 package Hospital.presentation.AcercaDe;
 
 import Hospital.logic.recetas.Receta;
-import Hospital.logic.Medicamento;
-import Hospital.logic.personas.Paciente;
 import Hospital.presentation.AbstractModel;
 
-import java.util.List;
 import java.beans.PropertyChangeListener;
-import java.util.List;
 
 public class Model extends AbstractModel {
     Receta current;
@@ -15,7 +11,7 @@ public class Model extends AbstractModel {
     public static final String CURRENT = "current";
 
     public Model() {
-        current = new Receta();
+        //current = new Receta(doctorAuxiliar = new Medico(), model.getCurrent().getPaciente(), model.getCurrent().getPrescripciones());
     }
 
     @Override
