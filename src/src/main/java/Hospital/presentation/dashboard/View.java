@@ -1,7 +1,8 @@
 package Hospital.presentation.dashboard;
 
 import Hospital.logic.Medicamento;
-import Hospital.presentation.dashboard.TableModel;
+import com.github.lgooddatepicker.components.DatePicker;
+import com.github.lgooddatepicker.components.DatePickerSettings;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,7 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.List;
 
 public class View implements PropertyChangeListener {
     private JLabel Desde;
@@ -19,11 +19,33 @@ public class View implements PropertyChangeListener {
     private JButton aceptarButton;
     private JTable table1;
     private JPanel panelDatos;
+    private JPanel fechaParaHasta;
+    private JComboBox comboBox1;
+    private JComboBox comboBox2;
+    private DatePicker fechaPicker;
+    private DatePicker fechaPicker1;
 
     Controller controller;
     Model model;
 
     public View() {
+
+        DatePickerSettings settingsDesde = new DatePickerSettings();
+        settingsDesde.setFormatForDatesCommonEra("yyyy-MM-dd");
+        settingsDesde.setAllowKeyboardEditing(false);
+        fechaPicker = new DatePicker(settingsDesde);
+
+        fechaParaDesde.setLayout(new BorderLayout());
+        fechaParaDesde.add(fechaPicker, BorderLayout.CENTER);
+
+        DatePickerSettings settingsHasta = new DatePickerSettings();
+        settingsHasta.setFormatForDatesCommonEra("yyyy-MM-dd");
+        settingsHasta.setAllowKeyboardEditing(false);
+        fechaPicker1 = new DatePicker(settingsHasta);
+
+        fechaParaHasta.setLayout(new BorderLayout());
+        fechaParaHasta.add(fechaPicker1, BorderLayout.CENTER);
+
         aceptarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -37,13 +59,17 @@ public class View implements PropertyChangeListener {
                 String seleccionado = listaMedicamentos.getSelectedItem().toString();
                 Medicamento m = buscarMedicamentoPorNombre(seleccionado);
                 if (m != null) {
-                    TableModel modeloTabla = (TableModel) table1.getModel();
-                    modeloTabla.getRows().add(m); // ← agrega sin reemplazar
+                    if (table1.getModel() instanceof TableModel modeloTabla) {
+                        modeloTabla.getRows().add(m);
+                        table1.revalidate();
+                        table1.repaint();
+                    }
                     table1.revalidate();
                     table1.repaint();
                 }
             }
         });
+
     }
 
     public JPanel getPanel() {

@@ -14,8 +14,10 @@ public class Application {
 
     public static final Color BACKGROUND_ERROR = new Color(255, 102, 102);
 
+    public static Data data;
+
     public static void main(String[] args) {
-        Data data = new Data();
+        Application.data = new Data();
 
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
@@ -62,7 +64,7 @@ public class Application {
 
         var dashboardModel = new Hospital.presentation.dashboard.Model();
         var dashboardView = new Hospital.presentation.dashboard.View();
-        var dashboardController = new Hospital.presentation.dashboard.Controller(dashboardModel, dashboardView);
+        var dashboardController = new Hospital.presentation.dashboard.Controller(dashboardModel, dashboardView, Application.data);
 
         var historicoView = new Hospital.presentation.historico.View();
         var historicoModel = new Hospital.presentation.historico.Model();
