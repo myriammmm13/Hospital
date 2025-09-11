@@ -122,6 +122,11 @@ public class View implements PropertyChangeListener {
                             cambiado.setNombre(nuevoValor);
                             break;
                     }
+                    try {
+                        controller.update(cambiado);
+                    } catch (Exception ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             }
         });

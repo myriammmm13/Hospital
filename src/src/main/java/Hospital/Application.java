@@ -1,6 +1,7 @@
 package Hospital;
 
 import Hospital.data.Data;
+import Hospital.data.XmlPersister;
 import Hospital.logic.Service;
 import Hospital.presentation.login.Controller;
 import Hospital.presentation.login.Model;
@@ -17,7 +18,30 @@ public class Application {
     public static Data data;
 
     public static void main(String[] args) {
-        Application.data = new Data();
+        // Cargar datos desde XML
+        try {
+            Application.data = XmlPersister.instance().load();
+            System.out.println("Datos cargados desde data.xml");
+        } catch (Exception e) {
+            System.out.println("No se pudo cargar, se usará data nueva.");
+            Application.data = new Data();
+            Application.data.inicializarSiVacio();
+        }
+
+        // Guardar datos en XML
+        try {
+            XmlPersister.instance().store(Application.data);
+            System.out.println("Datos guardados en data.xml");
+        } catch (Exception e) {
+            System.out.println("Error al guardar:");
+            e.printStackTrace();
+        }
+
+
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (Exception ex) {}
+
 
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");

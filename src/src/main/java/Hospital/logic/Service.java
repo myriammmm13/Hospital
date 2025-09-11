@@ -1,6 +1,8 @@
 package Hospital.logic;
 
+import Hospital.Application;
 import Hospital.data.Data;
+import Hospital.data.XmlPersister;
 import Hospital.logic.personas.Paciente;
 import Hospital.logic.personas.Trabajador;
 import Hospital.logic.personas.trabajadores.Medico;
@@ -13,17 +15,16 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Service {
-    private static Service Instance;
-
-    public static Service instance() {
-        if (Instance == null) Instance = new Service();
-        return Instance;
-    }
-
+    private static Service theInstance;
     private Data data;
 
+    public static Service instance() {
+        if (theInstance == null) theInstance = new Service();
+        return theInstance;
+    }
+
     private Service() {
-        data = new Data();
+        data = Application.data;
     }
 
     //CRUD Medicamentos
@@ -34,7 +35,17 @@ public class Service {
                 throw new Exception("Ya existe un medicamento con ese ID");
             }
         }
+
         data.getMedicamentos().add(nuevo);
+
+        // Guardar en XML
+        try {
+            XmlPersister.instance().store(data);
+            System.out.println("Medicamento guardado en XML");
+        } catch (Exception e) {
+            System.out.println("Error al guardar en XML:");
+            e.printStackTrace();
+        }
     }
 
     //READ
@@ -44,13 +55,19 @@ public class Service {
 
     public List<Medicamento> obtenerMedicamento(String cod) throws Exception {
         List<Medicamento> medicamentosEncontrados = new ArrayList<>();
+        String codLower = cod.toLowerCase();
+
         for (Medicamento m : data.getMedicamentos()) {
-            if (m.getCodigo().contains(cod) || m.getNombre().contains(cod))
+            if (m.getCodigo().toLowerCase().contains(codLower) ||
+                    m.getNombre().toLowerCase().contains(codLower)) {
                 medicamentosEncontrados.add(m);
+            }
         }
+
         if (medicamentosEncontrados.isEmpty()) {
             throw new Exception("Medicamento no encontrado");
         }
+
         return medicamentosEncontrados;
     }
 
@@ -59,6 +76,16 @@ public class Service {
         for (int i = 0; i < data.getMedicamentos().size(); i++) {
             if (data.getMedicamentos().get(i).getCodigo().equals(actualizado.getCodigo())) {
                 data.getMedicamentos().set(i, actualizado);
+
+                // Guardar en XML
+                try {
+                    XmlPersister.instance().store(data);
+                    System.out.println("Medicamento actualizado y guardado en XML");
+                } catch (Exception e) {
+                    System.out.println("Error al guardar actualización en XML:");
+                    e.printStackTrace();
+                }
+
                 return;
             }
         }
@@ -68,12 +95,21 @@ public class Service {
     //DELETE
     public void eliminarMedicamento(String cod) throws Exception {
         boolean eliminado = data.getMedicamentos().removeIf(m -> m.getCodigo().equals(cod));
+
         if (!eliminado) throw new Exception("Medicamento no encontrado para eliminar");
+
+        // Guardar en XML
+        try {
+            XmlPersister.instance().store(data);
+            System.out.println("Medicamento eliminado y guardado en XML");
+        } catch (Exception e) {
+            System.out.println("Error al guardar eliminación en XML:");
+            e.printStackTrace();
+        }
     }
 
 
-    //Paciente
-    //Create
+    // Paciente CRUD con persistencia
     public void agregarPaciente(Paciente nuevo) throws Exception {
         for (Paciente m : data.getPacientes()) {
             if (m.getId().equals(nuevo.getId())) {
@@ -81,9 +117,17 @@ public class Service {
             }
         }
         data.getPacientes().add(nuevo);
+
+        // Guardar en XML
+        try {
+            XmlPersister.instance().store(data);
+            System.out.println("Paciente agregado y guardado en XML");
+        } catch (Exception e) {
+            System.out.println("Error al guardar paciente:");
+            e.printStackTrace();
+        }
     }
 
-    //Read
     public List<Paciente> listarPacientes() {
         return data.getPacientes();
     }
@@ -99,38 +143,54 @@ public class Service {
         }
         return pacientesEncontrados;
     }
+
     public Paciente obtenerPaciente(String id, String nom) throws Exception {
-        Paciente paciente = new Paciente();
         for (Paciente m : data.getPacientes()) {
             if (m.getId().equals(id) || m.getNombre().equals(nom))
-                paciente = m;
+                return m;
         }
-        return paciente;
+        throw new Exception("Paciente no encontrado");
     }
 
-    //Update
     public void actualizarPaciente(Paciente act) throws Exception {
         for (int i = 0; i < data.getPacientes().size(); i++) {
             if (data.getPacientes().get(i).getId().equals(act.getId())) {
                 data.getPacientes().set(i, act);
+
+                // Guardar en XML
+                try {
+                    XmlPersister.instance().store(data);
+                    System.out.println("Paciente actualizado y guardado en XML");
+                } catch (Exception e) {
+                    System.out.println("Error al guardar actualización:");
+                    e.printStackTrace();
+                }
+
                 return;
             }
         }
         throw new Exception("Paciente no encontrado para actualizar");
     }
 
-    //Delete
     public void eliminarPaciente(Paciente r) throws Exception {
         boolean eliminado = data.getPacientes().removeIf(m -> m.getId().equals(r.getId()));
-        if (!eliminado){
+        if (!eliminado) {
             eliminado = data.getPacientes().removeIf(m -> m.getNombre().equals(r.getNombre()));
-            if(!eliminado)
+            if (!eliminado)
                 throw new Exception("Paciente no encontrado para eliminar");
+        }
+
+        // Guardar en XML
+        try {
+            XmlPersister.instance().store(data);
+            System.out.println("Paciente eliminado y guardado en XML");
+        } catch (Exception e) {
+            System.out.println("Error al guardar eliminación:");
+            e.printStackTrace();
         }
     }
 
-    //Doctor
-    //Create
+    // CREATE
     public void agregarDoctor(Medico nuevo) throws Exception {
         for (Medico m : data.getDoctores()) {
             if (m.getId().equals(nuevo.getId())) {
@@ -138,10 +198,19 @@ public class Service {
             }
         }
         data.getDoctores().add(nuevo);
-        data.getTrabajadores().add(nuevo);
+        data.getTrabajadores().add(nuevo); // si también lo registrás como trabajador
+
+        // Guardar en XML
+        try {
+            XmlPersister.instance().store(data);
+            System.out.println("Doctor agregado y guardado en XML");
+        } catch (Exception e) {
+            System.out.println("Error al guardar doctor:");
+            e.printStackTrace();
+        }
     }
 
-    //Read
+    // READ
     public List<Medico> listarDoctores() {
         return data.getDoctores();
     }
@@ -149,8 +218,9 @@ public class Service {
     public List<Medico> obtenerDoctores(String id, String nom) throws Exception {
         List<Medico> doctoresEncontrados = new ArrayList<>();
         for (Medico m : data.getDoctores()) {
-            if (m.getId().contains(id) || m.getNombre().contains(id))
+            if (m.getId().contains(id) || m.getNombre().contains(id)) {
                 doctoresEncontrados.add(m);
+            }
         }
         if (doctoresEncontrados.isEmpty()) {
             throw new Exception("Doctor no encontrado");
@@ -159,37 +229,56 @@ public class Service {
     }
 
     public Medico obtenerDoctor(String id, String nom) throws Exception {
-        Medico doctor = new Medico();
         for (Medico m : data.getDoctores()) {
-            if (m.getId().equals(id) || m.getNombre().equals(nom))
-                doctor = m;
+            if (m.getId().equals(id) || m.getNombre().equals(nom)) {
+                return m;
+            }
         }
-        return doctor;
+        throw new Exception("Doctor no encontrado");
     }
 
-
-    //Update
-    public void actualizarDoctor(Medico act, String userId) throws Exception {
-        for (int i = 0; i < data.getPacientes().size(); i++) {
+    // UPDATE
+    public void actualizarDoctor(Medico act) throws Exception {
+        for (int i = 0; i < data.getDoctores().size(); i++) {
             if (data.getDoctores().get(i).getId().equals(act.getId())) {
                 data.getDoctores().set(i, act);
+
+                // Guardar en XML
+                try {
+                    XmlPersister.instance().store(data);
+                    System.out.println("Doctor actualizado y guardado en XML");
+                } catch (Exception e) {
+                    System.out.println("Error al guardar actualización:");
+                    e.printStackTrace();
+                }
+
                 return;
             }
         }
         throw new Exception("Doctor no encontrado para actualizar");
     }
 
-    //Delete
+    // DELETE
     public void eliminarDoctor(String id, String nom) throws Exception {
         boolean eliminado = data.getDoctores().removeIf(m -> m.getId().equals(id));
-        if(!eliminado){
+        if (!eliminado) {
             eliminado = data.getDoctores().removeIf(m -> m.getNombre().equals(nom));
         }
-        if (!eliminado) throw new Exception("Doctor no encontrado para eliminar");
+        if (!eliminado) {
+            throw new Exception("Doctor no encontrado para eliminar");
+        }
+
+        // Guardar en XML
+        try {
+            XmlPersister.instance().store(data);
+            System.out.println("Doctor eliminado y guardado en XML");
+        } catch (Exception e) {
+            System.out.println("Error al guardar eliminación:");
+            e.printStackTrace();
+        }
     }
 
-    //Farma
-    //Create
+    // CREATE
     public void agregarFarmaceutico(Farmaceutico nuevo) throws Exception {
         for (Farmaceutico m : data.getFamaceuticos()) {
             if (m.getId().equals(nuevo.getId())) {
@@ -197,10 +286,19 @@ public class Service {
             }
         }
         data.getFamaceuticos().add(nuevo);
-        data.getTrabajadores().add(nuevo);
+        data.getTrabajadores().add(nuevo); // si también lo registrás como trabajador
+
+        // Guardar en XML
+        try {
+            XmlPersister.instance().store(data);
+            System.out.println("Farmacéutico agregado y guardado en XML");
+        } catch (Exception e) {
+            System.out.println("Error al guardar farmacéutico:");
+            e.printStackTrace();
+        }
     }
 
-    //Read
+    // READ
     public List<Farmaceutico> listarFarmaceuticos() {
         return data.getFamaceuticos();
     }
@@ -208,134 +306,221 @@ public class Service {
     public List<Farmaceutico> obtenerFarmaceuticos(String id, String nom) throws Exception {
         List<Farmaceutico> farmaceuticosEncontrados = new ArrayList<>();
         for (Farmaceutico m : data.getFamaceuticos()) {
-            if (m.getId().equals(id) || m.getNombre().equals(nom))
+            if (m.getId().contains(id) || m.getNombre().contains(id)) {
                 farmaceuticosEncontrados.add(m);
+            }
         }
         if (farmaceuticosEncontrados.isEmpty()) {
-            throw new Exception("Farmacuetico no encontrado");
+            throw new Exception("Farmacéutico no encontrado");
         }
         return farmaceuticosEncontrados;
     }
 
     public Farmaceutico obtenerFarmaceutico(String id, String nom) throws Exception {
-        Farmaceutico farma = new Farmaceutico();
         for (Farmaceutico m : data.getFamaceuticos()) {
-            if (m.getId().equals(id) || m.getNombre().equals(nom))
-                farma = m;
+            if (m.getId().equals(id) || m.getNombre().equals(nom)) {
+                return m;
+            }
         }
-        return farma;
+        throw new Exception("Farmacéutico no encontrado");
     }
 
-    //Update
-    public void actualizarFarmaceutico(Farmaceutico act, String userId) throws Exception {
+    // UPDATE
+    public void actualizarFarmaceutico(Farmaceutico act) throws Exception {
         for (int i = 0; i < data.getFamaceuticos().size(); i++) {
             if (data.getFamaceuticos().get(i).getId().equals(act.getId())) {
                 data.getFamaceuticos().set(i, act);
+
+                // Guardar en XML
+                try {
+                    XmlPersister.instance().store(data);
+                    System.out.println("Farmacéutico actualizado y guardado en XML");
+                } catch (Exception e) {
+                    System.out.println("Error al guardar actualización:");
+                    e.printStackTrace();
+                }
+
                 return;
             }
         }
-        throw new Exception("Farmaceutico no encontrado para actualizar");
+        throw new Exception("Farmacéutico no encontrado para actualizar");
     }
 
-    //Delete
+    // DELETE
     public void eliminarFarmaceutico(String id, String nom) throws Exception {
         boolean eliminado = data.getFamaceuticos().removeIf(m -> m.getId().equals(id));
-        if(!eliminado){
-            eliminado=data.getFamaceuticos().removeIf(m -> m.getNombre().equals(nom));
-            if (!eliminado) throw new Exception("Farmaceutico no encontrado para eliminar");
+        if (!eliminado) {
+            eliminado = data.getFamaceuticos().removeIf(m -> m.getNombre().equals(nom));
+        }
+        if (!eliminado) {
+            throw new Exception("Farmacéutico no encontrado para eliminar");
+        }
+
+        // Guardar en XML
+        try {
+            XmlPersister.instance().store(data);
+            System.out.println("Farmacéutico eliminado y guardado en XML");
+        } catch (Exception e) {
+            System.out.println("Error al guardar eliminación:");
+            e.printStackTrace();
         }
     }
 
     //Trabajador / Admin
-    //Create
+    // CREATE
     public void agregarTrabajador(Trabajador nuevo, String userId) throws Exception {
         for (Trabajador m : data.getTrabajadores()) {
             if (m.getId().equals(nuevo.getId())) {
-                throw new Exception("Ya existe un Trabajador con ese ID");
+                throw new Exception("Ya existe un trabajador con ese ID");
             }
         }
+
         data.getTrabajadores().add(nuevo);
-        if (nuevo instanceof Medico)
-            data.getDoctores().add((Medico) nuevo);
-        else if(nuevo instanceof Farmaceutico)
-            data.getFamaceuticos().add((Farmaceutico) nuevo);
+
+        if (nuevo instanceof Medico medico) {
+            data.getDoctores().add(medico);
+        } else if (nuevo instanceof Farmaceutico farma) {
+            data.getFamaceuticos().add(farma);
+        }
+
+        // Guardar en XML
+        try {
+            XmlPersister.instance().store(data);
+            System.out.println("Trabajador agregado y guardado en XML");
+        } catch (Exception e) {
+            System.out.println("Error al guardar trabajador:");
+            e.printStackTrace();
+        }
     }
 
-    //Read
+    // READ
     public List<Trabajador> listarTrabajadores() {
         return data.getTrabajadores();
     }
 
     public List<Trabajador> obtenerTrabajador(String id) throws Exception {
-        List<Trabajador> trabajadoresEncontrados = new ArrayList<>();
+        List<Trabajador> encontrados = new ArrayList<>();
         for (Trabajador m : data.getTrabajadores()) {
-            if (m.getId().contains(id) || m.getNombre().contains(id))
-                trabajadoresEncontrados.add(m);
+            if (m.getId().contains(id) || m.getNombre().contains(id)) {
+                encontrados.add(m);
+            }
         }
-        if (trabajadoresEncontrados.isEmpty()) {
+        if (encontrados.isEmpty()) {
             throw new Exception("Trabajador no encontrado");
         }
-        return trabajadoresEncontrados;
+        return encontrados;
     }
 
-    //Update
+    // UPDATE
     public void actualizarTrabajador(Trabajador act, String userId) throws Exception {
         for (int i = 0; i < data.getTrabajadores().size(); i++) {
             if (data.getTrabajadores().get(i).getId().equals(act.getId())) {
                 data.getTrabajadores().set(i, act);
+
+                // Guardar en XML
+                try {
+                    XmlPersister.instance().store(data);
+                    System.out.println("Trabajador actualizado y guardado en XML");
+                } catch (Exception e) {
+                    System.out.println("Error al guardar actualización:");
+                    e.printStackTrace();
+                }
+
                 return;
             }
         }
         throw new Exception("Trabajador no encontrado para actualizar");
     }
 
-    //Delete
+    // DELETE
     public void eliminarTrabajador(String id, String userId) throws Exception {
         boolean eliminado = data.getTrabajadores().removeIf(m -> m.getId().equals(id));
-        if (!eliminado) throw new Exception("Trabajador no encontrado para eliminar");
-        else {
-            eliminarFarmaceutico(id, userId);
-            eliminarDoctor(id, userId);
-        }//se llama para también eliminarlo a la categoría en la que se creó
-    }//revisar o cambiar, funciona pero no me convence
 
-    //create recetas
-    public void agregarReceta(Receta receta ) throws Exception {
+        if (!eliminado) {
+            throw new Exception("Trabajador no encontrado para eliminar");
+        }
+
+        // También eliminar de subcategorías
+        data.getDoctores().removeIf(m -> m.getId().equals(id));
+        data.getFamaceuticos().removeIf(m -> m.getId().equals(id));
+
+        // Guardar en XML
+        try {
+            XmlPersister.instance().store(data);
+            System.out.println("Trabajador eliminado y guardado en XML");
+        } catch (Exception e) {
+            System.out.println("Error al guardar eliminación:");
+            e.printStackTrace();
+        }
+    }
+
+    // CREATE
+    public void agregarReceta(Receta receta) throws Exception {
         for (Receta r : data.getRecetas()) {
             if (r.equals(receta)) {
                 throw new Exception("Ya se ha registrado esta receta");
             }
         }
         data.getRecetas().add(receta);
+
+        // Guardar en XML
+        try {
+            XmlPersister.instance().store(data);
+            System.out.println("Receta agregada y guardada en XML");
+        } catch (Exception e) {
+            System.out.println("Error al guardar receta:");
+            e.printStackTrace();
+        }
     }
 
-    //read recetas
+    // READ
     public List<Receta> listarRecetas() {
         return data.getRecetas();
     }
 
     public Receta obtenerReceta(Receta r) throws Exception {
         for (Receta re : data.getRecetas()) {
-            if (re.getPaciente().equals(r.getPaciente()) && re.getDoctor().equals(r.getDoctor()) /*&&
-                    re.getFechaConfeccion().equals(r.getFechaConfeccion())*/){
+            boolean mismoPaciente = re.getPaciente().equals(r.getPaciente());
+            boolean mismoDoctor = re.getDoctor().equals(r.getDoctor());
+            boolean mismaFecha = re.getFechaConfeccion() != null && re.getFechaConfeccion().equals(r.getFechaConfeccion());
+
+            if (mismoPaciente && mismoDoctor && mismaFecha) {
                 return re;
             }
         }
         throw new Exception("Receta no encontrada");
     }
 
-    //update recetas
+    // UPDATE
     public void actualizarReceta(Receta r) throws Exception {
         Receta original = obtenerReceta(r);
         original.setPrescripciones(r.getPrescripciones());
-        //original.setFechaRetiro(r.getFechaRetiro());
         original.setEstado(r.getEstado());
+        // original.setFechaRetiro(r.getFechaRetiro()); // si querés incluirlo
+
+        // Guardar en XML
+        try {
+            XmlPersister.instance().store(data);
+            System.out.println("Receta actualizada y guardada en XML");
+        } catch (Exception e) {
+            System.out.println("Error al guardar actualización:");
+            e.printStackTrace();
+        }
     }
 
-    //delete recetas
+    // DELETE
     public void eliminarReceta(Receta r) throws Exception {
         Receta borrado = obtenerReceta(r);
         data.getRecetas().remove(borrado);
+
+        // Guardar en XML
+        try {
+            XmlPersister.instance().store(data);
+            System.out.println("Receta eliminada y guardada en XML");
+        } catch (Exception e) {
+            System.out.println("Error al guardar eliminación:");
+            e.printStackTrace();
+        }
     }
 
     //más de recetas por dashboard

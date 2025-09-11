@@ -134,6 +134,7 @@ public class View implements PropertyChangeListener {
                         throw new RuntimeException(ex);
                     }
                 }
+
             }
         });
     }
