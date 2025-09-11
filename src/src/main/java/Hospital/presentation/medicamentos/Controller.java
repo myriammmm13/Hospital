@@ -1,5 +1,6 @@
 package Hospital.presentation.medicamentos;
 
+import Hospital.data.Data;
 import Hospital.logic.Medicamento;
 import Hospital.logic.Service;
 
@@ -18,9 +19,12 @@ public class Controller {
     }
 
     public void create(Medicamento m, String userId) throws Exception {
-        model.setCurrent(m);
         Service.instance().agregarMedicamento(m, userId);
+        List<Medicamento> todos = Service.instance().listarMedicamentos();
+        model.setList(todos);
+        model.setCurrent(m);
     }
+
 
     public void read(String codigo) throws Exception {
         List<Medicamento> encontrados = Service.instance().obtenerMedicamento(codigo);
@@ -28,18 +32,17 @@ public class Controller {
             throw new Exception("No se encontró ningún medicamento");
         }
         model.setCurrent(encontrados.get(0));
+        model.setList(encontrados);
     }
 
-    public void update(Medicamento m, String userId) throws Exception {
+    public void update(Medicamento m) throws Exception {
         model.setCurrent(m);
-        Service.instance().actualizarMedicamento(m, userId);
+        Service.instance().actualizarMedicamento(m);
     }
 
     public void delete(String codigo) throws Exception {
-        Medicamento m = new Medicamento();
-        m.setCodigo(codigo);
         Service.instance().eliminarMedicamento(codigo);
-        model.setCurrent(new Medicamento()); // limpiar la vista
+        model.setCurrent(new Medicamento());
     }
 
 }

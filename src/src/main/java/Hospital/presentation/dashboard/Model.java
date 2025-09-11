@@ -47,14 +47,14 @@ public class Model extends AbstractModel {
     }
 
     public List<Medicamento> getMedicamentos() {
-        return medicamentos;
+        if (this.medicamentos == null) {
+            return new ArrayList<>();
+        }
+        return this.medicamentos;
     }
 
     public void setMedicamentos(List<Medicamento> medicamentos) {
         this.medicamentos = medicamentos;
         firePropertyChange(LIST, null, medicamentos);
     }
-
-
-
 }

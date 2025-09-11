@@ -10,11 +10,6 @@ public class Trabajador extends Persona {
         clave=new Clave(id);
     }
 
-    //agregué este constructor para pasar la clave de una por parámetro en la data (brenda)
-    public Trabajador(String nombre, String id, String clave) {
-        super(nombre, id);
-        this.clave = new Clave(clave);
-    }
 
     public Trabajador(){
         super();

@@ -4,9 +4,7 @@ import Hospital.presentation.AbstractTableModel;
 import java.util.List;
 
 public class TableModel extends AbstractTableModel<Paciente> implements javax.swing.table.TableModel {
-    public TableModel(int[] cols, List<Paciente> rows) {
-        super(cols, rows);
-    }
+    public TableModel(int[] cols, List<Paciente> rows) {super(cols, rows);}
 
     public static final int ID = 0;
     public static final int NOMBRE = 1;
@@ -15,7 +13,7 @@ public class TableModel extends AbstractTableModel<Paciente> implements javax.sw
 
     @Override
     protected void initColNames() {
-        colNames = new String[5];
+        colNames = new String[4];
         colNames[ID] = "Id";
         colNames[NOMBRE] = "Nombre";
         colNames[NUMERO] = "Número";
@@ -37,5 +35,4 @@ public class TableModel extends AbstractTableModel<Paciente> implements javax.sw
                 return "";
         }
     }
-
 }

@@ -58,7 +58,7 @@ public class Service {
     }
 
     //UPDATE
-    public void actualizarMedicamento(Medicamento actualizado, String userId) throws Exception {
+    public void actualizarMedicamento(Medicamento actualizado) throws Exception {
         for (int i = 0; i < data.getMedicamentos().size(); i++) {
             if (data.getMedicamentos().get(i).getCodigo().equals(actualizado.getCodigo())) {
                 data.getMedicamentos().set(i, actualizado);
@@ -141,6 +141,7 @@ public class Service {
             }
         }
         data.getDoctores().add(nuevo);
+        data.getTrabajadores().add(nuevo);
     }
 
     //Read
@@ -199,6 +200,7 @@ public class Service {
             }
         }
         data.getFamaceuticos().add(nuevo);
+        data.getTrabajadores().add(nuevo);
     }
 
     //Read
@@ -301,7 +303,7 @@ public class Service {
     }//revisar o cambiar, funciona pero no me convence
 
     //create recetas
-    public void agregarReceta(Receta receta, String userId) throws Exception {
+    public void agregarReceta(Receta receta ) throws Exception {
         for (Receta r : data.getRecetas()) {
             if (r.equals(receta)) {
                 throw new Exception("Ya se ha registrado esta receta");

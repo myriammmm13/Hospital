@@ -60,12 +60,10 @@ public class View implements PropertyChangeListener {
                     Paciente n = take();
                     try {
                         controller.create(n);
-
                         JOptionPane.showMessageDialog(panel, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                     }
-
                 }
             }
         });
@@ -195,7 +193,6 @@ public class View implements PropertyChangeListener {
             IDText.setBackground(null);
             IDText.setToolTipText(null);
         }
-
         if (nomText.getText().isEmpty()) {
             valid = false;
             nomText.setBackground(Application.BACKGROUND_ERROR);
