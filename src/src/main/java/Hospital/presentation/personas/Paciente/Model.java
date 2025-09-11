@@ -17,7 +17,6 @@ public class Model extends AbstractModel {
     public Model() {
         current = new Paciente();
         list = new ArrayList<Paciente>();
-
     }
 
     @Override
