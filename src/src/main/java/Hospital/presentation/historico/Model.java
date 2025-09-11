@@ -18,6 +18,8 @@ public class Model extends AbstractModel {
         return recetas;
     }
 
+    public List<Receta> getRecetasRecientes(){ return recetasRecientes; }
+
     public Model(List<Receta> recetas) {
         this.recetas = recetas;
     }
