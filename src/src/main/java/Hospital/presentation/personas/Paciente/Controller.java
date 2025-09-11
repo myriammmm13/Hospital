@@ -19,14 +19,14 @@ public class Controller {
         model.setCurrent(r);
         Service.instance().agregarPaciente(r);
         model.setCurrent(new Paciente());
-        model.setList(Service.instance().findAllPacientes());
+        //model.setList(Service.instance().findAllPacientes());
     }
 
     public void read(String id, String nom) throws Exception {
         Paciente e = new Paciente();
         e.setId(id);
         try {
-            model.setCurrent(Service.instance().obtenerPaciente(id, nom));
+            model.setCurrent((Paciente) Service.instance().obtenerPaciente(id));
         } catch (Exception ex) {
             Paciente b = new Paciente();
             b.setId(id);
@@ -40,8 +40,8 @@ public class Controller {
         Service.instance().actualizarPaciente(r);//el ID es el del que hizo login
     }
 
-    public void delete(Paciente r) throws Exception {
-        Service.instance().eliminarPaciente(r);//segundo id de login
+    public void delete(String id) throws Exception {
+        Service.instance().eliminarPaciente(id);//segundo id de login
         model.setCurrent(new Paciente()); // limpiar la vista
     }
     public void clear() {

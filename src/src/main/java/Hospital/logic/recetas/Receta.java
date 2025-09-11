@@ -2,7 +2,6 @@ package Hospital.logic.recetas;
 
 import Hospital.logic.personas.Paciente;
 import Hospital.logic.personas.trabajadores.Medico;
-import Hospital.logic.Fecha;
 
 import java.util.ArrayList;
 import java.util.List;

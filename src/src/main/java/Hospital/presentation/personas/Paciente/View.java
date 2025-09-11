@@ -2,12 +2,18 @@ package Hospital.presentation.personas.Paciente;
 
 import Hospital.Application;
 import Hospital.logic.personas.Paciente;
+import com.github.lgooddatepicker.components.DatePicker;
+import com.github.lgooddatepicker.components.DatePickerSettings;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.time.LocalDate;
 
 public class View implements PropertyChangeListener {
     private JPanel panel;
@@ -29,15 +35,24 @@ public class View implements PropertyChangeListener {
     private JTextField numTelText;
     private JLabel idBusqLabel;
     private JTextField idBusqText;
-    private JTextField cambiarPorBiblio;
+    private DatePicker fechaPicker;
     private JLabel fechaLabel;
     private JScrollPane scrollTable;
     private JTable pacientesTable;
+    private JPanel fechaPanel;
 
     Model model;
     Controller controller;
 
     public View() {
+
+        DatePickerSettings settings = new DatePickerSettings();
+        settings.setFormatForDatesCommonEra("yyyy-MM-dd");
+        fechaPicker = new DatePicker(settings);
+
+        fechaPanel.setLayout(new BorderLayout());
+        fechaPanel.add(fechaPicker, BorderLayout.CENTER);
+
         GuardarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -67,7 +82,7 @@ public class View implements PropertyChangeListener {
                 if (validateDelete()) {
                     Paciente n = take();
                     try {
-                        controller.delete(n);
+                        controller.delete(String.valueOf(n));
                         JOptionPane.showMessageDialog(panel, "ELIMINACIÓN REALIZADA", "", JOptionPane.INFORMATION_MESSAGE);
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -89,6 +104,27 @@ public class View implements PropertyChangeListener {
                 }
             }
         });
+        pacientesTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2 && pacientesTable.getSelectedRow() != -1) {
+                    int row = pacientesTable.getSelectedRow();
+                    int column = pacientesTable.getSelectedColumn();
+
+                    Object value = pacientesTable.getValueAt(row, column);
+                    String nuevoValor = JOptionPane.showInputDialog(
+                            null,
+                            "Modificar valor:",
+                            value
+                    );
+
+                    if (nuevoValor != null) {
+                        pacientesTable.setValueAt(nuevoValor, row, column);
+                    }
+                }
+            }
+        });
+
     }
 
     public JPanel getPanel() { return panel; }
@@ -111,7 +147,12 @@ public class View implements PropertyChangeListener {
                 IDText.setText(model.getCurrent().getId());
                 nomText.setText(model.getCurrent().getNombre());
                 numTelText.setText(model.getCurrent().getTelNum());
-                cambiarPorBiblio.setText(model.getCurrent().getNombre());//se debe hacer el cambio por la biblioteca de fecha
+                String fechaTexto = model.getCurrent().getFechaNacimiento();
+                if (fechaTexto != null && !fechaTexto.isEmpty()) {
+                    fechaPicker.setDate(LocalDate.parse(fechaTexto));
+                } else {
+                    fechaPicker.clear();
+                }
                 break;
         }
         this.panel.revalidate();
@@ -121,8 +162,10 @@ public class View implements PropertyChangeListener {
         Paciente e = new Paciente();
         e.setId(IDText.getText());
         e.setNombre(nomText.getText());
-        e.setFechaNacimiento(cambiarPorBiblio.getText());//cambiar por la biblioteca
         e.setTelNum(numTelText.getText());
+        if (fechaPicker.getDate() != null) {
+            e.setFechaNacimiento(fechaPicker.getDate().toString());
+        }
         return e;
     }
     public void clearFields() {
@@ -135,6 +178,12 @@ public class View implements PropertyChangeListener {
         nomText.setBackground(null);
         IDText.setToolTipText(null);
         nomText.setToolTipText(null);
+        String fechaTexto = model.getCurrent().getFechaNacimiento();
+        if (fechaTexto != null && !fechaTexto.isEmpty()) {
+            fechaPicker.setDate(LocalDate.parse(fechaTexto));
+        } else {
+            fechaPicker.clear();
+        }
     }
     public void fillFields(Paciente e) {
         IDText.setText(e.getId());
@@ -170,7 +219,14 @@ public class View implements PropertyChangeListener {
             numTelText.setBackground(null);
             numTelText.setToolTipText(null);
         }
-      //hacer el de fecha después :))))
+        if (fechaPicker.getDate() == null) {
+            valid = false;
+            fechaPicker.getComponentDateTextField().setBackground(Application.BACKGROUND_ERROR);
+            fechaPicker.getComponentDateTextField().setToolTipText("Fecha de nacimiento requerida");
+        } else {
+            fechaPicker.getComponentDateTextField().setBackground(null);
+            fechaPicker.getComponentDateTextField().setToolTipText(null);
+        }
         return valid;
     }
 

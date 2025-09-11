@@ -1,6 +1,7 @@
 package Hospital.presentation.personas.Medico;
 
 import Hospital.Application;
+import Hospital.logic.Medicamento;
 import Hospital.logic.personas.trabajadores.Medico;
 
 import javax.swing.*;
@@ -59,7 +60,7 @@ public class View implements PropertyChangeListener {
         limpiarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controller.clear();
+                clearFields();
             }
         });
         borrarButton.addActionListener(new ActionListener() {
@@ -68,7 +69,7 @@ public class View implements PropertyChangeListener {
                 if (validateDelete()) {
                     Medico n = take();
                     try {
-                        controller.delete(n);
+                        controller.delete(String.valueOf(n));
                         JOptionPane.showMessageDialog(panel, "ELIMINACIÓN REALIZADA", "", JOptionPane.INFORMATION_MESSAGE);
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -82,7 +83,7 @@ public class View implements PropertyChangeListener {
             public void actionPerformed(ActionEvent e) {
                 if (validateSearch()) {
                     try {
-                        controller.read(idBusqText.getText(), NomText.getText());
+                        controller.read(idBusqText.getText());
                     } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
