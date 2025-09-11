@@ -96,7 +96,7 @@ public class View implements PropertyChangeListener {
         reporteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               //hay que hacerle la acción xd
+                //hay que hacerle la acción xd
             }
         });
 

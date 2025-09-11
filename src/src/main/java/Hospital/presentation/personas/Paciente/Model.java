@@ -13,7 +13,7 @@ public class Model extends AbstractModel {
 
     public static final String LIST = "list";
     public static final String CURRENT = "current";
-    
+
     public Model() {
         current = new Paciente();
         list = new ArrayList<Paciente>();
