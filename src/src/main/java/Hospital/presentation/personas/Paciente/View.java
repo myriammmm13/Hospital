@@ -128,10 +128,14 @@ public class View implements PropertyChangeListener {
                         case 3://fecha
                             cambiado.setFechaNacimiento(nuevoValor);
                     }
+                    try {
+                        controller.update(cambiado);
+                    } catch (Exception ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             }
         });
-
     }
 
     public JPanel getPanel() { return panel; }

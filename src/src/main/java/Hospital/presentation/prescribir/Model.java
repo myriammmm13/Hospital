@@ -6,6 +6,7 @@ import Hospital.logic.recetas.Receta;
 import Hospital.logic.personas.Paciente;
 import Hospital.presentation.AbstractModel;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.beans.PropertyChangeListener;
 
@@ -22,6 +23,12 @@ public class Model extends AbstractModel {
     public static final String PACIENTE = "paciente";
 
     public Model() {
+        pacientes = new ArrayList<>();
+        medicamentos = new ArrayList<>();
+        prescripciones = new ArrayList<>();
+
+        current = new Receta();
+
         //current = new Receta(doctorAuxiliar = new Medico(), model.getCurrent().getPaciente(), model.getCurrent().getPrescripciones());
     }
 
@@ -45,9 +52,6 @@ public class Model extends AbstractModel {
         return prescripciones;
     }
 
-    public List<Paciente> getPacientesList() {
-        return pacientes;
-    }
 
     public List<Medicamento> getMedicamentosList() {
         return medicamentos;
@@ -56,6 +60,11 @@ public class Model extends AbstractModel {
     public void setPrescripciones(List<Prescripcion> list) {
         this.prescripciones = list;
         firePropertyChange(PRESCRIPCIONES, null, list);
+    }
+
+    public void setPacientes(List<Paciente> list) {
+        this.pacientes = list != null ? list : new ArrayList<>();
+        firePropertyChange(PACIENTES, null, this.pacientes);
     }
 
     public void setPaciente(Paciente paciente) {
@@ -79,4 +88,9 @@ public class Model extends AbstractModel {
         this.current.actualizarPrescripcion(prescripcion, row);
         setPrescripciones(current.getPrescripciones());
     }
+
+    public List<Paciente> getPacientesList() {
+        return pacientes;
+    }
+
 }

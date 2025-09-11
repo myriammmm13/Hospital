@@ -8,13 +8,13 @@ public abstract class AbstractTableModel<E> extends javax.swing.table.AbstractTa
     protected int[] cols;
     protected String[] colNames;
 
+    protected AbstractTableModel() {
+    }
+
     public AbstractTableModel(int[] cols, List<E> rows){
         this.cols=cols;
         this.rows=rows;
         initColNames();
-    }
-
-    protected AbstractTableModel() {
     }
 
     public int getColumnCount() {
@@ -41,8 +41,7 @@ public abstract class AbstractTableModel<E> extends javax.swing.table.AbstractTa
     }
     protected abstract void initColNames();
 
-
     public List<E> getRows() {
-        return rows;
+        return  rows;
     }
 }
