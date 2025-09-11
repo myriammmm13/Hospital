@@ -1,17 +1,19 @@
 package Hospital.presentation.dashboard;
 
-import java.util.List;
+import Hospital.logic.Service;
+import Hospital.presentation.dashboard.View;
 
 public class Controller {
-    Model model;
-    View view;
+    private Model model;
+    private View view;
 
     public Controller(Model model, View view) {
-        this.model = model;
+        this.model = new Model();
         this.view = view;
 
         view.setController(this);
         view.setModel(model);
     }
+
 
 }

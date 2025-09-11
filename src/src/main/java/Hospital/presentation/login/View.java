@@ -1,5 +1,8 @@
 package Hospital.presentation.login;
 
+import Hospital.presentation.dashboard.Controller;
+import Hospital.presentation.dashboard.Model;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -122,5 +125,11 @@ public class View extends JFrame {
 
     public void showMessage(String msg) {
         JOptionPane.showMessageDialog(this, msg);
+    }
+
+    public void setController(Controller controller) {
+    }
+
+    public void setModel(Model model) {
     }
 }

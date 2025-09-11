@@ -23,7 +23,7 @@ public class Controller {
     }
 
     public void clear() {
-        model.setCurrent(new Receta());
+        //model.setCurrent(new Receta(doctorAuxiliar = new Medico(), model.getCurrent().getPaciente(), model.getCurrent().getPrescripciones()));
     }
 
     public void setPaciente(int row) {
