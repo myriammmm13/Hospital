@@ -27,4 +27,8 @@ public class Model {
         }
         return "DESCONOCIDO";
     }
+
+    public Data getData() {
+        return data;
+    }
 }
