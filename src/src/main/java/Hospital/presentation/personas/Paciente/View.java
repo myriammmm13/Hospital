@@ -60,12 +60,10 @@ public class View implements PropertyChangeListener {
                     Paciente n = take();
                     try {
                         controller.create(n);
-
                         JOptionPane.showMessageDialog(panel, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                     }
-
                 }
             }
         });
@@ -130,10 +128,15 @@ public class View implements PropertyChangeListener {
                         case 3://fecha
                             cambiado.setFechaNacimiento(nuevoValor);
                     }
+                    try {
+                        controller.update(cambiado);
+                    } catch (Exception ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
+
             }
         });
-
     }
 
     public JPanel getPanel() { return panel; }
@@ -195,7 +198,6 @@ public class View implements PropertyChangeListener {
             IDText.setBackground(null);
             IDText.setToolTipText(null);
         }
-
         if (nomText.getText().isEmpty()) {
             valid = false;
             nomText.setBackground(Application.BACKGROUND_ERROR);
@@ -253,5 +255,4 @@ public class View implements PropertyChangeListener {
         }
         return valid;
     }
-
 }

@@ -1,5 +1,6 @@
 package Hospital.presentation;
 
+import java.util.Calendar;
 import java.util.List;
 
 public abstract class AbstractTableModel<E> extends javax.swing.table.AbstractTableModel implements javax.swing.table.TableModel {
@@ -39,4 +40,8 @@ public abstract class AbstractTableModel<E> extends javax.swing.table.AbstractTa
         return rows.get(row);
     }
     protected abstract void initColNames();
+
+    public List<E> getRows() {
+        return  rows;
+    }
 }

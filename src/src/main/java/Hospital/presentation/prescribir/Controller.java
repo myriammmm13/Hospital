@@ -1,6 +1,7 @@
 package Hospital.presentation.prescribir;
 
 import Hospital.logic.Medicamento;
+import Hospital.logic.personas.Paciente;
 import Hospital.logic.recetas.Prescripcion;
 import Hospital.logic.recetas.Receta;
 import Hospital.logic.Service;
@@ -10,20 +11,22 @@ public class Controller {
     View view;
 
     public Controller(Model model, View view) {
-        this.model = model;
         this.view = view;
-
+        this.model = model;
         view.setController(this);
         view.setModel(model);
+        model.setPacientes(Service.instance().search(new Paciente()));
+        model.setMedicamentos(Service.instance().findAllMedicamentos());
     }
 
-    public void create(Receta r, String userId) throws Exception {
+    public void create(Receta r ) throws Exception {
         model.setCurrent(r);
-        Service.instance().agregarReceta(r, userId);
+        Service.instance().agregarReceta(r);
     }
+
 
     public void clear() {
-        model.setCurrent(new Receta());
+
     }
 
     public void setPaciente(int row) {

@@ -118,6 +118,11 @@ public class View implements PropertyChangeListener {
                         case 2://esp
                             cambiado.setEspecialidad(nuevoValor);
                     }
+                    try {
+                        controller.update(cambiado);
+                    } catch (Exception ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             }
         });

@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.time.LocalDate;
 
 public class View implements PropertyChangeListener {
     private JPanel medicamentosPanel;
@@ -24,14 +25,17 @@ public class View implements PropertyChangeListener {
     private JTextField nombreField;
     private JLabel descripcion;
     private JTextField descripcionField;
-    private JTextField buscarField;
     private JButton guardarButton;
     private JButton modificarButton;
     private JButton buttonEliminar;
     private JButton button1;
     private JButton buttonBuscar;
+    private JPanel medicamentosPanelTable;
+    private JTable medicamentosTable;
 
     public View() {
+
+        //medicamentosPanelTable.add(medicamentosTable);
 
         guardarButton.addActionListener(new ActionListener() {
             @Override
@@ -59,7 +63,7 @@ public class View implements PropertyChangeListener {
                         descripcionField.getText()
                 );
                 try {
-                    controller.update(m, "");
+                    controller.update(m);
                     JOptionPane.showMessageDialog(medicamentosPanel, "Medicamento modificado correctamente.");
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(medicamentosPanel, "Error al modificar: " + ex.getMessage());
@@ -95,7 +99,7 @@ public class View implements PropertyChangeListener {
         buttonBuscar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String codigoBuscado = buscarField.getText().trim();
+                String codigoBuscado = codigofield.getText().trim();
                 if (codigoBuscado.isEmpty()) {
                     JOptionPane.showMessageDialog(medicamentosPanel, "Por favor ingrese un código para buscar.");
                     return;
@@ -117,11 +121,11 @@ public class View implements PropertyChangeListener {
             }
         });
     }
+
     private void limpiarCampos() {
         codigofield.setText("");
         nombreField.setText("");
         descripcionField.setText("");
-        buscarField.setText("");
     }
 
     public void setController(Controller controller) {
@@ -135,11 +139,19 @@ public class View implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        if (Model.CURRENT.equals(evt.getPropertyName())) {
-            Medicamento m = model.getCurrent();
-            codigofield.setText(m.getCodigo());
-            nombreField.setText(m.getNombre());
-            descripcionField.setText(m.getPresentacion());
+        switch (evt.getPropertyName()) {
+            case Model.CURRENT: {
+                codigofield.setText(model.getCurrent().getCodigo());
+                nombreField.setText(model.getCurrent().getNombre());
+                descripcionField.setText(model.getCurrent().getPresentacion());
+                break;
+            }
+            case Model.LIST: {
+                int[] cols = {TableModel.CODIGO, TableModel.NOMBRE, TableModel.PRESENTACION};
+                medicamentosTable.setModel(new TableModel(cols, model.getList()));
+                break;
+            }
         }
+        this.medicamentosPanel.revalidate();
     }
 }

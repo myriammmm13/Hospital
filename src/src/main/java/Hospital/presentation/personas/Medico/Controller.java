@@ -37,9 +37,9 @@ public class Controller {
         }
     }
 
-    public void update(Medico m, String userId) throws Exception {
+    public void update(Medico m) throws Exception {
         model.setCurrent(m);
-        Service.instance().actualizarDoctor(m, userId);
+        Service.instance().actualizarDoctor(m);
     }
 
     public void delete(Medico r ) throws Exception {

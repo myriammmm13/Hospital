@@ -1,5 +1,6 @@
 package Hospital.presentation.prescribir;
 
+import Hospital.logic.personas.Paciente;
 import Hospital.logic.recetas.Prescripcion;
 import Hospital.logic.recetas.Receta;
 import Hospital.logic.personas.trabajadores.Medico;
@@ -12,10 +13,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.time.LocalDate;
 
 public class View implements PropertyChangeListener {
-    private JPanel panel;
+    private JPanel panelPrincipal;
     private JButton guardarButton;
     private JButton limpiarButton;
     private JButton descartarMedicamentoButton;
@@ -26,6 +26,12 @@ public class View implements PropertyChangeListener {
     private JLabel fechaField;
     private JLabel nombreField;
     private JPanel fechaPanel;
+    private JPanel controlPanel;
+    private JPanel recetaPanel;
+    private JPanel medioPanel;
+    private JPanel ajustarPanel;
+    private JLabel nombrePaciente;
+    private JLabel nombreLabel;
     private DatePicker fecha;
     private Hospital.presentation.prescribir.buscarPaciente.View buscarPacienteView;
     private Hospital.presentation.prescribir.buscarMedicamento.View buscarMedicamentoView;
@@ -39,12 +45,13 @@ public class View implements PropertyChangeListener {
         DatePickerSettings settings = new DatePickerSettings();
         settings.setFormatForDatesCommonEra("yyyy-MM-dd");
         fecha = new DatePicker(settings);
-
         fechaPanel.setLayout(new BorderLayout());
         fechaPanel.add(fecha, BorderLayout.CENTER);
 
         buscarPacienteView =  new Hospital.presentation.prescribir.buscarPaciente.View();
         buscarMedicamentoView = new  Hospital.presentation.prescribir.buscarMedicamento.View();
+        buscarPacienteView.setController((controller));
+        buscarMedicamentoView.setController((controller));
 
         guardarButton.addActionListener(new ActionListener() {
             @Override
@@ -52,10 +59,10 @@ public class View implements PropertyChangeListener {
                 Receta r = new Receta(doctorAuxiliar = new Medico(), model.getCurrent().getPaciente(),
                         model.getCurrent().getPrescripciones());
                 try {
-                    controller.create(r, "aqui falta el id");
-                    JOptionPane.showMessageDialog(panel, "Receta guardada correctamente.");
+                    controller.create(r);
+                    JOptionPane.showMessageDialog(panelPrincipal, "Receta guardada correctamente.");
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(panel, "Error al guardar: " + ex.getMessage());
+                    JOptionPane.showMessageDialog(panelPrincipal, "Error al guardar: " + ex.getMessage());
                 }
 
             }
@@ -64,10 +71,10 @@ public class View implements PropertyChangeListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    controller.create(new Receta(), "id del doctor");
+                    controller.create(new Receta(doctorAuxiliar = new Medico(), model.getCurrent().getPaciente(), model.getCurrent().getPrescripciones()) /*id del doctor*/);
                     limpiarCampos();
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(panel, "Error al limpiar: " + ex.getMessage());
+                    JOptionPane.showMessageDialog(panelPrincipal, "Error al limpiar: " + ex.getMessage());
                 }
 
             }
@@ -114,9 +121,13 @@ public class View implements PropertyChangeListener {
 
     }
 
-    public JPanel getPanel() { return panel; }
+    public JPanel getPanel() { return panelPrincipal; }
 
-    public void setController(Controller controller) { this.controller = controller; }
+    public void setController(Controller controller) {
+        this.controller = controller;
+        buscarPacienteView.setController(controller); // ← esta línea es clave
+        buscarMedicamentoView.setController(controller);
+    }
 
     public void setModel(Model model) {
         this.model = model;
@@ -127,9 +138,7 @@ public class View implements PropertyChangeListener {
         model.addPropertyChangeListener(buscarPacienteView);
 
         buscarMedicamentoView.setModel(model);
-        model.addPropertyChangeListener((buscarMedicamentoView));
-
-
+        model.addPropertyChangeListener(buscarMedicamentoView);
     }
 
     @Override
@@ -145,9 +154,9 @@ public class View implements PropertyChangeListener {
                 break;
             case Model.PACIENTE:
                 if (model.getCurrent().getPaciente() != null)
-                    nombreField.setText(model.getCurrent().getPaciente().getNombre());
+                    nombrePaciente.setText(model.getCurrent().getPaciente().getNombre());
                 else
-                    nombreField.setText("No seleccionado");
+                    nombrePaciente.setText("No seleccionado");
         }
     }
 
