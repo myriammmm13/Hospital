@@ -32,6 +32,8 @@ public class View extends JDialog implements PropertyChangeListener{
         setTitle("Pacientes");
         setSize(400, 250);
 
+        inicializarComboBox();
+
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -66,11 +68,11 @@ public class View extends JDialog implements PropertyChangeListener{
 
     private void inicializarComboBox() {
         categoriaBox.addItem("Id");
-        categoriaBox.addItem("Código");
+        categoriaBox.addItem("Nombre");
         categoriaBox.addItem("Telefono");
 
         columnaFiltroMap.put("Id", TableModel.ID);
-        columnaFiltroMap.put("Código", TableModel.NOMBRE);
+        columnaFiltroMap.put("Nombre", TableModel.NOMBRE);
         columnaFiltroMap.put("Telefono", TableModel.TELEFONO);
     }
 
@@ -79,7 +81,7 @@ public class View extends JDialog implements PropertyChangeListener{
 
         String texto = busquedaField.getText().trim();
         String categoriaSeleccionada = (String) categoriaBox.getSelectedItem();
-        int columna = columnaFiltroMap.getOrDefault(categoriaSeleccionada, Hospital.presentation.prescribir.buscarMedicamento.TableModel.NOMBRE);
+        int columna = columnaFiltroMap.getOrDefault(categoriaSeleccionada, TableModel.NOMBRE);
 
         if (texto.length() == 0) {
             ordenamientoBusqueda.setRowFilter(null);

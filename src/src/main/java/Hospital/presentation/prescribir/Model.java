@@ -1,6 +1,7 @@
 package Hospital.presentation.prescribir;
 
 import Hospital.logic.Medicamento;
+import Hospital.logic.Service;
 import Hospital.logic.recetas.Prescripcion;
 import Hospital.logic.recetas.Receta;
 import Hospital.logic.personas.Paciente;
@@ -22,6 +23,9 @@ public class Model extends AbstractModel {
     public static final String PACIENTE = "paciente";
 
     public Model() {
+        Service service = Service.instance();
+        pacientes = service.listarPacientes();
+        medicamentos = service.listarMedicamentos();
         current = new Receta();
     }
 

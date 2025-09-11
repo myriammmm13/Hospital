@@ -3,6 +3,7 @@ package Hospital.data;
 import Hospital.logic.Medicamento;
 import Hospital.logic.personas.Trabajador;
 import Hospital.logic.personas.Paciente;
+import Hospital.logic.recetas.Prescripcion;
 import Hospital.logic.recetas.Receta;
 import Hospital.logic.personas.trabajadores.Medico;
 import Hospital.logic.personas.trabajadores.Farmaceutico;
@@ -33,6 +34,19 @@ public class Data {
         trabajadores.add(new Trabajador("Ana Ramirez Soto", "ADM-001", "adm"));
         trabajadores.add(new Trabajador("Juan Hernandez Jimenez", "MED-002", "med"));
         trabajadores.add(new Trabajador("Marco Perez Garcia", "FAR-003", "far"));
+
+        Medico medico = new  Medico("Juan Hernandez Jimenez", "MED-002", "Cardiologo");
+        Paciente paciente = new Paciente("Ana Ramirez Soto", "ADM-001", "1111", "25");
+        medicos.add(medico);
+        pacientes.add(paciente);
+
+        Prescripcion pres = new Prescripcion(medicamentos.get(1), "oo", 1, 1);
+        List<Prescripcion> presc = new ArrayList<>();
+        presc.add(pres);
+
+        Receta receta = new Receta(medico, paciente, presc);
+
+        recetas.add(receta);
 
     }
 
