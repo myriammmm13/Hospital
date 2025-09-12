@@ -74,16 +74,16 @@ public class View implements PropertyChangeListener {
                 estado.toLowerCase();
 
                 switch (estado) {
-                    case "confeccionada":
+                    case "Confeccionada":
                         estadoRecetaButton.setText("Procesar");
                         break;
-                    case "en proceso":
+                    case "En Proceso":
                         estadoRecetaButton.setText("Preparar");
                         break;
-                    case "lista":
+                    case "Lista":
                         estadoRecetaButton.setText("Despachar");
                         break;
-                    case "entregada":
+                    case "Entregada":
                         estadoRecetaButton.setText("—");
                         estadoRecetaButton.setEnabled(false);
                         break;
@@ -92,7 +92,7 @@ public class View implements PropertyChangeListener {
                         break;
                 }
 
-                if (!estado.equalsIgnoreCase("entregada")) {
+                if (!estado.equalsIgnoreCase("Entregada")) {
                     estadoRecetaButton.setEnabled(true);
                 }
             }
