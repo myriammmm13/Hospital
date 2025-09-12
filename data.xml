@@ -124,13 +124,46 @@
             </paciente>
             <prescripciones>
                 <prescripcion>
-                    <cantidad>3</cantidad>
-                    <duracion>3</duracion>
+                    <medicamento>
+                        <codigo></codigo>
+                        <nombre></nombre>
+                        <presentacion></presentacion>
+                    </medicamento>
                     <indicaciones>Una por dia</indicaciones>
+                    <duracion>3</duracion>
+                    <cantidad>3</cantidad>
                 </prescripcion>
             </prescripciones>
             <fechaConfeccion>2025-09-12</fechaConfeccion>
             <fechaRetiro>2025-09-05</fechaRetiro>
+            <estado>Confeccionada</estado>
+        </receta>
+        <receta>
+            <doctor>
+                <id>MED-002</id>
+                <nombre>Juan Hernandez Jimenez</nombre>
+                <clave>MED-002</clave>
+            </doctor>
+            <paciente>
+                <id>333</id>
+                <nombre>Juana</nombre>
+                <fechaNacimiento>2025-09-11</fechaNacimiento>
+                <telNum>12324</telNum>
+            </paciente>
+            <prescripciones>
+                <prescripcion>
+                    <medicamento>
+                        <codigo>111</codigo>
+                        <nombre>Acetaminofen</nombre>
+                        <presentacion>500mg</presentacion>
+                    </medicamento>
+                    <indicaciones>un por dia</indicaciones>
+                    <duracion>3</duracion>
+                    <cantidad>3</cantidad>
+                </prescripcion>
+            </prescripciones>
+            <fechaConfeccion>2025-09-12</fechaConfeccion>
+            <fechaRetiro>2025-09-13</fechaRetiro>
             <estado>Confeccionada</estado>
         </receta>
     </recetas>
