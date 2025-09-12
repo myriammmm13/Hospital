@@ -1,10 +1,9 @@
 package Hospital.presentation.prescribir;
 
 import Hospital.logic.Service;
-import Hospital.logic.personas.trabajadores.Medico;
-import Hospital.Application;
 import Hospital.logic.Session;
 import Hospital.logic.personas.Paciente;
+import Hospital.logic.personas.Trabajador;
 import Hospital.logic.recetas.Prescripcion;
 import Hospital.logic.recetas.Receta;
 import Hospital.logic.personas.trabajadores.Medico;
@@ -18,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.List;
 
 public class View implements PropertyChangeListener {
     private JPanel panelPrincipal;
@@ -29,6 +29,7 @@ public class View implements PropertyChangeListener {
     private JButton buscarMedicamentoButton;
     private JTable PrescripcionTable;
     private JLabel fechaField;
+    private JLabel nombreField;
     private JPanel fechaPanel;
     private JPanel controlPanel;
     private JPanel recetaPanel;
@@ -43,6 +44,7 @@ public class View implements PropertyChangeListener {
 
     Model model;
     Controller controller;
+    Medico doctorAuxiliar; //solo para que no se pegue
 
     public View() {
         DatePickerSettings settings = new DatePickerSettings();
@@ -51,7 +53,6 @@ public class View implements PropertyChangeListener {
         fechaPanel.setLayout(new BorderLayout());
         fechaPanel.add(fecha, BorderLayout.CENTER);
 
-        nombrePaciente.setText("No seleccionado");
         buscarPacienteView =  new Hospital.presentation.prescribir.buscarPaciente.View();
         buscarMedicamentoView = new  Hospital.presentation.prescribir.buscarMedicamento.View();
         buscarPacienteView.setController((controller));
@@ -60,22 +61,45 @@ public class View implements PropertyChangeListener {
         guardarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (validate()) {
-                    Receta r = take();
-                    try {
-                        controller.create(r);
-                        JOptionPane.showMessageDialog(panelPrincipal, "Receta guardada correctamente.");
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(panelPrincipal, "Error al guardar: " + ex.getMessage());
-                    }
+                TableModel modeloTabla = (TableModel) PrescripcionTable.getModel();
+                List<Prescripcion> listaPrescripciones = modeloTabla.getPrescripciones();
+
+                Paciente paciente = model.getCurrent().getPaciente();
+                String idTrabajador = Session.getInstance().getUsuario(); // ← si devuelve un String
+
+                Trabajador doctor = Service.instance().findTrabajadorById(idTrabajador);
+
+                if (doctor == null) {
+                    JOptionPane.showMessageDialog(panelPrincipal, "No se encontró el médico con ID: " + idTrabajador);
+                    return;
+                }
+
+                if (paciente == null) {
+                    JOptionPane.showMessageDialog(panelPrincipal, "Debe seleccionar un paciente.");
+                    return;
+                }
+
+                if (listaPrescripciones.isEmpty()) {
+                    JOptionPane.showMessageDialog(panelPrincipal, "Debe agregar al menos una prescripción.");
+                    return;
+                }
+
+                Receta r = new Receta(doctor, paciente, listaPrescripciones);
+                r.setFechaRetiro(fecha.getDate());
+                model.setCurrent(r);
+
+                try {
+                    controller.create(r);
+                    JOptionPane.showMessageDialog(panelPrincipal, "Receta guardada correctamente.");
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(panelPrincipal, "Error al guardar: " + ex.getMessage());
                 }
             }
         });
+
         limpiarButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                controller.clear();
-            }
+            public void actionPerformed(ActionEvent e) {controller.clear();}
         });
 
         buscarPacienteButton.addActionListener(new ActionListener() {
@@ -123,7 +147,7 @@ public class View implements PropertyChangeListener {
 
     public void setController(Controller controller) {
         this.controller = controller;
-        buscarPacienteView.setController(controller);
+        buscarPacienteView.setController(controller); // ← esta línea es clave
         buscarMedicamentoView.setController(controller);
     }
 
@@ -158,48 +182,6 @@ public class View implements PropertyChangeListener {
         }
     }
 
-    private boolean validate() {
-        boolean valid = true;
-        System.out.println(nombrePaciente.getText());
-        if ("No seleccionado".equals(nombrePaciente.getText())) {
-            valid = false;
-            nombrePaciente.setBackground(Application.BACKGROUND_ERROR);
-            JOptionPane.showMessageDialog(panelPrincipal,"Nombre requerido");
-        } else {
-            nombrePaciente.setBackground(null);
-            nombrePaciente.setToolTipText(null);
-        }
-
-        if (PrescripcionTable.getRowCount() == 0) {
-            valid = false;
-            JOptionPane.showMessageDialog(panelPrincipal, "Debe agregar al menos una prescripción.");
-        }
-
-        if (fecha.getDate() == null) {
-            valid = false;
-            fecha.getComponentDateTextField().setBackground(Application.BACKGROUND_ERROR);
-            JOptionPane.showMessageDialog(panelPrincipal,"Fecha requerida");
-        } else {
-            fecha.getComponentDateTextField().setBackground(Color.WHITE);
-            fecha.getComponentDateTextField().setToolTipText(null);
-        }
-
-        return valid;
-    }
-
-    public Receta take() {
-        Receta e = new Receta();
-        e.setPaciente(model.getCurrent().getPaciente());
-        e.setPrescripciones(model.getCurrent().getPrescripciones());
-        //e.setFecha(fecha.getDate());
-        try {
-            Medico med= Service.instance().obtenerDoctor(Session.getInstance().getUsuario(), "");
-            e.setDoctor(med);
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
-        }
-        return e;
-    }
     public void clearFields() {
         int[] cols = {TableModel.MEDICAMENTO,TableModel.PRESENTACION, TableModel.CANTIDAD,
                 TableModel.INDICACIONES, TableModel.DURACION};

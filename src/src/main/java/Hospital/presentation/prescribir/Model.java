@@ -1,5 +1,6 @@
 package Hospital.presentation.prescribir;
 
+import Hospital.data.Data;
 import Hospital.logic.Medicamento;
 import Hospital.logic.recetas.Prescripcion;
 import Hospital.logic.recetas.Receta;
@@ -9,6 +10,8 @@ import Hospital.presentation.AbstractModel;
 import java.util.ArrayList;
 import java.util.List;
 import java.beans.PropertyChangeListener;
+
+import static Hospital.Application.data;
 
 public class Model extends AbstractModel {
     Receta current;
@@ -108,5 +111,9 @@ public class Model extends AbstractModel {
     public void setMedicamentos(List<Medicamento> list) {
         this.medicamentos = list != null ? list : new ArrayList<>();
         firePropertyChange(MEDICAMENTOS, null, this.medicamentos);
+    }
+
+    public Data getData() {
+        return data;
     }
 }

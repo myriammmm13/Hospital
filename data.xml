@@ -21,6 +21,11 @@
             <nombre>Loratadina</nombre>
             <presentacion>10mg tabletas</presentacion>
         </medicamento>
+        <medicamento>
+            <codigo></codigo>
+            <nombre></nombre>
+            <presentacion></presentacion>
+        </medicamento>
     </medicamentos>
     <trabajadores>
         <trabajador>
@@ -78,7 +83,6 @@
                 <id></id>
                 <nombre></nombre>
                 <clave></clave>
-                <especialidad></especialidad>
             </doctor>
             <paciente>
                 <id></id>
@@ -95,7 +99,6 @@
                 <id></id>
                 <nombre></nombre>
                 <clave></clave>
-                <especialidad></especialidad>
             </doctor>
             <paciente>
                 <id></id>
@@ -108,6 +111,11 @@
             <estado>Confeccionada</estado>
         </receta>
         <receta>
+            <doctor>
+                <id>MED-002</id>
+                <nombre>Juan Hernandez Jimenez</nombre>
+                <clave>MED-002</clave>
+            </doctor>
             <paciente>
                 <id>333</id>
                 <nombre>Juana</nombre>
@@ -116,17 +124,13 @@
             </paciente>
             <prescripciones>
                 <prescripcion>
-                    <medicamento>
-                        <codigo>114</codigo>
-                        <nombre>Loratadina</nombre>
-                        <presentacion>10mg tabletas</presentacion>
-                    </medicamento>
-                    <indicaciones>Tomar en la noche</indicaciones>
-                    <duracion>3</duracion>
                     <cantidad>3</cantidad>
+                    <duracion>3</duracion>
+                    <indicaciones>Una por dia</indicaciones>
                 </prescripcion>
             </prescripciones>
             <fechaConfeccion>2025-09-12</fechaConfeccion>
+            <fechaRetiro>2025-09-05</fechaRetiro>
             <estado>Confeccionada</estado>
         </receta>
     </recetas>

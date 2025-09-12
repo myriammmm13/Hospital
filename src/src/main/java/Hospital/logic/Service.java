@@ -562,4 +562,11 @@ public class Service {
                 .sorted(Comparator.comparing(Paciente::getNombre))
                 .collect(Collectors.toList());
     }
+
+    public Trabajador findTrabajadorById(String id) {
+        for (Trabajador m : data.getTrabajadores()) {
+            if (m.getId().equals(id)) return m;
+        }
+        return null;
+    }
 }

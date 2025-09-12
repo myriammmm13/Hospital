@@ -1,5 +1,6 @@
 package Hospital.presentation.prescribir;
 
+import Hospital.data.XmlPersister;
 import Hospital.logic.Medicamento;
 import Hospital.logic.personas.Paciente;
 import Hospital.logic.recetas.Prescripcion;
@@ -22,6 +23,7 @@ public class Controller {
     public void create(Receta r ) throws Exception {
         model.setCurrent(r);
         Service.instance().agregarReceta(r);
+        XmlPersister.instance().store(model.getData());
     }
 
 
