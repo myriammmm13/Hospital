@@ -1,7 +1,9 @@
 package Hospital.presentation.prescribir;
 
+import Hospital.logic.Service;
 import Hospital.logic.Session;
 import Hospital.logic.personas.Paciente;
+import Hospital.logic.personas.Trabajador;
 import Hospital.logic.recetas.Prescripcion;
 import Hospital.logic.recetas.Receta;
 import Hospital.logic.personas.trabajadores.Medico;
@@ -15,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.List;
 
 public class View implements PropertyChangeListener {
     private JPanel panelPrincipal;
@@ -58,17 +61,42 @@ public class View implements PropertyChangeListener {
         guardarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Receta r = new Receta(Session.getInstance().getUsuario(), model.getCurrent().getPaciente(),
-                        model.getCurrent().getPrescripciones());
+                TableModel modeloTabla = (TableModel) PrescripcionTable.getModel();
+                List<Prescripcion> listaPrescripciones = modeloTabla.getPrescripciones();
+
+                Paciente paciente = model.getCurrent().getPaciente();
+                String idTrabajador = Session.getInstance().getUsuario(); // ← si devuelve un String
+
+                Trabajador doctor = Service.instance().findTrabajadorById(idTrabajador);
+
+                if (doctor == null) {
+                    JOptionPane.showMessageDialog(panelPrincipal, "No se encontró el médico con ID: " + idTrabajador);
+                    return;
+                }
+
+                if (paciente == null) {
+                    JOptionPane.showMessageDialog(panelPrincipal, "Debe seleccionar un paciente.");
+                    return;
+                }
+
+                if (listaPrescripciones.isEmpty()) {
+                    JOptionPane.showMessageDialog(panelPrincipal, "Debe agregar al menos una prescripción.");
+                    return;
+                }
+
+                Receta r = new Receta(doctor, paciente, listaPrescripciones);
+                r.setFechaRetiro(fecha.getDate());
+                model.setCurrent(r);
+
                 try {
                     controller.create(r);
                     JOptionPane.showMessageDialog(panelPrincipal, "Receta guardada correctamente.");
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(panelPrincipal, "Error al guardar: " + ex.getMessage());
                 }
-
             }
         });
+
         limpiarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {controller.clear();}
