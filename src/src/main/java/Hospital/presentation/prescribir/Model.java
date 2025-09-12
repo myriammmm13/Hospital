@@ -77,7 +77,7 @@ public class Model extends AbstractModel {
         firePropertyChange(PRESCRIPCION, null, prescripcion);
     }
 
-    public Paciente getPaciente() { return  current.getPaciente(); }
+    public Paciente getPaciente() { return current.getPaciente(); }
 
     public void agregarPrescripcion(Prescripcion prescripcion){
         this.current.agregarPrescripcion(prescripcion);

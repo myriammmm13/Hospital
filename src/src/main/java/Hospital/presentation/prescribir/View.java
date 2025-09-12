@@ -50,8 +50,7 @@ public class View implements PropertyChangeListener {
         fechaPanel.setLayout(new BorderLayout());
         fechaPanel.add(fecha, BorderLayout.CENTER);
 
-        nombrePaciente = new JLabel();
-        nombrePaciente.setText("Nombre");
+        nombrePaciente.setText("No seleccionado");
         buscarPacienteView =  new Hospital.presentation.prescribir.buscarPaciente.View();
         buscarMedicamentoView = new  Hospital.presentation.prescribir.buscarMedicamento.View();
         buscarPacienteView.setController((controller));
