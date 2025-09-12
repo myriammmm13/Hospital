@@ -106,6 +106,34 @@
             <fechaRetiro>2025-09-05</fechaRetiro>
             <estado>Lista</estado>
         </receta>
+        <receta>
+            <doctor>
+                <id>MED-002</id>
+                <nombre>Juan Hernandez Jimenez</nombre>
+                <clave>MED-002</clave>
+            </doctor>
+            <paciente>
+                <id>777</id>
+                <nombre>Marco</nombre>
+                <fechaNacimiento>2025-09-05</fechaNacimiento>
+                <telNum>34534</telNum>
+            </paciente>
+            <prescripciones>
+                <prescripcion>
+                    <medicamento>
+                        <codigo>113</codigo>
+                        <nombre>Amoxicilina</nombre>
+                        <presentacion>250mg cápsulas</presentacion>
+                    </medicamento>
+                    <indicaciones>FGGHGF</indicaciones>
+                    <duracion>5</duracion>
+                    <cantidad>5</cantidad>
+                </prescripcion>
+            </prescripciones>
+            <fechaConfeccion>2025-09-12</fechaConfeccion>
+            <fechaRetiro>2025-09-12</fechaRetiro>
+            <estado>Confeccionada</estado>
+        </receta>
     </recetas>
     <pacientes>
         <paciente>
