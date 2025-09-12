@@ -14,6 +14,7 @@ public class Prescripcion {
         duracion=0;
         cantidad=0;
     }
+
     public Prescripcion(Medicamento medicamento, String indicaciones, int duracion, int cantidad) {
         if (medicamento == null) throw new IllegalArgumentException("Medicamento no puede ser nulo");
         if (indicaciones == null || indicaciones.isBlank()) throw new IllegalArgumentException("Indicaciones requeridas");

@@ -14,21 +14,24 @@ import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlRootElement
 public class Receta {
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
-    private String IDdoctor;
+    private LocalDate fechaConfeccion;
+
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    private LocalDate fechaRetiro;
+
+    private Medico doctor;
     private Paciente paciente;
     private List<Prescripcion> prescripciones;
-    private LocalDate fechaConfeccion;
-    private LocalDate fechaRetiro;
+
     private String estado;
 
     public Receta() {
         prescripciones = new ArrayList<>();
-        estado = "Confeccionada";
+        estado = "Iniciado";
         fechaConfeccion = LocalDate.now();
-        IDdoctor="";
     }
-    public Receta(String IDdoctor, Paciente paciente, List<Prescripcion> prescripciones, LocalDate fechaRetiro) {
-        this.IDdoctor = IDdoctor;
+    public Receta(Medico doctor, Paciente paciente, List<Prescripcion> prescripciones, LocalDate fechaRetiro) {
+        this.doctor = doctor;
         this.paciente = paciente;
         this.prescripciones = new ArrayList<>(prescripciones);
         this.fechaConfeccion = LocalDate.now();
@@ -36,8 +39,8 @@ public class Receta {
         this.estado = "Confeccionada";
     }
 
-    public Receta(String IDmedico, Paciente paciente, List<Prescripcion> prescripciones) {
-        this.IDdoctor = IDmedico;
+    public Receta(Medico medico, Paciente paciente, List<Prescripcion> prescripciones) {
+        this.doctor = new Medico();
         this.paciente = new Paciente();
         this.prescripciones = new ArrayList<>();
         this.fechaConfeccion = LocalDate.now();
@@ -46,7 +49,7 @@ public class Receta {
     }
 
     // Getters
-    public String getDoctor() { return IDdoctor; }
+    public Medico getDoctor() { return doctor; }
     public Paciente getPaciente() { return paciente; }
     public List<Prescripcion> getPrescripciones() { return prescripciones; }
     public LocalDate getFechaConfeccion() { return fechaConfeccion; }
@@ -54,7 +57,7 @@ public class Receta {
     public String getEstado() { return estado; }
 
     // Setters
-    public void setDoctor(String doctor) { this.IDdoctor = doctor; }
+    public void setDoctor(Medico doctor) { this.doctor = doctor; }
     public void setPaciente(Paciente paciente) { this.paciente = paciente; }
     public void setPrescripciones(List<Prescripcion> prescripciones) {
         this.prescripciones = new ArrayList<>(prescripciones);

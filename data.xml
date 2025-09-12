@@ -21,11 +21,6 @@
             <nombre>Loratadina</nombre>
             <presentacion>10mg tabletas</presentacion>
         </medicamento>
-        <medicamento>
-            <codigo></codigo>
-            <nombre></nombre>
-            <presentacion></presentacion>
-        </medicamento>
     </medicamentos>
     <trabajadores>
         <trabajador>
@@ -85,14 +80,15 @@
                 <clave></clave>
                 <especialidad></especialidad>
             </doctor>
-            <estado>Confeccionada</estado>
-            <fechaRetiro/>
             <paciente>
                 <id></id>
                 <nombre></nombre>
                 <fechaNacimiento></fechaNacimiento>
                 <telNum></telNum>
             </paciente>
+            <prescripciones/>
+            <fechaConfeccion>2025-09-12</fechaConfeccion>
+            <estado>Confeccionada</estado>
         </receta>
         <receta>
             <doctor>
@@ -101,14 +97,37 @@
                 <clave></clave>
                 <especialidad></especialidad>
             </doctor>
-            <estado>Confeccionada</estado>
-            <fechaRetiro/>
             <paciente>
                 <id></id>
                 <nombre></nombre>
                 <fechaNacimiento></fechaNacimiento>
                 <telNum></telNum>
             </paciente>
+            <prescripciones/>
+            <fechaConfeccion>2025-09-12</fechaConfeccion>
+            <estado>Confeccionada</estado>
+        </receta>
+        <receta>
+            <paciente>
+                <id>333</id>
+                <nombre>Juana</nombre>
+                <fechaNacimiento>2025-09-11</fechaNacimiento>
+                <telNum>12324</telNum>
+            </paciente>
+            <prescripciones>
+                <prescripcion>
+                    <medicamento>
+                        <codigo>114</codigo>
+                        <nombre>Loratadina</nombre>
+                        <presentacion>10mg tabletas</presentacion>
+                    </medicamento>
+                    <indicaciones>Tomar en la noche</indicaciones>
+                    <duracion>3</duracion>
+                    <cantidad>3</cantidad>
+                </prescripcion>
+            </prescripciones>
+            <fechaConfeccion>2025-09-12</fechaConfeccion>
+            <estado>Confeccionada</estado>
         </receta>
     </recetas>
     <pacientes>

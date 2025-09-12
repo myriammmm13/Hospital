@@ -1,5 +1,7 @@
 package Hospital.presentation.prescribir;
 
+import Hospital.logic.Service;
+import Hospital.logic.personas.trabajadores.Medico;
 import Hospital.Application;
 import Hospital.logic.Session;
 import Hospital.logic.personas.Paciente;
@@ -189,7 +191,13 @@ public class View implements PropertyChangeListener {
         Receta e = new Receta();
         e.setPaciente(model.getCurrent().getPaciente());
         e.setPrescripciones(model.getCurrent().getPrescripciones());
-        e.setDoctor(Session.getInstance().getUsuario());
+        //e.setFecha(fecha.getDate());
+        try {
+            Medico med= Service.instance().obtenerDoctor(Session.getInstance().getUsuario(), "");
+            e.setDoctor(med);
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
         return e;
     }
     public void clearFields() {
