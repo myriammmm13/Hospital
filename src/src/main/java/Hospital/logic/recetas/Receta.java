@@ -36,15 +36,6 @@ public class Receta {
         this.estado = "Confeccionada";
     }
 
-    public Receta(String IDmedico, Paciente paciente, List<Prescripcion> prescripciones) {
-        this.IDdoctor = IDmedico;
-        this.paciente = new Paciente();
-        this.prescripciones = new ArrayList<>();
-        this.fechaConfeccion = LocalDate.now();
-        this.fechaRetiro = LocalDate.now().plusDays(3); // valor por defecto
-        this.estado = "Confeccionada";
-    }
-
     // Getters
     public String getDoctor() { return IDdoctor; }
     public Paciente getPaciente() { return paciente; }
