@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 
 public class View implements PropertyChangeListener {
     private JPanel panelPrincipal;
@@ -40,6 +41,7 @@ public class View implements PropertyChangeListener {
     Model model;
     Controller controller;
     Medico doctorAuxiliar; //solo para que no se pegue
+    Paciente pacienteAuxiliar;
 
     public View() {
         DatePickerSettings settings = new DatePickerSettings();
@@ -73,7 +75,7 @@ public class View implements PropertyChangeListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    model.setCurrent(new Receta(doctorAuxiliar = new Medico(), model.getCurrent().getPaciente(), model.getCurrent().getPrescripciones()) /*id del doctor*/);
+                    model.setCurrent(new Receta(doctorAuxiliar = new Medico(), pacienteAuxiliar = new Paciente(), new ArrayList<>()) /*id del doctor*/);
                     limpiarCampos();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(panelPrincipal, "Error al limpiar: " + ex.getMessage());
@@ -182,7 +184,7 @@ public class View implements PropertyChangeListener {
     }
 
     private void limpiarCampos() {
-        nombrePaciente.setText("");
+        nombrePaciente.setText("No seleccionado");
         PrescripcionTable.repaint();
     }
 
