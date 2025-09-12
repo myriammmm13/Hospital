@@ -41,8 +41,6 @@ public class View implements PropertyChangeListener {
 
     Model model;
     Controller controller;
-    Medico doctorAuxiliar; //solo para que no se pegue
-    Paciente pacienteAuxiliar;
 
     public View() {
         DatePickerSettings settings = new DatePickerSettings();
