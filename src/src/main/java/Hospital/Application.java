@@ -114,11 +114,10 @@ public class Application {
                 tabs.addTab("Dashboard", cargarIcono("/images/dashboard1.png"), dashboardView.getPanel());
                 tabs.addTab("Histórico", cargarIcono("/images/historico1.png"), historicoView.getPanel());
                 tabs.addTab("Acerca de...", cargarIcono("/images/acercade1.png"), acercaDeView.getPanel());
-
                 break;
 
             case "FAR":
-                tabs.addTab("Prescribir", cargarIcono("/images/prescipcion1.png"), prescribirView.getPanel());
+                //tabs.addTab("Despacho", despachoView.getPanel());
                 tabs.addTab("Dashboard", cargarIcono("/images/dashboard1.png"), dashboardView.getPanel());
                 tabs.addTab("Acerca de...", cargarIcono("/images/acercade1.png"), acercaDeView.getPanel());
                 break;
