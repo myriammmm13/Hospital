@@ -14,11 +14,15 @@ import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlRootElement
 public class Receta {
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    private LocalDate fechaConfeccion;
+
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    private LocalDate fechaRetiro;
+
     private Medico doctor;
     private Paciente paciente;
     private List<Prescripcion> prescripciones;
-    private LocalDate fechaConfeccion;
-    private LocalDate fechaRetiro;
+
     private String estado;
 
     public Receta() {
