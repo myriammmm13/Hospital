@@ -154,9 +154,6 @@ public class View implements PropertyChangeListener {
     }
 
     private void inicializarComboBox() {
-        categoriaBox.addItem("Paciente");
-        categoriaBox.addItem("Doctor");
-
         columnaFiltroMap.put("Paciente", TableModel.PACIENTE);
         columnaFiltroMap.put("Doctor", TableModel.DOCTOR);
     }
