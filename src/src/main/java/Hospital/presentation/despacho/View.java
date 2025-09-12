@@ -58,15 +58,18 @@ public class View implements PropertyChangeListener {
         descartarRecetaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(getFilaModeloSeleccionada()>=0){
-                    try{
-                        controller.descartarReceta(getFilaModeloSeleccionada());
+                if(recetaTable.getSelectedRow()>=0){
+                    try {
+                        controller.descartarReceta(recetaTable.getSelectedRow());
+                        JOptionPane.showMessageDialog(panel, "Éxito al actualizar");
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(panel, "Error al actualizar: " + ex.getMessage());
                     }
                 }
             }
         });
+
+
 
         recetaTable.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting() && getFilaModeloSeleccionada() >= 0) {

@@ -83,7 +83,7 @@ public class View implements PropertyChangeListener {
                     return;
                 }
 
-                Receta r = new Receta(paciente, listaPrescripciones);
+                Receta r = new Receta(paciente, listaPrescripciones, doctor);
                 r.setFechaRetiro(fecha.getDate());
                 model.setCurrent(r);
 

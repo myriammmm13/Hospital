@@ -40,15 +40,17 @@ public class Receta {
         estado = "Confeccionada";
         fechaConfeccion = LocalDate.now();
         cant=0;
+        doctor=new Trabajador();
     }
 
-    public Receta(Paciente paciente, List<Prescripcion> prescripciones) {
+    public Receta(Paciente paciente, List<Prescripcion> prescripciones, Trabajador  doctor) {
         this.paciente = paciente;
         this.prescripciones = new ArrayList<>(prescripciones);
         this.fechaConfeccion = LocalDate.now();
         this.fechaRetiro = LocalDate.now().plusDays(3);
         this.estado = "Confeccionada";
         cant=prescripciones.size();
+        this.doctor=doctor;
     }
 
     // Getters
