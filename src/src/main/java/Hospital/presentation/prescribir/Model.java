@@ -12,7 +12,7 @@ import java.beans.PropertyChangeListener;
 
 public class Model extends AbstractModel {
     Receta current;
-    List<Prescripcion> prescripciones;
+    //List<Prescripcion> prescripciones;
     List<Medicamento> medicamentos;
     List<Paciente> pacientes;
 
@@ -26,7 +26,7 @@ public class Model extends AbstractModel {
     public Model() {
         pacientes = new ArrayList<>();
         medicamentos = new ArrayList<>();
-        prescripciones = new ArrayList<>();
+        //prescripciones = new ArrayList<>();
         current = new Receta();
     }
 
@@ -47,7 +47,8 @@ public class Model extends AbstractModel {
     }
 
     public List<Prescripcion> getPrescripcionesList() {
-        return prescripciones;
+        //return prescripciones;
+        return current.getPrescripciones();
     }
 
 
@@ -57,10 +58,10 @@ public class Model extends AbstractModel {
 
     public List<Paciente> getPacientes(){return pacientes;}
 
-    public void setPrescripciones(List<Prescripcion> list) {
+    /*public void setPrescripciones(List<Prescripcion> list) {
         this.prescripciones = list != null ? list : new ArrayList<>();
         firePropertyChange(PRESCRIPCIONES, null, this.prescripciones);
-    }
+    }*/
 
     public void setPacientes(List<Paciente> list) {
         this.pacientes = list != null ? list : new ArrayList<>();
@@ -81,17 +82,23 @@ public class Model extends AbstractModel {
 
     public void agregarPrescripcion(Prescripcion prescripcion){
         this.current.agregarPrescripcion(prescripcion);
-        setPrescripciones(current.getPrescripciones());
+        //setPrescripciones(current.getPrescripciones());
+        firePropertyChange(PRESCRIPCIONES, null, current.getPrescripciones());
+        firePropertyChange(PRESCRIPCION, null, prescripcion);
     }
 
     public void borrarPrescripcion(Prescripcion prescripcion){
         this.current.borrarPrescripcion(prescripcion);
-        setPrescripciones(current.getPrescripciones());
+        //setPrescripciones(current.getPrescripciones());
+        firePropertyChange(PRESCRIPCIONES, null, current.getPrescripciones());
+        firePropertyChange(PRESCRIPCION, null, prescripcion);
     }
 
     public void actualizarPrescripcion(Prescripcion prescripcion, int row) {
         this.current.actualizarPrescripcion(prescripcion, row);
-        setPrescripciones(current.getPrescripciones());
+        //setPrescripciones(current.getPrescripciones());
+        firePropertyChange(PRESCRIPCIONES, null, current.getPrescripciones());
+        firePropertyChange(PRESCRIPCION, null, prescripcion);
     }
 
     public List<Paciente> getPacientesList() {

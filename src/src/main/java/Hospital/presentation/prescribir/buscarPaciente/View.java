@@ -38,8 +38,8 @@ public class View extends JDialog implements PropertyChangeListener{
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(personasBusquedaTable.getSelectedRow()>=0){
-                    controller.setPaciente(personasBusquedaTable.getSelectedRow());
                     View.this.setVisible(false);
+                    controller.setPaciente(personasBusquedaTable.getSelectedRow());
                 }
             }
         });
