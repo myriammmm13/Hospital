@@ -139,6 +139,8 @@ public class View implements PropertyChangeListener {
     public void setModel(Model model) {
         this.model = model;
         model.addPropertyChangeListener(this);
+        int[] cols = {TableModel.ID, TableModel.NOMBRE, TableModel.CLAVE};
+        farmaceuticoTable.setModel(new TableModel(cols,model.getList()));
     }
 
     @Override

@@ -123,4 +123,5 @@ public class View extends JDialog implements PropertyChangeListener{
         }
         this.panel.revalidate();
     }
+
 }

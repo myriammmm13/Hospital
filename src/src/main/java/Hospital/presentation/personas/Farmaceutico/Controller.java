@@ -16,6 +16,7 @@ public class Controller {
 
         view.setController(this);
         view.setModel(model);
+        model.setList(Service.instance().findAllFarmacuetico());
     }
 
     public void create(Farmaceutico m) throws Exception {

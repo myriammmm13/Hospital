@@ -139,21 +139,28 @@ public class View implements PropertyChangeListener {
         });
     }
 
-    public JPanel getPanel() { return panel; }
+    public JPanel getPanel() {
+        return panel;
+    }
 
-    public void setController(Controller controller) { this.controller = controller; }
+    public void setController(Controller controller) {
+        this.controller = controller;
+    }
 
     public void setModel(Model model) {
         this.model = model;
         model.addPropertyChangeListener(this);
+
+        int[] cols = {TableModel.ID, TableModel.NOMBRE, TableModel.NUMERO, TableModel.FECHA};
+        pacientesTable.setModel(new TableModel(cols, model.getList()));
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
             case Model.LIST:
-                int[] cols = {TableModel.ID,TableModel.NOMBRE, TableModel.NUMERO, TableModel.FECHA};
-                pacientesTable.setModel(new TableModel(cols,model.getList()));
+                int[] cols = {TableModel.ID, TableModel.NOMBRE, TableModel.NUMERO, TableModel.FECHA};
+                pacientesTable.setModel(new TableModel(cols, model.getList()));
                 break;
             case Model.CURRENT:
                 IDText.setText(model.getCurrent().getId());
@@ -228,6 +235,7 @@ public class View implements PropertyChangeListener {
     private boolean validateSearch() {
         return !idBusqText.getText().isEmpty() || !NombreText.getText().isEmpty();
     }
+
     private boolean validateDelete() {
         boolean valid = false;
 

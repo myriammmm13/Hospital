@@ -16,6 +16,7 @@ public class Controller {
 
         view.setController(this);
         view.setModel(model);
+        model.setList(Service.instance().findAllMedico());
     }
 
     public void create(Medico m ) throws Exception {
