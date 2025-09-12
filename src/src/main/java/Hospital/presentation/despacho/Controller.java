@@ -15,6 +15,7 @@ public class Controller {
 
         view.setController(this);
         view.setModel(model);
+        model.setList(Service.instance().listarRecetas());
     }
 
     public void procesarReceta(int row) throws Exception {

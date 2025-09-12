@@ -13,6 +13,7 @@ public class Controller {
 
         view.setController(this);
         view.setModel(model);
+        model.setList(Service.instance().findAllPacientes());
     }
 
     public void create(Paciente p) throws Exception {

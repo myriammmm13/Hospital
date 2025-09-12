@@ -74,16 +74,16 @@ public class View implements PropertyChangeListener {
                 estado.toLowerCase();
 
                 switch (estado) {
-                    case "confeccionada":
+                    case "Confeccionada":
                         estadoRecetaButton.setText("Procesar");
                         break;
-                    case "en proceso":
+                    case "En Proceso":
                         estadoRecetaButton.setText("Preparar");
                         break;
-                    case "lista":
+                    case "Lista":
                         estadoRecetaButton.setText("Despachar");
                         break;
-                    case "entregada":
+                    case "Entregada":
                         estadoRecetaButton.setText("—");
                         estadoRecetaButton.setEnabled(false);
                         break;
@@ -92,7 +92,7 @@ public class View implements PropertyChangeListener {
                         break;
                 }
 
-                if (!estado.equalsIgnoreCase("entregada")) {
+                if (!estado.equalsIgnoreCase("Entregada")) {
                     estadoRecetaButton.setEnabled(true);
                 }
             }
@@ -148,12 +148,12 @@ public class View implements PropertyChangeListener {
         this.model = model;
         model.addPropertyChangeListener(this);
         propertyChange(new PropertyChangeEvent(model, model.RECETAS, null, null));
+
+        int[] cols = {TableModel.PACIENTE, TableModel.DOCTOR, TableModel.PRESCRIPCIONES,
+                TableModel.FECHA_CONFECCION, TableModel.ESTADO};
     }
 
     private void inicializarComboBox() {
-        categoriaBox.addItem("Paciente");
-        categoriaBox.addItem("Doctor");
-
         columnaFiltroMap.put("Paciente", TableModel.PACIENTE);
         columnaFiltroMap.put("Doctor", TableModel.DOCTOR);
     }
