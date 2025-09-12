@@ -10,7 +10,6 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
-import Hospital.logic.XmlPersister;
 import org.jfree.data.general.DefaultPieDataset;
 
 import javax.swing.*;
@@ -38,6 +37,7 @@ public class View implements PropertyChangeListener {
     private JButton limpiar;
     private JPanel panelparagrafico;
     private JPanel panelparaPastel;
+    private JButton actualizarPastel;
     private JComboBox comboBox1;
     private JComboBox comboBox2;
     private DatePicker fechaPicker;
@@ -91,6 +91,18 @@ public class View implements PropertyChangeListener {
                     new int[]{TableModel.MEDICAMENTO, TableModel.DESDE, TableModel.HASTA},
                     new ArrayList<>(), "", ""
             ));
+        });
+
+        actualizarPastel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Map<String, Integer> datos = contarRecetasPorEstado();
+                    mostrarGraficoEstados(datos);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(panelDatos, "Error al actualizar gráfico de estados: " + ex.getMessage());
+                }
+            }
         });
     }
 
