@@ -76,6 +76,12 @@
             <nombre>yassir</nombre>
             <clave></clave>
         </trabajador>
+        <trabajador xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="medico">
+            <id>504650944</id>
+            <nombre>Myriam Jara Watson</nombre>
+            <clave>504650944</clave>
+            <especialidad>Dermatología</especialidad>
+        </trabajador>
     </trabajadores>
     <recetas>
         <receta>
@@ -133,6 +139,29 @@
             <fechaRetiro>2025-09-05</fechaRetiro>
             <estado>Confeccionada</estado>
         </receta>
+        <receta>
+            <doctor>
+                <id>MED-002</id>
+                <nombre>Juan Hernandez Jimenez</nombre>
+                <clave>MED-002</clave>
+            </doctor>
+            <paciente>
+                <id>333</id>
+                <nombre>Juana</nombre>
+                <fechaNacimiento>2025-09-11</fechaNacimiento>
+                <telNum>12324</telNum>
+            </paciente>
+            <prescripciones>
+                <prescripcion>
+                    <cantidad>10</cantidad>
+                    <duracion>10</duracion>
+                    <indicaciones>si</indicaciones>
+                </prescripcion>
+            </prescripciones>
+            <fechaConfeccion>2025-09-12</fechaConfeccion>
+            <fechaRetiro>2025-09-19</fechaRetiro>
+            <estado>Confeccionada</estado>
+        </receta>
     </recetas>
     <pacientes>
         <paciente>
@@ -150,22 +179,10 @@
     </pacientes>
     <medicos>
         <medico>
-            <id>444</id>
-            <nombre>Matias</nombre>
-            <clave></clave>
-            <especialidad>pediatra</especialidad>
-        </medico>
-        <medico>
-            <id>666</id>
-            <nombre>FERNANDA</nombre>
-            <clave></clave>
-            <especialidad>psicologa</especialidad>
-        </medico>
-        <medico>
-            <id>888</id>
-            <nombre>Elias</nombre>
-            <clave></clave>
-            <especialidad>podologo</especialidad>
+            <id>504650944</id>
+            <nombre>Myriam Jara Watson</nombre>
+            <clave>504650944</clave>
+            <especialidad>Dermatología</especialidad>
         </medico>
     </medicos>
     <farmaceuticos>
