@@ -136,7 +136,7 @@
             </prescripciones>
             <fechaConfeccion>2025-09-12</fechaConfeccion>
             <fechaRetiro>2025-09-05</fechaRetiro>
-            <estado>Confeccionada</estado>
+            <estado>En Proceso</estado>
         </receta>
         <receta>
             <doctor>
@@ -179,6 +179,12 @@
             <nombre>Marco</nombre>
             <fechaNacimiento>2025-09-05</fechaNacimiento>
             <telNum>34534</telNum>
+        </paciente>
+        <paciente>
+            <id>504</id>
+            <nombre>mm</nombre>
+            <fechaNacimiento>2025-09-05</fechaNacimiento>
+            <telNum>d</telNum>
         </paciente>
     </pacientes>
     <medicos>

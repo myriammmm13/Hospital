@@ -1,5 +1,6 @@
 package Hospital.presentation.despacho;
 
+import Hospital.logic.personas.Paciente;
 import Hospital.logic.recetas.Prescripcion;
 import Hospital.logic.recetas.Receta;
 import Hospital.presentation.AbstractModel;
@@ -47,5 +48,12 @@ public class Model extends AbstractModel {
         Receta r = this.recetas.get(row);
         recetas.remove(r);
         firePropertyChange(RECETAS, null, recetas);
+    }
+
+
+
+    public void setList(List<Receta> list) {
+        this.recetas = list;
+        firePropertyChange(RECETAS);
     }
 }

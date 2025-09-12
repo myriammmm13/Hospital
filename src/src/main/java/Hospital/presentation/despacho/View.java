@@ -148,6 +148,9 @@ public class View implements PropertyChangeListener {
         this.model = model;
         model.addPropertyChangeListener(this);
         propertyChange(new PropertyChangeEvent(model, model.RECETAS, null, null));
+
+        int[] cols = {TableModel.PACIENTE, TableModel.DOCTOR, TableModel.PRESCRIPCIONES,
+                TableModel.FECHA_CONFECCION, TableModel.ESTADO};
     }
 
     private void inicializarComboBox() {
