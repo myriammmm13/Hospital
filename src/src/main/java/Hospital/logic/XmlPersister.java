@@ -1,5 +1,6 @@
-package Hospital.data;
+package Hospital.logic;
 
+import Hospital.data.Data;
 import jakarta.xml.bind.*;
 
 import java.io.*;

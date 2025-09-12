@@ -1,6 +1,7 @@
 package Hospital.presentation.login;
 
 import Hospital.data.Data;
+import Hospital.logic.Session;
 import Hospital.logic.personas.Trabajador;
 
 public class Model {
@@ -13,6 +14,7 @@ public class Model {
     public boolean validate(String user, String password) {
         for (Trabajador t : data.getTrabajadores()) {
             if (t.getId().equals(user) && t.getClave().equals(password)) {
+                Session.getInstance().setUsuario(user);
                 return true;
             }
         }

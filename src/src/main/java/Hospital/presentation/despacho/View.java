@@ -33,7 +33,7 @@ public class View implements PropertyChangeListener {
     Model model;
     Controller controller;
 
-    View(){
+    public View(){
         inicializarComboBox();
 
         detallesPrescripcionButton.addActionListener(new ActionListener() {
@@ -58,9 +58,10 @@ public class View implements PropertyChangeListener {
         descartarRecetaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(getFilaModeloSeleccionada()>=0){
-                    try{
-                        controller.descartarReceta(getFilaModeloSeleccionada());
+                if(recetaTable.getSelectedRow()>=0){
+                    try {
+                        controller.descartarReceta(recetaTable.getSelectedRow());
+                        JOptionPane.showMessageDialog(panel, "Éxito al actualizar");
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(panel, "Error al actualizar: " + ex.getMessage());
                     }
@@ -68,22 +69,24 @@ public class View implements PropertyChangeListener {
             }
         });
 
+
+
         recetaTable.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting() && getFilaModeloSeleccionada() >= 0) {
                 String estado = model.getRecetasList().get(getFilaModeloSeleccionada()).getEstado();
                 estado.toLowerCase();
 
                 switch (estado) {
-                    case "confeccionada":
+                    case "Confeccionada":
                         estadoRecetaButton.setText("Procesar");
                         break;
-                    case "en proceso":
+                    case "En Proceso":
                         estadoRecetaButton.setText("Preparar");
                         break;
-                    case "lista":
+                    case "Lista":
                         estadoRecetaButton.setText("Despachar");
                         break;
-                    case "entregada":
+                    case "Entregada":
                         estadoRecetaButton.setText("—");
                         estadoRecetaButton.setEnabled(false);
                         break;
@@ -92,7 +95,7 @@ public class View implements PropertyChangeListener {
                         break;
                 }
 
-                if (!estado.equalsIgnoreCase("entregada")) {
+                if (!estado.equalsIgnoreCase("Entregada")) {
                     estadoRecetaButton.setEnabled(true);
                 }
             }
@@ -147,13 +150,27 @@ public class View implements PropertyChangeListener {
     public void setModel(Model model) {
         this.model = model;
         model.addPropertyChangeListener(this);
-        propertyChange(new PropertyChangeEvent(model, model.RECETAS, null, null));
+
+        int[] cols = {
+                TableModel.PACIENTE,
+                TableModel.DOCTOR,
+                TableModel.PRESCRIPCIONES,
+                TableModel.FECHA_CONFECCION,
+                TableModel.ESTADO
+        };
+
+        List<Receta> recetasFiltradas = model.getRecetasList().stream()
+                .filter(r -> !r.getEstado().equalsIgnoreCase("Entregada"))
+                .collect(Collectors.toList());
+
+        TableModel tableModel = new TableModel(cols, recetasFiltradas);
+        recetaTable.setModel(tableModel);
+        ordenamientoBusqueda = new TableRowSorter<>(tableModel);
+        recetaTable.setRowSorter(ordenamientoBusqueda);
+
     }
 
     private void inicializarComboBox() {
-        categoriaBox.addItem("Paciente");
-        categoriaBox.addItem("Doctor");
-
         columnaFiltroMap.put("Paciente", TableModel.PACIENTE);
         columnaFiltroMap.put("Doctor", TableModel.DOCTOR);
     }
@@ -193,7 +210,6 @@ public class View implements PropertyChangeListener {
 
                 TableModel tableModel = new TableModel(cols, recetasFiltradas);
                 recetaTable.setModel(tableModel);
-
 
                 ordenamientoBusqueda = new TableRowSorter<>(tableModel);
                 recetaTable.setRowSorter(ordenamientoBusqueda);

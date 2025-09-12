@@ -84,5 +84,4 @@ public class View extends JDialog implements PropertyChangeListener {
 
 
     }
-
 }

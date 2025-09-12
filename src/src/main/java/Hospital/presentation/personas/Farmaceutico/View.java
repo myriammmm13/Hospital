@@ -139,13 +139,15 @@ public class View implements PropertyChangeListener {
     public void setModel(Model model) {
         this.model = model;
         model.addPropertyChangeListener(this);
+        int[] cols = {TableModel.ID, TableModel.NOMBRE, TableModel.CLAVE};
+        farmaceuticoTable.setModel(new TableModel(cols,model.getList()));
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
             case Model.LIST:
-                int[] cols = {TableModel.ID, TableModel.NOMBRE};
+                int[] cols = {TableModel.ID, TableModel.NOMBRE, TableModel.CLAVE};
                 farmaceuticoTable.setModel(new TableModel(cols,model.getList()));
                 break;
             case Model.CURRENT:
@@ -160,6 +162,7 @@ public class View implements PropertyChangeListener {
         Farmaceutico e = new Farmaceutico();
         e.setId(idText.getText());
         e.setNombre(nombreText.getText());
+        e.setClave(idText.getText());
         return e;
     }
     public void clearFields() {

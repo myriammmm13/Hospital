@@ -135,16 +135,18 @@ public class View implements PropertyChangeListener {
     public void setModel(Model model) {
         this.model = model;
         model.addPropertyChangeListener(this);
+        int[] cols = {TableModel.ID, TableModel.NOMBRE, TableModel.ESPECIALIDAD, TableModel.CLAVE};
+        medicoTable.setModel(new TableModel(cols,model.getList()));
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
             case Model.LIST:
-                int[] cols = {TableModel.ID, TableModel.NOMBRE, TableModel.ESPECIALIDAD};
+                int[] cols = {TableModel.ID, TableModel.NOMBRE, TableModel.ESPECIALIDAD, TableModel.CLAVE};
                 medicoTable.setModel(new TableModel(cols,model.getList()));
                 break;
-            case Hospital.presentation.personas.Paciente.Model.CURRENT:
+            case Model.CURRENT:
                 IDText.setText(model.getCurrent().getId());
                 NomText.setText(model.getCurrent().getNombre());
                 EspText.setText(model.getCurrent().getEspecialidad());
@@ -157,8 +159,8 @@ public class View implements PropertyChangeListener {
         Medico e = new Medico();
         e.setId(IDText.getText());
         e.setNombre(NomText.getText());
-        //hacer fecha
         e.setEspecialidad(EspText.getText());
+        e.setClave(IDText.getText());
         return e;
     }
     public void clearFields() {

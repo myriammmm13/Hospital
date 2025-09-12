@@ -14,16 +14,25 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
-        <!-- JAXB para persistencia -->
+        <!-- JFreeChart para gráficos -->
+        <dependency>
+            <groupId>org.jfree</groupId>
+            <artifactId>jfreechart</artifactId>
+            <version>1.5.4</version>
+        </dependency>
+
+        <!-- LGoodDatePicker para los selectores de fecha -->
+        <dependency>
+            <groupId>com.github.lgooddatepicker</groupId>
+            <artifactId>LGoodDatePicker</artifactId>
+            <version>11.2.1</version>
+        </dependency>
+
+        <!-- JAXB para persistencia XML -->
         <dependency>
             <groupId>jakarta.xml.bind</groupId>
             <artifactId>jakarta.xml.bind-api</artifactId>
             <version>4.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-impl</artifactId>
-            <version>4.0.3</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jaxb</groupId>
@@ -31,11 +40,11 @@
             <version>4.0.3</version>
         </dependency>
 
-        <!-- LGoodDatePicker para los calendarios -->
+        <!-- Activación para JAXB -->
         <dependency>
-            <groupId>com.github.lgooddatepicker</groupId>
-            <artifactId>LGoodDatePicker</artifactId>
-            <version>11.2.1</version>
+            <groupId>jakarta.activation</groupId>
+            <artifactId>jakarta.activation-api</artifactId>
+            <version>2.1.0</version>
         </dependency>
     </dependencies>
 </project>

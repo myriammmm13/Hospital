@@ -12,6 +12,7 @@ public class Controller {
     public Controller(Model model, View view) {
         this.model = model;
         this.view = view;
+        model.setList(Service.instance().listarRecetas()); // o como sea que se obtienen
 
         view.setController(this);
         view.setModel(model);

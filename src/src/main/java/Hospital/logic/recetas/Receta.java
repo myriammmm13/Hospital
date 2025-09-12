@@ -1,20 +1,24 @@
 package Hospital.logic.recetas;
 
-import Hospital.data.LocalDateAdapter;
+import Hospital.logic.LocalDateAdapter;
 import Hospital.logic.personas.Paciente;
-import Hospital.logic.personas.trabajadores.Medico;
+import Hospital.logic.personas.Trabajador;
 
-import jakarta.xml.bind.annotation.*;
-import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-@XmlRootElement(name = "receta")
+import jakarta.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Receta {
+    private int cant;
+    @XmlElement
+    private Trabajador doctor;
 
-    private Medico doctor;
+    @XmlElement
     private Paciente paciente;
 
     @XmlElementWrapper(name = "prescripciones")
@@ -27,56 +31,47 @@ public class Receta {
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate fechaRetiro;
 
+    @XmlElement
     private String estado;
 
+
     public Receta() {
-        this.prescripciones = new ArrayList<>();
-        this.estado = "Confeccionada";
-        this.fechaConfeccion = LocalDate.now();
+        prescripciones = new ArrayList<>();
+        estado = "Confeccionada";
+        fechaConfeccion = LocalDate.now();
+        cant=0;
+        doctor=new Trabajador();
     }
 
-    // Otros constructores
-    public Receta(Medico doctor, Paciente paciente, List<Prescripcion> prescripciones, LocalDate fechaRetiro) {
-        this.doctor = doctor;
+    public Receta(Paciente paciente, List<Prescripcion> prescripciones, Trabajador  doctor) {
         this.paciente = paciente;
         this.prescripciones = new ArrayList<>(prescripciones);
         this.fechaConfeccion = LocalDate.now();
-        this.fechaRetiro = fechaRetiro;
+        this.fechaRetiro = LocalDate.now().plusDays(3);
         this.estado = "Confeccionada";
+        cant=prescripciones.size();
+        this.doctor=doctor;
     }
 
-    public Receta(Medico medico, Paciente paciente, List<Prescripcion> prescripciones) {
-        this.doctor = medico;
-        this.paciente = paciente;
-        this.prescripciones = new ArrayList<>(prescripciones);
-        this.fechaConfeccion = LocalDate.now();
-        this.fechaRetiro = LocalDate.now().plusDays(3); // valor por defecto
-        this.estado = "Confeccionada";
-    }
-
-    // Getters y setters
-    public Medico getDoctor() { return doctor; }
-    public void setDoctor(Medico doctor) { this.doctor = doctor; }
-
+    // Getters
+    public Trabajador getDoctor() { return doctor; }
     public Paciente getPaciente() { return paciente; }
-    public void setPaciente(Paciente paciente) { this.paciente = paciente; }
-
     public List<Prescripcion> getPrescripciones() { return prescripciones; }
+    public LocalDate getFechaConfeccion() { return fechaConfeccion; }
+    public LocalDate getFechaRetiro() { return fechaRetiro; }
+    public String getEstado() { return estado; }
+
+    // Setters
+    public void setDoctor(Trabajador doctor) { this.doctor = doctor; }
+    public void setPaciente(Paciente paciente) { this.paciente = paciente; }
     public void setPrescripciones(List<Prescripcion> prescripciones) {
         this.prescripciones = new ArrayList<>(prescripciones);
+        cant=prescripciones.size();
     }
-
-    public LocalDate getFechaConfeccion() { return fechaConfeccion; }
-    public void setFechaConfeccion(LocalDate fechaConfeccion) { this.fechaConfeccion = fechaConfeccion; }
-
-    public LocalDate getFechaRetiro() { return fechaRetiro; }
     public void setFechaRetiro(LocalDate fechaRetiro) { this.fechaRetiro = fechaRetiro; }
-
-    public String getEstado() { return estado; }
     public void setEstado(String estado) { this.estado = estado; }
 
-
-
+    // Métodos de utilidad
     public void agregarPrescripcion(Prescripcion prescripcion) {
         this.prescripciones.add(prescripcion);
     }
@@ -94,5 +89,13 @@ public class Receta {
     public boolean estaListaParaRetiro() {
         LocalDate hoy = LocalDate.now();
         return !hoy.isBefore(fechaRetiro.minusDays(3)) && !hoy.isAfter(fechaRetiro.plusDays(3));
+    }
+
+    public String getCantidad() {
+        return cant+"";
+    }
+
+    public String getFecha_Confeccion() {
+        return fechaConfeccion.toString();
     }
 }
