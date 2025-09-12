@@ -44,4 +44,8 @@ public class TableModel extends AbstractTableModel<Prescripcion> implements java
         }
     }
 
+    public List<Prescripcion> getPrescripciones() {
+        return rows;
+    }
+
 }
