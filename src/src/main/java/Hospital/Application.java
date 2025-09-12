@@ -127,7 +127,7 @@ public class Application {
         }
 
         window.setContentPane(tabs);
-        window.setSize(800, 600);
+        window.setSize(1000, 500);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setLocationRelativeTo(null);
         window.setVisible(true);

@@ -11,6 +11,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import Hospital.logic.XmlPersister;
+import org.jfree.data.general.DefaultPieDataset;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,6 +37,7 @@ public class View implements PropertyChangeListener {
     private JPanel fechaParaHasta;
     private JButton limpiar;
     private JPanel panelparagrafico;
+    private JPanel panelparaPastel;
     private JComboBox comboBox1;
     private JComboBox comboBox2;
     private DatePicker fechaPicker;
@@ -66,6 +68,15 @@ public class View implements PropertyChangeListener {
         panelparagrafico.setPreferredSize(new Dimension(600, 400));
         panelparagrafico.setVisible(true);
 
+        panelparaPastel.setPreferredSize(new Dimension(400, 300));
+        panelparaPastel.setVisible(true);
+
+        try {
+            Map<String, Integer> datos = contarRecetasPorEstado();
+            mostrarGraficoEstados(datos);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(panelDatos, "Error al generar gráfico de estados: " + ex.getMessage());
+        }
 
         aceptarButton.addActionListener(e -> actualizarTabla());
 
@@ -156,6 +167,20 @@ public class View implements PropertyChangeListener {
         return conteoPorMes;
     }
 
+    private Map<String, Integer> contarRecetasPorEstado() throws Exception {
+        Map<String, Integer> conteo = new TreeMap<>();
+        List<Receta> recetas = Hospital.logic.XmlPersister.instance().load().getRecetas();
+
+        for (Receta r : recetas) {
+            String estado = r.getEstado();
+            if (estado == null || estado.isBlank()) continue;
+
+            conteo.put(estado, conteo.getOrDefault(estado, 0) + 1);
+        }
+
+        return conteo;
+    }
+
     private void mostrarGraficoRecetas(Map<String, Map<YearMonth, Integer>> datosPorMedicamento, LocalDate desde, LocalDate hasta) {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
@@ -225,6 +250,30 @@ public class View implements PropertyChangeListener {
         }
     }
 
+    private void mostrarGraficoEstados(Map<String, Integer> datos) {
+        DefaultPieDataset dataset = new DefaultPieDataset();
+
+        for (Map.Entry<String, Integer> entry : datos.entrySet()) {
+            dataset.setValue(entry.getKey(), entry.getValue());
+        }
+        JFreeChart chart = ChartFactory.createPieChart(
+                "Recetas por estado",
+                dataset,
+                true,
+                true,
+                false
+        );
+
+        ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(new Dimension(300, 200));
+
+        panelparaPastel.removeAll();
+        panelparaPastel.setLayout(new BorderLayout());
+        panelparaPastel.add(chartPanel, BorderLayout.CENTER);
+        panelparaPastel.revalidate();
+        panelparaPastel.repaint();
+    }
+
     public JPanel getPanel() {
         return panelDatos;
     }
@@ -272,4 +321,7 @@ public class View implements PropertyChangeListener {
         }
         return null;
     }
+
+
+
 }
