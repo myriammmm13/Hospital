@@ -1,6 +1,6 @@
 package Hospital.presentation.prescribir;
 
-import Hospital.data.XmlPersister;
+import Hospital.logic.XmlPersister;
 import Hospital.logic.Medicamento;
 import Hospital.logic.personas.Paciente;
 import Hospital.logic.recetas.Prescripcion;

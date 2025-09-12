@@ -18,7 +18,7 @@ public class TableModel extends AbstractTableModel<Receta> implements javax.swin
 
     @Override
     protected void initColNames() {
-        colNames = new String[7];
+        colNames = new String[5];
         colNames[PACIENTE] = "Paciente";
         colNames[DOCTOR] = "Doctor";
         colNames[PRESCRIPCIONES] = "Prescripciones";
@@ -36,13 +36,11 @@ public class TableModel extends AbstractTableModel<Receta> implements javax.swin
             case PACIENTE:
                 return e.getPaciente().getNombre();
             case DOCTOR:
-                return e.getDoctor();
+                return e.getDoctor() != null ? e.getDoctor().getNombre() : "Sin asignar";
             case PRESCRIPCIONES:
-                //return e.getCantidad();
-                return 0;
+                return e.getCantidad();
             case FECHA_CONFECCION:
-                //return e.getFecha_Confeccion();
-                return 0;
+                return e.getFecha_Confeccion();
             case ESTADO:
                 return e.getEstado();
             default:

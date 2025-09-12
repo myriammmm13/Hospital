@@ -79,6 +79,7 @@
     </trabajadores>
     <recetas>
         <receta>
+            <cant>0</cant>
             <doctor>
                 <id>MED-002</id>
                 <nombre>Juan Hernandez Jimenez</nombre>
@@ -93,18 +94,168 @@
             <prescripciones>
                 <prescripcion>
                     <medicamento>
-                        <codigo></codigo>
-                        <nombre></nombre>
-                        <presentacion></presentacion>
+                        <codigo>111</codigo>
+                        <nombre>Acetaminofen</nombre>
+                        <presentacion>500mg</presentacion>
                     </medicamento>
-                    <indicaciones>Una por dia</indicaciones>
-                    <duracion>3</duracion>
-                    <cantidad>3</cantidad>
+                    <indicaciones>Tomar una por día</indicaciones>
+                    <duracion>30</duracion>
+                    <cantidad>30</cantidad>
+                </prescripcion>
+                <prescripcion>
+                    <medicamento>
+                        <codigo>112</codigo>
+                        <nombre>Ibuprofeno</nombre>
+                        <presentacion>400mg</presentacion>
+                    </medicamento>
+                    <indicaciones>Tomar cada tres días</indicaciones>
+                    <duracion>30</duracion>
+                    <cantidad>10</cantidad>
                 </prescripcion>
             </prescripciones>
             <fechaConfeccion>2025-09-12</fechaConfeccion>
-            <fechaRetiro>2025-09-05</fechaRetiro>
-            <estado>Lista</estado>
+            <fechaRetiro>2025-09-25</fechaRetiro>
+            <estado>Entregada</estado>
+        </receta>
+        <receta>
+            <cant>1</cant>
+            <paciente>
+                <id>333</id>
+                <nombre>Juana</nombre>
+                <fechaNacimiento>2025-09-11</fechaNacimiento>
+                <telNum>12324</telNum>
+            </paciente>
+            <prescripciones>
+                <prescripcion>
+                    <medicamento>
+                        <codigo>111</codigo>
+                        <nombre>Acetaminofen</nombre>
+                        <presentacion>500mg</presentacion>
+                    </medicamento>
+                    <indicaciones>Tomar todas en el mismo momento</indicaciones>
+                    <duracion>1</duracion>
+                    <cantidad>16</cantidad>
+                </prescripcion>
+            </prescripciones>
+            <fechaConfeccion>2025-09-12</fechaConfeccion>
+            <fechaRetiro>2025-09-23</fechaRetiro>
+            <estado>Entregada</estado>
+        </receta>
+        <receta>
+            <cant>2</cant>
+            <paciente>
+                <id>777</id>
+                <nombre>Marco</nombre>
+                <fechaNacimiento>2025-09-05</fechaNacimiento>
+                <telNum>34534</telNum>
+            </paciente>
+            <prescripciones>
+                <prescripcion>
+                    <medicamento>
+                        <codigo>113</codigo>
+                        <nombre>Amoxicilina</nombre>
+                        <presentacion>250mg cápsulas</presentacion>
+                    </medicamento>
+                    <indicaciones>c</indicaciones>
+                    <duracion>2</duracion>
+                    <cantidad>5</cantidad>
+                </prescripcion>
+                <prescripcion>
+                    <medicamento>
+                        <codigo>114</codigo>
+                        <nombre>Loratadina</nombre>
+                        <presentacion>10mg tabletas</presentacion>
+                    </medicamento>
+                    <indicaciones>si quiero</indicaciones>
+                    <duracion>2</duracion>
+                    <cantidad>6</cantidad>
+                </prescripcion>
+            </prescripciones>
+            <fechaConfeccion>2025-09-12</fechaConfeccion>
+            <fechaRetiro>2025-09-14</fechaRetiro>
+            <estado>Entregada</estado>
+        </receta>
+        <receta>
+            <cant>3</cant>
+            <paciente>
+                <id>777</id>
+                <nombre>Marco</nombre>
+                <fechaNacimiento>2025-09-05</fechaNacimiento>
+                <telNum>34534</telNum>
+            </paciente>
+            <prescripciones>
+                <prescripcion>
+                    <medicamento>
+                        <codigo>111</codigo>
+                        <nombre>Acetaminofen</nombre>
+                        <presentacion>500mg</presentacion>
+                    </medicamento>
+                    <indicaciones>estoy probando</indicaciones>
+                    <duracion>20</duracion>
+                    <cantidad>20</cantidad>
+                </prescripcion>
+                <prescripcion>
+                    <medicamento>
+                        <codigo>113</codigo>
+                        <nombre>Amoxicilina</nombre>
+                        <presentacion>250mg cápsulas</presentacion>
+                    </medicamento>
+                    <indicaciones>si</indicaciones>
+                    <duracion>50</duracion>
+                    <cantidad>30</cantidad>
+                </prescripcion>
+            </prescripciones>
+            <fechaConfeccion>2025-09-12</fechaConfeccion>
+            <fechaRetiro>2025-09-18</fechaRetiro>
+            <estado>Confeccionada</estado>
+        </receta>
+        <receta>
+            <cant>2</cant>
+            <paciente>
+                <id>504</id>
+                <nombre>mm</nombre>
+                <fechaNacimiento>2025-09-05</fechaNacimiento>
+                <telNum>d</telNum>
+            </paciente>
+            <prescripciones>
+                <prescripcion>
+                    <medicamento>
+                        <codigo>112</codigo>
+                        <nombre>Ibuprofeno</nombre>
+                        <presentacion>400mg</presentacion>
+                    </medicamento>
+                    <indicaciones>kk</indicaciones>
+                    <duracion>30</duracion>
+                    <cantidad>50</cantidad>
+                </prescripcion>
+            </prescripciones>
+            <fechaConfeccion>2025-09-12</fechaConfeccion>
+            <fechaRetiro>2025-09-12</fechaRetiro>
+            <estado>Confeccionada</estado>
+        </receta>
+        <receta>
+            <cant>1</cant>
+            <paciente>
+                <id>777</id>
+                <nombre>Marco</nombre>
+                <fechaNacimiento>2025-09-05</fechaNacimiento>
+                <telNum>34534</telNum>
+            </paciente>
+            <prescripciones>
+                <prescripcion>
+                    <medicamento>
+                        <codigo>112</codigo>
+                        <nombre>Ibuprofeno</nombre>
+                        <presentacion>400mg</presentacion>
+                    </medicamento>
+                    <indicaciones>tomar todas</indicaciones>
+                    <duracion>10</duracion>
+                    <cantidad>70</cantidad>
+                </prescripcion>
+            </prescripciones>
+            <fechaConfeccion>2025-09-12</fechaConfeccion>
+            <fechaRetiro>2025-09-26</fechaRetiro>
+            <estado>Confeccionada</estado>
         </receta>
     </recetas>
     <pacientes>

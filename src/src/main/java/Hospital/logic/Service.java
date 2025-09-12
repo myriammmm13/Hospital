@@ -2,7 +2,6 @@ package Hospital.logic;
 
 import Hospital.Application;
 import Hospital.data.Data;
-import Hospital.data.XmlPersister;
 import Hospital.logic.personas.Paciente;
 import Hospital.logic.personas.Trabajador;
 import Hospital.logic.personas.trabajadores.Medico;
@@ -496,7 +495,7 @@ public class Service {
         Receta original = obtenerReceta(r);
         original.setPrescripciones(r.getPrescripciones());
         original.setEstado(r.getEstado());
-        // original.setFechaRetiro(r.getFechaRetiro()); // si querés incluirlo
+        original.setFechaRetiro(r.getFechaRetiro());
 
         // Guardar en XML
         try {

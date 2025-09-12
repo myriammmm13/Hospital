@@ -1,9 +1,8 @@
 package Hospital.logic.recetas;
 
-import Hospital.data.LocalDateAdapter;
+import Hospital.logic.LocalDateAdapter;
 import Hospital.logic.personas.Paciente;
 import Hospital.logic.personas.Trabajador;
-import Hospital.logic.personas.trabajadores.Medico;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Receta {
-
+    private int cant;
     @XmlElement
     private Trabajador doctor;
 
@@ -40,16 +39,16 @@ public class Receta {
         prescripciones = new ArrayList<>();
         estado = "Confeccionada";
         fechaConfeccion = LocalDate.now();
-        //IDdoctor="";
+        cant=0;
     }
 
-    public Receta(Trabajador doctor, Paciente paciente, List<Prescripcion> prescripciones) {
-        this.doctor = doctor;
+    public Receta(Paciente paciente, List<Prescripcion> prescripciones) {
         this.paciente = paciente;
         this.prescripciones = new ArrayList<>(prescripciones);
         this.fechaConfeccion = LocalDate.now();
         this.fechaRetiro = LocalDate.now().plusDays(3);
         this.estado = "Confeccionada";
+        cant=prescripciones.size();
     }
 
     // Getters
@@ -65,6 +64,7 @@ public class Receta {
     public void setPaciente(Paciente paciente) { this.paciente = paciente; }
     public void setPrescripciones(List<Prescripcion> prescripciones) {
         this.prescripciones = new ArrayList<>(prescripciones);
+        cant=prescripciones.size();
     }
     public void setFechaRetiro(LocalDate fechaRetiro) { this.fechaRetiro = fechaRetiro; }
     public void setEstado(String estado) { this.estado = estado; }
@@ -87,5 +87,13 @@ public class Receta {
     public boolean estaListaParaRetiro() {
         LocalDate hoy = LocalDate.now();
         return !hoy.isBefore(fechaRetiro.minusDays(3)) && !hoy.isAfter(fechaRetiro.plusDays(3));
+    }
+
+    public String getCantidad() {
+        return cant+"";
+    }
+
+    public String getFecha_Confeccion() {
+        return fechaConfeccion.toString();
     }
 }

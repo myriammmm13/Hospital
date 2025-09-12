@@ -44,7 +44,6 @@ public class View implements PropertyChangeListener {
 
     Model model;
     Controller controller;
-    Medico doctorAuxiliar; //solo para que no se pegue
 
     public View() {
         DatePickerSettings settings = new DatePickerSettings();
@@ -65,7 +64,7 @@ public class View implements PropertyChangeListener {
                 List<Prescripcion> listaPrescripciones = modeloTabla.getPrescripciones();
 
                 Paciente paciente = model.getCurrent().getPaciente();
-                String idTrabajador = Session.getInstance().getUsuario(); // ← si devuelve un String
+                String idTrabajador = Session.getInstance().getUsuario();
 
                 Trabajador doctor = Service.instance().findTrabajadorById(idTrabajador);
 
@@ -84,7 +83,7 @@ public class View implements PropertyChangeListener {
                     return;
                 }
 
-                Receta r = new Receta(doctor, paciente, listaPrescripciones);
+                Receta r = new Receta(paciente, listaPrescripciones);
                 r.setFechaRetiro(fecha.getDate());
                 model.setCurrent(r);
 

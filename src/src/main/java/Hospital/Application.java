@@ -1,8 +1,7 @@
 package Hospital;
 
 import Hospital.data.Data;
-import Hospital.data.XmlPersister;
-import Hospital.logic.Service;
+import Hospital.logic.XmlPersister;
 import Hospital.presentation.login.Controller;
 import Hospital.presentation.login.Model;
 import Hospital.presentation.login.View;

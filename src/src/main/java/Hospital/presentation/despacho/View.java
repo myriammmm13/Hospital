@@ -147,10 +147,24 @@ public class View implements PropertyChangeListener {
     public void setModel(Model model) {
         this.model = model;
         model.addPropertyChangeListener(this);
-        propertyChange(new PropertyChangeEvent(model, model.RECETAS, null, null));
 
-        int[] cols = {TableModel.PACIENTE, TableModel.DOCTOR, TableModel.PRESCRIPCIONES,
-                TableModel.FECHA_CONFECCION, TableModel.ESTADO};
+        int[] cols = {
+                TableModel.PACIENTE,
+                TableModel.DOCTOR,
+                TableModel.PRESCRIPCIONES,
+                TableModel.FECHA_CONFECCION,
+                TableModel.ESTADO
+        };
+
+        List<Receta> recetasFiltradas = model.getRecetasList().stream()
+                .filter(r -> !r.getEstado().equalsIgnoreCase("Entregada"))
+                .collect(Collectors.toList());
+
+        TableModel tableModel = new TableModel(cols, recetasFiltradas);
+        recetaTable.setModel(tableModel);
+        ordenamientoBusqueda = new TableRowSorter<>(tableModel);
+        recetaTable.setRowSorter(ordenamientoBusqueda);
+
     }
 
     private void inicializarComboBox() {
@@ -193,7 +207,6 @@ public class View implements PropertyChangeListener {
 
                 TableModel tableModel = new TableModel(cols, recetasFiltradas);
                 recetaTable.setModel(tableModel);
-
 
                 ordenamientoBusqueda = new TableRowSorter<>(tableModel);
                 recetaTable.setRowSorter(ordenamientoBusqueda);
