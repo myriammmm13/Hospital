@@ -76,12 +76,6 @@
             <nombre>yassir</nombre>
             <clave></clave>
         </trabajador>
-        <trabajador xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="medico">
-            <id>504650944</id>
-            <nombre>Myriam Jara Watson</nombre>
-            <clave>504650944</clave>
-            <especialidad>Dermatología</especialidad>
-        </trabajador>
     </trabajadores>
     <recetas>
         <receta>
@@ -130,9 +124,14 @@
             </paciente>
             <prescripciones>
                 <prescripcion>
-                    <cantidad>3</cantidad>
-                    <duracion>3</duracion>
+                    <medicamento>
+                        <codigo></codigo>
+                        <nombre></nombre>
+                        <presentacion></presentacion>
+                    </medicamento>
                     <indicaciones>Una por dia</indicaciones>
+                    <duracion>3</duracion>
+                    <cantidad>3</cantidad>
                 </prescripcion>
             </prescripciones>
             <fechaConfeccion>2025-09-12</fechaConfeccion>
@@ -153,13 +152,18 @@
             </paciente>
             <prescripciones>
                 <prescripcion>
-                    <cantidad>10</cantidad>
-                    <duracion>10</duracion>
-                    <indicaciones>si</indicaciones>
+                    <medicamento>
+                        <codigo>111</codigo>
+                        <nombre>Acetaminofen</nombre>
+                        <presentacion>500mg</presentacion>
+                    </medicamento>
+                    <indicaciones>un por dia</indicaciones>
+                    <duracion>3</duracion>
+                    <cantidad>3</cantidad>
                 </prescripcion>
             </prescripciones>
             <fechaConfeccion>2025-09-12</fechaConfeccion>
-            <fechaRetiro>2025-09-19</fechaRetiro>
+            <fechaRetiro>2025-09-13</fechaRetiro>
             <estado>Confeccionada</estado>
         </receta>
     </recetas>
@@ -179,10 +183,22 @@
     </pacientes>
     <medicos>
         <medico>
-            <id>504650944</id>
-            <nombre>Myriam Jara Watson</nombre>
-            <clave>504650944</clave>
-            <especialidad>Dermatología</especialidad>
+            <id>444</id>
+            <nombre>Matias</nombre>
+            <clave></clave>
+            <especialidad>pediatra</especialidad>
+        </medico>
+        <medico>
+            <id>666</id>
+            <nombre>FERNANDA</nombre>
+            <clave></clave>
+            <especialidad>psicologa</especialidad>
+        </medico>
+        <medico>
+            <id>888</id>
+            <nombre>Elias</nombre>
+            <clave></clave>
+            <especialidad>podologo</especialidad>
         </medico>
     </medicos>
     <farmaceuticos>
