@@ -1,6 +1,7 @@
 package Hospital.presentation.prescribir;
 
 import Hospital.Application;
+import Hospital.logic.Session;
 import Hospital.logic.personas.Paciente;
 import Hospital.logic.recetas.Prescripcion;
 import Hospital.logic.recetas.Receta;
@@ -73,13 +74,7 @@ public class View implements PropertyChangeListener {
         limpiarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    model.setCurrent(new Receta(doctorAuxiliar = new Medico(), pacienteAuxiliar = new Paciente(), new ArrayList<>()) /*id del doctor*/);
-                    limpiarCampos();
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(panelPrincipal, "Error al limpiar: " + ex.getMessage());
-                }
-
+                controller.clear();
             }
         });
 
@@ -128,7 +123,7 @@ public class View implements PropertyChangeListener {
 
     public void setController(Controller controller) {
         this.controller = controller;
-        buscarPacienteView.setController(controller); // ← esta línea es clave
+        buscarPacienteView.setController(controller);
         buscarMedicamentoView.setController(controller);
     }
 
@@ -192,17 +187,24 @@ public class View implements PropertyChangeListener {
         return valid;
     }
 
-    private void limpiarCampos() {
-        nombrePaciente.setText("No seleccionado");
-        fecha.clear();
-        PrescripcionTable.revalidate();
-    }
-
     public Receta take() {
         Receta e = new Receta();
         e.setPaciente(model.getCurrent().getPaciente());
         e.setPrescripciones(model.getCurrent().getPrescripciones());
+        e.setDoctor(Session.getInstance().getUsuario());
         return e;
     }
-
+    public void clearFields() {
+        int[] cols = {TableModel.MEDICAMENTO,TableModel.PRESENTACION, TableModel.CANTIDAD,
+                TableModel.INDICACIONES, TableModel.DURACION};
+        nombrePaciente.setText("No seleccionado");
+        PrescripcionTable.setModel(new TableModel(cols,new ArrayList<Prescripcion>()));
+        fecha.setText("");
+        fecha.getComponentDateTextField().setBackground(null);
+        fecha.getComponentDateTextField().setToolTipText(null);
+        nombrePaciente.setBackground(null);
+        PrescripcionTable.setBackground(null);
+        nombrePaciente.setToolTipText(null);
+        PrescripcionTable.setToolTipText(null);
+    }
 }
