@@ -21,12 +21,17 @@
             <nombre>Loratadina</nombre>
             <presentacion>10mg tabletas</presentacion>
         </medicamento>
+        <medicamento>
+            <codigo></codigo>
+            <nombre></nombre>
+            <presentacion></presentacion>
+        </medicamento>
     </medicamentos>
     <trabajadores>
         <trabajador>
             <id>ADM-001</id>
             <nombre>Ana Ramirez Soto</nombre>
-            <clave>ADM-001</clave>
+            <clave>123</clave>
         </trabajador>
         <trabajador>
             <id>MED-002</id>
@@ -38,16 +43,125 @@
             <nombre>Marco Perez Garcia</nombre>
             <clave>FAR-003</clave>
         </trabajador>
+        <trabajador xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="medico">
+            <id>444</id>
+            <nombre>Matias</nombre>
+            <clave></clave>
+            <especialidad>pediatra</especialidad>
+        </trabajador>
+        <trabajador xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="farmaceutico">
+            <id>555</id>
+            <nombre>Maria</nombre>
+            <clave></clave>
+        </trabajador>
+        <trabajador xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="medico">
+            <id>666</id>
+            <nombre>FERNANDA</nombre>
+            <clave></clave>
+            <especialidad>FGFGH</especialidad>
+        </trabajador>
+        <trabajador xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="medico">
+            <id>888</id>
+            <nombre>Elias</nombre>
+            <clave></clave>
+            <especialidad>podologo</especialidad>
+        </trabajador>
+        <trabajador xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="farmaceutico">
+            <id>999</id>
+            <nombre>Brenda</nombre>
+            <clave></clave>
+        </trabajador>
+        <trabajador xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="farmaceutico">
+            <id>000</id>
+            <nombre>yassir</nombre>
+            <clave></clave>
+        </trabajador>
     </trabajadores>
-    <recetas/>
+    <recetas>
+        <receta>
+            <doctor>
+                <id>MED-002</id>
+                <nombre>Juan Hernandez Jimenez</nombre>
+                <clave>MED-002</clave>
+            </doctor>
+            <paciente>
+                <id>333</id>
+                <nombre>Juana</nombre>
+                <fechaNacimiento>2025-09-11</fechaNacimiento>
+                <telNum>12324</telNum>
+            </paciente>
+            <prescripciones>
+                <prescripcion>
+                    <medicamento>
+                        <codigo></codigo>
+                        <nombre></nombre>
+                        <presentacion></presentacion>
+                    </medicamento>
+                    <indicaciones>Una por dia</indicaciones>
+                    <duracion>3</duracion>
+                    <cantidad>3</cantidad>
+                </prescripcion>
+            </prescripciones>
+            <fechaConfeccion>2025-09-12</fechaConfeccion>
+            <fechaRetiro>2025-09-05</fechaRetiro>
+            <estado>Lista</estado>
+        </receta>
+    </recetas>
     <pacientes>
         <paciente>
-            <id>1111</id>
-            <nombre>Abelardo Nuñez</nombre>
-            <fechaNacimiento>hoy</fechaNacimiento>
-            <telNum>88489371</telNum>
+            <id>333</id>
+            <nombre>Juana</nombre>
+            <fechaNacimiento>2025-09-11</fechaNacimiento>
+            <telNum>12324</telNum>
+        </paciente>
+        <paciente>
+            <id>777</id>
+            <nombre>Marco</nombre>
+            <fechaNacimiento>2025-09-05</fechaNacimiento>
+            <telNum>34534</telNum>
+        </paciente>
+        <paciente>
+            <id>504</id>
+            <nombre>mm</nombre>
+            <fechaNacimiento>2025-09-05</fechaNacimiento>
+            <telNum>d</telNum>
         </paciente>
     </pacientes>
-    <medicos/>
-    <farmaceuticos/>
+    <medicos>
+        <medico>
+            <id>444</id>
+            <nombre>Matias</nombre>
+            <clave></clave>
+            <especialidad>pediatra</especialidad>
+        </medico>
+        <medico>
+            <id>666</id>
+            <nombre>FERNANDA</nombre>
+            <clave></clave>
+            <especialidad>psicologa</especialidad>
+        </medico>
+        <medico>
+            <id>888</id>
+            <nombre>Elias</nombre>
+            <clave></clave>
+            <especialidad>podologo</especialidad>
+        </medico>
+    </medicos>
+    <farmaceuticos>
+        <farmaceutico>
+            <id>555</id>
+            <nombre>Myriam</nombre>
+            <clave></clave>
+        </farmaceutico>
+        <farmaceutico>
+            <id>999</id>
+            <nombre>Brenda</nombre>
+            <clave></clave>
+        </farmaceutico>
+        <farmaceutico>
+            <id>000</id>
+            <nombre>yassir</nombre>
+            <clave></clave>
+        </farmaceutico>
+    </farmaceuticos>
 </data>
