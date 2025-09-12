@@ -1,5 +1,6 @@
 package Hospital.presentation.prescribir;
 import Hospital.logic.recetas.Prescripcion;
+import Hospital.logic.recetas.Receta;
 import Hospital.presentation.AbstractTableModel;
 
 import java.util.List;
@@ -8,9 +9,6 @@ public class TableModel extends AbstractTableModel<Prescripcion> implements java
 
     public TableModel(int[] cols, List<Prescripcion> rows) {
         super(cols, rows);
-    }
-    public TableModel(){
-        super();
     }
 
     public static final int MEDICAMENTO = 0;
@@ -21,7 +19,7 @@ public class TableModel extends AbstractTableModel<Prescripcion> implements java
 
     @Override
     protected void initColNames() {
-        colNames = new String[5];
+        colNames = new String[7];
         colNames[MEDICAMENTO] = "Medicamento";
         colNames[PRESENTACION] = "Presentación";
         colNames[CANTIDAD] = "Cantidad";

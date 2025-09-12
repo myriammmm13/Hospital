@@ -132,6 +132,7 @@ public class View implements PropertyChangeListener {
     public void setModel(Model model) {
         this.model = model;
         model.addPropertyChangeListener(this);
+        propertyChange(new PropertyChangeEvent(model, Model.PRESCRIPCIONES, null, null));
 
         buscarPacienteView.setModel(model);
         model.addPropertyChangeListener(buscarPacienteView);
@@ -161,6 +162,6 @@ public class View implements PropertyChangeListener {
 
     private void limpiarCampos() {
         nombreField.setText("");
-        PrescripcionTable.setModel(new TableModel());
+        PrescripcionTable.repaint();
     }
 }

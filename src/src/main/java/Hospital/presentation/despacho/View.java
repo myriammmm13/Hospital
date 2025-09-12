@@ -11,7 +11,9 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class View implements PropertyChangeListener {
     private JPanel panel;
@@ -26,24 +28,39 @@ public class View implements PropertyChangeListener {
 
     private TableRowSorter<TableModel> ordenamientoBusqueda;
     private Map<String, Integer> columnaFiltroMap = new HashMap<>();
+    private Hospital.presentation.despacho.detalleMed.View detalleMedView;
 
     Model model;
     Controller controller;
 
     View(){
+        inicializarComboBox();
+
+        detallesPrescripcionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                detalleMedView = new Hospital.presentation.despacho.detalleMed.
+                        View(model.getRecetasList().get(getFilaModeloSeleccionada()));
+                detalleMedView.setControllerDespacho(controller);
+                detalleMedView.setModelDespacho(model);
+                detalleMedView.setVisible(true);
+            }
+        });
+
         limpiarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 limpiarCampos();
+                recetaTable.clearSelection();
             }
         });
 
         descartarRecetaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(recetaTable.getSelectedRow()>=0){
+                if(getFilaModeloSeleccionada()>=0){
                     try{
-                        controller.descartarReceta(recetaTable.getSelectedRow());
+                        controller.descartarReceta(getFilaModeloSeleccionada());
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(panel, "Error al actualizar: " + ex.getMessage());
                     }
@@ -52,8 +69,8 @@ public class View implements PropertyChangeListener {
         });
 
         recetaTable.getSelectionModel().addListSelectionListener(e -> {
-            if (!e.getValueIsAdjusting() && recetaTable.getSelectedRow() >= 0) {
-                String estado = model.getRecetasList().get(recetaTable.getSelectedRow()).getEstado();
+            if (!e.getValueIsAdjusting() && getFilaModeloSeleccionada() >= 0) {
+                String estado = model.getRecetasList().get(getFilaModeloSeleccionada()).getEstado();
                 estado.toLowerCase();
 
                 switch (estado) {
@@ -84,19 +101,19 @@ public class View implements PropertyChangeListener {
         estadoRecetaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(recetaTable.getSelectedRow()>=0){
+                if(getFilaModeloSeleccionada()>=0){
                     try{
                         switch(estadoRecetaButton.getText()){
                             case "Procesar":
-                                controller.procesarReceta(recetaTable.getSelectedRow());
+                                controller.procesarReceta(getFilaModeloSeleccionada());
                                 limpiarCampos();
                                 break;
                             case "Preparar":
-                                controller.prepararReceta(recetaTable.getSelectedRow());
+                                controller.prepararReceta(getFilaModeloSeleccionada());
                                 limpiarCampos();
                                 break;
                             case "Despachar":
-                                controller.despacharReceta(recetaTable.getSelectedRow());
+                                controller.despacharReceta(getFilaModeloSeleccionada());
                                 limpiarCampos();
                                 break;
                         }
@@ -130,16 +147,21 @@ public class View implements PropertyChangeListener {
     public void setModel(Model model) {
         this.model = model;
         model.addPropertyChangeListener(this);
+        propertyChange(new PropertyChangeEvent(model, model.RECETAS, null, null));
     }
 
     private void inicializarComboBox() {
         categoriaBox.addItem("Paciente");
         categoriaBox.addItem("Doctor");
-        categoriaBox.addItem("Estado");
 
         columnaFiltroMap.put("Paciente", TableModel.PACIENTE);
         columnaFiltroMap.put("Doctor", TableModel.DOCTOR);
-        columnaFiltroMap.put("Estado", TableModel.ESTADO);
+    }
+
+    private int getFilaModeloSeleccionada() {
+        int filaVista = recetaTable.getSelectedRow();
+        if (filaVista == -1) return -1;
+        return recetaTable.convertRowIndexToModel(filaVista);
     }
 
     private void filtrar() {
@@ -154,6 +176,8 @@ public class View implements PropertyChangeListener {
         } else {
             ordenamientoBusqueda.setRowFilter(RowFilter.regexFilter("(?i)" + texto, columna));
         }
+
+        recetaTable.repaint();
     }
 
     @Override
@@ -162,7 +186,12 @@ public class View implements PropertyChangeListener {
             case Model.RECETAS:
                 int[] cols = {TableModel.PACIENTE, TableModel.DOCTOR, TableModel.PRESCRIPCIONES,
                 TableModel.FECHA_CONFECCION, TableModel.ESTADO};
-                TableModel tableModel = new TableModel(cols, model.getRecetasList());
+
+                List<Receta> recetasFiltradas = model.getRecetasList().stream()
+                        .filter(r -> !r.getEstado().equalsIgnoreCase("entregada"))
+                        .collect(Collectors.toList());
+
+                TableModel tableModel = new TableModel(cols, recetasFiltradas);
                 recetaTable.setModel(tableModel);
 
 
@@ -175,6 +204,7 @@ public class View implements PropertyChangeListener {
 
     private void limpiarCampos() {
         busquedaField.setText("");
-        recetaTable.revalidate();
+        recetaTable.clearSelection();
+        recetaTable.repaint();
     }
 }

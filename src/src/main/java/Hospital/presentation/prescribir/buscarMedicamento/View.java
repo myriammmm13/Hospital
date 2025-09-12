@@ -51,7 +51,10 @@ public class View extends JDialog implements PropertyChangeListener {
                     crearPrescripcionView = new Hospital.presentation.prescribir.buscarMedicamento.
                             crearPrescripcion.View(controller.getMedicamento(medicamentoBusquedaTable.getSelectedRow()));
                 }
+                crearPrescripcionView.setModel(model);
+                crearPrescripcionView.setController(controller);
                 crearPrescripcionView.setVisible(true);
+                View.this.setVisible(false);
             }
         });
 

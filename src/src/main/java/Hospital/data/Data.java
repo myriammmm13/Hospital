@@ -61,6 +61,7 @@ public class Data {
             trabajadores.add(new Trabajador("Ana Ramirez Soto", "ADM-001"));
             trabajadores.add(new Trabajador("Juan Hernandez Jimenez", "MED-002"));
             trabajadores.add(new Trabajador("Marco Perez Garcia", "FAR-003"));
+            pacientes.add(new Paciente("Abelardo Nuñez", "1111", "88489371", "hoy"));
         }
     }
 

@@ -48,6 +48,7 @@ public class View extends JDialog implements PropertyChangeListener {
                             (int) duracionSpinner.getValue(), (int) cantidadSpinner.getValue());
                     controller.agregarPrescripcion(p);
                 }
+                View.this.setVisible(false);
             }
         });
 

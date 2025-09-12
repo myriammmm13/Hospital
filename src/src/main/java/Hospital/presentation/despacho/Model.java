@@ -1,8 +1,10 @@
 package Hospital.presentation.despacho;
 
+import Hospital.logic.recetas.Prescripcion;
 import Hospital.logic.recetas.Receta;
 import Hospital.presentation.AbstractModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Model extends AbstractModel {
@@ -11,6 +13,12 @@ public class Model extends AbstractModel {
 
     public List<Receta> getRecetasList() {
         return recetas;
+    }
+
+    public Model(List<Receta> receta) {
+        recetas = new ArrayList<>();
+        this.recetas = receta;
+        firePropertyChange(RECETAS, null, recetas);
     }
 
     public void procesarReceta(int row){
