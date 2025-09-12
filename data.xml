@@ -79,6 +79,7 @@
     </trabajadores>
     <recetas>
         <receta>
+            <cant>0</cant>
             <doctor>
                 <id>MED-002</id>
                 <nombre>Juan Hernandez Jimenez</nombre>

@@ -10,6 +10,7 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+import Hospital.logic.XmlPersister;
 
 import javax.swing.*;
 import java.awt.*;
@@ -127,7 +128,7 @@ public class View implements PropertyChangeListener {
 
     private Map<YearMonth, Integer> contarRecetasPorMes(Medicamento medicamento, LocalDate desde, LocalDate hasta) throws Exception {
         Map<YearMonth, Integer> conteoPorMes = new TreeMap<>();
-        List<Receta> recetas = Hospital.data.XmlPersister.instance().load().getRecetas();
+        List<Receta> recetas = Hospital.logic.XmlPersister.instance().load().getRecetas();
 
         for (Receta r : recetas) {
             LocalDate fecha = r.getFechaConfeccion();
