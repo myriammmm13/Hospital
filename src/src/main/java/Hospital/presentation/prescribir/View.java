@@ -169,7 +169,7 @@ public class View implements PropertyChangeListener {
         if ("No seleccionado".equals(nombrePaciente.getText())) {
             valid = false;
             nombrePaciente.setBackground(Application.BACKGROUND_ERROR);
-            nombrePaciente.setToolTipText("ID requerido");
+            JOptionPane.showMessageDialog(panelPrincipal,"Nombre requerido");
         } else {
             nombrePaciente.setBackground(null);
             nombrePaciente.setToolTipText(null);
@@ -179,12 +179,23 @@ public class View implements PropertyChangeListener {
             valid = false;
             JOptionPane.showMessageDialog(panelPrincipal, "Debe agregar al menos una prescripción.");
         }
+
+        if (fecha.getDate() == null) {
+            valid = false;
+            fecha.getComponentDateTextField().setBackground(Application.BACKGROUND_ERROR);
+            JOptionPane.showMessageDialog(panelPrincipal,"Fecha requerida");
+        } else {
+            fecha.getComponentDateTextField().setBackground(Color.WHITE);
+            fecha.getComponentDateTextField().setToolTipText(null);
+        }
+
         return valid;
     }
 
     private void limpiarCampos() {
         nombrePaciente.setText("No seleccionado");
-        PrescripcionTable.repaint();
+        fecha.clear();
+        PrescripcionTable.revalidate();
     }
 
     public Receta take() {
