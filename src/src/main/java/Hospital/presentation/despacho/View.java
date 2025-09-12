@@ -41,8 +41,8 @@ public class View implements PropertyChangeListener {
             public void actionPerformed(ActionEvent e) {
                 detalleMedView = new Hospital.presentation.despacho.detalleMed.
                         View(model.getRecetasList().get(getFilaModeloSeleccionada()));
-                detalleMedView.setController(controller);
-                detalleMedView.setModel(model);
+                detalleMedView.setControllerDespacho(controller);
+                detalleMedView.setModelDespacho(model);
                 detalleMedView.setVisible(true);
             }
         });

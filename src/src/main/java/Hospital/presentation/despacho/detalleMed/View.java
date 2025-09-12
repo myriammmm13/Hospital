@@ -8,14 +8,15 @@ import Hospital.presentation.prescribir.TableModel;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
 
 public class View extends JDialog {
     private JPanel panel;
     private JTable prescripcionTable;
     private JButton okButton;
-    Controller controller;
-    Model model;
+    Controller controllerDespacho;
+    Hospital.presentation.historico.Controller controllerHistorico;
+    Model modelDespacho;
+    Hospital.presentation.historico.Model modelHistorico;
     Receta receta;
 
     public View(Receta receta) {
@@ -40,12 +41,14 @@ public class View extends JDialog {
         });
     }
 
-    public void setController(Controller controller) {
-        this.controller = controller;
+    public void setControllerDespacho(Controller controller) {
+        this.controllerDespacho = controller;
     }
 
-    public void setModel(Model model) {
-        this.model = model;
-    }
+    public void setControllerHistorico(Hospital.presentation.historico.Controller controller) { this.controllerHistorico = controller; }
+
+    public void setModelDespacho(Model model) { this.modelDespacho = model; }
+
+    public void setModelHistorico(Hospital.presentation.historico.Model model) { this.modelHistorico = model; }
 
 }

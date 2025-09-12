@@ -54,6 +54,7 @@ public class View extends JDialog implements PropertyChangeListener {
                 crearPrescripcionView.setModel(model);
                 crearPrescripcionView.setController(controller);
                 crearPrescripcionView.setVisible(true);
+                View.this.setVisible(false);
             }
         });
 

@@ -50,9 +50,9 @@ public class View implements PropertyChangeListener {
                         TableModel tableModel = (TableModel) respuestaBusquedaPanel.getModel();
                         Receta recetaSeleccionada = tableModel.getRecetaAt(filaModelo);
                         detalleMedView = new Hospital.presentation.despacho.detalleMed.View(recetaSeleccionada);
-                        //detalleMedView.setController(controller);
-                        //detalleMedView.setModel(model);
-                        //controller.addRecetaReciente(recetaSeleccionada);
+                        detalleMedView.setControllerHistorico(controller);
+                        detalleMedView.setModelHistorico(model);
+                        controller.addRecetaReciente(recetaSeleccionada);
                         detalleMedView.setVisible(true);
                     }
 
@@ -118,6 +118,16 @@ public class View implements PropertyChangeListener {
 
                 TableModel tableModelRecientes = new TableModel(colsRec, model.getRecetasRecientes());
                 respuestaBusquedaPanel.setModel(tableModelRecientes);
+                break;
+            case Hospital.presentation.prescribir.Model.CURRENT:
+                int[] colsPres = {TableModel.PACIENTE, TableModel.DOCTOR, TableModel.PRESCRIPCIONES,
+                        TableModel.FECHA_CONFECCION, TableModel.ESTADO};
+
+                TableModel tableModelPres = new TableModel(colsPres, model.getRecetasList());
+                respuestaBusquedaPanel.setModel(tableModelPres);
+
+                ordenamientoBusqueda = new TableRowSorter<>(tableModelPres);
+                respuestaBusquedaPanel.setRowSorter(ordenamientoBusqueda);
                 break;
         }
         this.panel.revalidate();
