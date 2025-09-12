@@ -112,8 +112,12 @@ public class View implements PropertyChangeListener {
         table1.repaint();
 
         try {
-            Map<YearMonth, Integer> datos = contarRecetasPorMes(seleccionado, desde, hasta);
-            mostrarGraficoRecetas(datos, seleccionado.getNombre());
+            Map<String, Map<YearMonth, Integer>> datosPorMedicamento = new TreeMap<>();
+            for (Medicamento m : medicamentosSeleccionados) {
+                Map<YearMonth, Integer> datos = contarRecetasPorMes(m, desde, hasta);
+                datosPorMedicamento.put(m.getNombre(), datos);
+            }
+            mostrarGraficoRecetas(datosPorMedicamento, desde, hasta);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(panelDatos, "Error al generar gráfico: " + ex.getMessage());
         }
@@ -139,18 +143,41 @@ public class View implements PropertyChangeListener {
                 }
             }
         }
+        YearMonth inicio = YearMonth.from(desde);
+        YearMonth fin = YearMonth.from(hasta);
+
+        YearMonth actual = inicio;
+        while (!actual.isAfter(fin)) {
+            conteoPorMes.putIfAbsent(actual, 0);
+            actual = actual.plusMonths(1);
+        }
 
         return conteoPorMes;
     }
 
-    private void mostrarGraficoRecetas(Map<YearMonth, Integer> datos, String nombreMedicamento) {
+    private void mostrarGraficoRecetas(Map<String, Map<YearMonth, Integer>> datosPorMedicamento, LocalDate desde, LocalDate hasta) {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
-        for (Map.Entry<YearMonth, Integer> entry : datos.entrySet()) {
-            dataset.addValue(entry.getValue(), nombreMedicamento, entry.getKey().toString());
+        YearMonth inicio = YearMonth.from(desde);
+        YearMonth fin = YearMonth.from(hasta);
+        List<YearMonth> todosLosMeses = new ArrayList<>();
+        YearMonth actual = inicio;
+        while (!actual.isAfter(fin)) {
+            todosLosMeses.add(actual);
+            actual = actual.plusMonths(1);
         }
 
-        JFreeChart chart = ChartFactory.createBarChart(
+        for (Map.Entry<String, Map<YearMonth, Integer>> entrada : datosPorMedicamento.entrySet()) {
+            String nombre = entrada.getKey();
+            Map<YearMonth, Integer> datos = entrada.getValue();
+
+            for (YearMonth mes : todosLosMeses) {
+                int cantidad = datos.getOrDefault(mes, 0);
+                dataset.addValue(cantidad, nombre, mes.toString());
+            }
+        }
+
+        JFreeChart chart = ChartFactory.createLineChart(
                 "Recetas confeccionadas por mes",
                 "Mes",
                 "Cantidad",
@@ -159,13 +186,20 @@ public class View implements PropertyChangeListener {
                 true,
                 true,
                 false
-
         );
 
         var plot = chart.getCategoryPlot();
-        var renderer = (org.jfree.chart.renderer.category.BarRenderer) plot.getRenderer();
+        var renderer = plot.getRenderer();
 
-        renderer.setMaximumBarWidth(0.01);
+        Color[] colores = {Color.BLUE, Color.RED, Color.GREEN, Color.ORANGE, Color.MAGENTA};
+        for (int i = 0; i < datosPorMedicamento.size(); i++) {
+            renderer.setSeriesPaint(i, colores[i % colores.length]);
+            renderer.setSeriesStroke(i, new BasicStroke(2.0f));
+        }renderer.setSeriesPaint(0, Color.BLUE);
+        renderer.setSeriesStroke(0, new BasicStroke(2.0f));
+
+        chart.setBackgroundPaint(Color.WHITE);
+        plot.setBackgroundPaint(new Color(240, 240, 240));
 
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(600, 400));
@@ -177,8 +211,16 @@ public class View implements PropertyChangeListener {
         panelparagrafico.repaint();
 
         System.out.println("Datos para graficar:");
-        for (Map.Entry<YearMonth, Integer> entry : datos.entrySet()) {
-            System.out.println("Mes: " + entry.getKey() + " → Cantidad: " + entry.getValue());
+        for (Map.Entry<String, Map<YearMonth, Integer>> entrada : datosPorMedicamento.entrySet()) {
+            String nombre = entrada.getKey();
+            Map<YearMonth, Integer> datos = entrada.getValue();
+
+            System.out.println("→ Medicamento: " + nombre);
+            for (YearMonth mes : todosLosMeses) {
+                int cantidad = datos.getOrDefault(mes, 0);
+                dataset.addValue(cantidad, nombre, mes.toString());
+                System.out.println("Mes: " + mes + " → Cantidad: " + cantidad);
+            }
         }
     }
 

@@ -80,6 +80,118 @@
     <recetas>
         <receta>
             <doctor>
+                <id>MED-002</id>
+                <nombre>Juan Hernandez Jimenez</nombre>
+                <clave>MED-002</clave>
+            </doctor>
+            <paciente>
+                <id>101</id>
+                <nombre>Mario</nombre>
+                <fechaNacimiento>1990-05-12</fechaNacimiento>
+                <telNum>88888888</telNum>
+            </paciente>
+            <prescripciones>
+                <prescripcion>
+                    <medicamento>
+                        <codigo>001</codigo>
+                        <nombre>Acetaminofen</nombre>
+                        <presentacion>500mg</presentacion>
+                    </medicamento>
+                    <indicaciones>1 cada 8h</indicaciones>
+                    <duracion>5</duracion>
+                    <cantidad>15</cantidad>
+                </prescripcion>
+            </prescripciones>
+            <fechaConfeccion>2025-08-15</fechaConfeccion>
+            <fechaRetiro>2025-08-16</fechaRetiro>
+            <estado>Confeccionada</estado>
+        </receta>
+        <receta>
+            <doctor>
+                <id>MED-002</id>
+                <nombre>Juan Hernandez Jimenez</nombre>
+                <clave>MED-002</clave>
+            </doctor>
+            <paciente>
+                <id>102</id>
+                <nombre>Lucía</nombre>
+                <fechaNacimiento>1985-03-22</fechaNacimiento>
+                <telNum>77777777</telNum>
+            </paciente>
+            <prescripciones>
+                <prescripcion>
+                    <medicamento>
+                        <codigo>002</codigo>
+                        <nombre>Amoxicilina</nombre>
+                        <presentacion>250mg</presentacion>
+                    </medicamento>
+                    <indicaciones>1 cada 12h</indicaciones>
+                    <duracion>7</duracion>
+                    <cantidad>14</cantidad>
+                </prescripcion>
+            </prescripciones>
+            <fechaConfeccion>2025-09-10</fechaConfeccion>
+            <fechaRetiro>2025-09-11</fechaRetiro>
+            <estado>Confeccionada</estado>
+        </receta>
+        <receta>
+            <doctor>
+                <id>MED-002</id>
+                <nombre>Juan Hernandez Jimenez</nombre>
+                <clave>MED-002</clave>
+            </doctor>
+            <paciente>
+                <id>103</id>
+                <nombre>Carla</nombre>
+                <fechaNacimiento>1995-11-30</fechaNacimiento>
+                <telNum>66666666</telNum>
+            </paciente>
+            <prescripciones>
+                <prescripcion>
+                    <medicamento>
+                        <codigo>003</codigo>
+                        <nombre>Ibuprofeno</nombre>
+                        <presentacion>400mg</presentacion>
+                    </medicamento>
+                    <indicaciones>1 cada 6h</indicaciones>
+                    <duracion>3</duracion>
+                    <cantidad>12</cantidad>
+                </prescripcion>
+            </prescripciones>
+            <fechaConfeccion>2025-10-05</fechaConfeccion>
+            <fechaRetiro>2025-10-06</fechaRetiro>
+            <estado>Confeccionada</estado>
+        </receta>
+        <receta>
+            <doctor>
+                <id>MED-002</id>
+                <nombre>Juan Hernandez Jimenez</nombre>
+                <clave>MED-002</clave>
+            </doctor>
+            <paciente>
+                <id>104</id>
+                <nombre>Esteban</nombre>
+                <fechaNacimiento>1978-07-19</fechaNacimiento>
+                <telNum>55555555</telNum>
+            </paciente>
+            <prescripciones>
+                <prescripcion>
+                    <medicamento>
+                        <codigo>001</codigo>
+                        <nombre>Acetaminofen</nombre>
+                        <presentacion>500mg</presentacion>
+                    </medicamento>
+                    <indicaciones>1 cada 8h</indicaciones>
+                    <duracion>5</duracion>
+                    <cantidad>15</cantidad>
+                </prescripcion>
+            </prescripciones>
+            <fechaConfeccion>2025-11-20</fechaConfeccion>
+            <fechaRetiro>2025-11-21</fechaRetiro>
+            <estado>Confeccionada</estado>
+        </receta>
+        <receta>
+            <doctor>
                 <id></id>
                 <nombre></nombre>
                 <clave></clave>
@@ -192,6 +304,138 @@
             </prescripciones>
             <fechaConfeccion>2025-09-12</fechaConfeccion>
             <fechaRetiro>2025-09-12</fechaRetiro>
+            <estado>Confeccionada</estado>
+        </receta>
+        <receta>
+            <doctor>
+                <id>MED-002</id>
+                <nombre>Juan Hernandez Jimenez</nombre>
+                <clave>MED-002</clave>
+            </doctor>
+            <paciente>
+                <id>777</id>
+                <nombre>Marco</nombre>
+                <fechaNacimiento>2025-09-05</fechaNacimiento>
+                <telNum>34534</telNum>
+            </paciente>
+            <prescripciones>
+                <prescripcion>
+                    <medicamento>
+                        <codigo>111</codigo>
+                        <nombre>Acetaminofen</nombre>
+                        <presentacion>500mg</presentacion>
+                    </medicamento>
+                    <indicaciones>CZXCZ</indicaciones>
+                    <duracion>6</duracion>
+                    <cantidad>6</cantidad>
+                </prescripcion>
+            </prescripciones>
+            <fechaConfeccion>2025-09-12</fechaConfeccion>
+            <fechaRetiro>2025-10-23</fechaRetiro>
+            <estado>Confeccionada</estado>
+        </receta>
+        <receta>
+            <doctor>
+                <id>MED-002</id>
+                <nombre>Juan Hernandez Jimenez</nombre>
+                <clave>MED-002</clave>
+            </doctor>
+            <paciente>
+                <id>333</id>
+                <nombre>Juana</nombre>
+                <fechaNacimiento>2025-09-11</fechaNacimiento>
+                <telNum>12324</telNum>
+            </paciente>
+            <prescripciones>
+                <prescripcion>
+                    <medicamento>
+                        <codigo>114</codigo>
+                        <nombre>Loratadina</nombre>
+                        <presentacion>10mg tabletas</presentacion>
+                    </medicamento>
+                    <indicaciones>DFGDGDFG</indicaciones>
+                    <duracion>5</duracion>
+                    <cantidad>4</cantidad>
+                </prescripcion>
+            </prescripciones>
+            <fechaConfeccion>2025-09-12</fechaConfeccion>
+            <fechaRetiro>2025-10-17</fechaRetiro>
+            <estado>Confeccionada</estado>
+        </receta>
+        <receta>
+            <doctor>
+                <id>MED-002</id>
+                <nombre>Juan Hernandez Jimenez</nombre>
+                <clave>MED-002</clave>
+            </doctor>
+            <paciente>
+                <id>777</id>
+                <nombre>Marco</nombre>
+                <fechaNacimiento>2025-09-05</fechaNacimiento>
+                <telNum>34534</telNum>
+            </paciente>
+            <prescripciones>
+                <prescripcion>
+                    <medicamento>
+                        <codigo>111</codigo>
+                        <nombre>Acetaminofen</nombre>
+                        <presentacion>500mg</presentacion>
+                    </medicamento>
+                    <indicaciones>FDGDB</indicaciones>
+                    <duracion>6</duracion>
+                    <cantidad>6</cantidad>
+                </prescripcion>
+                <prescripcion>
+                    <medicamento>
+                        <codigo>112</codigo>
+                        <nombre>Ibuprofeno</nombre>
+                        <presentacion>400mg</presentacion>
+                    </medicamento>
+                    <indicaciones>V C</indicaciones>
+                    <duracion>6</duracion>
+                    <cantidad>8</cantidad>
+                </prescripcion>
+            </prescripciones>
+            <fechaConfeccion>2025-09-12</fechaConfeccion>
+            <fechaRetiro>2025-10-26</fechaRetiro>
+            <estado>Confeccionada</estado>
+        </receta>
+        <receta>
+            <doctor>
+                <id>MED-002</id>
+                <nombre>Juan Hernandez Jimenez</nombre>
+                <clave>MED-002</clave>
+            </doctor>
+            <paciente>
+                <id>777</id>
+                <nombre>Marco</nombre>
+                <fechaNacimiento>2025-09-05</fechaNacimiento>
+                <telNum>34534</telNum>
+            </paciente>
+            <prescripciones>
+                <prescripcion>
+                    <medicamento>
+                        <codigo>111</codigo>
+                        <nombre>Acetaminofen</nombre>
+                        <presentacion>500mg</presentacion>
+                    </medicamento>
+                    <indicaciones>FDGDB</indicaciones>
+                    <duracion>6</duracion>
+                    <cantidad>6</cantidad>
+                </prescripcion>
+                <prescripcion>
+                    <medicamento>
+                        <codigo>112</codigo>
+                        <nombre>Ibuprofeno</nombre>
+                        <presentacion>400mg</presentacion>
+                    </medicamento>
+                    <indicaciones>V C</indicaciones>
+                    <duracion>6</duracion>
+                    <cantidad>8</cantidad>
+                </prescripcion>
+            </prescripciones>
+            <fechaConfeccion>2025-09-12</fechaConfeccion>
+            <fechaRetiro>2025-10-26</fechaRetiro>
             <estado>Confeccionada</estado>
         </receta>
     </recetas>
