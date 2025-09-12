@@ -1,5 +1,6 @@
 package Hospital.presentation.prescribir;
 
+import Hospital.logic.Session;
 import Hospital.logic.personas.Paciente;
 import Hospital.logic.recetas.Prescripcion;
 import Hospital.logic.recetas.Receta;
@@ -13,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 
 public class View implements PropertyChangeListener {
     private JPanel panelPrincipal;
@@ -56,7 +58,7 @@ public class View implements PropertyChangeListener {
         guardarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Receta r = new Receta(doctorAuxiliar = new Medico(), model.getCurrent().getPaciente(),
+                Receta r = new Receta(Session.getInstance().getUsuario(), model.getCurrent().getPaciente(),
                         model.getCurrent().getPrescripciones());
                 try {
                     controller.create(r);
@@ -69,15 +71,7 @@ public class View implements PropertyChangeListener {
         });
         limpiarButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    controller.create(new Receta(doctorAuxiliar = new Medico(), model.getCurrent().getPaciente(), model.getCurrent().getPrescripciones()) /*id del doctor*/);
-                    limpiarCampos();
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(panelPrincipal, "Error al limpiar: " + ex.getMessage());
-                }
-
-            }
+            public void actionPerformed(ActionEvent e) {controller.clear();}
         });
 
         buscarPacienteButton.addActionListener(new ActionListener() {
@@ -160,8 +154,17 @@ public class View implements PropertyChangeListener {
         }
     }
 
-    private void limpiarCampos() {
-        nombreField.setText("");
-        PrescripcionTable.repaint();
+    public void clearFields() {
+        int[] cols = {TableModel.MEDICAMENTO,TableModel.PRESENTACION, TableModel.CANTIDAD,
+                TableModel.INDICACIONES, TableModel.DURACION};
+        nombrePaciente.setText("No seleccionado");
+        PrescripcionTable.setModel(new TableModel(cols,new ArrayList<Prescripcion>()));
+        fecha.setText("");
+        fecha.getComponentDateTextField().setBackground(null);
+        fecha.getComponentDateTextField().setToolTipText(null);
+        nombrePaciente.setBackground(null);
+        PrescripcionTable.setBackground(null);
+        nombrePaciente.setToolTipText(null);
+        PrescripcionTable.setToolTipText(null);
     }
 }

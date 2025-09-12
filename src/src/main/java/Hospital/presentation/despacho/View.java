@@ -33,7 +33,7 @@ public class View implements PropertyChangeListener {
     Model model;
     Controller controller;
 
-    View(){
+    public View(){
         inicializarComboBox();
 
         detallesPrescripcionButton.addActionListener(new ActionListener() {

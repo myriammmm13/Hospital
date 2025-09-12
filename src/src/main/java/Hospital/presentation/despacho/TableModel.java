@@ -36,7 +36,7 @@ public class TableModel extends AbstractTableModel<Receta> implements javax.swin
             case PACIENTE:
                 return e.getPaciente().getNombre();
             case DOCTOR:
-                return e.getDoctor().getNombre();
+                return e.getDoctor();
             case PRESCRIPCIONES:
                 //return e.getCantidad();
                 return 0;
