@@ -107,6 +107,35 @@
             <fechaRetiro>2025-09-05</fechaRetiro>
             <estado>Lista</estado>
         </receta>
+        <receta>
+            <cant>1</cant>
+            <doctor>
+                <id>MED-002</id>
+                <nombre>Juan Hernandez Jimenez</nombre>
+                <clave>MED-002</clave>
+            </doctor>
+            <paciente>
+                <id>777</id>
+                <nombre>Marco</nombre>
+                <fechaNacimiento>2025-09-05</fechaNacimiento>
+                <telNum>34534</telNum>
+            </paciente>
+            <prescripciones>
+                <prescripcion>
+                    <medicamento>
+                        <codigo>114</codigo>
+                        <nombre>Loratadina</nombre>
+                        <presentacion>10mg tabletas</presentacion>
+                    </medicamento>
+                    <indicaciones>por si acaso</indicaciones>
+                    <duracion>39</duracion>
+                    <cantidad>50</cantidad>
+                </prescripcion>
+            </prescripciones>
+            <fechaConfeccion>2025-09-12</fechaConfeccion>
+            <fechaRetiro>2025-09-19</fechaRetiro>
+            <estado>Confeccionada</estado>
+        </receta>
     </recetas>
     <pacientes>
         <paciente>
