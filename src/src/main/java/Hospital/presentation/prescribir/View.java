@@ -1,5 +1,6 @@
 package Hospital.presentation.prescribir;
 
+import Hospital.Application;
 import Hospital.logic.personas.Paciente;
 import Hospital.logic.recetas.Prescripcion;
 import Hospital.logic.recetas.Receta;
@@ -24,7 +25,6 @@ public class View implements PropertyChangeListener {
     private JButton buscarMedicamentoButton;
     private JTable PrescripcionTable;
     private JLabel fechaField;
-    private JLabel nombreField;
     private JPanel fechaPanel;
     private JPanel controlPanel;
     private JPanel recetaPanel;
@@ -48,6 +48,8 @@ public class View implements PropertyChangeListener {
         fechaPanel.setLayout(new BorderLayout());
         fechaPanel.add(fecha, BorderLayout.CENTER);
 
+        nombrePaciente = new JLabel();
+        nombrePaciente.setText("Nombre");
         buscarPacienteView =  new Hospital.presentation.prescribir.buscarPaciente.View();
         buscarMedicamentoView = new  Hospital.presentation.prescribir.buscarMedicamento.View();
         buscarPacienteView.setController((controller));
@@ -56,22 +58,22 @@ public class View implements PropertyChangeListener {
         guardarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Receta r = new Receta(doctorAuxiliar = new Medico(), model.getCurrent().getPaciente(),
-                        model.getCurrent().getPrescripciones());
-                try {
-                    controller.create(r);
-                    JOptionPane.showMessageDialog(panelPrincipal, "Receta guardada correctamente.");
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(panelPrincipal, "Error al guardar: " + ex.getMessage());
+                if (validate()) {
+                    Receta r = take();
+                    try {
+                        controller.create(r);
+                        JOptionPane.showMessageDialog(panelPrincipal, "Receta guardada correctamente.");
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(panelPrincipal, "Error al guardar: " + ex.getMessage());
+                    }
                 }
-
             }
         });
         limpiarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    controller.create(new Receta(doctorAuxiliar = new Medico(), model.getCurrent().getPaciente(), model.getCurrent().getPrescripciones()) /*id del doctor*/);
+                    model.setCurrent(new Receta(doctorAuxiliar = new Medico(), model.getCurrent().getPaciente(), model.getCurrent().getPrescripciones()) /*id del doctor*/);
                     limpiarCampos();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(panelPrincipal, "Error al limpiar: " + ex.getMessage());
@@ -160,8 +162,35 @@ public class View implements PropertyChangeListener {
         }
     }
 
+    private boolean validate() {
+        boolean valid = true;
+        System.out.println(nombrePaciente.getText());
+        if ("No seleccionado".equals(nombrePaciente.getText())) {
+            valid = false;
+            nombrePaciente.setBackground(Application.BACKGROUND_ERROR);
+            nombrePaciente.setToolTipText("ID requerido");
+        } else {
+            nombrePaciente.setBackground(null);
+            nombrePaciente.setToolTipText(null);
+        }
+
+        if (PrescripcionTable.getRowCount() == 0) {
+            valid = false;
+            JOptionPane.showMessageDialog(panelPrincipal, "Debe agregar al menos una prescripción.");
+        }
+        return valid;
+    }
+
     private void limpiarCampos() {
-        nombreField.setText("");
+        nombrePaciente.setText("");
         PrescripcionTable.repaint();
     }
+
+    public Receta take() {
+        Receta e = new Receta();
+        e.setPaciente(model.getCurrent().getPaciente());
+        e.setPrescripciones(model.getCurrent().getPrescripciones());
+        return e;
+    }
+
 }
