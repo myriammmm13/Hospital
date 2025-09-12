@@ -18,7 +18,6 @@ public class Application {
     public static Data data;
 
     public static void main(String[] args) {
-        // Cargar datos desde XML
         try {
             Application.data = XmlPersister.instance().load();
             System.out.println("Datos cargados desde data.xml");
@@ -28,7 +27,6 @@ public class Application {
             Application.data.inicializarSiVacio();
         }
 
-        // Guardar datos en XML
         try {
             XmlPersister.instance().store(Application.data);
             System.out.println("Datos guardados en data.xml");
@@ -47,7 +45,6 @@ public class Application {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
         } catch (Exception ex) {}
 
-        // Mostrar ventana de login
         View loginView = new View();
         Model loginModel = new Model(data);
         Controller loginController = new Controller(loginView, loginModel, (userId, userType) -> {
@@ -64,7 +61,6 @@ public class Application {
         JFrame window = new JFrame("Hospital - Usuario: " + userId);
         JTabbedPane tabs = new JTabbedPane();
 
-        // Todos los tríos
         var medicoView = new Hospital.presentation.personas.Medico.View();
         var medicoModel = new Hospital.presentation.personas.Medico.Model();
         var medicoController = new Hospital.presentation.personas.Medico.Controller(medicoModel, medicoView);
@@ -98,6 +94,10 @@ public class Application {
         var acercaDeModel = new Hospital.presentation.AcercaDe.Model();
         var acercaDeController = new Hospital.presentation.AcercaDe.Controller(acercaDeModel, acercaDeView);
 
+        var despachoView = new Hospital.presentation.despacho.View();
+        var despachoModel = new Hospital.presentation.despacho.Model();
+        var despachoController = new Hospital.presentation.despacho.Controller(despachoModel, despachoView);
+
         switch (userType) {
             case "ADM":
                 tabs.addTab("Medicos", cargarIcono("/images/medico1.png"), medicoView.getPanel());
@@ -117,7 +117,7 @@ public class Application {
                 break;
 
             case "FAR":
-                //tabs.addTab("Despacho", despachoView.getPanel());
+                tabs.addTab("Despacho", despachoView.getPanel());
                 tabs.addTab("Dashboard", cargarIcono("/images/dashboard1.png"), dashboardView.getPanel());
                 tabs.addTab("Acerca de...", cargarIcono("/images/acercade1.png"), acercaDeView.getPanel());
                 break;

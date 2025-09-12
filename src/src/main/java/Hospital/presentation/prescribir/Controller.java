@@ -26,7 +26,8 @@ public class Controller {
 
 
     public void clear() {
-
+        model.setCurrent(new Receta());
+        view.clearFields();
     }
 
     public void setPaciente(int row) {

@@ -21,6 +21,10 @@ public class Model extends AbstractModel {
         firePropertyChange(RECETAS, null, recetas);
     }
 
+    public Model(){
+        recetas = new ArrayList<>();
+        firePropertyChange(RECETAS, null, recetas);
+    }
     public void procesarReceta(int row){
         Receta r = this.recetas.get(row);
         r.setEstado("En Proceso");
