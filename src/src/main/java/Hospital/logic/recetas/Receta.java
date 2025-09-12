@@ -4,28 +4,38 @@ import Hospital.data.LocalDateAdapter;
 import Hospital.logic.personas.Paciente;
 import Hospital.logic.personas.trabajadores.Medico;
 
+import jakarta.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.xml.bind.annotation.XmlRootElement;
-import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-@XmlRootElement
+@XmlRootElement(name = "receta")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Receta {
-    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+
     private Medico doctor;
     private Paciente paciente;
+
+    @XmlElementWrapper(name = "prescripciones")
+    @XmlElement(name = "prescripcion")
     private List<Prescripcion> prescripciones;
+
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate fechaConfeccion;
+
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate fechaRetiro;
+
     private String estado;
 
     public Receta() {
-        prescripciones = new ArrayList<>();
-        estado = "Iniciado";
-        fechaConfeccion = LocalDate.now();
+        this.prescripciones = new ArrayList<>();
+        this.estado = "Confeccionada";
+        this.fechaConfeccion = LocalDate.now();
     }
+
+    // Otros constructores
     public Receta(Medico doctor, Paciente paciente, List<Prescripcion> prescripciones, LocalDate fechaRetiro) {
         this.doctor = doctor;
         this.paciente = paciente;
@@ -36,32 +46,37 @@ public class Receta {
     }
 
     public Receta(Medico medico, Paciente paciente, List<Prescripcion> prescripciones) {
-        this.doctor = new Medico();
-        this.paciente = new Paciente();
-        this.prescripciones = new ArrayList<>();
+        this.doctor = medico;
+        this.paciente = paciente;
+        this.prescripciones = new ArrayList<>(prescripciones);
         this.fechaConfeccion = LocalDate.now();
         this.fechaRetiro = LocalDate.now().plusDays(3); // valor por defecto
         this.estado = "Confeccionada";
     }
 
-    // Getters
+    // Getters y setters
     public Medico getDoctor() { return doctor; }
-    public Paciente getPaciente() { return paciente; }
-    public List<Prescripcion> getPrescripciones() { return prescripciones; }
-    public LocalDate getFechaConfeccion() { return fechaConfeccion; }
-    public LocalDate getFechaRetiro() { return fechaRetiro; }
-    public String getEstado() { return estado; }
-
-    // Setters
     public void setDoctor(Medico doctor) { this.doctor = doctor; }
+
+    public Paciente getPaciente() { return paciente; }
     public void setPaciente(Paciente paciente) { this.paciente = paciente; }
+
+    public List<Prescripcion> getPrescripciones() { return prescripciones; }
     public void setPrescripciones(List<Prescripcion> prescripciones) {
         this.prescripciones = new ArrayList<>(prescripciones);
     }
+
+    public LocalDate getFechaConfeccion() { return fechaConfeccion; }
+    public void setFechaConfeccion(LocalDate fechaConfeccion) { this.fechaConfeccion = fechaConfeccion; }
+
+    public LocalDate getFechaRetiro() { return fechaRetiro; }
     public void setFechaRetiro(LocalDate fechaRetiro) { this.fechaRetiro = fechaRetiro; }
+
+    public String getEstado() { return estado; }
     public void setEstado(String estado) { this.estado = estado; }
 
-    // Métodos de utilidad
+
+
     public void agregarPrescripcion(Prescripcion prescripcion) {
         this.prescripciones.add(prescripcion);
     }
