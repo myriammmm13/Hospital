@@ -1,4 +1,4 @@
 package Hospital.data;
 
-public class ClaveDAO {
+public class ClaveDao {
 }

@@ -1,4 +1,4 @@
 package Hospital.data.medicamento;
 
-public class MedicamentoDAO {
+public class PrescripcionDao {
 }

@@ -2,7 +2,6 @@ package Hospital.data.personas;
 
 import Hospital.data.DataBase;
 import Hospital.logic.personas.Paciente;
-import Hospital.logic.personas.Persona;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

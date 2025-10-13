@@ -1,4 +1,4 @@
 package Hospital.data.personas;
 
-public class TrabajadorDAO {
+public class MedicoDao {
 }
