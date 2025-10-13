@@ -16,7 +16,7 @@ public class PacienteDao {
         db= DataBase.instance();
     }
     public void create(Paciente p) throws Exception{
-        String sql="insert into Persona (nombre, id, TelNum, FechaNacimiento) "+"values(?,?,?,?)";
+        String sql="insert into Paciente (nombre, id, TelNum, FechaNacimiento) "+"values(?,?,?,?)";
         PreparedStatement stm = db.prepareStatement(sql);
         stm.setString(1, p.getNombre());
         stm.setString(2, p.getId());
@@ -45,16 +45,13 @@ public class PacienteDao {
     }
 
     public void update(Paciente p) throws Exception{
-        String sql="update paciente set nombre=?"+"TelNum=?"+"FechaNacimiento=?"+ "where id=?";
+        String sql="update paciente set nombre=?, TelNum=?, FechaNacimiento=? where id=?";
         PreparedStatement stm = db.prepareStatement(sql);
         stm.setString(1, p.getNombre());
-        stm.setString(2, p.getId());
-        stm.setString(3,p.getTelNum());
-        stm.setString(4,p.getFechaNacimiento());
+        stm.setString(2, p.getTelNum());
+        stm.setString(3, p.getFechaNacimiento());
+        stm.setString(4, p.getId());
         int count=db.executeUpdate(stm);
-        if (count==0){
-            throw new Exception("Paciente ya existe");
-        }
         if (count==0){
             throw new Exception("Paciente no existe");
         }
@@ -83,14 +80,14 @@ public class PacienteDao {
                 p= from(rs,"p");
                 resultado.add(p);
             }
-        } catch (SQLException ex) {  }
+        }catch (SQLException ex) { return null; }
         return resultado;
     }
 
     private Paciente from(ResultSet rs, String alias){
         try {
             Paciente p= new Paciente("","","","");
-            p.setId(rs.getString(alias + ".id"));
+            p.setId(rs.getString("id"));
             p.setNombre(rs.getString(alias + ".nombre"));
             p.setTelNum(rs.getString(alias + ".telNum"));
             p.setFechaNacimiento(rs.getString(alias + ".fechaNacimiento"));
