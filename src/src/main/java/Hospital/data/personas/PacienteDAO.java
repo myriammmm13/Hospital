@@ -1,0 +1,103 @@
+package Hospital.data.personas;
+
+import Hospital.data.DataBase;
+import Hospital.logic.personas.Paciente;
+import Hospital.logic.personas.Persona;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class PacienteDao {
+    DataBase db;
+
+    public PacienteDao(){
+        db= DataBase.instance();
+    }
+    public void create(Paciente p) throws Exception{
+        String sql="insert into Persona (nombre, id, TelNum, FechaNacimiento) "+"values(?,?,?,?)";
+        PreparedStatement stm = db.prepareStatement(sql);
+        stm.setString(1, p.getNombre());
+        stm.setString(2, p.getId());
+        stm.setString(3,p.getTelNum());
+        stm.setString(4,p.getFechaNacimiento());
+        int count=db.executeUpdate(stm);
+        if (count==0){
+            throw new Exception("Paciente ya existe");
+        }
+    }
+
+    public Paciente read(String id) throws Exception{
+        String sql="select * from Paciente p "+
+                "where p.id=?";
+        PreparedStatement stm = db.prepareStatement(sql);
+        stm.setString(1, id);
+        ResultSet rs =  db.executeQuery(stm);
+        Paciente p;
+        if (rs.next()) {
+            p= from(rs,"p");
+            return p;
+        }
+        else{
+            throw new Exception ("Paciente no Existe");
+        }
+    }
+
+    public void update(Paciente p) throws Exception{
+        String sql="update paciente set nombre=?"+"TelNum=?"+"FechaNacimiento=?"+ "where id=?";
+        PreparedStatement stm = db.prepareStatement(sql);
+        stm.setString(1, p.getNombre());
+        stm.setString(2, p.getId());
+        stm.setString(3,p.getTelNum());
+        stm.setString(4,p.getFechaNacimiento());
+        int count=db.executeUpdate(stm);
+        if (count==0){
+            throw new Exception("Paciente ya existe");
+        }
+        if (count==0){
+            throw new Exception("Paciente no existe");
+        }
+    }
+
+    public void delete(Paciente o) throws Exception{
+        String sql="delete from paciente where id=?";
+        PreparedStatement stm = db.prepareStatement(sql);
+        stm.setString(1, o.getId());
+        int count=db.executeUpdate(stm);
+        if (count==0){
+            throw new Exception("Paciente no existe");
+        }
+    }
+
+    public List<Paciente> findByNombre(Paciente filtro){
+        List<Paciente> resultado = new ArrayList<Paciente>();
+        try {
+            String sql="select * from Paciente p "+
+                    "where p.nombre like ?";
+            PreparedStatement stm = db.prepareStatement(sql);
+            stm.setString(1, "%"+filtro.getNombre()+"%");
+            ResultSet rs =  db.executeQuery(stm);
+            Paciente p;
+            while (rs.next()) {
+                p= from(rs,"p");
+                resultado.add(p);
+            }
+        } catch (SQLException ex) {  }
+        return resultado;
+    }
+
+    private Paciente from(ResultSet rs, String alias){
+        try {
+            Paciente p= new Paciente("","","","");
+            p.setId(rs.getString(alias + ".id"));
+            p.setNombre(rs.getString(alias + ".nombre"));
+            p.setTelNum(rs.getString(alias + ".telNum"));
+            p.setFechaNacimiento(rs.getString(alias + ".fechaNacimiento"));
+            return p;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+}
