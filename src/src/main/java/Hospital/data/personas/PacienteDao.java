@@ -58,7 +58,7 @@ public class PacienteDao {
     }
 
     public void delete(Paciente o) throws Exception{
-        String sql="delete from paciente where id=?";
+        String sql="delete from Paciente where id=?";
         PreparedStatement stm = db.prepareStatement(sql);
         stm.setString(1, o.getId());
         int count=db.executeUpdate(stm);
