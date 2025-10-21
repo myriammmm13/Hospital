@@ -31,13 +31,12 @@ public class DataBase {
             URL resourceUrl = getClass().getResource(PROPERTIES_FILE_NAME);
             File file = new File(resourceUrl.toURI());
             prop.load(new BufferedInputStream(new FileInputStream(file)));
-           /* String driver = prop.getProperty("database_driver");
+            String driver = prop.getProperty("database_driver");
             String server = prop.getProperty("database_server");
             String port = prop.getProperty("database_port");
             String user = prop.getProperty("database_user");
             String password = prop.getProperty("database_password");
             String database = prop.getProperty("database_name");
-*/
             String URL_conexion="jdbc:mysql://"+ server+":"+port+"/"+
                     database+"?user="+user+"&password="+password+"&serverTimezone=UTC";
             Class.forName(driver).newInstance();
