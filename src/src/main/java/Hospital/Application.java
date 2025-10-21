@@ -17,7 +17,7 @@ public class Application {
 
     public static void main(String[] args) {
         try {
-            System.out.println("Datos cargados desde data.xml");
+            System.out.println("Datos cargados desde BD");
         } catch (Exception e) {
             System.out.println("No se pudo cargar, se usará data nueva.");
             Application.data = new Data();
