@@ -39,7 +39,6 @@ public class Service {
 
         // Guardar en XML
         try {
-            XmlPersister.instance().store(data);
             System.out.println("Medicamento guardado en XML");
         } catch (Exception e) {
             System.out.println("Error al guardar en XML:");
@@ -78,7 +77,6 @@ public class Service {
 
                 // Guardar en XML
                 try {
-                    XmlPersister.instance().store(data);
                     System.out.println("Medicamento actualizado y guardado en XML");
                 } catch (Exception e) {
                     System.out.println("Error al guardar actualización en XML:");
@@ -99,7 +97,6 @@ public class Service {
 
         // Guardar en XML
         try {
-            XmlPersister.instance().store(data);
             System.out.println("Medicamento eliminado y guardado en XML");
         } catch (Exception e) {
             System.out.println("Error al guardar eliminación en XML:");
@@ -119,7 +116,6 @@ public class Service {
 
         // Guardar en XML
         try {
-            XmlPersister.instance().store(data);
             System.out.println("Paciente agregado y guardado en XML");
         } catch (Exception e) {
             System.out.println("Error al guardar paciente:");
@@ -158,7 +154,6 @@ public class Service {
 
                 // Guardar en XML
                 try {
-                    XmlPersister.instance().store(data);
                     System.out.println("Paciente actualizado y guardado en XML");
                 } catch (Exception e) {
                     System.out.println("Error al guardar actualización:");
@@ -181,7 +176,6 @@ public class Service {
 
         // Guardar en XML
         try {
-            XmlPersister.instance().store(data);
             System.out.println("Paciente eliminado y guardado en XML");
         } catch (Exception e) {
             System.out.println("Error al guardar eliminación:");
@@ -201,7 +195,6 @@ public class Service {
 
         // Guardar en XML
         try {
-            XmlPersister.instance().store(data);
             System.out.println("Doctor agregado y guardado en XML");
         } catch (Exception e) {
             System.out.println("Error al guardar doctor:");
@@ -244,7 +237,6 @@ public class Service {
 
                 // Guardar en XML
                 try {
-                    XmlPersister.instance().store(data);
                     System.out.println("Doctor actualizado y guardado en XML");
                 } catch (Exception e) {
                     System.out.println("Error al guardar actualización:");
@@ -269,7 +261,6 @@ public class Service {
 
         // Guardar en XML
         try {
-            XmlPersister.instance().store(data);
             System.out.println("Doctor eliminado y guardado en XML");
         } catch (Exception e) {
             System.out.println("Error al guardar eliminación:");
@@ -289,7 +280,6 @@ public class Service {
 
         // Guardar en XML
         try {
-            XmlPersister.instance().store(data);
             System.out.println("Farmacéutico agregado y guardado en XML");
         } catch (Exception e) {
             System.out.println("Error al guardar farmacéutico:");
@@ -332,7 +322,6 @@ public class Service {
 
                 // Guardar en XML
                 try {
-                    XmlPersister.instance().store(data);
                     System.out.println("Farmacéutico actualizado y guardado en XML");
                 } catch (Exception e) {
                     System.out.println("Error al guardar actualización:");
@@ -357,7 +346,6 @@ public class Service {
 
         // Guardar en XML
         try {
-            XmlPersister.instance().store(data);
             System.out.println("Farmacéutico eliminado y guardado en XML");
         } catch (Exception e) {
             System.out.println("Error al guardar eliminación:");
@@ -384,7 +372,6 @@ public class Service {
 
         // Guardar en XML
         try {
-            XmlPersister.instance().store(data);
             System.out.println("Trabajador agregado y guardado en XML");
         } catch (Exception e) {
             System.out.println("Error al guardar trabajador:");
@@ -418,7 +405,6 @@ public class Service {
 
                 // Guardar en XML
                 try {
-                    XmlPersister.instance().store(data);
                     System.out.println("Trabajador actualizado y guardado en XML");
                 } catch (Exception e) {
                     System.out.println("Error al guardar actualización:");
@@ -445,7 +431,6 @@ public class Service {
 
         // Guardar en XML
         try {
-            XmlPersister.instance().store(data);
             System.out.println("Trabajador eliminado y guardado en XML");
         } catch (Exception e) {
             System.out.println("Error al guardar eliminación:");
@@ -464,7 +449,6 @@ public class Service {
 
         // Guardar en XML
         try {
-            XmlPersister.instance().store(data);
             System.out.println("Receta agregada y guardada en XML");
         } catch (Exception e) {
             System.out.println("Error al guardar receta:");
@@ -499,7 +483,6 @@ public class Service {
 
         // Guardar en XML
         try {
-            XmlPersister.instance().store(data);
             System.out.println("Receta actualizada y guardada en XML");
         } catch (Exception e) {
             System.out.println("Error al guardar actualización:");
@@ -514,7 +497,6 @@ public class Service {
 
         // Guardar en XML
         try {
-            XmlPersister.instance().store(data);
             System.out.println("Receta eliminada y guardada en XML");
         } catch (Exception e) {
             System.out.println("Error al guardar eliminación:");
