@@ -1,6 +1,5 @@
 package Hospital.logic.recetas;
 
-import Hospital.logic.LocalDateAdapter;
 import Hospital.logic.personas.Paciente;
 import Hospital.logic.personas.Trabajador;
 
@@ -8,32 +7,16 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.xml.bind.annotation.*;
-import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
+
 public class Receta {
     private int cant;
-    @XmlElement
     private Trabajador doctor;
-
-    @XmlElement
     private Paciente paciente;
-
-    @XmlElementWrapper(name = "prescripciones")
-    @XmlElement(name = "prescripcion")
     private List<Prescripcion> prescripciones;
-
-    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate fechaConfeccion;
-
-    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate fechaRetiro;
-
-    @XmlElement
     private String estado;
-
 
     public Receta() {
         prescripciones = new ArrayList<>();

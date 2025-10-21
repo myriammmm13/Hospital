@@ -7,37 +7,20 @@ import Hospital.logic.personas.Trabajador;
 import Hospital.logic.personas.trabajadores.Farmaceutico;
 import Hospital.logic.personas.trabajadores.Medico;
 import Hospital.logic.recetas.Receta;
-import jakarta.xml.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
 public class Data {
-
-    @XmlElementWrapper(name = "medicamentos")
-    @XmlElement(name = "medicamento")
     private List<Medicamento> medicamentos;
-
-    @XmlElementWrapper(name = "trabajadores")
-    @XmlElement(name = "trabajador")
     private List<Trabajador> trabajadores;
 
-    @XmlElementWrapper(name = "recetas")
-    @XmlElement(name = "receta")
     private List<Receta> recetas;
 
-    @XmlElementWrapper(name = "pacientes")
-    @XmlElement(name = "paciente")
     private List<Paciente> pacientes;
 
-    @XmlElementWrapper(name = "medicos")
-    @XmlElement(name = "medico")
     private List<Medico> medicos;
 
-    @XmlElementWrapper(name = "farmaceuticos")
-    @XmlElement(name = "farmaceutico")
     private List<Farmaceutico> famaceuticos;
 
     public Data() {
