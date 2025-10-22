@@ -1,6 +1,5 @@
 package Hospital.logic.recetas;
 
-import Hospital.logic.LocalDateAdapter;
 import Hospital.logic.personas.Paciente;
 import Hospital.logic.personas.Trabajador;
 
@@ -8,30 +7,24 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.xml.bind.annotation.*;
-import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
+//sin persistencia 
 public class Receta {
+    // El ID se maneja como String para compatibilidad con la base de datos
+    // aunque internamente sea un número entero
+    // Identificador único en la base de datos
+    private String id;
+    
+    // Cantidad de prescripciones
     private int cant;
-    @XmlElement
+    
+    // Referencias a otras entidades
     private Trabajador doctor;
-
-    @XmlElement
     private Paciente paciente;
-
-    @XmlElementWrapper(name = "prescripciones")
-    @XmlElement(name = "prescripcion")
     private List<Prescripcion> prescripciones;
-
-    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    
+    // Fechas y estado
     private LocalDate fechaConfeccion;
-
-    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate fechaRetiro;
-
-    @XmlElement
     private String estado;
 
 
@@ -54,6 +47,9 @@ public class Receta {
     }
 
     // Getters
+    public String getId() {
+        return id;
+    }
     public Trabajador getDoctor() { return doctor; }
     public Paciente getPaciente() { return paciente; }
     public List<Prescripcion> getPrescripciones() { return prescripciones; }
@@ -62,6 +58,7 @@ public class Receta {
     public String getEstado() { return estado; }
 
     // Setters
+    public void setId(String id) { this.id = id; }  // Setter para el ID
     public void setDoctor(Trabajador doctor) { this.doctor = doctor; }
     public void setPaciente(Paciente paciente) { this.paciente = paciente; }
     public void setPrescripciones(List<Prescripcion> prescripciones) {
@@ -92,10 +89,11 @@ public class Receta {
     }
 
     public String getCantidad() {
-        return cant+"";
+        return String.valueOf(cant);
     }
 
     public String getFecha_Confeccion() {
         return fechaConfeccion.toString();
     }
+
 }

@@ -12,8 +12,8 @@ import java.util.List;
 public class MedicamentoDao {
     DataBase db;
 
-    public MedicamentoDao() {
-        db = DataBase.instance();
+    public MedicamentoDao(DataBase db) {
+        this.db = db;
     }
 
     public void create(Medicamento m) throws Exception {
@@ -62,12 +62,12 @@ public class MedicamentoDao {
         }
     }
 
-    public List<Medicamento> findByNombre(String nombre) {
+    public List<Medicamento> findByNombre(Medicamento filtro) {
         List<Medicamento> resultado = new ArrayList<>();
         try {
             String sql = "select * from Medicamento where nombre like ?";
             PreparedStatement stm = db.prepareStatement(sql);
-            stm.setString(1, "%" + nombre + "%");
+            stm.setString(1, "%" + (filtro.getNombre() != null ? filtro.getNombre() : "") + "%");
             ResultSet rs = db.executeQuery(stm);
             while (rs.next()) {
                 resultado.add(from(rs));
@@ -78,15 +78,11 @@ public class MedicamentoDao {
         return resultado;
     }
 
-    private Medicamento from(ResultSet rs) {
-        try {
-            Medicamento m = new Medicamento();
-            m.setCodigo(rs.getString("codigo"));
-            m.setNombre(rs.getString("nombre"));
-            m.setPresentacion(rs.getString("presentacion"));
-            return m;
-        } catch (SQLException ex) {
-            return null;
-        }
+    private Medicamento from(ResultSet rs) throws SQLException {
+        Medicamento m = new Medicamento();
+        m.setCodigo(rs.getString("codigo"));
+        m.setNombre(rs.getString("nombre"));
+        m.setPresentacion(rs.getString("presentacion"));
+        return m;
     }
 }
