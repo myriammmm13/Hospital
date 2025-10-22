@@ -95,4 +95,11 @@ public class Receta {
         return fechaConfeccion.toString();
     }
 
+    public void setFechaConfeccion(LocalDate confeccion) {
+        this.fechaConfeccion = confeccion;
+        // Si no se ha establecido la fecha de retiro, la establecemos a 3 días después
+        if (this.fechaRetiro == null && confeccion != null) {
+            this.fechaRetiro = confeccion.plusDays(3);
+        }
+    }
 }

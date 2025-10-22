@@ -75,6 +75,12 @@ public class Prescripcion {
         if (cantidad > 0) this.cantidad = cantidad;
     }
 
+    public void setMedicamento(Medicamento medicamento) {
+        if (medicamento != null) {
+            this.medicamento = medicamento;
+        }
+    }
+
     // Utilidad
     public String resumen() {
         return String.format("%s (%s): %d unidades, %d días, indicaciones: %s",

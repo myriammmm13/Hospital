@@ -45,7 +45,7 @@ public class PacienteDao {
     }
 
     public void update(Paciente p) throws Exception{
-        String sql="update paciente set nombre=?, TelNum=?, FechaNacimiento=? where id=?";
+        String sql="update Paciente set nombre=?, TelNum=?, FechaNacimiento=? where id=?";
         PreparedStatement stm = db.prepareStatement(sql);
         stm.setString(1, p.getNombre());
         stm.setString(3, p.getTelNum());
@@ -86,11 +86,11 @@ public class PacienteDao {
 
     private Paciente from(ResultSet rs){
         try {
-            Paciente p= new Paciente("","","","");
-            p.setId(rs.getString("id"));
-            p.setNombre(rs.getString( ".nombre"));
-            p.setTelNum(rs.getString( ".telNum"));
-            p.setFechaNacimiento(rs.getString(".fechaNacimiento"));
+            Paciente p = new Paciente();
+            p.setId(rs.getString(alias + ".id"));
+            p.setNombre(rs.getString(alias + ".nombre"));
+            p.setTelNum(rs.getString(alias + ".TelNum"));
+            p.setFechaNacimiento(rs.getString(alias + ".FechaNacimiento"));
             return p;
         } catch (SQLException ex) {
             return null;

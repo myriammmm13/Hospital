@@ -19,10 +19,6 @@ public class RecetaDao {
         db = DataBase.instance();
     }
 
-    public RecetaDao(DataBase db) {
-        this.db = db;
-    }
-
     public void create(Receta r) throws Exception {
         String sql = "insert into Receta (doctor_id, paciente_id, fecha_confeccion, fecha_retiro, estado) values (?, ?, ?, ?, ?)";
         PreparedStatement stm = db.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -79,13 +75,15 @@ public class RecetaDao {
             Trabajador doctor = new Trabajador();
             doctor.setId(rs.getString("doctor_id"));
 
-            LocalDate confeccion = rs.getDate("fecha_confeccion").toLocalDate();
-            LocalDate retiro = rs.getDate("fecha_retiro").toLocalDate();
+            LocalDate confeccion = rs.getDate("fecha_confeccion") != null ? rs.getDate("fecha_confeccion").toLocalDate() : null;
+            LocalDate retiro = rs.getDate("fecha_retiro") != null ? rs.getDate("fecha_retiro").toLocalDate() : null;
             String estado = rs.getString("estado");
 
             Receta receta = new Receta();
+            receta.setId(String.valueOf(rs.getInt("id")));
             receta.setDoctor(doctor);
             receta.setPaciente(paciente);
+            receta.setFechaConfeccion(confeccion);
             receta.setFechaRetiro(retiro);
             receta.setEstado(estado);
             receta.setPrescripciones(buscarPrescripciones(rs.getInt("id")));

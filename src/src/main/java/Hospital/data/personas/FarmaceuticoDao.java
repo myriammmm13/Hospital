@@ -12,8 +12,8 @@ import java.util.List;
 public class FarmaceuticoDao {
     DataBase db;
 
-    public FarmaceuticoDao(DataBase db) {
-        db= DataBase.instance();
+    public FarmaceuticoDao() {
+        db = DataBase.instance();
     }
     public void create(Farmaceutico p) throws Exception{
         String sql="insert into Farmaceutico (nombre, id) "+"values(?,?)";
@@ -79,6 +79,9 @@ public class FarmaceuticoDao {
 
     private Farmaceutico from(ResultSet rs){
         try {
+            Farmaceutico p = new Farmaceutico();
+            p.setId(rs.getString(alias + ".id"));
+            p.setNombre(rs.getString(alias + ".nombre"));
             Farmaceutico p= new Farmaceutico("","");
             p.setId(rs.getString("id"));
             p.setNombre(rs.getString("nombre"));

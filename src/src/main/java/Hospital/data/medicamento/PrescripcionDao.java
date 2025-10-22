@@ -15,13 +15,14 @@ public class PrescripcionDao {
         db = DataBase.instance();
     }
 
-    public void create(Prescripcion p) throws Exception {
-        String sql = "insert into Prescripcion (medicamento_codigo, indicaciones, duracion, cantidad) values (?, ?, ?, ?)";
+    public void create(Prescripcion p, int recetaId) throws Exception {
+        String sql = "insert into Prescripcion (medicamento_codigo, indicaciones, duracion, cantidad, receta_id) values (?, ?, ?, ?, ?)";
         PreparedStatement stm = db.prepareStatement(sql);
         stm.setString(1, p.getCodigoMedicamento());
         stm.setString(2, p.getIndicaciones());
         stm.setInt(3, p.getDuracion());
         stm.setInt(4, p.getCantidad());
+        stm.setInt(5, recetaId);
         int count = db.executeUpdate(stm);
         if (count == 0) {
             throw new Exception("No se pudo registrar la prescripción");
@@ -58,6 +59,34 @@ public class PrescripcionDao {
             return new Prescripcion(m, indicaciones, duracion, cantidad);
         } catch (SQLException ex) {
             return null;
+        }
+    }
+
+    public Prescripcion read(int id) throws Exception {
+        String sql = "select p.*, m.nombre, m.presentacion from Prescripcion p " +
+                    "join Medicamento m on p.medicamento_codigo = m.codigo " +
+                    "where p.id = ?";
+        PreparedStatement stm = db.prepareStatement(sql);
+        stm.setInt(1, id);
+        ResultSet rs = db.executeQuery(stm);
+        if (rs.next()) {
+            return from(rs);
+        } else {
+            throw new Exception("Prescripción no encontrada");
+        }
+    }
+
+    public void update(Prescripcion p, int id) throws Exception {
+        String sql = "update Prescripcion set medicamento_codigo = ?, indicaciones = ?, duracion = ?, cantidad = ? where id = ?";
+        PreparedStatement stm = db.prepareStatement(sql);
+        stm.setString(1, p.getCodigoMedicamento());
+        stm.setString(2, p.getIndicaciones());
+        stm.setInt(3, p.getDuracion());
+        stm.setInt(4, p.getCantidad());
+        stm.setInt(5, id);
+        int count = db.executeUpdate(stm);
+        if (count == 0) {
+            throw new Exception("No se pudo actualizar la prescripción");
         }
     }
 }
