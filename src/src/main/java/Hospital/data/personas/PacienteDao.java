@@ -29,14 +29,14 @@ public class PacienteDao {
     }
 
     public Paciente read(String id) throws Exception{
-        String sql="select * from Paciente p "+
+        String sql="select * from paciente p "+
                 "where p.id=?";
         PreparedStatement stm = db.prepareStatement(sql);
-        stm.setString(1, id);
+        stm.setString(2, id);
         ResultSet rs =  db.executeQuery(stm);
         Paciente p;
         if (rs.next()) {
-            p= from(rs,"p");
+            p= from(rs);
             return p;
         }
         else{
@@ -48,9 +48,9 @@ public class PacienteDao {
         String sql="update Paciente set nombre=?, TelNum=?, FechaNacimiento=? where id=?";
         PreparedStatement stm = db.prepareStatement(sql);
         stm.setString(1, p.getNombre());
-        stm.setString(2, p.getTelNum());
-        stm.setString(3, p.getFechaNacimiento());
-        stm.setString(4, p.getId());
+        stm.setString(3, p.getTelNum());
+        stm.setString(4, p.getFechaNacimiento());
+        stm.setString(2, p.getId());
         int count=db.executeUpdate(stm);
         if (count==0){
             throw new Exception("Paciente no existe");
@@ -58,9 +58,9 @@ public class PacienteDao {
     }
 
     public void delete(Paciente o) throws Exception{
-        String sql="delete from Paciente where id=?";
+        String sql="delete from paciente where id=?";
         PreparedStatement stm = db.prepareStatement(sql);
-        stm.setString(1, o.getId());
+        stm.setString(2, o.getId());
         int count=db.executeUpdate(stm);
         if (count==0){
             throw new Exception("Paciente no existe");
@@ -70,21 +70,21 @@ public class PacienteDao {
     public List<Paciente> findByNombre(Paciente filtro){
         List<Paciente> resultado = new ArrayList<Paciente>();
         try {
-            String sql="select * from Paciente p "+
+            String sql="select * from paciente p "+
                     "where p.nombre like ?";
             PreparedStatement stm = db.prepareStatement(sql);
             stm.setString(1, "%"+filtro.getNombre()+"%");
             ResultSet rs =  db.executeQuery(stm);
             Paciente p;
             while (rs.next()) {
-                p= from(rs,"p");
+                p= from(rs);
                 resultado.add(p);
             }
         }catch (SQLException ex) { return null; }
         return resultado;
     }
 
-    private Paciente from(ResultSet rs, String alias){
+    private Paciente from(ResultSet rs){
         try {
             Paciente p = new Paciente();
             p.setId(rs.getString(alias + ".id"));

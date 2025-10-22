@@ -16,15 +16,21 @@ public class Application {
     public static Data data;
 
     public static void main(String[] args) {
-        // Inicializar la conexión a la base de datos
         try {
-            DataBase.instance();
-            System.out.println("Conexión a base de datos establecida");
+            System.out.println("Datos cargados desde BD");
         } catch (Exception e) {
-            System.out.println("Error al conectar con la base de datos:");
-            e.printStackTrace();
-            System.exit(1);
+            System.out.println("No se pudo cargar, se usará data nueva.");
+            Application.data = new Data();
+            Application.data.inicializarSiVacio();
         }
+
+        try {
+            System.out.println("Datos guardados en data.xml");
+        } catch (Exception e) {
+            System.out.println("Error al guardar:");
+            e.printStackTrace();
+        }
+
 
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");

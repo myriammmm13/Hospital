@@ -9,7 +9,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Properties;
 
 public class DataBase {
@@ -20,11 +19,12 @@ public class DataBase {
         }
         return theInstance;
     }
-    public static final String PROPERTIES_FILE_NAME="/database.properties";
+    public static final String PROPERTIES_FILE_NAME="/database.properties";//revisar
     Connection cnx;
     public DataBase(){
         cnx=this.getConnection();
     }
+
     public Connection getConnection(){
         try {
             Properties prop = new Properties();
@@ -72,9 +72,10 @@ public class DataBase {
         return null;
     }
 
-    public void close() throws Exception{
+    /*public void close() throws Exception{
         if (cnx!=null && !cnx.isClosed()){
             cnx.close();
         }
-    }
+        return;
+    }*/
 }

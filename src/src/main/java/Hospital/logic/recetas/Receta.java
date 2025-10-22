@@ -27,7 +27,6 @@ public class Receta {
     private LocalDate fechaRetiro;
     private String estado;
 
-
     public Receta() {
         prescripciones = new ArrayList<>();
         estado = "Confeccionada";
