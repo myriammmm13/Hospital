@@ -151,9 +151,9 @@ public class View implements PropertyChangeListener {
 
     private Map<YearMonth, Integer> contarRecetasPorMes(Medicamento medicamento, LocalDate desde, LocalDate hasta) throws Exception {
         Map<YearMonth, Integer> conteoPorMes = new TreeMap<>();
-        List<Receta> recetas = Hospital.logic.XmlPersister.instance().load().getRecetas();
-
-        for (Receta r : recetas) {
+        //List<Receta> recetas = Hospital.logic.XmlPersister.instance().load().getRecetas();
+//cambiar por BD
+     /*   for (Receta r : recetas) {
             LocalDate fecha = r.getFechaConfeccion();
             if (fecha == null || fecha.isBefore(desde) || fecha.isAfter(hasta)) continue;
 
@@ -176,12 +176,13 @@ public class View implements PropertyChangeListener {
             actual = actual.plusMonths(1);
         }
 
+        return conteoPorMes;*/
         return conteoPorMes;
     }
 
     private Map<String, Integer> contarRecetasPorEstado() throws Exception {
         Map<String, Integer> conteo = new TreeMap<>();
-        List<Receta> recetas = Hospital.logic.XmlPersister.instance().load().getRecetas();
+       /* List<Receta> recetas = Hospital.logic.XmlPersister.instance().load().getRecetas();
 
         for (Receta r : recetas) {
             String estado = r.getEstado();
@@ -189,7 +190,7 @@ public class View implements PropertyChangeListener {
 
             conteo.put(estado, conteo.getOrDefault(estado, 0) + 1);
         }
-
+*/
         return conteo;
     }
 

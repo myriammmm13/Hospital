@@ -30,12 +30,11 @@ public class MedicoDao {
         String sql="select * from Medico p "+
                 "where p.id=?";
         PreparedStatement stm = db.prepareStatement(sql);
-        stm.setString(1, id);
+        stm.setString(2, id);
         ResultSet rs =  db.executeQuery(stm);
         Medico p;
         if (rs.next()) {
-            p= from(rs,"p");
-            return p;
+            return from(rs);
         }
         else{
             throw new Exception ("Medico no Existe");
@@ -43,11 +42,11 @@ public class MedicoDao {
     }
 
     public void update(Medico p) throws Exception{
-        String sql="update paciente set nombre=?, Especialidad=? where id=?";
+        String sql="update medico set nombre=?, Especialidad=? where id=?";
         PreparedStatement stm = db.prepareStatement(sql);
         stm.setString(1, p.getNombre());
-        stm.setString(2, p.getEspecialidad());
-        stm.setString(3, p.getId());
+        stm.setString(3, p.getEspecialidad());
+        stm.setString(2, p.getId());
         int count=db.executeUpdate(stm);
         if (count==0){
             throw new Exception("Medico no existe");
@@ -55,9 +54,9 @@ public class MedicoDao {
     }
 
     public void delete(Medico o) throws Exception{
-        String sql="delete from Medico where id=?";
+        String sql="delete from medico where id=?";
         PreparedStatement stm = db.prepareStatement(sql);
-        stm.setString(1, o.getId());
+        stm.setString(2, o.getId());
         int count=db.executeUpdate(stm);
         if (count==0){
             throw new Exception("Medico no existe");
@@ -67,26 +66,26 @@ public class MedicoDao {
     public List<Medico> findByNombre(Medico filtro){
         List<Medico> resultado = new ArrayList<Medico>();
         try {
-            String sql="select * from Medico p "+
+            String sql="select * from medico p "+
                     "where p.nombre like ?";
             PreparedStatement stm = db.prepareStatement(sql);
             stm.setString(1, "%"+filtro.getNombre()+"%");
             ResultSet rs =  db.executeQuery(stm);
             Medico p;
             while (rs.next()) {
-                p= from(rs,"p");
+                p= from(rs);
                 resultado.add(p);
             }
         }catch (SQLException ex) { return null; }
         return resultado;
     }
 
-    private Medico from(ResultSet rs, String alias){
+    private Medico from(ResultSet rs){
         try {
             Medico p= new Medico("","","");
             p.setId(rs.getString("id"));
-            p.setNombre(rs.getString(alias + ".nombre"));
-            p.setEspecialidad(rs.getString(alias + ".especialidad"));
+            p.setNombre(rs.getString( ".nombre"));
+            p.setEspecialidad(rs.getString(".especialidad"));
             return p;
         } catch (SQLException ex) {
             return null;
