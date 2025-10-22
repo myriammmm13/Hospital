@@ -19,6 +19,10 @@ public class RecetaDao {
         db = DataBase.instance();
     }
 
+    public RecetaDao(DataBase db) {
+        this.db = db;
+    }
+
     public void create(Receta r) throws Exception {
         String sql = "insert into Receta (doctor_id, paciente_id, fecha_confeccion, fecha_retiro, estado) values (?, ?, ?, ?, ?)";
         PreparedStatement stm = db.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -117,5 +121,126 @@ public class RecetaDao {
             return null;
         }
         return lista;
+    }
+
+    public List<Receta> findAll() {
+        List<Receta> resultado = new ArrayList<>();
+        try {
+            String sql = "select * from Receta";
+            PreparedStatement stm = db.prepareStatement(sql);
+            ResultSet rs = db.executeQuery(stm);
+            while (rs.next()) {
+                resultado.add(from(rs));
+            }
+        } catch (SQLException ex) {
+            return null;
+        }
+        return resultado;
+    }
+
+    public String getId(Receta r) {
+        try {
+            String sql = "select id from Receta where doctor_id = ? and paciente_id = ? and fecha_confeccion = ?";
+            PreparedStatement stm = db.prepareStatement(sql);
+            stm.setString(1, r.getDoctor().getId());
+            stm.setString(2, r.getPaciente().getId());
+            stm.setDate(3, Date.valueOf(r.getFechaConfeccion()));
+            ResultSet rs = db.executeQuery(stm);
+            if (rs.next()) {
+                return String.valueOf(rs.getInt("id"));
+            }
+            return null;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+
+    public Receta read(String id) throws Exception {
+        String sql = "select * from Receta where id = ?";
+        PreparedStatement stm = db.prepareStatement(sql);
+        stm.setInt(1, Integer.parseInt(id));
+        ResultSet rs = db.executeQuery(stm);
+        if (rs.next()) {
+            return from(rs);
+        } else {
+            throw new Exception("Receta no encontrada");
+        }
+    }
+
+    public List<Receta> findByPacienteAndDoctor(Paciente paciente, Trabajador doctor, LocalDate fecha) {
+        List<Receta> resultado = new ArrayList<>();
+        try {
+            String sql = "select * from Receta where paciente_id = ? and doctor_id = ? and fecha_confeccion = ?";
+            PreparedStatement stm = db.prepareStatement(sql);
+            stm.setString(1, paciente.getId());
+            stm.setString(2, doctor.getId());
+            stm.setDate(3, Date.valueOf(fecha));
+            ResultSet rs = db.executeQuery(stm);
+            while (rs.next()) {
+                resultado.add(from(rs));
+            }
+        } catch (SQLException ex) {
+            return null;
+        }
+        return resultado;
+    }
+
+    public void update(Receta r) throws Exception {
+        try {
+            String sql = "update Receta set estado = ?, fecha_retiro = ? where id = ?";
+            PreparedStatement stm = db.prepareStatement(sql);
+            stm.setString(1, r.getEstado());
+            stm.setDate(2, r.getFechaRetiro() != null ? Date.valueOf(r.getFechaRetiro()) : null);
+            stm.setInt(3, Integer.parseInt(r.getId()));
+            
+            int count = db.executeUpdate(stm);
+            if (count == 0) throw new Exception("Receta no encontrada");
+
+            // Actualizar prescripciones
+            sql = "delete from Prescripcion where receta_id = ?";
+            stm = db.prepareStatement(sql);
+            stm.setInt(1, Integer.parseInt(r.getId()));
+            db.executeUpdate(stm);
+
+            guardarPrescripciones(Integer.parseInt(r.getId()), r.getPrescripciones());
+        } catch (SQLException ex) {
+            throw new Exception("Error al actualizar la receta");
+        }
+    }
+
+    public void delete(Receta r) throws Exception {
+        try {
+            // Primero eliminar prescripciones relacionadas
+            String sql = "delete from Prescripcion where receta_id = ?";
+            PreparedStatement stm = db.prepareStatement(sql);
+            stm.setInt(1, Integer.parseInt(r.getId()));
+            db.executeUpdate(stm);
+
+            // Luego eliminar la receta
+            sql = "delete from Receta where id = ?";
+            stm = db.prepareStatement(sql);
+            stm.setInt(1, Integer.parseInt(r.getId()));
+            int count = db.executeUpdate(stm);
+            if (count == 0) throw new Exception("Receta no encontrada");
+        } catch (SQLException ex) {
+            throw new Exception("Error al eliminar la receta");
+        }
+    }
+
+    public List<Receta> findByDateRange(LocalDate desde, LocalDate hasta) {
+        List<Receta> resultado = new ArrayList<>();
+        try {
+            String sql = "select * from Receta where fecha_confeccion between ? and ?";
+            PreparedStatement stm = db.prepareStatement(sql);
+            stm.setDate(1, Date.valueOf(desde));
+            stm.setDate(2, Date.valueOf(hasta));
+            ResultSet rs = db.executeQuery(stm);
+            while (rs.next()) {
+                resultado.add(from(rs));
+            }
+        } catch (SQLException ex) {
+            return null;
+        }
+        return resultado;
     }
 }
