@@ -72,10 +72,10 @@ public class DataBase {
         return null;
     }
 
-    /*public void close() throws Exception{
+    public void close() throws Exception{
         if (cnx!=null && !cnx.isClosed()){
             cnx.close();
         }
         return;
-    }*/
+    }
 }
