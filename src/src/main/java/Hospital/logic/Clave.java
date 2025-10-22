@@ -4,6 +4,9 @@ package Hospital.logic;
 //Ella va contenida en solo en trabajador (doc y farma) porque paciente no tiene
 public class Clave {
     private String clave;
+
+    public Clave(){}
+
     public Clave(String clave) {
         this.clave = clave;
     }

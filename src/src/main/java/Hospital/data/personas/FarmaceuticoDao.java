@@ -27,13 +27,13 @@ public class FarmaceuticoDao {
     }
 
     public Farmaceutico read(String id) throws Exception{
-        String sql="select * from farmaceutico p "+
+        String sql="select * from Farmaceutico p "+
                 "where p.id=?";
         PreparedStatement stm = db.prepareStatement(sql);
-        stm.setString(2, id);
+        stm.setString(1, id);
         ResultSet rs =  db.executeQuery(stm);
         if (rs.next()) {
-            return from(rs);
+            return from(rs, "p");
         }
         else{
             throw new Exception ("Farmaceutico no Existe");
@@ -54,37 +54,33 @@ public class FarmaceuticoDao {
     public void delete(Farmaceutico o) throws Exception{
         String sql="delete from Farmaceutico where id=?";
         PreparedStatement stm = db.prepareStatement(sql);
-        stm.setString(2, o.getId());
+        stm.setString(1, o.getId());
         int count=db.executeUpdate(stm);
         if (count==0){
             throw new Exception("Farmaceutico no existe");
         }
-    }//revisar xd
+    }
 
     public List<Farmaceutico> findByNombre(Farmaceutico filtro){
         List<Farmaceutico> resultado = new ArrayList<Farmaceutico>();
         try {
-            String sql="select * from farmaceutico p "+
+            String sql="select * from Farmaceutico p "+
                     "where p.nombre like ?";
             PreparedStatement stm = db.prepareStatement(sql);
             stm.setString(1, "%"+filtro.getNombre()+"%");
             ResultSet rs =  db.executeQuery(stm);
-            Farmaceutico p;
             while (rs.next()) {
-                resultado.add(from(rs));
+                resultado.add(from(rs, "p"));
             }
         }catch (SQLException ex) { return null; }
         return resultado;
     }
 
-    private Farmaceutico from(ResultSet rs){
+    private Farmaceutico from(ResultSet rs, String alias){
         try {
             Farmaceutico p = new Farmaceutico();
             p.setId(rs.getString(alias + ".id"));
             p.setNombre(rs.getString(alias + ".nombre"));
-            Farmaceutico p= new Farmaceutico("","");
-            p.setId(rs.getString("id"));
-            p.setNombre(rs.getString("nombre"));
             return p;
         } catch (SQLException ex) {
             return null;

@@ -1,6 +1,5 @@
 package Hospital.data;
 
-import Hospital.data.DataBase;
 import Hospital.logic.Clave;
 
 import java.sql.PreparedStatement;
@@ -12,8 +11,8 @@ import java.util.List;
 public class ClaveDao {
     DataBase db;
 
-    public ClaveDao(DataBase db) {
-        db= DataBase.instance();
+    public ClaveDao() {
+        db = DataBase.instance();
     }
     public void create(Clave p) throws Exception{
         String sql="insert into Clave (clave) "+"values(?)";
@@ -26,13 +25,13 @@ public class ClaveDao {
     }
 
     public Clave read(String clave) throws Exception{
-        String sql="select * from clave p "+
+        String sql="select * from Clave p "+
                 "where p.clave=?";
         PreparedStatement stm = db.prepareStatement(sql);
         stm.setString(1, clave);
         ResultSet rs =  db.executeQuery(stm);
         if (rs.next()) {
-            return from(rs);
+            return from(rs, "p");
         }
         else{
             throw new Exception ("Clave no Existe");
@@ -40,9 +39,10 @@ public class ClaveDao {
     }
 
     public void update(Clave p) throws Exception{
-        String sql="update clave where clave=?";
+        String sql="update Clave set clave=? where clave=?";
         PreparedStatement stm = db.prepareStatement(sql);
         stm.setString(1, p.getClave());
+        stm.setString(2, p.getClave());
         int count=db.executeUpdate(stm);
         if (count==0){
             throw new Exception("Clave no existe");
@@ -62,23 +62,22 @@ public class ClaveDao {
     public List<Clave> findByNombre(Clave filtro){
         List<Clave> resultado = new ArrayList<Clave>();
         try {
-            String sql="select * from clave p "+
+            String sql="select * from Clave p "+
                     "where p.clave like ?";
             PreparedStatement stm = db.prepareStatement(sql);
             stm.setString(1, "%"+filtro.getClave()+"%");
             ResultSet rs =  db.executeQuery(stm);
-            Clave p;
             while (rs.next()) {
-                resultado.add(from(rs));
+                resultado.add(from(rs, "p"));
             }
         }catch (SQLException ex) { return null; }
         return resultado;
     }
 
-    private Clave from(ResultSet rs){
+    private Clave from(ResultSet rs, String alias){
         try {
-            Clave p= new Clave("");
-            p.setClave(rs.getString("clave"));
+            Clave p = new Clave();
+            p.setClave(rs.getString(alias + ".clave"));
             return p;
         } catch (SQLException ex) {
             return null;

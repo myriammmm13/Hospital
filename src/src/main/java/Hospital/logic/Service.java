@@ -3,6 +3,7 @@ package Hospital.logic;
 import Hospital.Application;
 import Hospital.data.Data;
 import Hospital.data.personas.FarmaceuticoDao;
+import Hospital.data.personas.MedicoDao;
 import Hospital.logic.personas.Paciente;
 import Hospital.logic.personas.Trabajador;
 import Hospital.logic.personas.trabajadores.Medico;
@@ -11,9 +12,7 @@ import Hospital.logic.recetas.Prescripcion;
 import Hospital.logic.recetas.Receta;
 import Hospital.data.medicamento.MedicamentoDao;
 import Hospital.data.personas.PacienteDao;
-import Hospital.data.personas.MedicoDao;
 import Hospital.data.medicamento.RecetaDao;
-import Hospital.data.DataBase;
 
 import java.time.LocalDate;
 import java.util.*;
