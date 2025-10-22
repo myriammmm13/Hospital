@@ -1,5 +1,4 @@
 package Hospital.presentation.login;
-import Hospital.logic.XmlPersister;
 import Hospital.logic.personas.Trabajador;
 
 import javax.swing.*;

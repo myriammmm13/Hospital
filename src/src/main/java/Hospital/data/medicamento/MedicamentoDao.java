@@ -12,8 +12,12 @@ import java.util.List;
 public class MedicamentoDao {
     DataBase db;
 
+    public MedicamentoDao() {
+        db = DataBase.instance();
+    }
+
     public MedicamentoDao(DataBase db) {
-        this.db = db;
+        this.db = (db != null) ? db : DataBase.instance();
     }
 
     public void create(Medicamento m) throws Exception {

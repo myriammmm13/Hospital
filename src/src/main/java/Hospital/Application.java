@@ -1,7 +1,6 @@
 package Hospital;
 
 import Hospital.data.Data;
-import Hospital.logic.XmlPersister;
 import Hospital.presentation.login.Controller;
 import Hospital.presentation.login.Model;
 import Hospital.presentation.login.View;
@@ -17,23 +16,15 @@ public class Application {
     public static Data data;
 
     public static void main(String[] args) {
+        // Inicializar la conexión a la base de datos
         try {
-            Application.data = XmlPersister.instance().load();
-            System.out.println("Datos cargados desde data.xml");
+            DataBase.instance();
+            System.out.println("Conexión a base de datos establecida");
         } catch (Exception e) {
-            System.out.println("No se pudo cargar, se usará data nueva.");
-            Application.data = new Data();
-            Application.data.inicializarSiVacio();
-        }
-
-        try {
-            XmlPersister.instance().store(Application.data);
-            System.out.println("Datos guardados en data.xml");
-        } catch (Exception e) {
-            System.out.println("Error al guardar:");
+            System.out.println("Error al conectar con la base de datos:");
             e.printStackTrace();
+            System.exit(1);
         }
-
 
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");

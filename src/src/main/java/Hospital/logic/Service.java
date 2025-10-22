@@ -33,7 +33,7 @@ public class Service {
     }
 
     // CRUD Medicamentos con base de datos
-    MedicamentoDao medicamentoDao = new MedicamentoDao(DataBase.instance());
+    MedicamentoDao medicamentoDao = new MedicamentoDao();
 
     // CREATE
     public void agregarMedicamento(Medicamento nuevo, String userId) throws Exception {
@@ -145,7 +145,7 @@ public class Service {
     }
 
     // CRUD Doctores con base de datos
-    MedicoDao medicoDao = new MedicoDao(DataBase.instance());
+    MedicoDao medicoDao = new MedicoDao();
 
     // CREATE
     public void agregarDoctor(Medico nuevo) throws Exception {
@@ -210,7 +210,7 @@ public class Service {
     }
 
     // CRUD Farmaceuticos con base de datos
-    FarmaceuticoDao farmaceuticoDao = new FarmaceuticoDao(DataBase.instance());
+    FarmaceuticoDao farmaceuticoDao = new FarmaceuticoDao();
 
     // CREATE
     public void agregarFarmaceutico(Farmaceutico nuevo) throws Exception {
@@ -374,7 +374,7 @@ public class Service {
     }
 
     // CRUD Recetas con base de datos
-    RecetaDao recetaDao = new RecetaDao(DataBase.instance());
+    RecetaDao recetaDao = new RecetaDao();
 
     // CREATE
     public void agregarReceta(Receta receta) throws Exception {

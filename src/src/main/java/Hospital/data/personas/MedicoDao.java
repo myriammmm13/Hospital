@@ -11,8 +11,8 @@ import java.util.List;
 public class MedicoDao {
     DataBase db;
 
-    public MedicoDao(DataBase db) {
-        db= DataBase.instance();
+    public MedicoDao() {
+        db = DataBase.instance();
     }
     public void create(Medico p) throws Exception{
         String sql="insert into Medico (nombre, id, Especialidad) "+"values(?,?,?)";
@@ -43,7 +43,7 @@ public class MedicoDao {
     }
 
     public void update(Medico p) throws Exception{
-        String sql="update paciente set nombre=?, Especialidad=? where id=?";
+        String sql="update Medico set nombre=?, Especialidad=? where id=?";
         PreparedStatement stm = db.prepareStatement(sql);
         stm.setString(1, p.getNombre());
         stm.setString(2, p.getEspecialidad());
@@ -83,10 +83,10 @@ public class MedicoDao {
 
     private Medico from(ResultSet rs, String alias){
         try {
-            Medico p= new Medico("","","");
-            p.setId(rs.getString("id"));
+            Medico p = new Medico();
+            p.setId(rs.getString(alias + ".id"));
             p.setNombre(rs.getString(alias + ".nombre"));
-            p.setEspecialidad(rs.getString(alias + ".especialidad"));
+            p.setEspecialidad(rs.getString(alias + ".Especialidad"));
             return p;
         } catch (SQLException ex) {
             return null;

@@ -1,15 +1,8 @@
 package Hospital.logic.recetas;
 
 import Hospital.logic.Medicamento;
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
 public class Prescripcion {
-    @XmlElement
     private Medicamento medicamento;
     private String indicaciones;
     private int duracion; // en días
@@ -80,6 +73,12 @@ public class Prescripcion {
 
     public void setCantidad(int cantidad) {
         if (cantidad > 0) this.cantidad = cantidad;
+    }
+
+    public void setMedicamento(Medicamento medicamento) {
+        if (medicamento != null) {
+            this.medicamento = medicamento;
+        }
     }
 
     // Utilidad
