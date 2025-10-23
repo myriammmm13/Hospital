@@ -1,9 +1,9 @@
 package Hospital;
 
-import Hospital.data.Data;
-import Hospital.presentation.login.Controller;
-import Hospital.presentation.login.Model;
-import Hospital.presentation.login.View;
+import Hospital.backend.data.Data;
+import Hospital.frontend.presentation.login.Controller;
+import Hospital.frontend.presentation.login.Model;
+import Hospital.frontend.presentation.login.View;
 
 import javax.swing.*;
 import java.awt.*;
@@ -57,42 +57,42 @@ public class Application {
         JFrame window = new JFrame("Hospital - Usuario: " + userId);
         JTabbedPane tabs = new JTabbedPane();
 
-        var medicoView = new Hospital.presentation.personas.Medico.View();
-        var medicoModel = new Hospital.presentation.personas.Medico.Model();
-        var medicoController = new Hospital.presentation.personas.Medico.Controller(medicoModel, medicoView);
+        var medicoView = new Hospital.frontend.presentation.personas.Medico.View();
+        var medicoModel = new Hospital.frontend.presentation.personas.Medico.Model();
+        var medicoController = new Hospital.frontend.presentation.personas.Medico.Controller(medicoModel, medicoView);
 
-        var farmaceuticoView = new Hospital.presentation.personas.Farmaceutico.View();
-        var farmaceuticoModel = new Hospital.presentation.personas.Farmaceutico.Model();
-        var farmaceuticoController = new Hospital.presentation.personas.Farmaceutico.Controller(farmaceuticoModel, farmaceuticoView);
+        var farmaceuticoView = new Hospital.frontend.presentation.personas.Farmaceutico.View();
+        var farmaceuticoModel = new Hospital.frontend.presentation.personas.Farmaceutico.Model();
+        var farmaceuticoController = new Hospital.frontend.presentation.personas.Farmaceutico.Controller(farmaceuticoModel, farmaceuticoView);
 
-        var medicamentoView = new Hospital.presentation.medicamentos.View();
-        var medicamentoModel = new Hospital.presentation.medicamentos.Model();
-        var medicamentoController = new Hospital.presentation.medicamentos.Controller(medicamentoModel, medicamentoView);
+        var medicamentoView = new Hospital.frontend.presentation.medicamentos.View();
+        var medicamentoModel = new Hospital.frontend.presentation.medicamentos.Model();
+        var medicamentoController = new Hospital.frontend.presentation.medicamentos.Controller(medicamentoModel, medicamentoView);
 
-        var prescribirView = new Hospital.presentation.prescribir.View();
-        var prescribirModel = new Hospital.presentation.prescribir.Model();
-        var prescribirController = new  Hospital.presentation.prescribir.Controller(prescribirModel, prescribirView);
+        var prescribirView = new Hospital.frontend.presentation.prescribir.View();
+        var prescribirModel = new Hospital.frontend.presentation.prescribir.Model();
+        var prescribirController = new  Hospital.frontend.presentation.prescribir.Controller(prescribirModel, prescribirView);
 
 
-        var pacienteView = new Hospital.presentation.personas.Paciente.View();
-        var pacienteModel = new Hospital.presentation.personas.Paciente.Model();
-        var pacienteController = new Hospital.presentation.personas.Paciente.Controller(pacienteModel, pacienteView);
+        var pacienteView = new Hospital.frontend.presentation.personas.Paciente.View();
+        var pacienteModel = new Hospital.frontend.presentation.personas.Paciente.Model();
+        var pacienteController = new Hospital.frontend.presentation.personas.Paciente.Controller(pacienteModel, pacienteView);
 
-        var dashboardModel = new Hospital.presentation.dashboard.Model();
-        var dashboardView = new Hospital.presentation.dashboard.View();
-        var dashboardController = new Hospital.presentation.dashboard.Controller(dashboardModel, dashboardView, Application.data);
+        var dashboardModel = new Hospital.frontend.presentation.dashboard.Model();
+        var dashboardView = new Hospital.frontend.presentation.dashboard.View();
+        var dashboardController = new Hospital.frontend.presentation.dashboard.Controller(dashboardModel, dashboardView, Application.data);
 
-        var historicoView = new Hospital.presentation.historico.View();
-        var historicoModel = new Hospital.presentation.historico.Model();
-        var historicoController = new Hospital.presentation.historico.Controller(historicoModel, historicoView);
+        var historicoView = new Hospital.frontend.presentation.historico.View();
+        var historicoModel = new Hospital.frontend.presentation.historico.Model();
+        var historicoController = new Hospital.frontend.presentation.historico.Controller(historicoModel, historicoView);
 
-        var acercaDeView = new Hospital.presentation.AcercaDe.View();
-        var acercaDeModel = new Hospital.presentation.AcercaDe.Model();
-        var acercaDeController = new Hospital.presentation.AcercaDe.Controller(acercaDeModel, acercaDeView);
+        var acercaDeView = new Hospital.frontend.presentation.AcercaDe.View();
+        var acercaDeModel = new Hospital.frontend.presentation.AcercaDe.Model();
+        var acercaDeController = new Hospital.frontend.presentation.AcercaDe.Controller(acercaDeModel, acercaDeView);
 
-        var despachoView = new Hospital.presentation.despacho.View();
-        var despachoModel = new Hospital.presentation.despacho.Model();
-        var despachoController = new Hospital.presentation.despacho.Controller(despachoModel, despachoView);
+        var despachoView = new Hospital.frontend.presentation.despacho.View();
+        var despachoModel = new Hospital.frontend.presentation.despacho.Model();
+        var despachoController = new Hospital.frontend.presentation.despacho.Controller(despachoModel, despachoView);
 
         switch (userType) {
             case "ADM":
