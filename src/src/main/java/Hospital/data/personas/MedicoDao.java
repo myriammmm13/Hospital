@@ -14,6 +14,8 @@ public class MedicoDao {
     public MedicoDao(DataBase db) {
         db= DataBase.instance();
     }
+
+
     public void create(Medico p) throws Exception{
         String sql="insert into Medico (nombre, id, Especialidad) "+"values(?,?,?)";
         PreparedStatement stm = db.prepareStatement(sql);

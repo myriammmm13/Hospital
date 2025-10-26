@@ -60,4 +60,7 @@ public class PrescripcionDao {
             return null;
         }
     }
+
+    /*public Prescripcion read(String indicaciones) {
+    }*/
 }

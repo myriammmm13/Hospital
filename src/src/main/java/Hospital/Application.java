@@ -25,7 +25,7 @@ public class Application {
         }
 
         try {
-            System.out.println("Datos guardados en data.xml");
+            System.out.println("Datos guardados en BD");
         } catch (Exception e) {
             System.out.println("Error al guardar:");
             e.printStackTrace();
