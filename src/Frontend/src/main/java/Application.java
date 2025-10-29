@@ -1,0 +1,137 @@
+import Hospital.backend.data.Data;
+import Frontend.presentation.login.Controller;
+import Hospital.frontend.presentation.login.Model;
+import Hospital.frontend.presentation.login.View;
+
+import javax.swing.*;
+import java.awt.*;
+import java.net.URL;
+
+public class Application {
+
+    public static final Color BACKGROUND_ERROR = new Color(255, 102, 102);
+
+    public static void main(String[] args) {
+        try {
+            System.out.println("Datos cargados desde BD");
+        } catch (Exception e) {
+            System.out.println("No se pudo cargar, se usará data nueva.");
+
+        }
+
+        try {
+            System.out.println("Datos guardados en data.xml");
+        } catch (Exception e) {
+            System.out.println("Error al guardar:");
+            e.printStackTrace();
+        }
+
+
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (Exception ex) {}
+
+
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (Exception ex) {}
+
+        View loginView = new View();
+        Model loginModel = new Model(data);
+        Controller loginController = new Controller(loginView, loginModel, (userId, userType) -> {
+            SwingUtilities.invokeLater(() -> {
+                loginView.dispose();
+                launchMainWindow(userId, userType);
+            });
+        });
+
+        loginView.setVisible(true);
+    }
+
+    public static void launchMainWindow(String userId, String userType) {
+        JFrame window = new JFrame("Hospital - Usuario: " + userId);
+        JTabbedPane tabs = new JTabbedPane();
+
+        var medicoView = new Hospital.frontend.presentation.personas.Medico.View();
+        var medicoModel = new Hospital.frontend.presentation.personas.Medico.Model();
+        var medicoController = new Hospital.frontend.presentation.personas.Medico.Controller(medicoModel, medicoView);
+
+        var farmaceuticoView = new Hospital.frontend.presentation.personas.Farmaceutico.View();
+        var farmaceuticoModel = new Hospital.frontend.presentation.personas.Farmaceutico.Model();
+        var farmaceuticoController = new Hospital.frontend.presentation.personas.Farmaceutico.Controller(farmaceuticoModel, farmaceuticoView);
+
+        var medicamentoView = new Hospital.frontend.presentation.medicamentos.View();
+        var medicamentoModel = new Hospital.frontend.presentation.medicamentos.Model();
+        var medicamentoController = new Hospital.frontend.presentation.medicamentos.Controller(medicamentoModel, medicamentoView);
+
+        var prescribirView = new Hospital.frontend.presentation.prescribir.View();
+        var prescribirModel = new Hospital.frontend.presentation.prescribir.Model();
+        var prescribirController = new  Hospital.frontend.presentation.prescribir.Controller(prescribirModel, prescribirView);
+
+
+        var pacienteView = new Hospital.frontend.presentation.personas.Paciente.View();
+        var pacienteModel = new Hospital.frontend.presentation.personas.Paciente.Model();
+        var pacienteController = new Hospital.frontend.presentation.personas.Paciente.Controller(pacienteModel, pacienteView);
+
+        var dashboardModel = new Hospital.frontend.presentation.dashboard.Model();
+        var dashboardView = new Hospital.frontend.presentation.dashboard.View();
+        var dashboardController = new Hospital.frontend.presentation.dashboard.Controller(dashboardModel, dashboardView, Application.data);
+
+        var historicoView = new Hospital.frontend.presentation.historico.View();
+        var historicoModel = new Hospital.frontend.presentation.historico.Model();
+        var historicoController = new Hospital.frontend.presentation.historico.Controller(historicoModel, historicoView);
+
+        var acercaDeView = new Hospital.frontend.presentation.AcercaDe.View();
+        var acercaDeModel = new Hospital.frontend.presentation.AcercaDe.Model();
+        var acercaDeController = new Hospital.frontend.presentation.AcercaDe.Controller(acercaDeModel, acercaDeView);
+
+        var despachoView = new Hospital.frontend.presentation.despacho.View();
+        var despachoModel = new Hospital.frontend.presentation.despacho.Model();
+        var despachoController = new Hospital.frontend.presentation.despacho.Controller(despachoModel, despachoView);
+
+        switch (userType) {
+            case "ADM":
+                tabs.addTab("Medicos", cargarIcono("/images/medico1.png"), medicoView.getPanel());
+                  tabs.addTab("Farmaceutas", cargarIcono("/images/farmaceuta.png"), farmaceuticoView.getPanel());
+                  tabs.addTab("Pacientes", cargarIcono("/images/paciente.png"), pacienteView.getPanel());
+                  tabs.addTab("Medicamentos", cargarIcono("/images/medicamento1.png"), medicamentoView.getPanel());
+                  tabs.addTab("Dashboard", cargarIcono("/images/dashboard1.png"), dashboardView.getPanel());
+                  tabs.addTab("Histórico", cargarIcono("/images/historico1.png"), historicoView.getPanel());
+                  tabs.addTab("Acerca de...", cargarIcono("/images/acercade1.png"), acercaDeView.getPanel());
+                break;
+
+            case "MED":
+                tabs.addTab("Prescribir", cargarIcono("/images/prescipcion1.png"), prescribirView.getPanel());
+                tabs.addTab("Dashboard", cargarIcono("/images/dashboard1.png"), dashboardView.getPanel());
+                tabs.addTab("Histórico", cargarIcono("/images/historico1.png"), historicoView.getPanel());
+                tabs.addTab("Acerca de...", cargarIcono("/images/acercade1.png"), acercaDeView.getPanel());
+                break;
+
+            case "FAR":
+                tabs.addTab("Despacho", despachoView.getPanel());
+                tabs.addTab("Dashboard", cargarIcono("/images/dashboard1.png"), dashboardView.getPanel());
+                tabs.addTab("Acerca de...", cargarIcono("/images/acercade1.png"), acercaDeView.getPanel());
+                break;
+
+            default:
+                JOptionPane.showMessageDialog(null, "Tipo de usuario no reconocido");
+                System.exit(0);
+        }
+
+        window.setContentPane(tabs);
+        window.setSize(1000, 500);
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setLocationRelativeTo(null);
+        window.setVisible(true);
+    }
+
+    private static ImageIcon cargarIcono(String ruta) {
+        URL url = Application.class.getResource(ruta);
+        if (url != null) {
+            ImageIcon icon = new ImageIcon(url);
+            Image scaled = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            return new ImageIcon(scaled);
+        }
+        return null;
+    }
+}
