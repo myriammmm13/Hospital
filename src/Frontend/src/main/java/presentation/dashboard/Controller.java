@@ -1,7 +1,7 @@
 package presentation.dashboard;
 
-import Hospital.backend.logic.Medicamento;
-import Hospital.backend.data.Data;
+import logic.Medicamento;
+import data.Data;
 
 import java.util.List;
 

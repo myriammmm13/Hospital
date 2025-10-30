@@ -1,7 +1,7 @@
 package presentation.personas.Farmaceutico;
 
-import Hospital.backend.logic.personas.trabajadores.Farmaceutico;
-import Hospital.backend.logic.Service;
+import logic.personas.trabajadores.Farmaceutico;
+import logic.Service;
 
 import java.util.List;
 

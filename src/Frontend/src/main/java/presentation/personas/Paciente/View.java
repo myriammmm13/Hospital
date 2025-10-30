@@ -1,7 +1,7 @@
 package presentation.personas.Paciente;
 
-import Hospital.Application;
-import Hospital.backend.logic.personas.Paciente;
+//import Application;
+import logic.personas.Paciente;
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.DatePickerSettings;
 

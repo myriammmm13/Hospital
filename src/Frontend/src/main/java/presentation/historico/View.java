@@ -1,7 +1,7 @@
 package presentation.historico;
 
-import Hospital.backend.logic.recetas.Receta;
-import Hospital.frontend.presentation.despacho.TableModel;
+import logic.recetas.Receta;
+import presentation.despacho.TableModel;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;

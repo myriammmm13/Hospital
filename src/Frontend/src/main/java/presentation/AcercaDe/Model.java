@@ -1,6 +1,6 @@
 package presentation.AcercaDe;
 
-import Hospital.backend.logic.recetas.Receta;
+import logic.recetas.Receta;
 import presentation.AbstractModel;
 
 import java.beans.PropertyChangeListener;

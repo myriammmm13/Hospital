@@ -1,6 +1,6 @@
 package presentation.dashboard;
 
-import Hospital.backend.logic.Medicamento;
+import logic.Medicamento;
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.DatePickerSettings;
 import org.jfree.chart.ChartFactory;

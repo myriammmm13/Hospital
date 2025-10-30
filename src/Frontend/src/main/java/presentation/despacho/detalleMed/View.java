@@ -1,6 +1,6 @@
 package presentation.despacho.detalleMed;
 
-import Hospital.backend.logic.recetas.Receta;
+import logic.recetas.Receta;
 import presentation.despacho.Controller;
 import presentation.despacho.Model;
 import presentation.prescribir.TableModel;

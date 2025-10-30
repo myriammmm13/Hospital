@@ -6,10 +6,10 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import Hospital.backend.logic.Medicamento;
-import Hospital.backend.logic.recetas.Prescripcion;
-import Hospital.frontend.presentation.prescribir.Controller;
-import Hospital.frontend.presentation.prescribir.Model;
+import logic.Medicamento;
+import logic.recetas.Prescripcion;
+import presentation.prescribir.Controller;
+import presentation.prescribir.Model;
 
 public class View extends JDialog implements PropertyChangeListener {
 

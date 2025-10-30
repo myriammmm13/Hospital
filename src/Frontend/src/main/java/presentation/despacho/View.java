@@ -1,6 +1,6 @@
 package presentation.despacho;
 
-import Hospital.backend.logic.recetas.Receta;
+import logic.recetas.Receta;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;

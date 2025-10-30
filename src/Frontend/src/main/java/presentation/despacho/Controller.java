@@ -1,7 +1,7 @@
 package presentation.despacho;
 
-import Hospital.backend.logic.recetas.Receta;
-import Hospital.backend.logic.Service;
+import logic.recetas.Receta;
+import logic.Service;
 
 public class Controller {
     Model model;

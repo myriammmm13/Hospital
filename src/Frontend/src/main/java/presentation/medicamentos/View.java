@@ -1,6 +1,6 @@
 package presentation.medicamentos;
 
-import Hospital.backend.logic.Medicamento;
+import logic.Medicamento;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

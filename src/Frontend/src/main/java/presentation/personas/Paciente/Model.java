@@ -1,6 +1,6 @@
 package presentation.personas.Paciente;
 
-import Hospital.backend.logic.personas.Paciente;
+import logic.personas.Paciente;
 import presentation.AbstractModel;
 
 import java.beans.PropertyChangeListener;

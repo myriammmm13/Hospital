@@ -1,5 +1,5 @@
 package presentation.login;
-import Hospital.backend.logic.personas.Trabajador;
+import logic.personas.Trabajador;
 
 import javax.swing.*;
 import java.util.function.BiConsumer;

@@ -1,7 +1,7 @@
 package presentation.dashboard;
 
-import Hospital.backend.logic.Medicamento;
-import Hospital.backend.logic.recetas.Receta;
+import logic.Medicamento;
+import logic.recetas.Receta;
 import presentation.AbstractModel;
 
 import java.beans.PropertyChangeListener;

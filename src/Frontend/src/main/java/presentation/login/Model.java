@@ -1,8 +1,8 @@
 package presentation.login;
 
-import Hospital.backend.data.Data;
-import Hospital.backend.logic.Session;
-import Hospital.backend.logic.personas.Trabajador;
+import data.Data;
+import logic.Session;
+import logic.personas.Trabajador;
 
 public class Model {
     private Data data;

@@ -1,6 +1,6 @@
 package presentation.prescribir.buscarMedicamento;
 
-import Hospital.backend.logic.Medicamento;
+import logic.Medicamento;
 import presentation.AbstractTableModel;
 
 import java.util.List;

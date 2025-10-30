@@ -1,6 +1,6 @@
 package presentation.dashboard;
 
-import Hospital.backend.logic.Medicamento;
+import logic.Medicamento;
 import presentation.AbstractTableModel;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package presentation.personas.Medico;
 
-import Hospital.backend.logic.personas.trabajadores.Medico;
-import Hospital.backend.logic.Service;
+import logic.personas.trabajadores.Medico;
+import logic.Service;
 
 public class Controller {
     Model model;

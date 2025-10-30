@@ -1,6 +1,6 @@
 package presentation.historico;
 
-import Hospital.backend.logic.recetas.Receta;
+import logic.recetas.Receta;
 
 public class Controller {
     Model model;

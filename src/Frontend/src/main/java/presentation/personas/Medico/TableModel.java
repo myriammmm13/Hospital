@@ -1,6 +1,6 @@
 package presentation.personas.Medico;
 
-import Hospital.backend.logic.personas.trabajadores.Medico;
+import logic.personas.trabajadores.Medico;
 import presentation.AbstractTableModel;
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package presentation.medicamentos;
 
-import Hospital.backend.logic.Medicamento;
-import Hospital.backend.logic.Service;
+import logic.Medicamento;
+import logic.Service;
 
 import java.util.List;
 

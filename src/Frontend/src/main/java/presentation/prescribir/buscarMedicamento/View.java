@@ -11,8 +11,8 @@ import java.util.Map;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.TableRowSorter;
 
-import Hospital.frontend.presentation.prescribir.Controller;
-import Hospital.frontend.presentation.prescribir.Model;
+import presentation.prescribir.Controller;
+import presentation.prescribir.Model;
 
 public class View extends JDialog implements PropertyChangeListener {
 

@@ -1,7 +1,7 @@
 package presentation.personas.Medico;
 
 import Hospital.Application;
-import Hospital.backend.logic.personas.trabajadores.Medico;
+import logic.personas.trabajadores.Medico;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

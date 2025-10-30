@@ -1,7 +1,7 @@
 package presentation.historico;
 
-import Hospital.backend.logic.Service;
-import Hospital.backend.logic.recetas.Receta;
+import logic.Service;
+import logic.recetas.Receta;
 import presentation.AbstractModel;
 
 import java.util.ArrayList;
