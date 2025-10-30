@@ -1,8 +1,8 @@
 package data.medicamento;
 
-import Hospital.backend.data.DataBase;
-import Hospital.backend.logic.Medicamento;
-import Hospital.backend.logic.recetas.Prescripcion;
+import data.DataBase;
+import logic.Medicamento;
+import logic.recetas.Prescripcion;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -47,7 +47,7 @@ public class PrescripcionDao {
 
     private Prescripcion from(ResultSet rs) {
         try {
-            Medicamento m = new Medicamento();
+            logic.Medicamento m = new logic.Medicamento();
             m.setCodigo(rs.getString("medicamento_codigo"));
             m.setNombre(rs.getString("nombre"));
             m.setPresentacion(rs.getString("presentacion"));

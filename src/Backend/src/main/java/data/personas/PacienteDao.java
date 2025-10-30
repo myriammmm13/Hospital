@@ -1,7 +1,7 @@
 package data.personas;
 
-import Hospital.backend.data.DataBase;
-import Hospital.backend.logic.personas.Paciente;
+import data.DataBase;
+import logic.personas.Paciente;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -1,7 +1,7 @@
 package data.medicamento;
 
-import Hospital.backend.data.DataBase;
-import Hospital.backend.logic.Medicamento;
+import data.DataBase;
+import logic.Medicamento;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

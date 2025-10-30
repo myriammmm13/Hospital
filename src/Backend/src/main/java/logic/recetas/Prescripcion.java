@@ -1,6 +1,6 @@
 package logic.recetas;
 
-import Hospital.backend.logic.Medicamento;
+import logic.Medicamento;
 
 public class Prescripcion {
     private Medicamento medicamento;
@@ -15,7 +15,7 @@ public class Prescripcion {
         cantidad=0;
     }
 
-    public Prescripcion(Medicamento medicamento, String indicaciones, int duracion, int cantidad) {
+    public Prescripcion(logic.Medicamento medicamento, String indicaciones, int duracion, int cantidad) {
         if (medicamento == null) throw new IllegalArgumentException("Medicamento no puede ser nulo");
         if (indicaciones == null || indicaciones.isBlank()) throw new IllegalArgumentException("Indicaciones requeridas");
         if (duracion <= 0) throw new IllegalArgumentException("Duración debe ser positiva");

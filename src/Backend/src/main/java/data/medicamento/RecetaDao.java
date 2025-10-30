@@ -1,11 +1,11 @@
 package data.medicamento;
 
-import Hospital.backend.data.DataBase;
-import Hospital.backend.logic.Medicamento;
-import Hospital.backend.logic.personas.Paciente;
-import Hospital.backend.logic.personas.Trabajador;
-import Hospital.backend.logic.recetas.Prescripcion;
-import Hospital.backend.logic.recetas.Receta;
+import data.DataBase;
+import logic.Medicamento;
+import logic.personas.Paciente;
+import logic.personas.Trabajador;
+import logic.recetas.Prescripcion;
+import logic.recetas.Receta;
 
 import java.sql.*;
 import java.time.LocalDate;

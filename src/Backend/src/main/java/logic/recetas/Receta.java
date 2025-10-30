@@ -1,7 +1,7 @@
 package logic.recetas;
 
-import Hospital.backend.logic.personas.Paciente;
-import Hospital.backend.logic.personas.Trabajador;
+import logic.personas.Paciente;
+import logic.personas.Trabajador;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

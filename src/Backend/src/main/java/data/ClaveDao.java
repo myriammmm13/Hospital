@@ -1,6 +1,6 @@
 package data;
 
-import org.logic.Clave;
+import logic.Clave;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

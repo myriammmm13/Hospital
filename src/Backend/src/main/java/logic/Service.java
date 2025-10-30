@@ -1,18 +1,18 @@
 package logic;
 
-import Hospital.Application;
-import Hospital.backend.data.Data;
-import Hospital.backend.data.personas.FarmaceuticoDao;
-import Hospital.backend.data.personas.MedicoDao;
-import Hospital.backend.logic.personas.Paciente;
-import Hospital.backend.logic.personas.Trabajador;
-import Hospital.backend.logic.personas.trabajadores.Medico;
-import Hospital.backend.logic.personas.trabajadores.Farmaceutico;
-import Hospital.backend.logic.recetas.Prescripcion;
-import Hospital.backend.logic.recetas.Receta;
-import Hospital.backend.data.medicamento.MedicamentoDao;
-import Hospital.backend.data.personas.PacienteDao;
-import Hospital.backend.data.medicamento.RecetaDao;
+import application.Application;
+import data.Data;
+import data.personas.FarmaceuticoDao;
+import data.personas.MedicoDao;
+import logic.personas.Paciente;
+import logic.personas.Trabajador;
+import logic.personas.trabajadores.Medico;
+import logic.personas.trabajadores.Farmaceutico;
+import logic.recetas.Prescripcion;
+import logic.recetas.Receta;
+import data.medicamento.MedicamentoDao;
+import data.personas.PacienteDao;
+import data.medicamento.RecetaDao;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -28,8 +28,8 @@ public class Service {
     }
 
     private Service() {
-        data = Application.data;
-    }
+        //data = Application.data;//esto da error porque no está implementado algo que sea data en app
+    }//no deebría darse data pq ahora se trabaja con base de datos
 
     // CRUD Medicamentos con base de datos
     MedicamentoDao medicamentoDao = new MedicamentoDao();

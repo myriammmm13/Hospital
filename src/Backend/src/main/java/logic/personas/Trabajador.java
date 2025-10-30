@@ -1,6 +1,6 @@
 package logic.personas;
 
-import Hospital.backend.logic.Clave;
+import logic.Clave;
 
 public class Trabajador extends Persona {
     private Clave clave;

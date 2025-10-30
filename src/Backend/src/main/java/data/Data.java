@@ -1,12 +1,11 @@
 package data;
 
-
-import Hospital.backend.logic.Medicamento;
-import Hospital.backend.logic.personas.Paciente;
-import Hospital.backend.logic.personas.Trabajador;
-import Hospital.backend.logic.personas.trabajadores.Farmaceutico;
-import Hospital.backend.logic.personas.trabajadores.Medico;
-import Hospital.backend.logic.recetas.Receta;
+import logic.Medicamento;
+import logic.personas.Paciente;
+import logic.personas.Trabajador;
+import logic.personas.trabajadores.Farmaceutico;
+import logic.personas.trabajadores.Medico;
+import logic.recetas.Receta;
 
 import java.util.ArrayList;
 import java.util.List;
