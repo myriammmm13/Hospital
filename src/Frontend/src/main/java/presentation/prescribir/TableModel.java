@@ -1,5 +1,5 @@
 package presentation.prescribir;
-import Hospital.backend.logic.recetas.Prescripcion;
+import logic.recetas.Prescripcion;
 import presentation.AbstractTableModel;
 
 import java.util.List;

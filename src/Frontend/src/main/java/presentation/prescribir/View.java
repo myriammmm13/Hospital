@@ -1,11 +1,11 @@
 package presentation.prescribir;
 
-import Hospital.backend.logic.Service;
-import Hospital.backend.logic.Session;
-import Hospital.backend.logic.personas.Paciente;
-import Hospital.backend.logic.personas.Trabajador;
-import Hospital.backend.logic.recetas.Prescripcion;
-import Hospital.backend.logic.recetas.Receta;
+import logic.Service;
+import logic.Session;
+import logic.personas.Paciente;
+import logic.personas.Trabajador;
+import logic.recetas.Prescripcion;
+import logic.recetas.Receta;
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.DatePickerSettings;
 

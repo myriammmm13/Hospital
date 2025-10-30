@@ -1,10 +1,10 @@
 package logic2;
 
 import logic.Medicamento;
-import backend.server.Protocol;
-import backend.logic.personas.Paciente;
-import backend.logic.personas.trabajadores.Medico;
-import backend.logic.recetas.Receta;
+import server.Protocol;
+import logic.personas.Paciente;
+import logic.personas.trabajadores.Medico;
+import logic.recetas.Receta;
 
 import java.io.*;
 import java.net.Socket;

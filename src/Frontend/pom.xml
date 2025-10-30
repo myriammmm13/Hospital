@@ -27,6 +27,13 @@
             <artifactId>Protocol</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+
+        <!-- Dependencia del módulo Backend -->
+        <dependency>
+            <groupId>org.example</groupId>
+            <artifactId>Backend</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 </project>

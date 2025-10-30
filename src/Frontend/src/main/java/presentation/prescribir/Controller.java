@@ -1,10 +1,10 @@
 package presentation.prescribir;
 
-import Hospital.backend.logic.Medicamento;
-import Hospital.backend.logic.personas.Paciente;
-import Hospital.backend.logic.recetas.Prescripcion;
-import Hospital.backend.logic.recetas.Receta;
-import Hospital.backend.logic.Service;
+import logic.Medicamento;
+import logic.personas.Paciente;
+import logic.recetas.Prescripcion;
+import logic.recetas.Receta;
+import logic.Service;
 
 public class Controller {
     Model model;

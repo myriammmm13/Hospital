@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import presentation.prescribir.Controller;
-import Hospital.frontend.presentation.prescribir.Model;
+import presentation.prescribir.Model;
 
 public class View extends JDialog implements PropertyChangeListener{
     private JPanel panel;

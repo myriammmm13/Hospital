@@ -1,10 +1,10 @@
 package presentation.prescribir;
 
-import Hospital.backend.data.Data;
-import Hospital.backend.logic.Medicamento;
-import Hospital.backend.logic.recetas.Prescripcion;
-import Hospital.backend.logic.recetas.Receta;
-import Hospital.backend.logic.personas.Paciente;
+import data.Data;
+import logic.Medicamento;
+import logic.recetas.Prescripcion;
+import logic.recetas.Receta;
+import logic.personas.Paciente;
 import presentation.AbstractModel;
 
 import java.util.ArrayList;
